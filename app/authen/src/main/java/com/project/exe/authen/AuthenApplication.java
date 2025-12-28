@@ -1,0 +1,15 @@
+package com.project.exe.authen;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+@SpringBootApplication
+@ComponentScan(basePackages = {"com.project.exe.authen", "com.project.exe.common"})
+public class AuthenApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(AuthenApplication.class, args);
+    }
+
+}

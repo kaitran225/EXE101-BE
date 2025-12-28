@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: cronjob
+  config:
+    import: optional:classpath:application.yaml
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cronjob
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  
+  cloud:
+    task:
+      execution:
+        pool:
+          core-size: 1
+          max-size: 10
+
+server:
+  port: 8085
