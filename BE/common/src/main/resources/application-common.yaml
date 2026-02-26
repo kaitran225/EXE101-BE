@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: exe101-common
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+logging:
+  level:
+    org.springframework.security: INFO
