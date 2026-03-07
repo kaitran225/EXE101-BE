@@ -1,0 +1,85 @@
+import { Outlet, Link, useLocation } from 'react-router-dom'
+import { Button, Input } from '../ui'
+
+const navItems = [
+  { to: '/dashboard', label: 'Dashboard' },
+  { to: '/study-rooms', label: 'Study Rooms' },
+  { to: '/teams', label: 'Projects' },
+  { to: '/meet-ai', label: 'AI Tutor' },
+] as const
+
+export function AppLayout() {
+  const location = useLocation()
+
+  return (
+    <div className="min-h-screen flex flex-col bg-neutral-50">
+      <header className="bg-white border-b border-neutral-200 px-4 py-3 md:px-8 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-6">
+          <Link to="/" className="flex items-center gap-2">
+            <span className="text-lg font-bold text-neutral-900">Together</span>
+          </Link>
+          <nav className="flex items-center gap-2" aria-label="Main">
+            {navItems.map(({ to, label }) => {
+              const active = location.pathname === to || (to !== '/dashboard' && location.pathname.startsWith(to))
+              return (
+                <Link key={to} to={to}>
+                  <span
+                    className={`px-2 py-1 text-sm font-medium rounded border ${
+                      active
+                        ? 'bg-white border-neutral-900 text-neutral-900 font-bold'
+                        : 'border-transparent text-neutral-900'
+                    }`}
+                  >
+                    {label}
+                  </span>
+                </Link>
+              )
+            })}
+          </nav>
+        </div>
+        <div className="flex items-center gap-2">
+          <Input
+            placeholder="Search platform..."
+            className="max-w-64 min-h-[40px] py-2"
+            aria-label="Search"
+          />
+          <Link to="/notifications">
+            <Button variant="ghost" size="sm" aria-label="Notifications">🔔</Button>
+          </Link>
+          <Link to="/profile">
+            <Button variant="ghost" size="sm" aria-label="Profile">👤</Button>
+          </Link>
+        </div>
+      </header>
+
+      <footer className="bg-white border-t border-neutral-200 px-4 py-3 mt-auto">
+        <div className="max-w-[1200px] mx-auto flex flex-wrap justify-between items-center gap-4">
+          <div className="flex items-center gap-4">
+            <div>
+              <p className="label-study text-[10px]">Current Streak</p>
+              <p className="text-sm font-bold">12 Days</p>
+            </div>
+            <div className="w-px h-8 bg-neutral-200" />
+            <div className="w-64">
+              <div className="flex justify-between text-[10px] font-bold uppercase">
+                <span>Level 14</span>
+                <span>2,450 / 3,000 XP</span>
+              </div>
+              <div className="h-2 w-full bg-white border border-neutral-200 rounded overflow-hidden mt-1">
+                <div className="h-full bg-neutral-900 w-[81%]" />
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-6">
+            <Link to="/quests"><span className="text-[10px] font-bold uppercase">Quests</span></Link>
+            <Link to="/rank"><span className="text-[10px] font-bold uppercase">Rank</span></Link>
+          </div>
+        </div>
+      </footer>
+
+      <main className="flex-1 p-4 md:p-6 md:py-8 max-w-[1200px] w-full mx-auto">
+        <Outlet />
+      </main>
+    </div>
+  )
+}

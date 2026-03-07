@@ -1,27 +1,68 @@
-:root {
-  font-family: system-ui, -apple-system, sans-serif;
-  line-height: 1.5;
-  color: #1a1a1a;
-  background-color: #f5f5f5;
+@import 'tailwindcss';
+
+/* Design tokens: study vibe, robust, modern */
+@theme {
+  /* Typography */
+  --font-sans: 'Lexend', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Liberation Mono', ui-monospace, monospace;
+
+  /* Neutral */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-500: #737373;
+  --color-neutral-900: #171717;
+
+  /* Study accent: primary (links, active), highlight (streak, CTAs) */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-highlight: #f97316;
+  --color-highlight-hover: #ea580c;
+  --color-focus-area: #7c3aed;
+
+  /* Semantic */
+  --color-border: #e5e5e5;
+  --color-border-strong: rgba(0, 0, 0, 0.2);
+  --color-error: #dc2626;
+
+  /* Spacing (align with 4/8/16/24/32) */
+  --spacing-section: 1.5rem;
+  --spacing-container: 1.5rem;
+  --radius-card: 0.625rem;
+  --radius-button: 0.625rem;
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08);
 }
 
-* {
-  box-sizing: border-box;
+/* Base */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+    margin: 0;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  #root {
+    min-height: 100vh;
+  }
+  /* Smooth scrolling for overflow areas */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Focus visible for a11y */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-}
-
-#root {
-  min-height: 100vh;
-}
-
-a {
-  color: #2563eb;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
+/* Label: uppercase, bold, tracking (study vibe) */
+.label-study {
+  @apply text-sm font-bold uppercase tracking-wide text-neutral-900;
 }
