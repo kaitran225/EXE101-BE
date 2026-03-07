@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import type { MeResponse } from '../types/dto'
 import { authApi, readApi, workflowApi, getStoredToken, clearStoredToken } from '../api/client'
 
 export default function Dashboard() {
-  const [user, setUser] = useState<Record<string, unknown> | null>(null)
+  const [user, setUser] = useState<MeResponse | null>(null)
   const [readHealth, setReadHealth] = useState<string>('—')
   const [workflowHealth, setWorkflowHealth] = useState<string>('—')
 
@@ -11,7 +12,7 @@ export default function Dashboard() {
     const token = getStoredToken()
     if (!token) return
     authApi.me(token).then((res) => {
-      if (res.success && res.data) setUser(res.data as Record<string, unknown>)
+      if (res.success && res.data) setUser(res.data)
     })
     readApi.health().then((res) => setReadHealth(res.success ? 'UP' : 'DOWN'))
     workflowApi.health().then((res) => setWorkflowHealth(res.success ? 'UP' : 'DOWN'))
@@ -37,7 +38,8 @@ export default function Dashboard() {
       <h1>Dashboard</h1>
       {user && (
         <p>
-          Logged in as <strong>{String(user.email)}</strong> ({String(user.userSso)})
+          Logged in as <strong>{user.email}</strong> ({user.userSso})
+          {user.fullName != null && ` — ${user.fullName}`}
         </p>
       )}
       <p>Read service: {readHealth} | Workflow service: {workflowHealth}</p>
