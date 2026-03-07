@@ -13,7 +13,10 @@ export default function AllTeams() {
           <Card key={i}>
             <h3 className="font-bold text-lg mb-2">{t.name}</h3>
             <p className="text-sm text-neutral-500 mb-4">{t.members} members</p>
-            <Link to="/team-management"><Button variant="secondary" size="sm">Manage</Button></Link>
+            <div className="flex gap-2">
+              <Link to="/teams/board"><Button variant="secondary" size="sm">Board</Button></Link>
+              <Link to="/team-management"><Button variant="secondary" size="sm">Manage</Button></Link>
+            </div>
           </Card>
         ))}
       </div>

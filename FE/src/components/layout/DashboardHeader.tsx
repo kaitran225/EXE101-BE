@@ -31,16 +31,20 @@ const BREADCRUMBS: Record<string, BreadcrumbItem[]> = {
   '/personalize-2': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Profile', href: '/profile' }, { label: 'Personalize' }],
   '/personalize-3': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Profile', href: '/profile' }, { label: 'Personalize' }],
   '/meetings': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Meetings' }],
-  '/scrum-board': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Teams', href: '/teams' }, { label: 'Scrum board' }],
-  '/sprint-board': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Teams', href: '/teams' }, { label: 'Sprint board' }],
-  '/sprint-member-board': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Teams', href: '/teams' }, { label: 'Sprint board', href: '/sprint-board' }, { label: 'Members' }],
+  '/meetings/room': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Meetings', href: '/meetings' }, { label: 'In meeting' }],
+  '/teams/board': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Teams', href: '/teams' }, { label: 'Board' }],
+  '/scrum-board': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Teams', href: '/teams' }, { label: 'Board', href: '/teams/board' }],
+  '/sprint-board': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Teams', href: '/teams' }, { label: 'Board', href: '/teams/board' }],
+  '/sprint-member-board': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Teams', href: '/teams' }, { label: 'Board', href: '/teams/board' }, { label: 'Members' }],
 }
 
 const PAGE_TITLES: Record<string, string> = {
   '/dashboard': 'Home',
   '/profile': 'Profile',
   '/study-rooms': 'Study Rooms',
+  '/meetings': 'Meetings',
   '/teams': 'Teams',
+  '/teams/board': 'Board',
   '/calendar': 'Calendar',
   '/subscription': 'Subscription',
   '/shop': 'Shop',
@@ -49,7 +53,7 @@ const PAGE_TITLES: Record<string, string> = {
 }
 
 const PAGE_SUBTITLES: Record<string, string> = {
-  '/dashboard': 'Chào Nam, hôm nay bạn có 3 deadline, bắt đầu ngay nhé!',
+  '/dashboard': 'You have 3 deadlines today — get started!',
 }
 
 function getBreadcrumbs(pathname: string): BreadcrumbItem[] | null {

@@ -5,6 +5,7 @@ const navItems = [
   { to: '/profile', label: 'Profile' },
   { to: '/dashboard', label: 'Home' },
   { to: '/study-rooms', label: 'Study Rooms' },
+  { to: '/meetings', label: 'Meetings' },
   { to: '/teams', label: 'Teams' },
   { to: '/calendar', label: 'Calendar' },
   { to: '/subscription', label: 'Subscription' },
@@ -12,8 +13,8 @@ const navItems = [
   { to: '/meet-ai', label: 'Together AI' },
 ] as const
 
-const iconKeys: Array<'profile' | 'home' | 'study' | 'teams' | 'calendar' | 'gift' | 'shop' | 'ai'> = [
-  'profile', 'home', 'study', 'teams', 'calendar', 'gift', 'shop', 'ai',
+const iconKeys: Array<'profile' | 'home' | 'study' | 'meetings' | 'teams' | 'calendar' | 'gift' | 'shop' | 'ai'> = [
+  'profile', 'home', 'study', 'meetings', 'teams', 'calendar', 'gift', 'shop', 'ai',
 ]
 
 function NavIcon({ icon }: { icon: (typeof iconKeys)[number] }) {
@@ -34,6 +35,11 @@ function NavIcon({ icon }: { icon: (typeof iconKeys)[number] }) {
       <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
         <path d="M2 3h6a4 4 0 0 1 4 4v14a2 2 0 0 1-2 2H2" />
         <path d="M22 3h-6a4 4 0 0 0-4 4v14a2 2 0 0 0 2 2h8" />
+      </svg>
+    ),
+    meetings: (
+      <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
       </svg>
     ),
     teams: (

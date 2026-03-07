@@ -44,7 +44,7 @@ export default function Dashboard() {
             </svg>
           </div>
           <div className="min-w-0 truncate">
-            <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide">Chuỗi học hiện tại</p>
+            <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide">Current streak</p>
             <p className="text-base font-bold text-neutral-900">15 Days</p>
           </div>
         </Card>
@@ -56,13 +56,13 @@ export default function Dashboard() {
             </svg>
           </div>
           <div className="min-w-0 truncate">
-            <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide">Điểm kinh nghiệm</p>
+            <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide">Experience points</p>
             <p className="text-base font-bold text-neutral-900">12,450 XP</p>
           </div>
         </Card>
         <Card className={`flex items-center gap-2 py-2.5 ${cardCompact}`}>
           <div className="min-w-0 truncate">
-            <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide">Xu trong ví</p>
+            <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide">Coins in wallet</p>
             <p className="text-base font-bold text-neutral-900">1000</p>
           </div>
         </Card>
@@ -70,7 +70,7 @@ export default function Dashboard() {
 
       {/* Main columns 20% | 30% | 50% — Row 1: Today's work | Teams | Study time */}
       <div className="grid grid-cols-1 lg:grid-cols-[20fr_30fr_50fr] gap-3 w-full">
-        <Card className={`flex flex-col ${cardCompact}`} heading="Công việc hôm nay">
+        <Card className={`flex flex-col ${cardCompact}`} heading="Today's work">
           <ul className="space-y-0 divide-y divide-neutral-200 -mx-0.5">
             {todayTasks.map((t, i) => (
               <li key={i} className="flex items-center gap-2 py-1.5 px-0.5">
@@ -83,11 +83,11 @@ export default function Dashboard() {
             ))}
           </ul>
           <Button variant="ghost" size="sm" className="w-full mt-2 text-neutral-500 font-medium text-xs py-1.5">
-            + Thêm công việc
+            + Add task
           </Button>
         </Card>
 
-        <Card className={cardCompact} heading="Teams đã tham gia">
+        <Card className={cardCompact} heading="Teams joined">
           <div className="grid grid-cols-2 gap-2">
             {teamCards.map((team, i) => (
               <div key={i} className="p-2 rounded-md border border-neutral-200 bg-neutral-50/50 flex flex-col gap-1">
@@ -97,7 +97,7 @@ export default function Dashboard() {
                 </span>
                 <Link to="/teams">
                   <Button variant="secondary" size="sm" className="w-full py-1 text-xs h-7">
-                    Tham gia
+                    Join
                   </Button>
                 </Link>
               </div>
@@ -105,10 +105,10 @@ export default function Dashboard() {
           </div>
         </Card>
 
-        <Card className={`flex flex-col ${cardCompact}`} heading="Thời gian học hôm nay">
+        <Card className={`flex flex-col ${cardCompact}`} heading="Study time today">
           <div className="flex justify-end mb-1">
             <Button variant="ghost" size="sm" className="text-[10px] font-medium text-neutral-600 py-0 h-6">
-              Phân tích dữ liệu
+              View analytics
             </Button>
           </div>
           <div className="flex items-end gap-0.5 h-16">
@@ -150,10 +150,10 @@ export default function Dashboard() {
           </ul>
         </Card>
 
-        <Card className={cardCompact} heading="Phòng học đang mở">
+        <Card className={cardCompact} heading="Open study rooms">
           <div className="flex justify-end mb-1">
             <Button variant="ghost" size="sm" className="text-[10px] font-medium text-neutral-600 py-0 h-6">
-              Tham gia ngẫu nhiên
+              Join randomly
             </Button>
           </div>
           <div className="grid grid-cols-2 gap-2">
@@ -165,7 +165,7 @@ export default function Dashboard() {
                 </span>
                 <Link to="/study-room">
                   <Button variant="secondary" size="sm" className="w-full py-1 text-xs h-7">
-                    Vào học
+                    Enter
                   </Button>
                 </Link>
               </div>
@@ -174,7 +174,14 @@ export default function Dashboard() {
         </Card>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Card className={cardCompact} heading="Cuộc họp sắp tới">
+          <Card className={cardCompact} heading="Upcoming meetings">
+            <div className="flex justify-end mb-1">
+              <Link to="/meetings">
+                <Button variant="secondary" size="sm" className="text-[10px] font-medium py-1 h-7">
+                  Start / Join
+                </Button>
+              </Link>
+            </div>
             <ul className="space-y-1">
               {upcomingItems.slice(0, 2).map((item, i) => (
                 <li key={i} className="p-1.5 rounded-md border border-neutral-200 bg-neutral-50/50">
@@ -189,13 +196,13 @@ export default function Dashboard() {
               ))}
             </ul>
           </Card>
-          <Card className={cardCompact} heading="Ghi chú nhanh">
+          <Card className={cardCompact} heading="Quick notes">
             <Textarea
-              placeholder="Bắt đầu ghi chú..."
+              placeholder="Start typing a note..."
               className="min-h-[60px] resize-y text-xs py-2"
             />
             <Button variant="ghost" size="sm" className="w-full mt-1.5 text-neutral-500 font-medium text-xs py-1">
-              + Thêm ghi chú
+              + Add note
             </Button>
           </Card>
         </div>

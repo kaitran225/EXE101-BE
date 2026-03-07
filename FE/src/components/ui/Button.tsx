@@ -27,11 +27,12 @@ export function Button({
   disabled,
   ...props
 }: ButtonProps) {
+  const isFullWidth = className.includes('w-full')
   return (
     <button
       type="button"
       className={`
-        inline-flex items-center justify-center font-medium rounded-[var(--radius-button,0.625rem)]
+        ${isFullWidth ? 'flex w-full' : 'inline-flex'} items-center justify-center gap-2 font-medium rounded-lg
         transition-colors
         disabled:opacity-50 disabled:pointer-events-none
         ${variantClasses[variant]}

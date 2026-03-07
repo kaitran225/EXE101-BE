@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Badge, Button } from '../../components/ui'
 
 const PARTICIPANTS = [
@@ -18,6 +19,7 @@ const TASKS = [
 ]
 
 export default function MainMeetingBoard() {
+  const navigate = useNavigate()
   return (
     <div className="flex h-full min-h-0 flex-col gap-0">
       {/* Recording indicator */}
@@ -127,7 +129,7 @@ export default function MainMeetingBoard() {
           ))}
         </div>
         <div className="flex flex-col items-center gap-0.5">
-          <Button variant="primary" size="md" className="uppercase">
+          <Button variant="primary" size="md" className="uppercase" onClick={() => navigate('/meetings')}>
             End call
           </Button>
           <span className="text-[10px] font-semibold uppercase tracking-wide text-neutral-500">
