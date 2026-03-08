@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { AiBotIcon } from '../AiBotIcon'
 
 const navItems = [
   { to: '/dashboard', label: 'Home' },
@@ -59,12 +60,7 @@ function NavIcon({ icon }: { icon: (typeof iconKeys)[number] }) {
         <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
       </svg>
     ),
-    ai: (
-      <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-        <path d="M12 6v6l4 2" />
-      </svg>
-    ),
+    ai: <AiBotIcon className="w-6 h-6 flex-shrink-0" />,
   }
   return icons[icon]
 }
@@ -75,9 +71,8 @@ export function DashboardSidebar() {
 
   return (
     <aside
-      className={`relative h-full flex flex-col flex-shrink-0 bg-neutral-800 text-white transition-[width] ${
-        collapsed ? 'w-14' : 'w-56'
-      }`}
+      className={`relative h-full flex flex-col flex-shrink-0 bg-neutral-800 text-white transition-[width] ${collapsed ? 'w-14' : 'w-56'
+        }`}
       aria-label="Dashboard navigation"
     >
       <div className="p-2.5 flex flex-col gap-1 flex-1 min-h-0 overflow-hidden">
@@ -86,8 +81,10 @@ export function DashboardSidebar() {
           className={`flex items-center p-1.5 rounded-xl hover:bg-neutral-700 text-neutral-300 hover:text-white transition-colors duration-150 ${collapsed ? 'justify-center' : ''}`}
           aria-label="App home"
         >
-          <span className="text-xl font-bold text-violet-400 flex-shrink-0">∞</span>
-          {!collapsed && <span className="ml-2 text-sm font-bold text-white truncate">together</span>}
+          <div className="flex gap-2 h-16 items-center justify-center">
+            <img src="/together/horizontal-icon.svg" alt="Together" className="h-full relative -bottom-4 flex-shrink-0 align-bottom" />
+            {!collapsed && <span className="ml-2 text-sm font-bold text-white truncate"></span>}
+          </div>
         </Link>
         <nav className="flex flex-col gap-0.5 flex-1 min-h-0 overflow-y-auto" aria-label="Main">
           {navItems.map(({ to, label }, i) => {
@@ -100,13 +97,11 @@ export function DashboardSidebar() {
                 key={`${to}-${label}`}
                 to={to}
                 title={label}
-                className={`self-stretch flex items-center gap-3 rounded-xl py-2 transition-colors duration-150 ${
-                  collapsed ? 'justify-center px-2' : 'justify-start px-2.5'
-                } ${
-                  active
+                className={`self-stretch flex items-center gap-3 rounded-xl py-2 transition-colors duration-150 ${collapsed ? 'justify-center px-2' : 'justify-start px-2.5'
+                  } ${active
                     ? 'bg-amber-500/20 text-amber-400'
                     : 'text-neutral-400 hover:bg-neutral-700 hover:text-white'
-                }`}
+                  }`}
               >
                 <NavIcon icon={iconKeys[i]} />
                 {!collapsed && (
@@ -117,40 +112,40 @@ export function DashboardSidebar() {
           })}
         </nav>
         <div className="pt-4 border-t border-neutral-600 space-y-3">
-            {collapsed ? (
-              <Link
-                to="/profile"
-                className="flex justify-center p-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
-                aria-label="Go to profile"
-              >
-                <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
-              </Link>
-            ) : (
-              <>
-                <div>
-                  <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-2 px-2">Global ranking</p>
-                  <Link
-                    to="/profile"
-                    className="flex items-center gap-2 py-1.5 px-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
-                    aria-label="Go to profile"
-                  >
-                    <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-medium text-white truncate">You</p>
-                      <p className="text-[10px] text-neutral-400">Level 24 · #777</p>
-                    </div>
-                  </Link>
-                </div>
-            <div className="px-2">
-              <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-1.5">Next reward 75%</p>
-              <div className="h-2 w-full bg-neutral-700 rounded-full overflow-hidden">
-                <div className="h-full w-3/4 bg-violet-500 rounded-full" />
+          {collapsed ? (
+            <Link
+              to="/profile"
+              className="flex justify-center p-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
+              aria-label="Go to profile"
+            >
+              <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
+            </Link>
+          ) : (
+            <>
+              <div>
+                <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-2 px-2">Global ranking</p>
+                <Link
+                  to="/profile"
+                  className="flex items-center gap-2 py-1.5 px-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
+                  aria-label="Go to profile"
+                >
+                  <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-medium text-white truncate">You</p>
+                    <p className="text-[10px] text-neutral-400">Level 24 · #777</p>
+                  </div>
+                </Link>
               </div>
-              <p className="text-[10px] text-neutral-400 mt-1">Level 24 + Premium</p>
-            </div>
-              </>
-            )}
-          </div>
+              <div className="px-2">
+                <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-1.5">Next reward 75%</p>
+                <div className="h-2 w-full bg-neutral-700 rounded-full overflow-hidden">
+                  <div className="h-full w-3/4 bg-violet-500 rounded-full" />
+                </div>
+                <p className="text-[10px] text-neutral-400 mt-1">Level 24 + Premium</p>
+              </div>
+            </>
+          )}
+        </div>
       </div>
       {/* Peel tab: outside overflow-hidden so both right corners stay rounded */}
       <button

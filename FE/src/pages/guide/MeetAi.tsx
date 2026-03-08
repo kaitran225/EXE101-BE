@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { AiBotIcon } from '../../components/AiBotIcon'
 import { Button, Card, Input, Textarea } from '../../components/ui'
 
 const QUICK_PROMPTS = [
@@ -245,7 +246,9 @@ export default function MeetAi() {
                 </div>
               </div>
               <div className="p-4 flex flex-col min-h-0">
-                <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide mb-2 flex items-center gap-1"><span aria-hidden>≡</span> Executive summary</p>
+                <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide mb-2 flex items-center gap-1">
+                <svg className="w-3.5 h-3.5 text-neutral-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                Executive summary</p>
                 <div className="flex-1 min-h-[200px] rounded-xl border-2 border-neutral-200 bg-white p-4 overflow-y-auto">
                   {summaryText ? (
                     <p className="text-sm text-neutral-700 whitespace-pre-wrap">{summaryText}</p>
@@ -270,7 +273,10 @@ export default function MeetAi() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setChatDialogOpen(false)}>
           <div className="bg-white rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200 bg-neutral-50">
-              <h2 className="text-sm font-bold text-neutral-900 uppercase tracking-wide">Together AI — Chat</h2>
+              <div className="flex items-center gap-2">
+                <AiBotIcon className="w-8 h-8" />
+                <h2 className="text-sm font-bold text-neutral-900 uppercase tracking-wide">Together AI — Chat</h2>
+              </div>
               <button type="button" onClick={() => setChatDialogOpen(false)} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900" aria-label="Close">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
@@ -279,8 +285,8 @@ export default function MeetAi() {
               {MESSAGES.map((msg) => (
                 <div key={msg.id} className={`flex gap-3 max-w-[90%] ${msg.role === 'user' ? 'ml-auto' : ''}`}>
                   {msg.role === 'assistant' && (
-                    <span className="w-8 h-8 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center text-violet-600" aria-hidden>
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2h-4a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                    <span className="w-8 h-8 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                      <AiBotIcon className="w-7 h-7" />
                     </span>
                   )}
                   <div className={`rounded-xl px-3 py-2 text-sm ${msg.role === 'assistant' ? 'bg-neutral-100 text-neutral-900 border border-neutral-200' : 'bg-violet-100 text-violet-900 border border-violet-200'}`}>

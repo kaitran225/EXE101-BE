@@ -75,12 +75,6 @@ function ArchivedCard({ name, active }: (typeof archivedData)[0]) {
 export default function AllTeams() {
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const scroll = (dir: 'l' | 'r') => {
-    if (!scrollRef.current) return
-    const step = 210
-    scrollRef.current.scrollBy({ left: dir === 'r' ? step : -step, behavior: 'smooth' })
-  }
-
   return (
     <div className="flex flex-col h-full min-h-0 gap-3 p-3 md:p-4">
       {/* Header — same as StudyRoom: white bar, border-2, rounded-2xl, shadow-md */}

@@ -249,9 +249,21 @@ function ScrumBoardContent() {
                     onClick={() => setSelected({ task, columnId: col.id, taskIndex: i })}
                     className="w-full text-left p-2 bg-white rounded-md border border-neutral-200 shadow-sm relative hover:border-neutral-300 transition-colors"
                   >
-                    {task.flagged && <span className="absolute top-1 right-1 text-neutral-400 text-[10px]" aria-hidden>🔖</span>}
-                    {task.done && <span className="absolute top-1 right-1 text-emerald-500 text-[10px]" aria-hidden>✓</span>}
-                    {task.missed && <span className="absolute top-1 right-1 text-amber-500 text-[10px]" aria-hidden>ⓘ</span>}
+                    {task.flagged && (
+                      <span className="absolute top-1 right-1 text-neutral-400" aria-hidden>
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" /></svg>
+                      </span>
+                    )}
+                    {task.done && (
+                      <span className="absolute top-1 right-1 text-emerald-500" aria-hidden>
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      </span>
+                    )}
+                    {task.missed && (
+                      <span className="absolute top-1 right-1 text-amber-500" aria-hidden>
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      </span>
+                    )}
                     <span className="inline-block px-1 py-0.5 text-[9px] font-bold uppercase bg-neutral-200 text-neutral-700 rounded mb-1">{task.tag}</span>
                     <p className="text-xs font-medium text-neutral-900 leading-tight">{task.title}</p>
                     {task.due && <p className="text-[10px] text-neutral-500 mt-0.5">Due: {task.due}</p>}
@@ -308,8 +320,14 @@ function ScrumBoardContent() {
             <section className="mb-2">
               <h3 className="text-[10px] font-bold uppercase text-neutral-600 mb-1">Suggestions</h3>
               <ul className="space-y-0.5 text-[10px] text-neutral-700">
-                <li>☑ Completion Oct 24.</li>
-                <li>👤 Anna free for review.</li>
+                <li className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-neutral-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  Completion Oct 24.
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-neutral-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                  Anna free for review.
+                </li>
               </ul>
             </section>
             <Button variant="primary" size="sm" className="w-full py-1 text-xs h-7">Generate Report</Button>
@@ -478,10 +496,12 @@ function SprintBoardContent() {
               </div>
               <ul className="space-y-1">
                 <li className="flex items-center gap-1.5 text-[10px] text-neutral-700">
-                  <span className="text-neutral-400">📄</span> project_spec_v2.pdf <span className="text-[9px] text-neutral-400">2h</span>
+                  <svg className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-3.414-3.414A1 1 0 0015.586 5H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                  project_spec_v2.pdf <span className="text-[9px] text-neutral-400">2h</span>
                 </li>
                 <li className="flex items-center gap-1.5 text-[10px] text-neutral-700">
-                  <span className="text-neutral-400">🖼</span> moodboard_final.png <span className="text-[9px] text-neutral-400">5h</span>
+                  <svg className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                  moodboard_final.png <span className="text-[9px] text-neutral-400">5h</span>
                 </li>
               </ul>
             </section>

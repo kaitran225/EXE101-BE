@@ -53,8 +53,8 @@ export default function App() {
       {isStandalone && !isAuth && (
         <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-neutral-200/80 shadow-sm">
           <nav className="flex flex-wrap items-center gap-2 px-3 py-2 md:px-4 md:gap-3 max-w-[1200px] mx-auto" aria-label="Main">
-            <Link to="/dashboard" className="text-lg font-bold text-neutral-900 hover:text-neutral-700 transition-colors duration-150">
-              Together
+            <Link to="/dashboard" className="flex items-center hover:opacity-90 transition-opacity">
+              <img src="/together/horizontal-icon.svg" alt="Together" className="h-7 w-auto" />
             </Link>
             <Link to="/welcome" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Welcome</Link>
             <Link to="/dashboard" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Dashboard</Link>

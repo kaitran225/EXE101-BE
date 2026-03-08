@@ -1,14 +1,24 @@
+import type React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Card, Input } from '../../components/ui'
 
+const PACK_ICONS: Record<string, React.ReactNode> = {
+  starter: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+  student: <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>,
+  pro: <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>,
+  squad: <span className="text-xs font-bold">G</span>,
+  mastery: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>,
+  ultimate: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg>,
+}
+
 const PACKS = [
-  { id: 'starter', name: 'Starter Pack', coins: 500, price: 4.99, icon: '$' },
-  { id: 'student', name: 'Student Special', coins: 1200, price: 9.99, icon: '▶' },
-  { id: 'pro', name: 'Pro Scholar', coins: 3000, price: 19.99, icon: '★', popular: true },
-  { id: 'squad', name: 'Squad Bundle', coins: 7500, price: 39.99, icon: 'G' },
-  { id: 'mastery', name: 'Mastery Pack', coins: 18000, price: 79.99, icon: '◆' },
-  { id: 'ultimate', name: 'Ultimate Treasury', coins: 45000, price: 149.99, icon: '◎' },
+  { id: 'starter', name: 'Starter Pack', coins: 500, price: 4.99, iconKey: 'starter' },
+  { id: 'student', name: 'Student Special', coins: 1200, price: 9.99, iconKey: 'student' },
+  { id: 'pro', name: 'Pro Scholar', coins: 3000, price: 19.99, iconKey: 'pro', popular: true },
+  { id: 'squad', name: 'Squad Bundle', coins: 7500, price: 39.99, iconKey: 'squad' },
+  { id: 'mastery', name: 'Mastery Pack', coins: 18000, price: 79.99, iconKey: 'mastery' },
+  { id: 'ultimate', name: 'Ultimate Treasury', coins: 45000, price: 149.99, iconKey: 'ultimate' },
 ]
 
 export default function Shop() {
@@ -49,8 +59,8 @@ export default function Shop() {
               </div>
             )}
             <div className="flex flex-col items-center text-center">
-              <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-base font-bold text-neutral-700 shadow-sm">
-                {pack.icon}
+              <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-neutral-700 shadow-sm">
+                {PACK_ICONS[pack.iconKey]}
               </div>
               <h3 className="mb-1 text-sm font-bold uppercase leading-6 text-neutral-900 sm:text-base">
                 {pack.name}

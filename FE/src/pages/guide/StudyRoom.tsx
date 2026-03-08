@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AiBotIcon } from '../../components/AiBotIcon'
 import { Button, Card } from '../../components/ui'
 
 const CHAT_MESSAGES = [
@@ -89,24 +90,31 @@ export default function StudyRoom() {
           <div className="flex-1 overflow-y-auto p-4 space-y-2 min-h-0">
             {CHAT_MESSAGES.map((m, i) => (
               <div key={i} className={m.ai ? 'flex justify-center' : m.own ? 'flex justify-end' : ''}>
-                <div
-                  className={`max-w-[90%] rounded-lg border-2 ${
-                    m.ai
-                      ? 'p-2 bg-neutral-200 border-neutral-400 text-neutral-700 text-[10px]'
-                      : m.own
-                        ? 'p-2 bg-neutral-900 border-neutral-900 text-white'
-                        : 'p-2 rounded-lg border-2 border-neutral-300 bg-neutral-100 text-neutral-900'
-                  }`}
-                >
-                  {!m.ai && (
-                    <div className="flex justify-between items-start gap-1">
-                      <span className={`text-[9px] font-semibold uppercase ${m.own ? 'text-neutral-300' : 'text-neutral-600'}`}>
-                        {m.user}
-                      </span>
-                      {m.time && <span className="text-[9px] text-neutral-500">{m.time}</span>}
-                    </div>
+                <div className={m.ai ? 'flex gap-2 max-w-[90%]' : 'max-w-[90%]'}>
+                  {m.ai && (
+                    <span className="w-6 h-6 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                      <AiBotIcon className="w-5 h-5" />
+                    </span>
                   )}
-                  <p className="text-xs font-medium mt-0.5">{m.text}</p>
+                  <div
+                    className={`rounded-lg border-2 ${
+                      m.ai
+                        ? 'p-2 bg-neutral-200 border-neutral-400 text-neutral-700 text-[10px]'
+                        : m.own
+                          ? 'p-2 bg-neutral-900 border-neutral-900 text-white'
+                          : 'p-2 rounded-lg border-2 border-neutral-300 bg-neutral-100 text-neutral-900'
+                    }`}
+                  >
+                    {!m.ai && (
+                      <div className="flex justify-between items-start gap-1">
+                        <span className={`text-[9px] font-semibold uppercase ${m.own ? 'text-neutral-300' : 'text-neutral-600'}`}>
+                          {m.user}
+                        </span>
+                        {m.time && <span className="text-[9px] text-neutral-500">{m.time}</span>}
+                      </div>
+                    )}
+                    <p className="text-xs font-medium mt-0.5">{m.text}</p>
+                  </div>
                 </div>
               </div>
             ))}

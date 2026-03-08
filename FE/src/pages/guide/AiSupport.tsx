@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { AiBotIcon } from '../../components/AiBotIcon'
 import { Button, Card, Input, Progress, Textarea } from '../../components/ui'
 import { QuizletQuizModal } from '../../components/QuizletQuizModal'
 
@@ -192,22 +193,32 @@ export default function AiSupport() {
 
         {/* Right: 30% — Conversation chat */}
         <aside className="min-w-0 flex flex-col border-l-2 border-neutral-200 bg-white">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-sky-600 px-4 py-3 border-b-2 border-neutral-200">
-            Conversation
-          </h2>
+          <div className="flex items-center gap-2 px-4 py-3 border-b-2 border-neutral-200">
+            <AiBotIcon className="w-7 h-7" />
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-sky-600">
+              Conversation
+            </h2>
+          </div>
           <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
             {MESSAGES.map((msg) => (
               <div key={msg.id} className={msg.role === 'assistant' ? 'flex justify-center' : 'flex justify-end'}>
-                <div
-                  className={`max-w-[85%] rounded-xl px-3 py-2 border-2 ${
-                    msg.role === 'assistant'
-                      ? 'bg-neutral-100 border-neutral-200 text-neutral-600 text-xs'
-                      : 'bg-violet-100 border-violet-200 text-violet-900'
-                  }`}
-                >
-                  {msg.role === 'user' && <p className="text-[10px] font-semibold text-neutral-500 mb-0.5">You · {msg.time}</p>}
-                  <p className="text-sm leading-relaxed">{msg.text}</p>
-                  {msg.role === 'assistant' && msg.time && <p className="text-[10px] text-neutral-500 mt-1">{msg.time}</p>}
+                <div className={msg.role === 'assistant' ? 'flex gap-2 max-w-[85%]' : 'max-w-[85%]'}>
+                  {msg.role === 'assistant' && (
+                    <span className="w-7 h-7 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                      <AiBotIcon className="w-6 h-6" />
+                    </span>
+                  )}
+                  <div
+                    className={`rounded-xl px-3 py-2 border-2 ${
+                      msg.role === 'assistant'
+                        ? 'bg-neutral-100 border-neutral-200 text-neutral-600 text-xs'
+                        : 'bg-violet-100 border-violet-200 text-violet-900'
+                    }`}
+                  >
+                    {msg.role === 'user' && <p className="text-[10px] font-semibold text-neutral-500 mb-0.5">You · {msg.time}</p>}
+                    <p className="text-sm leading-relaxed">{msg.text}</p>
+                    {msg.role === 'assistant' && msg.time && <p className="text-[10px] text-neutral-500 mt-1">{msg.time}</p>}
+                  </div>
                 </div>
               </div>
             ))}
@@ -265,7 +276,10 @@ export default function AiSupport() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200 bg-neutral-50">
-              <h2 className="text-sm font-bold text-neutral-900 uppercase tracking-wide">Together AI — Chat</h2>
+              <div className="flex items-center gap-2">
+                <AiBotIcon className="w-8 h-8" />
+                <h2 className="text-sm font-bold text-neutral-900 uppercase tracking-wide">Together AI — Chat</h2>
+              </div>
               <button
                 type="button"
                 onClick={() => setDialogOpen(false)}
@@ -280,16 +294,23 @@ export default function AiSupport() {
             <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
               {MESSAGES.map((msg) => (
                 <div key={msg.id} className={msg.role === 'assistant' ? 'flex justify-center' : 'flex justify-end'}>
-                  <div
-                    className={`max-w-[90%] rounded-xl px-3 py-2 border-2 ${
-                      msg.role === 'assistant'
-                        ? 'bg-neutral-100 border-neutral-200 text-neutral-600 text-xs'
-                        : 'bg-violet-100 border-violet-200 text-violet-900'
-                    }`}
-                  >
-                    {msg.role === 'user' && <p className="text-[10px] font-semibold text-neutral-500 mb-0.5">You · {msg.time}</p>}
-                    <p className="text-sm leading-relaxed">{msg.text}</p>
-                    {msg.role === 'assistant' && msg.time && <p className="text-[10px] text-neutral-500 mt-1">{msg.time}</p>}
+                  <div className={msg.role === 'assistant' ? 'flex gap-2 max-w-[90%]' : 'max-w-[90%]'}>
+                    {msg.role === 'assistant' && (
+                      <span className="w-7 h-7 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                        <AiBotIcon className="w-6 h-6" />
+                      </span>
+                    )}
+                    <div
+                      className={`rounded-xl px-3 py-2 border-2 ${
+                        msg.role === 'assistant'
+                          ? 'bg-neutral-100 border-neutral-200 text-neutral-600 text-xs'
+                          : 'bg-violet-100 border-violet-200 text-violet-900'
+                      }`}
+                    >
+                      {msg.role === 'user' && <p className="text-[10px] font-semibold text-neutral-500 mb-0.5">You · {msg.time}</p>}
+                      <p className="text-sm leading-relaxed">{msg.text}</p>
+                      {msg.role === 'assistant' && msg.time && <p className="text-[10px] text-neutral-500 mt-1">{msg.time}</p>}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -400,7 +421,9 @@ export default function AiSupport() {
                 </div>
               </div>
               <div className="p-4 flex flex-col min-h-0">
-                <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide mb-2 flex items-center gap-1"><span aria-hidden>≡</span> Executive summary</p>
+                <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide mb-2 flex items-center gap-1">
+                <svg className="w-3.5 h-3.5 text-neutral-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                Executive summary</p>
                 <div className="flex-1 min-h-[200px] rounded-xl border-2 border-neutral-200 bg-white p-4 overflow-y-auto">
                   {summaryText ? (
                     <p className="text-sm text-neutral-700 whitespace-pre-wrap">{summaryText}</p>

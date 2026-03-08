@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AiBotIcon } from '../../components/AiBotIcon'
 import { Button, Card, Textarea } from '../../components/ui'
 import { QuizletQuizModal } from '../../components/QuizletQuizModal'
 
@@ -164,21 +165,28 @@ export default function FocusRoom() {
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             {CHAT_MESSAGES.map((m, i) => (
               <div key={i} className={m.ai ? 'flex justify-center' : m.own ? 'flex justify-end' : ''}>
-                <div
-                  className={`max-w-[85%] rounded-xl px-3 py-2 border-2 ${
-                    m.ai
-                      ? 'bg-neutral-100 border-neutral-200 text-neutral-600 text-xs'
-                      : m.own
-                        ? 'bg-violet-100 border-violet-200 text-violet-900'
-                        : 'bg-neutral-50 border-neutral-200 text-neutral-900'
-                  }`}
-                >
-                  {!m.ai && (
-                    <p className="text-[10px] font-semibold text-neutral-500 mb-0.5">
-                      {m.user}{m.time ? ` · ${m.time}` : ''}
-                    </p>
+                <div className={m.ai ? 'flex gap-2 max-w-[85%]' : 'max-w-[85%]'}>
+                  {m.ai && (
+                    <span className="w-7 h-7 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                      <AiBotIcon className="w-6 h-6" />
+                    </span>
                   )}
-                  <p className="text-sm">{m.text}</p>
+                  <div
+                    className={`rounded-xl px-3 py-2 border-2 ${
+                      m.ai
+                        ? 'bg-neutral-100 border-neutral-200 text-neutral-600 text-xs'
+                        : m.own
+                          ? 'bg-violet-100 border-violet-200 text-violet-900'
+                          : 'bg-neutral-50 border-neutral-200 text-neutral-900'
+                    }`}
+                  >
+                    {!m.ai && (
+                      <p className="text-[10px] font-semibold text-neutral-500 mb-0.5">
+                        {m.user}{m.time ? ` · ${m.time}` : ''}
+                      </p>
+                    )}
+                    <p className="text-sm">{m.text}</p>
+                  </div>
                 </div>
               </div>
             ))}
