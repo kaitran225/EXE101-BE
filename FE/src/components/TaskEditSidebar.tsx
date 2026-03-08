@@ -7,10 +7,15 @@ export type TaskForEdit = {
   assignee: string
   tag?: string
   desc?: string
+  startDate?: string
+  endDate?: string
   due?: string
   status?: string
   progress?: number
   completed?: string
+  priority?: string
+  estimate?: string
+  reporter?: string
   flagged?: boolean
   done?: boolean
   missed?: boolean
@@ -35,18 +40,30 @@ export function TaskEditSidebar({ task, onSave, onClose, statusOptions = DEFAULT
   const [description, setDescription] = useState(task.desc ?? '')
   const [assignee, setAssignee] = useState(task.assignee)
   const [status, setStatus] = useState(task.status ?? '')
+  const [startDate, setStartDate] = useState(task.startDate ?? '')
+  const [endDate, setEndDate] = useState(task.endDate ?? '')
   const [due, setDue] = useState(task.due ?? '')
   const [tag, setTag] = useState(task.tag ?? '')
   const [progress, setProgress] = useState(task.progress ?? 0)
+  const [priority, setPriority] = useState(task.priority ?? '')
+  const [estimate, setEstimate] = useState(task.estimate ?? '')
+  const [reporter, setReporter] = useState(task.reporter ?? '')
+  const [completed, setCompleted] = useState(task.completed ?? '')
 
   useEffect(() => {
     setTitle(task.title)
     setDescription(task.desc ?? '')
     setAssignee(task.assignee)
     setStatus(task.status ?? '')
+    setStartDate(task.startDate ?? '')
+    setEndDate(task.endDate ?? '')
     setDue(task.due ?? '')
     setTag(task.tag ?? '')
     setProgress(task.progress ?? 0)
+    setPriority(task.priority ?? '')
+    setEstimate(task.estimate ?? '')
+    setReporter(task.reporter ?? '')
+    setCompleted(task.completed ?? '')
   }, [task])
 
   const handleSave = () => {
@@ -56,9 +73,15 @@ export function TaskEditSidebar({ task, onSave, onClose, statusOptions = DEFAULT
       desc: description,
       assignee,
       status: status || undefined,
+      startDate: startDate || undefined,
+      endDate: endDate || undefined,
       due: due || undefined,
+      completed: completed || undefined,
       tag: tag || undefined,
       progress: progress,
+      priority: priority || undefined,
+      estimate: estimate || undefined,
+      reporter: reporter || undefined,
     })
     onClose()
   }
@@ -136,13 +159,39 @@ export function TaskEditSidebar({ task, onSave, onClose, statusOptions = DEFAULT
               )}
             </div>
             <div>
+              <label className="block text-[10px] font-medium text-neutral-600 mb-0.5">Start date</label>
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                className="w-full px-2 py-1.5 text-xs border border-neutral-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-neutral-300"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] font-medium text-neutral-600 mb-0.5">End date</label>
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                className="w-full px-2 py-1.5 text-xs border border-neutral-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-neutral-300"
+              />
+            </div>
+            <div>
               <label className="block text-[10px] font-medium text-neutral-600 mb-0.5">Due date</label>
               <input
-                type="text"
+                type="date"
                 value={due}
                 onChange={(e) => setDue(e.target.value)}
                 className="w-full px-2 py-1.5 text-xs border border-neutral-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-neutral-300"
-                placeholder="e.g. Oct 15"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] font-medium text-neutral-600 mb-0.5">Completed date</label>
+              <input
+                type="date"
+                value={completed}
+                onChange={(e) => setCompleted(e.target.value)}
+                className="w-full px-2 py-1.5 text-xs border border-neutral-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-neutral-300"
               />
             </div>
             <div>
@@ -154,6 +203,42 @@ export function TaskEditSidebar({ task, onSave, onClose, statusOptions = DEFAULT
                 className="w-full px-2 py-1.5 text-xs border border-neutral-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-neutral-300"
                 placeholder="e.g. BACKEND"
               />
+            </div>
+            <div>
+              <label className="block text-[10px] font-medium text-neutral-600 mb-0.5">Priority</label>
+              <select
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
+                className="w-full px-2 py-1.5 text-xs border border-neutral-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-neutral-300"
+              >
+                <option value="">—</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Urgent">Urgent</option>
+              </select>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5">
+              <div>
+                <label className="block text-[10px] font-medium text-neutral-600 mb-0.5">Estimate</label>
+                <input
+                  type="text"
+                  value={estimate}
+                  onChange={(e) => setEstimate(e.target.value)}
+                  className="w-full px-2 py-1.5 text-xs border border-neutral-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-neutral-300"
+                  placeholder="e.g. 2h or 3d"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] font-medium text-neutral-600 mb-0.5">Reporter</label>
+                <input
+                  type="text"
+                  value={reporter}
+                  onChange={(e) => setReporter(e.target.value)}
+                  className="w-full px-2 py-1.5 text-xs border border-neutral-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-neutral-300"
+                  placeholder="e.g. AM"
+                />
+              </div>
             </div>
             {(task.progress != null || progress > 0) && (
               <div>

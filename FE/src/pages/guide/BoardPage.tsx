@@ -8,23 +8,34 @@ type ScrumTask = {
   tag: string
   title: string
   assignee: string
+  startDate?: string
+  endDate?: string
   due?: string
   status?: string
   completed?: string
+  priority?: string
+  estimate?: string
+  reporter?: string
   flagged?: boolean
   done?: boolean
   missed?: boolean
 }
 
-// Sprint task: optional tag, desc, due, progress, status, needsFeedback
+// Sprint task: optional tag, desc, dates, progress, status, needsFeedback
 type SprintTask = {
   title: string
   assignee: string
   tag?: string
   desc?: string
+  startDate?: string
+  endDate?: string
   due?: string
   progress?: number
   status?: string
+  priority?: string
+  estimate?: string
+  reporter?: string
+  completed?: string
   needsFeedback?: boolean
 }
 
@@ -127,24 +138,24 @@ const SCRUM_COLUMNS_INIT: { id: string; title: string; tasks: ScrumTask[] }[] = 
     id: 'todo',
     title: 'TO-DO',
     tasks: [
-      { tag: 'RESEARCH', title: 'Draft initial architecture diagram', due: 'Oct 12', assignee: 'JD' },
-      { tag: 'DOCS', title: 'Write API specifications', due: 'Oct 15', assignee: 'AM' },
-      { tag: 'BACKEND', title: 'Set up CI pipeline', due: 'Oct 18', assignee: 'SK' },
+      { tag: 'RESEARCH', title: 'Draft initial architecture diagram', startDate: 'Oct 1', endDate: 'Oct 12', due: 'Oct 12', assignee: 'JD', priority: 'High', estimate: '2d', reporter: 'AM' },
+      { tag: 'DOCS', title: 'Write API specifications', startDate: 'Oct 5', due: 'Oct 15', assignee: 'AM', priority: 'Medium', estimate: '1d' },
+      { tag: 'BACKEND', title: 'Set up CI pipeline', due: 'Oct 18', assignee: 'SK', priority: 'High', estimate: '3d' },
     ],
   },
   {
     id: 'doing',
     title: 'DOING',
     tasks: [
-      { tag: 'FRONTEND', title: 'Integrate AI Dashboard UI', status: 'In Progress', assignee: 'SK', flagged: true },
+      { tag: 'FRONTEND', title: 'Integrate AI Dashboard UI', status: 'In Progress', assignee: 'SK', flagged: true, startDate: 'Oct 8', endDate: 'Oct 20', due: 'Oct 20', priority: 'Urgent', estimate: '5d', reporter: 'JD' },
     ],
   },
   {
     id: 'done',
     title: 'DONE',
     tasks: [
-      { tag: 'BACKEND', title: 'Database schema refinement', completed: 'Oct 10', assignee: 'JD', done: true },
-      { tag: 'DESIGN', title: 'User Interview Analysis', completed: 'Oct 09', assignee: 'AM', done: true },
+      { tag: 'BACKEND', title: 'Database schema refinement', completed: 'Oct 10', assignee: 'JD', done: true, startDate: 'Oct 1', endDate: 'Oct 10', due: 'Oct 10', priority: 'High', estimate: '1.5d', reporter: 'AM' },
+      { tag: 'DESIGN', title: 'User Interview Analysis', completed: 'Oct 09', assignee: 'AM', done: true, startDate: 'Oct 3', endDate: 'Oct 9', due: 'Oct 9', reporter: 'SK' },
     ],
   },
   {
@@ -179,8 +190,14 @@ function ScrumBoardContent() {
                       title: updated.title,
                       assignee: updated.assignee,
                       tag: updated.tag ?? t.tag,
+                      startDate: updated.startDate,
+                      endDate: updated.endDate,
                       due: updated.due,
                       status: updated.status,
+                      completed: updated.completed,
+                      priority: updated.priority,
+                      estimate: updated.estimate,
+                      reporter: updated.reporter,
                     }
                   : t
               ),
@@ -360,9 +377,15 @@ function SprintBoardContent() {
                       assignee: updated.assignee,
                       tag: updated.tag ?? t.tag,
                       desc: updated.desc ?? t.desc,
+                      startDate: updated.startDate,
+                      endDate: updated.endDate,
                       due: updated.due,
                       status: updated.status,
                       progress: updated.progress ?? t.progress,
+                      priority: updated.priority,
+                      estimate: updated.estimate,
+                      reporter: updated.reporter,
+                      completed: updated.completed,
                     }
                   : t
               ),
