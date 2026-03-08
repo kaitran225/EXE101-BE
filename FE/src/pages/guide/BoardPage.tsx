@@ -1,6 +1,31 @@
 import { useSearchParams } from 'react-router-dom'
 import { Button } from '../../components/ui'
 
+// Scrum task: different columns have different optional fields
+type ScrumTask = {
+  tag: string
+  title: string
+  assignee: string
+  due?: string
+  status?: string
+  completed?: string
+  flagged?: boolean
+  done?: boolean
+  missed?: boolean
+}
+
+// Sprint task: optional tag, desc, due, progress, status, needsFeedback
+type SprintTask = {
+  title: string
+  assignee: string
+  tag?: string
+  desc?: string
+  due?: string
+  progress?: number
+  status?: string
+  needsFeedback?: boolean
+}
+
 const TABS = [
   { id: 'scrum', label: 'Scrum Board' },
   { id: 'sprint', label: 'Sprint Board' },
@@ -38,7 +63,7 @@ export default function BoardPage() {
 }
 
 // --- Scrum Board (SP Project Alpha): Board | Timeline | Files, Kanban TO-DO | DOING | DONE | MISSED, AI Task Insights sidebar ---
-const SCRUM_COLUMNS = [
+const SCRUM_COLUMNS: { id: string; title: string; count: number; tasks: ScrumTask[] }[] = [
   {
     id: 'todo',
     title: 'TO-DO',
@@ -173,7 +198,7 @@ function ScrumBoardContent() {
 }
 
 // --- Sprint Board: breadcrumb, SPRINT BOARD ACTIVE, 12 Tasks / 4 Members / 2 Days left, Task Board | Members, Start meeting / New Task, TO DO | IN PROGRESS | REVIEW | DONE, Recent Files + Team + AI Assistant ---
-const SPRINT_COLUMNS = [
+const SPRINT_COLUMNS: { id: string; title: string; tasks: SprintTask[] }[] = [
   {
     id: 'todo',
     title: 'TO DO',

@@ -33,7 +33,7 @@ export default function MainMeetingBoard() {
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-[1fr_320px]">
         {/* Video grid 2x2 */}
         <div className="grid min-h-0 grid-cols-2 gap-3 sm:gap-4">
-          {PARTICIPANTS.map((p, i) => (
+          {PARTICIPANTS.map((p) => (
             <div
               key={p.name}
               className="flex flex-col rounded-xl border-2 border-neutral-300 bg-neutral-100/80 overflow-hidden"
