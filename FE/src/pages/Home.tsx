@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="rounded-2xl bg-white border border-neutral-200/60 shadow-sm p-6 md:p-8 max-w-2xl">
       <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 tracking-tight mb-3">
-        EXE101
+        Together
       </h1>
       <p className="text-neutral-600 leading-relaxed mb-2">
         All-in-one learning: personal study, rooms, and team workflow.

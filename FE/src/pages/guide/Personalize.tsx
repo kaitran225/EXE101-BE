@@ -1,14 +1,108 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card } from '../../components/ui'
+import { Button, Card, Input, Select } from '../../components/ui'
+
+const MAJOR_OPTIONS = [
+  { value: '', label: 'Select your major' },
+  { value: 'cs', label: 'Computer Science' },
+  { value: 'eng', label: 'Engineering' },
+  { value: 'bio', label: 'Biology' },
+  { value: 'econ', label: 'Economics' },
+  { value: 'other', label: 'Other' },
+]
+
+const INSTITUTION_OPTIONS = [
+  { value: '', label: 'Select institution' },
+  { value: 'uni-a', label: 'University A' },
+  { value: 'uni-b', label: 'University B' },
+  { value: 'college', label: 'College' },
+  { value: 'other', label: 'Other' },
+]
+
+const STUDY_GOALS = [
+  { value: '1', label: '1h', sub: 'Basic' },
+  { value: '2', label: '2h', sub: 'Good' },
+  { value: '4', label: '4h', sub: 'Excellent' },
+  { value: '6', label: '6+', sub: 'Elite' },
+]
 
 export default function Personalize() {
+  const [goal, setGoal] = useState('2')
+
   return (
-    <div className="flex flex-col gap-8">
-      <h1 className="text-3xl font-bold">Personalize your experience</h1>
-      <Card heading="Step 1">
-        <p className="text-neutral-600 mb-4">Choose your main study topics and goals.</p>
-        <Link to="/personalize-2"><Button variant="primary">Next</Button></Link>
+    <div className="flex flex-col gap-6 max-w-2xl mx-auto w-full">
+      <div className="flex items-center gap-3">
+        <span className="text-sm font-semibold text-neutral-600 uppercase tracking-wide">Step 1/3</span>
+        <div className="flex-1 flex items-center gap-2">
+          <div className="flex-1 h-2 bg-neutral-200 rounded-full overflow-hidden">
+            <div className="h-full bg-sky-600 rounded-full transition-[width]" style={{ width: '33%' }} />
+          </div>
+          <span className="text-sm font-medium text-neutral-600 w-10">33%</span>
+        </div>
+      </div>
+
+      <Card className="p-6 shadow-sm border-2 border-neutral-200">
+        <h1 className="text-2xl font-bold text-neutral-900 mb-6">Personalize your journey</h1>
+
+        <div className="space-y-5">
+          <Select
+            label="What is your major?"
+            options={MAJOR_OPTIONS}
+            defaultValue=""
+          />
+          <Select
+            label="Current institution"
+            options={INSTITUTION_OPTIONS}
+            defaultValue=""
+          />
+          <Input
+            label="Which year are you?"
+            placeholder="Year 1, Year 2..."
+          />
+
+          <div>
+            <p className="text-sm font-medium text-neutral-900 mb-3">Daily study goal</p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {STUDY_GOALS.map((g) => (
+                <button
+                  key={g.value}
+                  type="button"
+                  onClick={() => setGoal(g.value)}
+                  className={`py-3 px-4 rounded-xl border-2 text-center transition-colors ${
+                    goal === g.value
+                      ? 'bg-sky-600 border-sky-600 text-white'
+                      : 'bg-white border-neutral-300 text-neutral-900 hover:border-neutral-400'
+                  }`}
+                >
+                  <span className="block font-bold text-lg">{g.label}</span>
+                  <span className="block text-xs font-medium opacity-90 mt-0.5">{g.sub}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-between mt-8 pt-6 border-t border-neutral-200">
+          <Link to="/welcome">
+            <Button variant="secondary">Back</Button>
+          </Link>
+          <Link to="/personalize-2">
+            <Button variant="primary">Next →</Button>
+          </Link>
+        </div>
       </Card>
+
+      <div className="rounded-xl border-2 border-dashed border-sky-300 bg-sky-50/50 p-4 flex items-center gap-4">
+        <span className="w-12 h-12 rounded-full border-2 border-dashed border-sky-400 flex items-center justify-center text-sky-600 shrink-0" aria-hidden>
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg>
+        </span>
+        <div>
+          <p className="text-sm font-semibold text-neutral-900">Unlock your first achievement</p>
+          <p className="text-xs text-neutral-600 mt-0.5">Complete to earn experience points and coins.</p>
+        </div>
+      </div>
     </div>
   )
 }

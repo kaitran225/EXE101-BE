@@ -55,7 +55,7 @@ export default function App() {
         <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-neutral-200/80 shadow-sm">
           <nav className="flex flex-wrap items-center gap-3 px-4 py-2.5 md:px-6 md:gap-4 max-w-[1200px] mx-auto" aria-label="Main">
             <Link to="/dashboard" className="text-lg font-bold text-neutral-900 hover:text-neutral-700 transition-colors duration-150">
-              EXE101
+              Together
             </Link>
             <Link to="/welcome" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Welcome</Link>
             <Link to="/dashboard" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Dashboard</Link>
@@ -91,7 +91,7 @@ export default function App() {
         <Route path="/study-rooms/recommend" element={<GuideLayout><RecommendRoomMatching /></GuideLayout>} />
         <Route path="/study-room" element={<GuideLayout><StudyRoom /></GuideLayout>} />
         <Route path="/study-room-dashboard" element={<GuideLayout><StudyRoomDashboard /></GuideLayout>} />
-        <Route path="/focus-room" element={<GuideLayout><FocusRoom /></GuideLayout>} />
+        <Route path="/focus-room" element={<FocusRoom />} />
         <Route path="/focus-room-dialog" element={<GuideLayout><FocusRoomDialog /></GuideLayout>} />
         <Route path="/meetings" element={<GuideLayout><MeetingLobby /></GuideLayout>} />
         <Route path="/meetings/room" element={<GuideLayout><MainMeetingBoard /></GuideLayout>} />
