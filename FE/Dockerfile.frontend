@@ -1,15 +1,15 @@
 # Simple Frontend Dockerfile without Nginx
-# Build from repo root: docker build -f FE/Dockerfile.frontend .
+# When Docker Build Context is FE/ (e.g. on Render), paths are relative to FE/.
 FROM node:20-alpine AS build
 WORKDIR /app/frontend
 
 # Copy frontend package files
-COPY FE/package.json ./
-COPY FE/package-lock.json* ./
+COPY package.json ./
+COPY package-lock.json* ./
 RUN npm install --no-audit --no-fund && npm cache clean --force
 
 # Copy frontend source and build
-COPY FE/ .
+COPY . .
 
 # Optional: build args for Vite env (e.g. API URL)
 ARG VITE_API_BASE_URL
