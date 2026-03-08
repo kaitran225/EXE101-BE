@@ -15,7 +15,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
       <AuthSidebar />
       <div className="flex flex-col min-w-0 m-3 gap-3">
         <AuthHeaderBar />
-        <div className="flex min-h-0 flex-1 flex-col rounded-2xl overflow-hidden bg-white shadow-sm border border-neutral-200/50">
+        <div className="flex min-h-0 flex-1 flex-col rounded-2xl overflow-hidden bg-white shadow-sm border-2 border-neutral-200">
           <div className="flex min-h-0 flex-1 flex-col overflow-auto bg-neutral-50/95 p-6 md:p-8">
             {children}
           </div>

@@ -2,32 +2,41 @@ import { Link } from 'react-router-dom'
 import { Button, Card, Textarea } from '../components/ui'
 
 const todayTasks = [
-  { title: 'Read Chapter 4 Notes', due: 'Due 2:00 PM' },
+  { title: 'Read Chapter 4 – Biology', due: 'Due 2:00 PM' },
   { title: 'History Essay Outline', due: 'Due 6:00 PM' },
   { title: 'Python Quiz Prep', due: 'Due 11:59 PM' },
+  { title: 'Physics Problem Set 3', due: 'Due 11:59 PM' },
 ]
 
-const studyBars = [
-  { day: 'Mon', h: 20 },
-  { day: 'Tue', h: 32 },
-  { day: 'Wed', h: 16 },
-  { day: 'Thu', h: 40, active: true, label: '4h' },
-  { day: 'Fri', h: 24 },
-  { day: 'Sat', h: 10 },
-  { day: 'Sun', h: 24 },
+// Weekly study hours (realistic: weekdays higher, weekend lower); Thu = today
+const studyBarsRaw = [
+  { day: 'Mon', hours: 2.5 },
+  { day: 'Tue', hours: 3 },
+  { day: 'Wed', hours: 1.5 },
+  { day: 'Thu', hours: 4, active: true },
+  { day: 'Fri', hours: 2 },
+  { day: 'Sat', hours: 0.5 },
+  { day: 'Sun', hours: 1.5 },
 ]
+const studyMaxHours = Math.max(...studyBarsRaw.map((b) => b.hours))
+// Bar height as % of max (0–100%); minimum 12% so shortest bar is visible
+const studyBars = studyBarsRaw.map((b) => ({
+  ...b,
+  h: Math.max(12, (b.hours / studyMaxHours) * 100),
+  label: b.active ? `${b.hours}h` : undefined,
+}))
 
 const upcomingItems = [
-  { tag: 'DEADLINE', tagClass: 'bg-orange-500/90 text-white', title: 'Physics Lab Report', time: 'Tomorrow' },
+  { tag: 'DEADLINE', tagClass: 'bg-orange-500/90 text-white', title: 'Physics Lab Report', time: 'Tomorrow, 11:59 PM' },
   { tag: 'PROJECT', tagClass: 'bg-amber-200 text-neutral-800', title: 'Web Dev Mockups Review', time: 'Fri, 11 AM' },
-  { tag: 'PROJECT', tagClass: 'bg-amber-200 text-neutral-800', title: 'Web Dev Mockups Review', time: 'Fri, 11 AM' },
+  { tag: 'MEETING', tagClass: 'bg-sky-200 text-sky-900', title: 'Calculus Study Group', time: 'Sat, 2:00 PM' },
 ]
 
 const teamCards = [
   { name: 'Calculus II Prep', active: '8 Active' },
   { name: 'Organic Chemistry', active: '14 Active' },
-  { name: 'Organic Chemistry', active: '14 Active' },
-  { name: 'Organic Chemistry', active: '14 Active' },
+  { name: 'Web Dev Sprint', active: '5 Active' },
+  { name: 'History Essay Group', active: '3 Active' },
 ]
 
 const cardCompact = 'p-4 [&_h3]:pb-1.5 [&_h3]:mb-3 [&_h3]:text-sm [&_h3]:font-semibold'
@@ -111,13 +120,13 @@ export default function Dashboard() {
               View analytics
             </Button>
           </div>
-          <div className="flex items-end gap-0.5 h-16">
+          <div className="flex items-end gap-1 h-[140px]">
             {studyBars.map((b, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center justify-end gap-0 min-w-0">
+              <div key={i} className="flex-1 flex flex-col items-center justify-end gap-0.5 min-w-0 h-full">
                 {b.label && <span className="text-[9px] font-semibold text-neutral-600">{b.label}</span>}
                 <div
-                  className={`w-full rounded-t min-h-[4px] ${b.active ? 'bg-violet-400' : 'bg-neutral-200'}`}
-                  style={{ height: `${Math.max(10, b.h)}%` }}
+                  className={`w-full rounded-t min-h-[6px] ${b.active ? 'bg-violet-500' : 'bg-neutral-300'}`}
+                  style={{ height: `${b.h}%` }}
                 />
               </div>
             ))}
@@ -134,7 +143,7 @@ export default function Dashboard() {
 
       {/* Main columns 20% | 30% | 50% — Row 2: Upcoming | Open rooms | Meetings + Notes */}
       <div className="grid grid-cols-1 lg:grid-cols-[20fr_30fr_50fr] gap-3 w-full">
-        <Card className={cardCompact} heading="Sắp diễn ra">
+        <Card className={cardCompact} heading="Upcoming meetings">
           <ul className="space-y-1">
             {upcomingItems.map((item, i) => (
               <li key={i} className="p-1.5 rounded-md border border-neutral-200 bg-neutral-50/50">
@@ -150,9 +159,10 @@ export default function Dashboard() {
           </ul>
         </Card>
 
-        <Card className={cardCompact} heading="Open study rooms">
-          <div className="flex justify-end mb-1">
-            <Button variant="ghost" size="sm" className="text-[10px] font-medium text-neutral-600 py-0 h-6">
+        <Card className={cardCompact}>
+          <div className="flex items-center justify-between gap-2 pb-1.5 mb-3 border-b border-neutral-200">
+            <h3 className="text-sm font-semibold text-neutral-900">Open study rooms</h3>
+            <Button variant="ghost" size="sm" className="text-[10px] font-medium text-neutral-600 py-0 h-6 shrink-0">
               Join randomly
             </Button>
           </div>
@@ -174,10 +184,11 @@ export default function Dashboard() {
         </Card>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Card className={cardCompact} heading="Upcoming meetings">
-            <div className="flex justify-end mb-1">
+          <Card className={cardCompact}>
+            <div className="flex items-center justify-between gap-2 pb-1.5 mb-3 border-b border-neutral-200">
+              <h3 className="text-sm font-semibold text-neutral-900">Upcoming meetings</h3>
               <Link to="/meetings">
-                <Button variant="secondary" size="sm" className="text-[10px] font-medium py-1 h-7">
+                <Button variant="secondary" size="sm" className="text-[10px] font-medium py-1 h-7 shrink-0">
                   Start / Join
                 </Button>
               </Link>

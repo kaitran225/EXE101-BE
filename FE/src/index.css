@@ -2,6 +2,9 @@
 
 /* Design tokens: study vibe, robust, modern */
 @theme {
+  /* Border: thicker default for whole app */
+  --default-border-width: 3px;
+
   /* Typography */
   --font-sans: 'Lexend', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;

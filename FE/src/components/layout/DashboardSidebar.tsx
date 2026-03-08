@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 const navItems = [
-  { to: '/profile', label: 'Profile' },
   { to: '/dashboard', label: 'Home' },
   { to: '/study-rooms', label: 'Study Rooms' },
   { to: '/meetings', label: 'Meetings' },
@@ -13,19 +12,13 @@ const navItems = [
   { to: '/meet-ai', label: 'Together AI' },
 ] as const
 
-const iconKeys: Array<'profile' | 'home' | 'study' | 'meetings' | 'teams' | 'calendar' | 'gift' | 'shop' | 'ai'> = [
-  'profile', 'home', 'study', 'meetings', 'teams', 'calendar', 'gift', 'shop', 'ai',
+const iconKeys: Array<'home' | 'study' | 'meetings' | 'teams' | 'calendar' | 'gift' | 'shop' | 'ai'> = [
+  'home', 'study', 'meetings', 'teams', 'calendar', 'gift', 'shop', 'ai',
 ]
 
 function NavIcon({ icon }: { icon: (typeof iconKeys)[number] }) {
   const iconClass = 'w-5 h-5 flex-shrink-0'
   const icons = {
-    profile: (
-      <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-        <circle cx="12" cy="8" r="3" />
-        <path d="M5 20v-2a5 5 0 0 1 10 0v2" />
-      </svg>
-    ),
     home: (
       <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
         <path d="M4 10l8-6 8 6v10h-6v-6H10v6H4z" />
@@ -82,7 +75,7 @@ export function DashboardSidebar() {
 
   return (
     <aside
-      className={`h-full flex flex-col flex-shrink-0 bg-neutral-800 text-white transition-[width] ${
+      className={`relative h-full flex flex-col flex-shrink-0 bg-neutral-800 text-white transition-[width] ${
         collapsed ? 'w-[72px]' : 'w-64'
       }`}
       aria-label="Dashboard navigation"
@@ -123,18 +116,31 @@ export function DashboardSidebar() {
             )
           })}
         </nav>
-        {!collapsed && (
-          <div className="pt-4 border-t border-neutral-600 space-y-3">
-            <div>
-              <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-2 px-2">Global ranking</p>
-              <div className="flex items-center gap-2 py-1.5 px-2">
+        <div className="pt-4 border-t border-neutral-600 space-y-3">
+            {collapsed ? (
+              <Link
+                to="/profile"
+                className="flex justify-center p-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
+                aria-label="Go to profile"
+              >
                 <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs font-medium text-white truncate">You</p>
-                  <p className="text-[10px] text-neutral-400">Level 24 · #777</p>
+              </Link>
+            ) : (
+              <>
+                <div>
+                  <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-2 px-2">Global ranking</p>
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-2 py-1.5 px-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
+                    aria-label="Go to profile"
+                  >
+                    <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-medium text-white truncate">You</p>
+                      <p className="text-[10px] text-neutral-400">Level 24 · #777</p>
+                    </div>
+                  </Link>
                 </div>
-              </div>
-            </div>
             <div className="px-2">
               <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-1.5">Next reward 75%</p>
               <div className="h-2 w-full bg-neutral-700 rounded-full overflow-hidden">
@@ -142,25 +148,27 @@ export function DashboardSidebar() {
               </div>
               <p className="text-[10px] text-neutral-400 mt-1">Level 24 + Premium</p>
             </div>
+              </>
+            )}
           </div>
-        )}
-        <button
-          type="button"
-          onClick={() => setCollapsed((c: boolean) => !c)}
-          className="mt-2 p-2 rounded-xl text-neutral-400 hover:bg-neutral-700 hover:text-white self-center transition-colors duration-150 active:scale-95"
-          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        >
-          <svg
-            className={`w-5 h-5 transition-transform duration-200 ease-out ${collapsed ? 'rotate-180' : ''}`}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
       </div>
+      {/* Peel tab: outside overflow-hidden so both right corners stay rounded */}
+      <button
+        type="button"
+        onClick={() => setCollapsed((c: boolean) => !c)}
+        className="absolute right-0 bottom-6 w-8 h-11 flex items-center justify-center rounded-l-none rounded-tr-2xl rounded-br-2xl bg-neutral-800 text-neutral-300 transition-all duration-200 active:scale-95 -translate-y-1/2 translate-x-full z-10 hover:bg-gradient-to-r hover:from-neutral-800 hover:to-neutral-500 hover:text-white"
+        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+      >
+        <svg
+          className={`w-4 h-4 transition-transform duration-200 ease-out ${collapsed ? 'rotate-180' : ''}`}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </aside>
   )
 }

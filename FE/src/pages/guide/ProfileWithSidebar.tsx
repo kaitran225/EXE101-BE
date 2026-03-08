@@ -5,15 +5,6 @@ import { authApi, readApi, workflowApi, getStoredToken, clearStoredToken } from 
 import { getFakeMeResponse } from '../../mocks/user'
 import { Button, Card, Progress, Badge } from '../../components/ui'
 
-const sidebarLinks = [
-  { to: '/dashboard', label: 'Home' },
-  { to: '/study-rooms', label: 'Study Rooms' },
-  { to: '/teams', label: 'Teams' },
-  { to: '/calendar', label: 'Calendar' },
-  { to: '/subscription', label: 'Subscription' },
-  { to: '/personalize', label: 'Personalize' },
-]
-
 export default function ProfileWithSidebar() {
   const [user, setUser] = useState<MeResponse | null>(null)
   const [readHealth, setReadHealth] = useState<string>('—')
@@ -43,21 +34,7 @@ export default function ProfileWithSidebar() {
   const workflowUp = workflowHealth === 'UP'
 
   return (
-    <div className="flex flex-col gap-8 md:flex-row">
-      <aside className="w-full shrink-0 rounded-lg border border-neutral-200 bg-white p-4 md:w-64">
-        <nav className="flex flex-col gap-2">
-          {sidebarLinks.map(({ to, label }) => (
-            <Link
-              key={to}
-              to={to}
-              className="rounded-lg px-3 py-2 text-neutral-900 hover:bg-neutral-100"
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-      <div className="min-w-0 flex-1 flex flex-col gap-8">
+    <div className="flex flex-col gap-8 w-full">
         <div className="border-b border-neutral-200 pb-6">
           <h1 className="mb-2 text-3xl font-bold text-neutral-900 md:text-4xl">
             Profile
@@ -143,7 +120,6 @@ export default function ProfileWithSidebar() {
             </Link>
           </div>
         </Card>
-      </div>
     </div>
   )
 }

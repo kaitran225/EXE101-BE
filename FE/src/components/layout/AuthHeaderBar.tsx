@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export function AuthHeaderBar() {
   return (
     <header
-      className="flex-shrink-0 flex items-center justify-between gap-2 px-4 py-2 bg-white/90 backdrop-blur-xl border border-neutral-200/80 rounded-2xl shadow-sm"
+      className="flex-shrink-0 flex items-center justify-between gap-2 px-4 py-2 bg-white/90 backdrop-blur-xl border-2 border-neutral-200 rounded-2xl shadow-sm"
       role="banner"
     >
       <Link to="/welcome" className="flex items-center gap-2 shrink-0">
