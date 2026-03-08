@@ -1,85 +1,55 @@
-# EXE101 Backend
+# EXE101
 
-This is a Spring Boot microservices project built with Java 21 and Spring Boot 3.5.9. It's organized as a Maven multi-module setup, which makes it easier to manage shared code and keep services independent.
+Spring Boot microservices backend + Vite React frontend (from [SRS](.guide/SRS.md) and [original schema](.guide/original.sql)).
 
 ## Structure
 
-The project is split into several services, each handling a specific part of the system:
+- **BE/** – Maven multi-module backend (Java 21, Spring Boot 3.4)
+  - **common** – Shared config, security (JWT resource server), DTOs, exception handling
+  - **auth** (port **8081**) – OAuth2 Authorization Server, users, JWT issuance
+  - **read** (port **8083**) – Read service (documents, schedules, quizzes – to be extended)
+  - **workflow** (port **8082**) – Workflow service (rooms, tasks, teams, meetings – to be extended)
+- **frontend/** – Vite + React 19 + TypeScript, React Router
 
-- **common** - This one doesn't run on its own (no port). It's where we keep all the shared utilities, base classes, and configurations that the other services use. Think of it as the foundation everything else builds on.
+## Backend – Getting started
 
-- **authen** (Port 8081) - Our OAuth2 authorization server. This is the single source of truth for authentication - all other services trust tokens from here.
+1. **PostgreSQL**: Create databases `auth`, `read`, `workflow` on `localhost:5432` (user/pass `postgres` or set in each service’s `application.yaml`).
 
-- **read** (Port 8083) - Handles read operations for the system.
+2. **Build:**
+   ```bash
+   cd BE
+   ./mvnw.cmd clean install -DskipTests   # Windows
+   # ./mvnw clean install -DskipTests     # Linux/macOS
+   ```
 
-- **workflow** (Port 8082) - Manages workflow-related functionality.
+3. **Run services** (each in its own terminal):
+   ```bash
+   cd BE/auth && ../mvnw.cmd spring-boot:run      # 8081
+   cd BE/read && ../mvnw.cmd spring-boot:run       # 8083
+   cd BE/workflow && ../mvnw.cmd spring-boot:run   # 8082
+   ```
 
-- **email** (Port 8084) - Takes care of sending emails.
+   With `local` profile, JPA uses `ddl-auto: update` for schema.
 
-- **cronjob** (Port 8085) - Runs scheduled tasks and background jobs.
-
-## Getting Started
-
-To build everything at once, run:
+## Frontend – Getting started
 
 ```bash
-cd app
-mvn clean install -DskipTests
+cd frontend
+npm install
+npm run dev
 ```
 
-Once that's done, you can start any service individually. For example, to start the authentication service:
-
-```bash
-cd app/authen
-mvn spring-boot:run
-```
-
-By default, everything runs with the `local` profile. If you need to switch to a different environment, set the `SPRING_PROFILES_ACTIVE` environment variable to `dev` or `stage`.
+- App: http://localhost:5173  
+- **Login** uses OAuth2 authorization code flow with auth service (8081). Redirect URIs include `http://localhost:5173/callback`.  
+- **Dashboard** calls auth `/api/v1/users/me` (proxied to 8081) and health endpoints on read (8083) and workflow (8082).
 
 ## Configuration
 
-Each service has its own `application.yaml` file, plus environment-specific overrides:
-- `application-local.yaml` - For local development (debug logging, auto DDL updates)
-- `application-dev.yaml` - For the dev environment (Flyway migrations enabled)
-- `application-stage.yaml` - For staging (production-like settings)
+- **Auth** – OAuth2 client `exe101-web` / `secret`; CORS allows `http://localhost:5173`.  
+- **Read / Workflow** – Validate JWT via `http://localhost:8081/oauth2/jwks`.  
+- Frontend proxy in `vite.config.ts`: `/api` → `http://localhost:8081`.
 
-The base configuration lives in `common/src/main/resources/application.yaml`. Each service imports this and then overrides whatever it needs to customize.
+## Tech stack
 
-## Database Setup
-
-We're using PostgreSQL, and each service has its own database:
-- `auth` - For the authentication service
-- `read` - For the read service
-- `workflow` - For the workflow service
-- `email` - For the email service
-- `cronjob` - For the cronjob service
-
-Make sure you create these databases before starting the services. When running locally, it connects to `localhost:5432` with default settings. For other environments, you'll need to set the appropriate environment variables.
-
-## Security
-
-We're using OAuth2 with a resource server setup. The `authen` service is the authorization server that issues JWT tokens. All the other services act as resource servers that validate those tokens. The security configuration is centralized in the common module, so services just import it and it works automatically.
-
-## Tech Stack
-
-Here's what we're using:
-- Spring Boot 3.5.9
-- Java 21
-- PostgreSQL for data persistence
-- Spring Security OAuth2 for authentication
-- JPA/Hibernate for database access
-- MapStruct for object mapping
-- Lombok to reduce boilerplate
-- Redis (optional) for caching
-- Flyway for database migrations
-- Actuator for monitoring and health checks
-- OpenAPI/Swagger for API documentation
-- Resilience4j for handling failures gracefully
-
-## A Few Things to Know
-
-Services are configured to scan both their own package and `com.project.exe.common`. This means they automatically pick up all the common beans and configurations without any extra setup.
-
-We follow an interface/implementation pattern: service interfaces go in `service/`, and their implementations live in `service/impl/`.
-
-Configuration classes are named per module to avoid conflicts. For example, you'll see `AuthenDataSourceConfiguration` instead of just `DataSourceConfiguration`. This prevents Spring from getting confused when multiple modules have similar configs.
+- **Backend:** Spring Boot 3.4, Java 21, Spring Security OAuth2 (Authorization Server + Resource Server), JPA, PostgreSQL.  
+- **Frontend:** Vite 6, React 19, TypeScript, React Router 7.
