@@ -191,13 +191,13 @@ export default function StudyRoom() {
           onClick={() => setShowEndModal(false)}
         >
           <Card
-            className="p-8 max-w-md w-full"
+            className="p-5 max-w-md w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <p className="text-xl font-bold text-neutral-900 text-center mb-6">
+            <p className="text-lg font-bold text-neutral-900 text-center mb-4">
               End study session?
             </p>
-            <div className="flex gap-3 mb-6">
+            <div className="flex gap-3 mb-4">
               <Button variant="primary" size="md" className="flex-1" onClick={() => setShowEndModal(false)}>
                 Continue
               </Button>
@@ -207,14 +207,14 @@ export default function StudyRoom() {
                 </Button>
               </Link>
             </div>
-            <div className="flex justify-between gap-4 text-center border-t border-neutral-200 pt-6">
+            <div className="flex justify-between gap-4 text-center border-t border-neutral-200 pt-4">
               <div>
-                <p className="text-2xl font-bold text-neutral-900">1h 42m</p>
+                <p className="text-xl font-bold text-neutral-900">1h 42m</p>
                 <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide mt-1">Time studied</p>
               </div>
               <div className="w-px bg-neutral-200" />
               <div>
-                <p className="text-2xl font-bold text-neutral-900">9</p>
+                <p className="text-xl font-bold text-neutral-900">9</p>
                 <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide mt-1">Members</p>
               </div>
             </div>

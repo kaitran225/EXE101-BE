@@ -69,14 +69,14 @@ export default function MeetAi() {
   const handleDragOver = (e: React.DragEvent) => e.preventDefault()
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full items-start">
       <header className="lg:col-span-3">
-        <h1 className="text-3xl font-bold text-neutral-900 tracking-tight">Meet AI Tutor</h1>
+        <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Meet AI Tutor</h1>
         <p className="text-neutral-600 mt-1">Get instant help with concepts, summaries, and practice. Ask anything or paste your notes.</p>
       </header>
 
       {/* Column 1: Ask a question */}
-      <Card className="p-6 shadow-sm border-2 border-neutral-200 min-w-0">
+      <Card className="p-5 shadow-sm border-2 border-neutral-200 min-w-0">
         <h2 className="text-sm font-semibold text-neutral-700 uppercase tracking-wide mb-3">Ask a question or paste content</h2>
         <div className="relative mb-4">
           <Textarea

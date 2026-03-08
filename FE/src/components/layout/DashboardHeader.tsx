@@ -98,7 +98,7 @@ export function DashboardHeader() {
 
   return (
     <header
-      className="flex-shrink-0 flex items-center gap-2 px-4 md:px-5 py-2 bg-white/90 backdrop-blur-xl border-2 border-neutral-200 rounded-2xl shadow-sm transition-shadow duration-200"
+      className="flex-shrink-0 flex items-center gap-2 px-3 md:px-4 py-1.5 bg-white/90 backdrop-blur-xl border-2 border-neutral-200 rounded-2xl shadow-sm transition-shadow duration-200"
       role="banner"
     >
       <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-2">

@@ -56,15 +56,15 @@ export default function AiSupport() {
   const handleDragOver = (e: React.DragEvent) => e.preventDefault()
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 w-full max-w-6xl">
-      <div className="flex flex-col gap-8 min-w-0">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 w-full max-w-6xl">
+      <div className="flex flex-col gap-6 min-w-0">
         <div>
-          <h1 className="text-3xl font-bold text-neutral-900 tracking-tight">AI Support</h1>
+          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">AI Support</h1>
           <p className="text-neutral-600 mt-1">Use the AI to summarize, quiz you, or explain concepts from your study material.</p>
         </div>
 
-        <Card className="p-6 shadow-sm border-2 border-neutral-200 bg-gradient-to-br from-violet-50/50 to-white">
-        <p className="text-neutral-700 mb-6">
+        <Card className="p-5 shadow-sm border-2 border-neutral-200 bg-gradient-to-br from-violet-50/50 to-white">
+        <p className="text-neutral-700 mb-4">
           Get help with your study material. Upload or paste content, then choose how you want to use it: get a summary, generate quiz questions, or ask for explanations.
         </p>
         <div className="flex flex-wrap gap-3">
@@ -88,16 +88,16 @@ export default function AiSupport() {
                 onClick={() => setSummarizeOpen(true)}
                 className="w-full text-left"
               >
-                <Card className="p-5 h-full hover:shadow-md hover:border-violet-200 transition-all cursor-pointer group border-2 border-neutral-200">
-                  <span className="text-2xl mb-3 block" aria-hidden>{action.icon}</span>
+                <Card className="p-4 h-full hover:shadow-md hover:border-violet-200 transition-all cursor-pointer group border-2 border-neutral-200">
+                  <span className="text-xl mb-2 block" aria-hidden>{action.icon}</span>
                   <h3 className="font-semibold text-neutral-900 mb-1 group-hover:text-violet-700">{action.title}</h3>
                   <p className="text-sm text-neutral-600">{action.description}</p>
                 </Card>
               </button>
             ) : (
               <Link key={action.title} to={action.href}>
-                <Card className="p-5 h-full hover:shadow-md hover:border-violet-200 transition-all cursor-pointer group border-2 border-neutral-200">
-                  <span className="text-2xl mb-3 block" aria-hidden>{action.icon}</span>
+                <Card className="p-4 h-full hover:shadow-md hover:border-violet-200 transition-all cursor-pointer group border-2 border-neutral-200">
+                  <span className="text-xl mb-2 block" aria-hidden>{action.icon}</span>
                   <h3 className="font-semibold text-neutral-900 mb-1 group-hover:text-violet-700">{action.title}</h3>
                   <p className="text-sm text-neutral-600">{action.description}</p>
                 </Card>

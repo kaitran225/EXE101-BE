@@ -50,8 +50,8 @@ function FeatureItem({
 export default function Subscription() {
   return (
     <div className="mx-auto flex w-full max-w-[1160px] flex-col px-4 py-4 sm:px-6">
-      <div className="flex flex-col items-center gap-4 pb-8 sm:gap-5 sm:pb-10 md:gap-6 md:pb-12">
-        <h1 className="text-center text-2xl font-bold uppercase tracking-tight text-neutral-900 sm:text-3xl md:text-4xl md:leading-[2.75rem]">
+      <div className="flex flex-col items-center gap-3 pb-6 sm:gap-4 sm:pb-8 md:gap-5 md:pb-10">
+        <h1 className="text-center text-xl font-bold uppercase tracking-tight text-neutral-900 sm:text-2xl md:text-3xl md:leading-tight">
           Subscription Plans
         </h1>
         <p className="w-full max-w-[28rem] text-center text-sm leading-6 text-neutral-700 sm:max-w-[672px] sm:text-base sm:leading-7">
@@ -59,11 +59,11 @@ export default function Subscription() {
         </p>
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 lg:gap-6">
+      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-4">
         {/* FREE */}
-        <div className="flex min-w-0 flex-col justify-between rounded-2xl border-2 border-neutral-300 bg-white p-5 shadow-sm sm:p-6 lg:min-h-[420px] lg:p-8">
+        <div className="flex min-w-0 flex-col justify-between rounded-2xl border-2 border-neutral-300 bg-white p-4 shadow-sm sm:p-5 lg:min-h-[380px] lg:p-6">
           <div className="flex flex-col">
-            <div className="flex flex-col gap-2 pb-4 sm:pb-6">
+            <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Free</h3>
               <div className="flex items-baseline gap-1">
                 <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">$0</span>
@@ -71,7 +71,7 @@ export default function Subscription() {
               </div>
               <p className="text-sm font-normal leading-6 text-neutral-700 sm:text-base">Perfect for individuals</p>
             </div>
-            <ul className="flex flex-col gap-3 pb-8 sm:gap-4 sm:pb-10">
+            <ul className="flex flex-col gap-2 pb-6 sm:gap-3 sm:pb-8">
               {FREE_FEATURES.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <FeatureItem text={f} prefix="-" />
@@ -83,9 +83,9 @@ export default function Subscription() {
         </div>
 
         {/* PERSONAL */}
-        <div className="flex min-w-0 flex-col justify-between rounded-2xl border-2 border-neutral-300 bg-white p-5 shadow-sm sm:p-6 lg:min-h-[420px] lg:p-8">
+        <div className="flex min-w-0 flex-col justify-between rounded-2xl border-2 border-neutral-300 bg-white p-4 shadow-sm sm:p-5 lg:min-h-[380px] lg:p-6">
           <div className="flex flex-col">
-            <div className="flex flex-col gap-2 pb-4 sm:pb-6">
+            <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Personal</h3>
               <div className="flex items-baseline gap-1">
                 <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">$6.99</span>
@@ -93,7 +93,7 @@ export default function Subscription() {
               </div>
               <p className="text-sm font-normal leading-6 text-neutral-700 sm:text-base">Perfect for individuals</p>
             </div>
-            <ul className="flex flex-col gap-3 pb-8 sm:gap-4 sm:pb-10">
+            <ul className="flex flex-col gap-2 pb-6 sm:gap-3 sm:pb-8">
               {PERSONAL_FEATURES.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <FeatureItem text={f} prefix="-" />
@@ -108,12 +108,12 @@ export default function Subscription() {
         </div>
 
         {/* TEAMS — Most Popular */}
-        <div className="relative flex min-w-0 flex-col justify-between rounded-2xl border-2 border-sky-200 bg-sky-100/80 p-5 shadow-md sm:p-6 lg:min-h-[420px] lg:p-8">
+        <div className="relative flex min-w-0 flex-col justify-between rounded-2xl border-2 border-sky-200 bg-sky-100/80 p-4 shadow-md sm:p-5 lg:min-h-[380px] lg:p-6">
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded border-2 border-violet-500 bg-violet-500 px-3 py-1.5">
             <span className="text-[10px] font-bold uppercase tracking-wide text-white">Most Popular</span>
           </div>
           <div className="flex flex-col">
-            <div className="flex flex-col gap-2 pb-4 sm:pb-6">
+            <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Teams</h3>
               <div className="flex items-baseline gap-1">
                 <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">$9.99</span>
@@ -121,7 +121,7 @@ export default function Subscription() {
               </div>
               <p className="text-sm font-normal leading-6 text-neutral-900 sm:text-base">For serious students</p>
             </div>
-            <ul className="flex flex-col gap-3 pb-8 sm:gap-4 sm:pb-10">
+            <ul className="flex flex-col gap-2 pb-6 sm:gap-3 sm:pb-8">
               {TEAMS_FEATURES.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <FeatureItem text={f} prefix="+"/>
@@ -136,15 +136,15 @@ export default function Subscription() {
         </div>
 
         {/* COMBO (TEAMS + PERSONAL) Custom */}
-        <div className="flex min-w-0 flex-col justify-between rounded-2xl border-2 border-neutral-300 bg-white p-5 shadow-sm sm:p-6 lg:min-h-[420px] lg:p-8">
+        <div className="flex min-w-0 flex-col justify-between rounded-2xl border-2 border-neutral-300 bg-white p-4 shadow-sm sm:p-5 lg:min-h-[380px] lg:p-6">
           <div className="flex flex-col">
-            <div className="flex flex-col gap-2 pb-4 sm:pb-6">
+            <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Combo</h3>
               <p className="text-base font-semibold leading-6 text-neutral-700 sm:text-lg">(Teams + Personal)</p>
               <div className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">Custom</div>
               <p className="text-sm font-normal leading-6 text-neutral-700 sm:text-base">For institutions & large groups</p>
             </div>
-            <ul className="flex flex-col gap-3 pb-8 sm:gap-4 sm:pb-10">
+            <ul className="flex flex-col gap-2 pb-6 sm:gap-3 sm:pb-8">
               {COMBO_FEATURES.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <FeatureItem text={f} prefix="-" />

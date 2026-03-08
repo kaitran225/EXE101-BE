@@ -53,7 +53,7 @@ export default function App() {
     <div className={isStandalone ? 'min-h-screen bg-neutral-100' : ''}>
       {isStandalone && !isAuth && (
         <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-neutral-200/80 shadow-sm">
-          <nav className="flex flex-wrap items-center gap-3 px-4 py-2.5 md:px-6 md:gap-4 max-w-[1200px] mx-auto" aria-label="Main">
+          <nav className="flex flex-wrap items-center gap-2 px-3 py-2 md:px-4 md:gap-3 max-w-[1200px] mx-auto" aria-label="Main">
             <Link to="/dashboard" className="text-lg font-bold text-neutral-900 hover:text-neutral-700 transition-colors duration-150">
               Together
             </Link>
@@ -77,8 +77,8 @@ export default function App() {
       )}
       <Routes>
         <Route path="/" element={<Navigate to="/welcome" replace />} />
-        <Route path="/login" element={<main className="p-4 md:p-6 md:py-8 max-w-[1200px] mx-auto min-h-[calc(100vh-4rem)]"><Login /></main>} />
-        <Route path="/callback" element={<main className="p-4 md:p-6 md:py-8 max-w-[1200px] mx-auto min-h-[calc(100vh-4rem)]"><Callback /></main>} />
+        <Route path="/login" element={<main className="p-3 md:p-4 md:py-6 max-w-[1200px] mx-auto min-h-[calc(100vh-4rem)]"><Login /></main>} />
+        <Route path="/callback" element={<main className="p-3 md:p-4 md:py-6 max-w-[1200px] mx-auto min-h-[calc(100vh-4rem)]"><Callback /></main>} />
         <Route path="/welcome" element={<AuthLayout><Welcome /></AuthLayout>} />
         <Route path="/sign-up" element={<AuthLayout><SignUp /></AuthLayout>} />
         <Route path="/confirm-mail" element={<AuthLayout><ConfirmMail /></AuthLayout>} />

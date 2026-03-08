@@ -186,7 +186,7 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Card className={cardCompact}>
             <div className="flex items-center justify-between gap-2 pb-1.5 mb-3 border-b border-neutral-200">
-              <h3 className="text-sm font-semibold text-neutral-900">Upcoming meetings</h3>
+              <h3 className="text-sm font-semibold text-neutral-900">Upcoming tasks</h3>
               <Link to="/meetings">
                 <Button variant="secondary" size="sm" className="text-[10px] font-medium py-1 h-7 shrink-0">
                   Start / Join

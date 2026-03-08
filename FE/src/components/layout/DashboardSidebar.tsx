@@ -76,14 +76,14 @@ export function DashboardSidebar() {
   return (
     <aside
       className={`relative h-full flex flex-col flex-shrink-0 bg-neutral-800 text-white transition-[width] ${
-        collapsed ? 'w-[72px]' : 'w-64'
+        collapsed ? 'w-14' : 'w-56'
       }`}
       aria-label="Dashboard navigation"
     >
-      <div className="p-3 flex flex-col gap-1 flex-1 min-h-0 overflow-hidden">
+      <div className="p-2.5 flex flex-col gap-1 flex-1 min-h-0 overflow-hidden">
         <Link
           to="/dashboard"
-          className={`flex items-center p-2 rounded-xl hover:bg-neutral-700 text-neutral-300 hover:text-white transition-colors duration-150 ${collapsed ? 'justify-center' : ''}`}
+          className={`flex items-center p-1.5 rounded-xl hover:bg-neutral-700 text-neutral-300 hover:text-white transition-colors duration-150 ${collapsed ? 'justify-center' : ''}`}
           aria-label="App home"
         >
           <span className="text-xl font-bold text-violet-400 flex-shrink-0">∞</span>
@@ -100,8 +100,8 @@ export function DashboardSidebar() {
                 key={`${to}-${label}`}
                 to={to}
                 title={label}
-                className={`self-stretch flex items-center gap-3 rounded-xl py-2.5 transition-colors duration-150 ${
-                  collapsed ? 'justify-center px-2' : 'justify-start px-3'
+                className={`self-stretch flex items-center gap-3 rounded-xl py-2 transition-colors duration-150 ${
+                  collapsed ? 'justify-center px-2' : 'justify-start px-2.5'
                 } ${
                   active
                     ? 'bg-amber-500/20 text-amber-400'

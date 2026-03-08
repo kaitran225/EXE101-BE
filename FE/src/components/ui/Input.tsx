@@ -21,7 +21,7 @@ export function Input({ label, error, id, className = '', ...props }: InputProps
           text-neutral-900 placeholder:text-neutral-500
           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
           disabled:opacity-50 disabled:bg-neutral-100
-          min-h-[44px]
+          min-h-[2.5rem]
           ${error ? 'border-error ring-1 ring-error' : ''}
           ${className}
         `.trim().replace(/\s+/g, ' ')}

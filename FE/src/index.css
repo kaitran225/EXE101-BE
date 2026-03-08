@@ -30,9 +30,9 @@
   --color-border-strong: rgba(0, 0, 0, 0.2);
   --color-error: #dc2626;
 
-  /* Spacing (align with 4/8/16/24/32) */
-  --spacing-section: 1.5rem;
-  --spacing-container: 1.5rem;
+  /* Spacing (slightly tighter for resized app) */
+  --spacing-section: 1.25rem;
+  --spacing-container: 1.25rem;
   --radius-card: 0.625rem;
   --radius-button: 0.625rem;
   --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08);
@@ -41,6 +41,7 @@
 /* Base */
 @layer base {
   html {
+    font-size: 14px;
     font-family: var(--font-sans);
     scroll-behavior: smooth;
   }
