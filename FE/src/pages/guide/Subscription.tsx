@@ -108,7 +108,7 @@ export default function Subscription() {
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Personal</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">$6.99</span>
+                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">66.000VND</span>
                 <span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span>
               </div>
               <p className="text-sm font-normal leading-6 text-neutral-700 sm:text-base">Perfect for individuals</p>
@@ -136,7 +136,7 @@ export default function Subscription() {
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Teams</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">$9.99</span>
+                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">225.000VND</span>
                 <span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span>
               </div>
               <p className="text-sm font-normal leading-6 text-neutral-900 sm:text-base">For serious students</p>
@@ -161,7 +161,8 @@ export default function Subscription() {
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Combo</h3>
               <p className="text-base font-semibold leading-6 text-neutral-700 sm:text-lg">(Teams + Personal)</p>
-              <div className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">Custom</div>
+              <div className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">103.000VND</div>
+<span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span>
               <p className="text-sm font-normal leading-6 text-neutral-700 sm:text-base">For institutions & large groups</p>
             </div>
             <ul className="flex flex-col gap-2 pb-6 sm:gap-3 sm:pb-8">
