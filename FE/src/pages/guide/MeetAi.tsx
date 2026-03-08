@@ -100,7 +100,7 @@ export default function MeetAi() {
         </div>
         <div className="flex flex-wrap gap-2 mb-3">
           <Button variant="primary" size="md">Send</Button>
-          <Link to="/ai-support-attachment">
+          <Link to="/ai-support">
             <Button variant="secondary" size="md">Open full chat</Button>
           </Link>
         </div>
@@ -131,7 +131,7 @@ export default function MeetAi() {
           {RECENT_CHATS.map((c) => (
             <li key={c.id}>
               <Link
-                to="/ai-support-attachment"
+                to="/ai-support"
                 className="flex items-center gap-3 p-3 rounded-xl border border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300 transition-colors group"
               >
                 <span className="w-10 h-10 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center text-violet-600 group-hover:bg-violet-200" aria-hidden>
@@ -148,7 +148,7 @@ export default function MeetAi() {
             </li>
           ))}
         </ul>
-        <Link to="/ai-support-attachment" className="inline-block mt-4 pt-4 border-t border-neutral-200">
+        <Link to="/ai-support" className="inline-block mt-4 pt-4 border-t border-neutral-200">
           <Button variant="ghost" size="sm">View all in AI Support</Button>
         </Link>
       </Card>
@@ -183,7 +183,7 @@ export default function MeetAi() {
           </p>
         </Card>
         <Link
-          to="/ai-support-attachment"
+          to="/ai-support"
           className="flex-1 min-h-[120px] flex flex-col justify-center p-5 rounded-xl border-2 border-violet-200 bg-violet-50 hover:bg-violet-100 transition-colors"
         >
           <p className="text-sm font-semibold text-violet-900">Open full chat</p>

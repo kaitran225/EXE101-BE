@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Card, Textarea } from '../../components/ui'
+import { QuizletQuizModal } from '../../components/QuizletQuizModal'
+
+/** Mock AI-generated quizlet card sets */
+const MOCK_QUIZLET_CARDS = [
+  { id: '1', title: 'Compare Gradient Descent and Adam', subtitle: 'Optimization basics' },
+  { id: '2', title: 'Neural Networks & Backprop', subtitle: 'Deep learning fundamentals' },
+  { id: '3', title: 'Optimization algorithms', subtitle: 'SGD, Adam, RMSprop' },
+]
 
 const TODAY_TASKS = [
   { title: 'Read Chapter 4 Notes', due: 'Due 2:00 PM' },
@@ -18,6 +26,8 @@ const CHAT_MESSAGES = [
 export default function FocusRoom() {
   const [showEndModal, setShowEndModal] = useState(false)
   const [notes, setNotes] = useState('')
+  const [quizletCards, setQuizletCards] = useState<typeof MOCK_QUIZLET_CARDS | null>(null)
+  const [showQuizModal, setShowQuizModal] = useState(false)
 
   return (
     <div className="fixed inset-0 z-40 flex flex-col h-screen w-screen bg-white">
@@ -91,14 +101,47 @@ export default function FocusRoom() {
           <section>
             <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-600 mb-2">Summary</h2>
             <Card className="p-4 min-h-[120px] border-2 border-neutral-200 text-neutral-500 text-sm">
-              Session summary will appear here after you study.
+              {quizletCards
+                ? 'AI has generated quizlet sets below. Click "Do the quiz" on any card to start.'
+                : 'Session summary will appear here after you study.'}
             </Card>
           </section>
           <div className="flex flex-wrap gap-2">
-            <Button variant="secondary" size="sm">Generate Quiz</Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setQuizletCards(quizletCards ? null : MOCK_QUIZLET_CARDS)}
+            >
+              {quizletCards ? 'Hide Quizlet' : 'Generate Quizlet'}
+            </Button>
             <Button variant="secondary" size="sm">Flashcards</Button>
             <Button variant="secondary" size="sm">Mindmaps</Button>
           </div>
+          {quizletCards && (
+            <section>
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-600 mb-2">Quizlet sets</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {quizletCards.map((card) => (
+                  <Card key={card.id} className="p-4 border-2 border-neutral-200 flex flex-col min-h-[10rem]">
+                    <div className="flex-1 min-h-0">
+                      <p className="text-sm font-bold text-neutral-900">{card.title}</p>
+                      <p className="text-xs text-neutral-500 mt-0.5">{card.subtitle}</p>
+                    </div>
+                    <div className="flex-shrink-0 pt-3 mt-auto">
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        className="w-full"
+                        onClick={() => setShowQuizModal(true)}
+                      >
+                        Do the quiz
+                      </Button>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          )}
           <section className="mt-auto pt-4">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-600 mb-2">Quick notes</h2>
             <div className="flex gap-2">
@@ -150,14 +193,37 @@ export default function FocusRoom() {
         </aside>
       </div>
 
-      {/* End session modal - main app theme */}
+      {showQuizModal && (
+        <QuizletQuizModal onClose={() => setShowQuizModal(false)} />
+      )}
+
+      {/* End session modal — large, app theme, session statistics */}
       {showEndModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setShowEndModal(false)}>
-          <Card
-            className="p-8 max-w-md w-full shadow-xl border-2 border-neutral-200"
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/40" onClick={() => setShowEndModal(false)}>
+          <div
+            className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl border-2 border-neutral-200 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex gap-2 mb-6">
+            <div className="bg-gradient-to-br from-violet-50 to-white px-8 pt-10 pb-12">
+              <p className="text-2xl md:text-3xl font-bold text-neutral-900 text-center mb-10">
+                Done! You did well today.
+              </p>
+              <div className="flex justify-center gap-4 md:gap-8">
+                <div className="flex-1 max-w-[140px] rounded-xl bg-white/80 border-2 border-neutral-200 px-4 py-5 text-center shadow-sm">
+                  <p className="text-2xl md:text-3xl font-bold text-violet-600 tabular-nums">1h 42m</p>
+                  <p className="text-[11px] text-neutral-500 uppercase tracking-wide mt-1.5">Time studied</p>
+                </div>
+                <div className="flex-1 max-w-[140px] rounded-xl bg-white/80 border-2 border-neutral-200 px-4 py-5 text-center shadow-sm">
+                  <p className="text-2xl md:text-3xl font-bold text-sky-600 tabular-nums">04</p>
+                  <p className="text-[11px] text-neutral-500 uppercase tracking-wide mt-1.5">Quizzes</p>
+                </div>
+                <div className="flex-1 max-w-[140px] rounded-xl bg-white/80 border-2 border-neutral-200 px-4 py-5 text-center shadow-sm">
+                  <p className="text-2xl md:text-3xl font-bold text-orange-500 tabular-nums">23</p>
+                  <p className="text-[11px] text-neutral-500 uppercase tracking-wide mt-1.5">Flashcards</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-3 p-6 border-t-2 border-neutral-200 bg-neutral-50/50">
               <Button variant="primary" size="md" className="flex-1" onClick={() => setShowEndModal(false)}>
                 Continue study
               </Button>
@@ -165,26 +231,7 @@ export default function FocusRoom() {
                 <Button variant="secondary" size="md" className="w-full">Home</Button>
               </Link>
             </div>
-            <p className="text-xl font-bold text-neutral-900 text-center mb-8">
-              Session complete. You did well today.
-            </p>
-            <div className="flex justify-between gap-4 text-center border-t-2 border-neutral-200 pt-6">
-              <div>
-                <p className="text-2xl font-bold text-neutral-900">1h 42m</p>
-                <p className="text-xs text-neutral-500 uppercase tracking-wide mt-1">Time studied</p>
-              </div>
-              <div className="w-px bg-neutral-200" />
-              <div>
-                <p className="text-2xl font-bold text-neutral-900">04</p>
-                <p className="text-xs text-neutral-500 uppercase tracking-wide mt-1">Quizzes</p>
-              </div>
-              <div className="w-px bg-neutral-200" />
-              <div>
-                <p className="text-2xl font-bold text-neutral-900">23</p>
-                <p className="text-xs text-neutral-500 uppercase tracking-wide mt-1">Flashcards</p>
-              </div>
-            </div>
-          </Card>
+          </div>
         </div>
       )}
     </div>

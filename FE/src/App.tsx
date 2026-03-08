@@ -27,7 +27,6 @@ import {
   TeamManagement,
   MeetAi,
   AiSupport,
-  AiSupportAttachment,
   Quizlet,
   QuizletResult,
   ProfileWithSidebar,
@@ -103,7 +102,6 @@ export default function App() {
         <Route path="/scrum-board" element={<Navigate to="/teams/board?tab=scrum" replace />} />
         <Route path="/meet-ai" element={<GuideLayout><MeetAi /></GuideLayout>} />
         <Route path="/ai-support" element={<GuideLayout><AiSupport /></GuideLayout>} />
-        <Route path="/ai-support-attachment" element={<GuideLayout><AiSupportAttachment /></GuideLayout>} />
         <Route path="/quizlet" element={<GuideLayout><Quizlet /></GuideLayout>} />
         <Route path="/quizlet-result" element={<GuideLayout><QuizletResult /></GuideLayout>} />
         <Route path="/profile" element={<GuideLayout><ProfileWithSidebar /></GuideLayout>} />

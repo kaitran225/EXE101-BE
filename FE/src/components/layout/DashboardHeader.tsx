@@ -20,7 +20,6 @@ const BREADCRUMBS: Record<string, BreadcrumbItem[]> = {
   '/shop': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Shop' }],
   '/meet-ai': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Meet AI' }],
   '/ai-support': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Meet AI', href: '/meet-ai' }, { label: 'AI Support' }],
-  '/ai-support-attachment': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Meet AI', href: '/meet-ai' }, { label: 'AI Support' }],
   '/quizlet': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Quiz' }],
   '/quizlet-result': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Quiz result' }],
   '/focus-room': [{ label: 'Dashboard', href: '/dashboard' }, { label: 'Focus room' }],
@@ -144,17 +143,6 @@ export function DashboardHeader() {
       </div>
       <div className="flex shrink-0 items-center justify-end gap-2 md:gap-3">
         <div className="relative w-full min-w-0 max-w-[11rem]">
-          <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" aria-hidden>
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </span>
-          <input
-            type="search"
-            placeholder="Search..."
-            className="w-full pl-8 pr-2.5 py-1 text-sm border border-neutral-200/90 rounded-xl bg-neutral-50/80 focus:outline-none focus:ring-2 focus:ring-violet-400/50 focus:border-violet-300 transition-shadow duration-150"
-            aria-label="Search"
-          />
         </div>
         <button
           type="button"

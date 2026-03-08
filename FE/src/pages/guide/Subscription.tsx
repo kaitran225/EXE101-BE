@@ -1,32 +1,52 @@
 import { Button } from '../../components/ui'
 
 const FREE_FEATURES = [
-  'Individual study timers',
-  'Basic AI summaries (3/day)',
-  'Join up to 2 study squads',
-  'Advanced project analytics',
+  'Study rooms',
+  'Meeting rooms',
+  'Note storage',
+  'Planner',
 ]
 
 const PERSONAL_FEATURES = [
-  'Individual study timers',
-  'Basic AI summaries (3/day)',
-  'Join up to 2 study squads',
-  'Advanced project analytics',
+  'Extra study rooms',
+  'Extra meeting rooms',
+  'Extra storage',
+  'Extra planner',
+  'Extra mind maps',
+  'Extra flashcard',
+  'Extra upload PDF',
+  'Extra AI summarize',
+  'AI analyzes quiz results',
+  'Personalized learning roadmap',
+  'Extra saveloads',
 ]
 
 const TEAMS_FEATURES = [
-  'Unlimited AI-driven features',
-  'Infinite study squads',
-  'Advanced focus analytics',
-  'Priority support',
-  'Exclusive gamified rewards',
+  'Create up to three teams',
+  'Maximum of 6 members per team',
+  'Extra AI summarize',
+  'Member participation analysis',
+  'Quick post-meeting quiz',
+  'Smart Scheduling',
+  'Extra saveloads',
+  'Extra create teams',
+  'Deadline reminders',
+  'End-of-term contribution report',
 ]
 
 const COMBO_FEATURES = [
-  'White-label options',
-  'Dedicated account manager',
-  'SSO / edu integration',
-  'Custom AI model training',
+  'Study rooms',
+  'Mind maps & flashcards',
+  'PDF upload, full storage',
+  'Create meetings',
+  'AI summarize',
+  'Advanced learning analytics',
+  'Personalized learning roadmap',
+  'Member participation analysis',
+  'Quick post-meeting quiz',
+  'Smart Scheduling',
+  'Deadline reminders',
+  'End-of-term contribution report',
 ]
 
 function FeatureItem({
