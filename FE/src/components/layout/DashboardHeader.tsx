@@ -151,7 +151,7 @@ export function DashboardHeader() {
           </span>
           <input
             type="search"
-            placeholder="Tìm kiếm..."
+            placeholder="Search..."
             className="w-full pl-8 pr-2.5 py-1 text-sm border border-neutral-200/90 rounded-xl bg-neutral-50/80 focus:outline-none focus:ring-2 focus:ring-violet-400/50 focus:border-violet-300 transition-shadow duration-150"
             aria-label="Search"
           />
