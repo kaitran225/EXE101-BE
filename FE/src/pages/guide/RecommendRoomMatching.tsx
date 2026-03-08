@@ -1,50 +1,120 @@
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card, Input } from '../../components/ui'
+import { Button, Input } from '../../components/ui'
+
+const RECOMMENDED_ROOMS = [
+  { id: '1', title: 'Advanced Calculus Group', subject: 'MATHEMATICS', active: 12 },
+  { id: '2', title: 'Advanced Calculus Group', subject: 'MATHEMATICS', active: 8 },
+  { id: '3', title: 'Advanced Calculus Group', subject: 'MATHEMATICS', active: 14 },
+  { id: '4', title: 'Advanced Calculus Group', subject: 'MATHEMATICS', active: 6 },
+  { id: '5', title: 'Advanced Calculus Group', subject: 'MATHEMATICS', active: 10 },
+  { id: '6', title: 'Advanced Calculus Group', subject: 'MATHEMATICS', active: 12 },
+]
 
 export default function RecommendRoomMatching() {
+  const [goal, setGoal] = useState('')
+  const [subject, setSubject] = useState('')
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const scrollRight = () => {
+    if (scrollRef.current) scrollRef.current.scrollBy({ left: 280, behavior: 'smooth' })
+  }
+
   return (
-    <div className="flex flex-col gap-8">
-      <div className="text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold text-neutral-900 uppercase mb-4">Find the best study room for you</h1>
-        <p className="text-lg text-neutral-900 mb-8">
-          Describe what you&apos;re studying and Together AI will match you with the best study group for your goals.
-        </p>
+    <div className="flex flex-col gap-8 mx-auto">
+      {/* Header */}
+      <div className="flex items-center justify-between gap-4 pb-4 border-b-2 border-neutral-200">
+        <div className="flex items-center gap-2">
+          <span className="w-5 h-5 bg-neutral-700 rounded-sm shrink-0" aria-hidden />
+          <h1 className="text-xl font-bold text-neutral-900 uppercase tracking-tight">Matching room</h1>
+        </div>
+        <Link to="/study-rooms">
+          <Button variant="secondary" size="md" className="border-2 border-neutral-200">
+            Go back
+          </Button>
+        </Link>
       </div>
-      <Card className="p-6 flex flex-col items-center gap-8 max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
-          <div className="flex flex-col gap-2">
-            <label className="text-neutral-900 text-xl font-bold uppercase">Goals</label>
-            <Input placeholder="Goals..." className="h-24" />
+
+      {/* AI Matching section */}
+      <div className="text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 uppercase tracking-tight mb-3">
+          Find the best study room for you
+        </h2>
+        <p className="text-sm text-neutral-600 mb-8 max-w-xl mx-auto">
+          Describe what you’re studying and Together AI will match you with study groups that fit your goals.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mb-6">
+          <div className="flex flex-col gap-2 text-left">
+            <label className="text-sm font-bold text-neutral-900 uppercase">Goal</label>
+            <Input
+              placeholder="Goal..."
+              className="h-14 rounded-lg border-2 border-neutral-200 bg-neutral-50/50 text-neutral-900 placeholder:text-neutral-400 focus:ring-2 focus:ring-sky-400 focus:border-sky-400"
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
+              aria-label="Goal"
+            />
           </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-neutral-900 text-xl font-bold uppercase">Subject</label>
-            <Input placeholder="Subject..." className="h-24" />
+          <div className="flex flex-col gap-2 text-left">
+            <label className="text-sm font-bold text-neutral-900 uppercase">Subject</label>
+            <Input
+              placeholder="Subject..."
+              className="h-14 rounded-lg border-2 border-neutral-200 bg-neutral-50/50 text-neutral-900 placeholder:text-neutral-400 focus:ring-2 focus:ring-sky-400 focus:border-sky-400"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              aria-label="Subject"
+            />
           </div>
         </div>
-        <Button variant="primary" size="lg" className="bg-blue-300 border-2 border-neutral-900 text-neutral-900 uppercase">
+        <Button variant="primary" size="lg" className="px-8">
           Match with AI
         </Button>
-      </Card>
-      <div className="pt-8">
-        <h2 className="text-2xl font-bold text-neutral-900 uppercase mb-6">Recommended for you</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <Card key={i} className="overflow-hidden">
-              <div className="h-36 bg-white border-b border-neutral-900 flex items-start p-2">
-                <span className="text-orange-500 text-[10px] font-bold uppercase">LIVE</span>
-              </div>
-              <div className="p-5 flex flex-col gap-3">
-                <h3 className="text-lg font-bold text-neutral-900">Advanced Calculus Group</h3>
-                <p className="text-xs font-semibold text-neutral-900 uppercase tracking-wide">Mathematics</p>
-                <div className="flex justify-between items-center pt-2">
-                  <span className="px-2 py-1 bg-green-300 rounded-lg text-xs font-medium">12 Active</span>
+      </div>
+
+      {/* Recommendations */}
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="px-3 py-1.5 rounded-lg bg-neutral-100 border-2 border-neutral-200 text-neutral-700 text-xs font-semibold">
+            Sessions 4/5
+          </span>
+          <h3 className="text-lg font-bold text-neutral-900 uppercase tracking-tight">Recommendations for you</h3>
+        </div>
+        <p className="text-xs font-semibold text-neutral-600 uppercase">• Live</p>
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            className="flex gap-4 overflow-x-auto pb-2 scroll-smooth scrollbar-thin"
+            style={{ scrollbarWidth: 'thin' }}
+          >
+            {RECOMMENDED_ROOMS.map((room) => (
+              <div
+                key={room.id}
+                className="shrink-0 w-64 rounded-lg border-2 border-neutral-200 bg-white p-4 flex flex-col gap-3 shadow-sm"
+              >
+                <h4 className="font-bold text-neutral-900 text-base leading-tight">{room.title}</h4>
+                <p className="text-xs font-semibold text-neutral-600 uppercase tracking-wide">{room.subject}</p>
+                <div className="flex items-center justify-between gap-2 mt-auto pt-2">
+                  <span className="px-2.5 py-1 rounded-lg bg-emerald-500 text-white text-xs font-bold">
+                    {room.active} Active
+                  </span>
                   <Link to="/study-room">
-                    <Button variant="secondary" size="sm" className="bg-sky-200 uppercase">Join</Button>
+                    <Button variant="secondary" size="sm" className="border-2 border-neutral-200 text-xs">
+                      Join
+                    </Button>
                   </Link>
                 </div>
               </div>
-            </Card>
-          ))}
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-lg border-2 border-neutral-200 bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center text-neutral-600 shadow-sm -translate-x-2 z-10"
+            aria-label="Scroll right"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>

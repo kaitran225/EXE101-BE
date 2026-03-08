@@ -89,7 +89,7 @@ export default function App() {
         <Route path="/study-rooms/create" element={<GuideLayout><CreateRoom /></GuideLayout>} />
         <Route path="/study-rooms/create-new" element={<GuideLayout><CreateNewRoomStudy /></GuideLayout>} />
         <Route path="/study-rooms/recommend" element={<GuideLayout><RecommendRoomMatching /></GuideLayout>} />
-        <Route path="/study-room" element={<GuideLayout><StudyRoom /></GuideLayout>} />
+        <Route path="/study-room" element={<StudyRoom />} />
         <Route path="/study-room-dashboard" element={<GuideLayout><StudyRoomDashboard /></GuideLayout>} />
         <Route path="/focus-room" element={<FocusRoom />} />
         <Route path="/focus-room-dialog" element={<GuideLayout><FocusRoomDialog /></GuideLayout>} />
