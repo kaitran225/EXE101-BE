@@ -73,7 +73,7 @@ export default function MeetAi() {
             <Button variant="secondary" size="md">Open full chat</Button>
           </Link>
         </div>
-        <button type="button" onClick={() => setChatDialogOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800 mb-4">
+        <button type="button" onClick={() => setChatDialogOpen(true)} className="text-xs font-medium text-primary hover:text-primary-hover mb-4">
           Open chat in popup
         </button>
         <div className="pt-4 border-t border-neutral-200">
@@ -103,7 +103,7 @@ export default function MeetAi() {
                 to="/ai-support"
                 className="flex items-center gap-3 p-3 rounded-xl border border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300 transition-colors group"
               >
-                <span className="w-10 h-10 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center text-violet-600 group-hover:bg-violet-200" aria-hidden>
+                <span className="w-10 h-10 rounded-full bg-accent-muted flex-shrink-0 flex items-center justify-center text-primary group-hover:bg-primary/20" aria-hidden>
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
@@ -128,19 +128,19 @@ export default function MeetAi() {
           <h3 className="text-sm font-semibold text-neutral-900 mb-3">How AI Tutor helps</h3>
           <ul className="space-y-2 text-sm text-neutral-600">
             <li className="flex gap-2">
-              <span className="text-violet-500 shrink-0">•</span>
+              <span className="text-primary shrink-0">•</span>
               Explain concepts in simpler terms
             </li>
             <li className="flex gap-2">
-              <span className="text-violet-500 shrink-0">•</span>
+              <span className="text-primary shrink-0">•</span>
               Summarize long notes or chapters
             </li>
             <li className="flex gap-2">
-              <span className="text-violet-500 shrink-0">•</span>
+              <span className="text-primary shrink-0">•</span>
               Generate practice questions
             </li>
             <li className="flex gap-2">
-              <span className="text-violet-500 shrink-0">•</span>
+              <span className="text-primary shrink-0">•</span>
               Walk through problem solving
             </li>
           </ul>
@@ -153,10 +153,10 @@ export default function MeetAi() {
         </Card>
         <Link
           to="/ai-support"
-          className="flex-1 min-h-[120px] flex flex-col justify-center p-5 rounded-xl border-2 border-violet-200 bg-violet-50 hover:bg-violet-100 transition-colors"
+          className="flex-1 min-h-[120px] flex flex-col justify-center p-5 rounded-xl border-2 border-primary/20 bg-accent-muted hover:bg-primary/10 transition-colors"
         >
-          <p className="text-sm font-semibold text-violet-900">Open full chat</p>
-          <p className="text-xs text-violet-700 mt-0.5">Continue in AI Support with full conversation history.</p>
+          <p className="text-sm font-semibold text-neutral-900">Open full chat</p>
+          <p className="text-xs text-primary mt-0.5">Continue in AI Support with full conversation history.</p>
         </Link>
       </aside>
 
@@ -190,7 +190,7 @@ export default function MeetAi() {
                     <svg className="w-12 h-12 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
                     <span className="text-sm font-semibold text-neutral-600">Drop PDF</span>
                     <span className="text-xs">Max {MAX_PDF_MB}MB</span>
-                    {droppedFile && <span className="text-xs font-medium text-violet-600 mt-1 truncate max-w-full px-2">{droppedFile.name}</span>}
+                    {droppedFile && <span className="text-xs font-medium text-primary mt-1 truncate max-w-full px-2">{droppedFile.name}</span>}
                   </button>
                 </div>
                 <div>
@@ -227,7 +227,7 @@ export default function MeetAi() {
                   )}
                 </div>
                 <div className="flex gap-2 mt-3">
-                  <Button variant="primary" size="sm" className="rounded-lg bg-sky-500 hover:bg-sky-600 border-0" onClick={() => setSummaryText(droppedFile ? 'Summary will appear here after processing. (Mock: This is a placeholder summary for ' + droppedFile.name + '.)' : 'Drop or select a PDF first.')}>Summarize</Button>
+                  <Button variant="primary" size="sm" className="rounded-lg bg-accent hover:bg-accent border-0" onClick={() => setSummaryText(droppedFile ? 'Summary will appear here after processing. (Mock: This is a placeholder summary for ' + droppedFile.name + '.)' : 'Drop or select a PDF first.')}>Summarize</Button>
                   <Button variant="secondary" size="sm" className="rounded-lg" onClick={() => setSummaryText('')}>Download</Button>
                 </div>
               </div>
@@ -253,11 +253,11 @@ export default function MeetAi() {
               {MESSAGES.map((msg) => (
                 <div key={msg.id} className={`flex gap-3 max-w-[90%] ${msg.role === 'user' ? 'ml-auto' : ''}`}>
                   {msg.role === 'assistant' && (
-                    <span className="w-8 h-8 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                    <span className="w-8 h-8 rounded-full bg-accent-muted flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
                       <AiBotIcon className="w-7 h-7" />
                     </span>
                   )}
-                  <div className={`rounded-xl px-3 py-2 text-sm ${msg.role === 'assistant' ? 'bg-neutral-100 text-neutral-900 border border-neutral-200' : 'bg-violet-100 text-violet-900 border border-violet-200'}`}>
+                  <div className={`rounded-xl px-3 py-2 text-sm ${msg.role === 'assistant' ? 'bg-neutral-100 text-neutral-900 border border-neutral-200' : 'bg-accent-muted text-neutral-900 border border-primary/20'}`}>
                     <p className="leading-relaxed">{msg.text}</p>
                     <p className="text-[10px] text-neutral-500 mt-1">{msg.time}</p>
                   </div>

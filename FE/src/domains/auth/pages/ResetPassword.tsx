@@ -16,13 +16,13 @@ export default function ResetPassword() {
         <form onSubmit={handleConfirm} className="flex flex-col gap-4">
           <Input label="PASSWORD" placeholder="********" type="password" />
           <Input label="CONFIRM PASSWORD" placeholder="********" type="password" />
-          <Button type="submit" size="lg" className="w-full min-h-[48px] rounded-xl !bg-sky-400 !text-white hover:!bg-sky-500 border-0 font-semibold uppercase">
+          <Button type="submit" size="lg" className="w-full min-h-[48px] rounded-xl !bg-accent !text-primary-foreground hover:!opacity-90 border-0 font-semibold uppercase">
             Confirm
           </Button>
         </form>
         <hr className="border-neutral-200" />
         <p className="text-center text-sm text-neutral-500">
-          <Link to="/welcome" className="font-semibold text-sky-600 hover:text-sky-700">Back to log in</Link>
+          <Link to="/welcome" className="font-semibold text-accent hover:opacity-90">Back to log in</Link>
         </p>
       </div>
     </div>

@@ -66,7 +66,7 @@ export default function StudyRoomDiscovery() {
               onClick={() => setTab(t.key)}
               className={`px-4 py-2.5 text-sm font-semibold rounded-t transition-colors -mb-px ${
                 tab === t.key
-                  ? 'bg-white border-2 border-neutral-200 border-b-0 text-sky-600'
+                  ? 'bg-white border-2 border-neutral-200 border-b-0 text-accent'
                   : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
               }`}
             >
@@ -88,7 +88,7 @@ export default function StudyRoomDiscovery() {
               onClick={() => setCategory(f.key)}
               className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors border-2 ${
                 category === f.key
-                  ? 'font-bold text-neutral-900 bg-sky-50 text-sky-800 border-sky-200'
+                  ? 'font-bold text-neutral-900 bg-accent-muted text-accent border-accent/20'
                   : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 border-neutral-200'
               }`}
             >
@@ -110,7 +110,7 @@ export default function StudyRoomDiscovery() {
             <Card key={room.id} className="cursor-pointer hover:shadow-md transition-shadow flex flex-col p-4 border-2 border-neutral-200">
               <h3 className="font-bold text-base mb-1">{room.title}</h3>
               <p className="text-xs text-neutral-500 mb-1.5">
-                {FILTERS.find((f) => f.key === room.topic)?.label ?? room.topic} · <span className="text-emerald-600 font-medium">{room.membersCurrent} Active</span> · {room.membersMax} max
+                {FILTERS.find((f) => f.key === room.topic)?.label ?? room.topic} · <span className="text-success font-medium">{room.membersCurrent} Active</span> · {room.membersMax} max
               </p>
               <p className="text-xs text-neutral-700 mb-3 flex-1">{room.description}</p>
               {room.tags.length > 0 && (

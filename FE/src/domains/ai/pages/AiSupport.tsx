@@ -66,7 +66,7 @@ export default function AiSupport() {
                       to="#"
                       className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                         c.active
-                          ? 'bg-violet-100 text-violet-900'
+                          ? 'bg-accent-muted text-neutral-900'
                           : 'text-neutral-700 hover:bg-neutral-200/80'
                       }`}
                     >
@@ -83,10 +83,10 @@ export default function AiSupport() {
             </section>
           </div>
           <div className="p-3 border-t border-neutral-200">
-            <div className="rounded-xl bg-violet-50 border border-violet-200 p-3">
+            <div className="rounded-xl bg-accent-muted border border-primary/20 p-3">
               <div className="flex justify-between items-center mb-1.5">
-                <span className="text-xs font-medium text-violet-900">Tokens used</span>
-                <span className="text-xs font-semibold text-violet-700">64%</span>
+                <span className="text-xs font-medium text-neutral-900">Tokens used</span>
+                <span className="text-xs font-semibold text-primary">64%</span>
               </div>
               <Progress value={64} max={100} className="h-2 rounded-full" />
             </div>
@@ -160,7 +160,7 @@ export default function AiSupport() {
         <aside className="min-w-0 flex flex-col border-l-2 border-neutral-200 bg-white">
           <div className="flex items-center gap-2 px-4 py-3 border-b-2 border-neutral-200">
             <AiBotIcon className="w-7 h-7" />
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-sky-600">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-accent">
               Conversation
             </h2>
           </div>
@@ -169,7 +169,7 @@ export default function AiSupport() {
               <div key={msg.id} className={msg.role === 'assistant' ? 'flex justify-center' : 'flex justify-end'}>
                 <div className={msg.role === 'assistant' ? 'flex gap-2 max-w-[85%]' : 'max-w-[85%]'}>
                   {msg.role === 'assistant' && (
-                    <span className="w-7 h-7 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                    <span className="w-7 h-7 rounded-full bg-accent-muted flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
                       <AiBotIcon className="w-6 h-6" />
                     </span>
                   )}
@@ -177,7 +177,7 @@ export default function AiSupport() {
                     className={`rounded-xl px-3 py-2 border-2 ${
                       msg.role === 'assistant'
                         ? 'bg-neutral-100 border-neutral-200 text-neutral-600 text-xs'
-                        : 'bg-violet-100 border-violet-200 text-violet-900'
+                        : 'bg-accent-muted border-primary/20 text-neutral-900'
                     }`}
                   >
                     {msg.role === 'user' && <p className="text-[10px] font-semibold text-neutral-500 mb-0.5">You · {msg.time}</p>}
@@ -198,8 +198,8 @@ export default function AiSupport() {
               placeholder="Type your question..."
               secondaryActions={
                 <>
-                  <button type="button" onClick={() => setSummarizeOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Summarize</button>
-                  <button type="button" onClick={() => setDialogOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Open chat in popup</button>
+                  <button type="button" onClick={() => setSummarizeOpen(true)} className="text-xs font-medium text-primary hover:text-primary-hover">Summarize</button>
+                  <button type="button" onClick={() => setDialogOpen(true)} className="text-xs font-medium text-primary hover:text-primary-hover">Open chat in popup</button>
                 </>
               }
             />
@@ -240,7 +240,7 @@ export default function AiSupport() {
                 <div key={msg.id} className={msg.role === 'assistant' ? 'flex justify-center' : 'flex justify-end'}>
                   <div className={msg.role === 'assistant' ? 'flex gap-2 max-w-[90%]' : 'max-w-[90%]'}>
                     {msg.role === 'assistant' && (
-                      <span className="w-7 h-7 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                      <span className="w-7 h-7 rounded-full bg-accent-muted flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
                         <AiBotIcon className="w-6 h-6" />
                       </span>
                     )}
@@ -248,7 +248,7 @@ export default function AiSupport() {
                       className={`rounded-xl px-3 py-2 border-2 ${
                         msg.role === 'assistant'
                           ? 'bg-neutral-100 border-neutral-200 text-neutral-600 text-xs'
-                          : 'bg-violet-100 border-violet-200 text-violet-900'
+                          : 'bg-accent-muted border-primary/20 text-neutral-900'
                       }`}
                     >
                       {msg.role === 'user' && <p className="text-[10px] font-semibold text-neutral-500 mb-0.5">You · {msg.time}</p>}
@@ -320,7 +320,7 @@ export default function AiSupport() {
                     <svg className="w-12 h-12 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
                     <span className="text-sm font-semibold text-neutral-600">Drop PDF</span>
                     <span className="text-xs">Max {MAX_PDF_MB}MB</span>
-                    {droppedFile && <span className="text-xs font-medium text-violet-600 mt-1 truncate max-w-full px-2">{droppedFile.name}</span>}
+                    {droppedFile && <span className="text-xs font-medium text-primary mt-1 truncate max-w-full px-2">{droppedFile.name}</span>}
                   </button>
                 </div>
                 <div>
@@ -357,7 +357,7 @@ export default function AiSupport() {
                   )}
                 </div>
                 <div className="flex gap-2 mt-3">
-                  <Button variant="primary" size="sm" className="rounded-lg bg-sky-500 hover:bg-sky-600 border-0" onClick={() => setSummaryText(droppedFile ? 'Summary will appear here after processing. (Mock: This is a placeholder summary for ' + droppedFile.name + '.)' : 'Drop or select a PDF first.')}>Summarize</Button>
+                  <Button variant="primary" size="sm" className="rounded-lg bg-accent hover:bg-accent border-0" onClick={() => setSummaryText(droppedFile ? 'Summary will appear here after processing. (Mock: This is a placeholder summary for ' + droppedFile.name + '.)' : 'Drop or select a PDF first.')}>Summarize</Button>
                   <Button variant="secondary" size="sm" className="rounded-lg" onClick={() => setSummaryText('')}>Download</Button>
                 </div>
               </div>

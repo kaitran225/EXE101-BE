@@ -40,7 +40,7 @@ export default function RecommendRoomMatching() {
             <label className="text-sm font-bold text-neutral-900 uppercase">Goal</label>
             <Input
               placeholder="Goal..."
-              className="h-14 rounded-lg border-2 border-neutral-200 bg-neutral-50/50 text-neutral-900 placeholder:text-neutral-400 focus:ring-2 focus:ring-sky-400 focus:border-sky-400"
+              className="h-14 rounded-lg border-2 border-neutral-200 bg-neutral-50/50 text-neutral-900 placeholder:text-neutral-400 focus:ring-2 focus:ring-accent focus:border-accent"
               value={goal}
               onChange={(e) => setGoal(e.target.value)}
               aria-label="Goal"
@@ -50,7 +50,7 @@ export default function RecommendRoomMatching() {
             <label className="text-sm font-bold text-neutral-900 uppercase">Subject</label>
             <Input
               placeholder="Subject..."
-              className="h-14 rounded-lg border-2 border-neutral-200 bg-neutral-50/50 text-neutral-900 placeholder:text-neutral-400 focus:ring-2 focus:ring-sky-400 focus:border-sky-400"
+              className="h-14 rounded-lg border-2 border-neutral-200 bg-neutral-50/50 text-neutral-900 placeholder:text-neutral-400 focus:ring-2 focus:ring-accent focus:border-accent"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               aria-label="Subject"
@@ -85,7 +85,7 @@ export default function RecommendRoomMatching() {
                 <h4 className="font-bold text-neutral-900 text-base leading-tight">{room.title}</h4>
                 <p className="text-xs font-semibold text-neutral-600 uppercase tracking-wide">{room.subject}</p>
                 <div className="flex items-center justify-between gap-2 mt-auto pt-2">
-                  <span className="px-2.5 py-1 rounded-lg bg-emerald-500 text-white text-xs font-bold">
+                  <span className="px-2.5 py-1 rounded-lg bg-success text-white text-xs font-bold">
                     {room.active} Active
                   </span>
                   <Link to="/study-room">

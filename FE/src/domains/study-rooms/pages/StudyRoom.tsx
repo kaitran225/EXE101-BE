@@ -31,12 +31,12 @@ export default function StudyRoom() {
           <Button
             variant="primary"
             size="sm"
-            className="!bg-red-500 !border-red-500 hover:!bg-red-600 text-white text-[11px] font-bold rounded-xl"
+            className="!bg-error !border-error hover:!opacity-90 text-white text-[11px] font-bold rounded-xl"
             onClick={() => setShowEndModal(true)}
           >
             End
           </Button>
-          <span className="w-7 h-7 rounded-full bg-violet-200 text-violet-800 border-2 border-violet-300 flex items-center justify-center text-[10px] font-semibold shrink-0" aria-hidden>
+          <span className="w-7 h-7 rounded-full bg-accent-muted text-primary border-2 border-primary/30 flex items-center justify-center text-[10px] font-semibold shrink-0" aria-hidden>
             N
           </span>
         </div>
@@ -52,7 +52,7 @@ export default function StudyRoom() {
                 key={i}
                 className={`aspect-video rounded-xl border-2 flex items-center justify-center text-xs font-semibold ${
                   p.isYou
-                    ? 'border-violet-400 bg-violet-50 text-violet-900 shadow'
+                    ? 'border-primary bg-accent-muted text-neutral-900 shadow'
                     : 'border-neutral-300 bg-neutral-50 text-neutral-700 shadow-sm'
                 }`}
               >
@@ -72,7 +72,7 @@ export default function StudyRoom() {
               <div key={i} className={m.ai ? 'flex justify-center' : m.own ? 'flex justify-end' : ''}>
                 <div className={m.ai ? 'flex gap-2 max-w-[90%]' : 'max-w-[90%]'}>
                   {m.ai && (
-                    <span className="w-6 h-6 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                    <span className="w-6 h-6 rounded-full bg-accent-muted flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
                       <AiBotIcon className="w-5 h-5" />
                     </span>
                   )}
@@ -103,7 +103,7 @@ export default function StudyRoom() {
             <input
               type="text"
               placeholder="Type a message..."
-              className="w-full pl-3 pr-2.5 py-1.5 text-sm border-2 border-neutral-300 rounded-xl bg-white text-neutral-900 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-violet-500"
+              className="w-full pl-3 pr-2.5 py-1.5 text-sm border-2 border-neutral-300 rounded-xl bg-white text-neutral-900 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
             />
@@ -190,7 +190,7 @@ export default function StudyRoom() {
                 Continue
               </Button>
               <Link to="/study-rooms" className="flex-1">
-                <Button variant="secondary" size="md" className="w-full !bg-red-50 !border-red-300 !text-red-800 hover:!bg-red-100">
+                <Button variant="secondary" size="md" className="w-full !bg-error/10 !border-error/50 !text-error hover:!bg-error/20">
                   End session
                 </Button>
               </Link>

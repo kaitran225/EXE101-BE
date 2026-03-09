@@ -131,7 +131,7 @@ export default function Calendar() {
                   >
                     <span
                       className={`inline-flex w-7 h-7 items-center justify-center rounded-full text-sm font-semibold shrink-0 ${isToday
-                        ? 'bg-violet-600 text-white'
+                        ? 'bg-primary text-primary-foreground'
                         : isCurrentMonth
                           ? 'text-neutral-900'
                           : 'text-neutral-400'
@@ -162,9 +162,9 @@ export default function Calendar() {
 
         {/* AI Support panel — fixed width, consistent input/Send height */}
         <aside className="w-full lg:w-[340px] shrink-0 flex flex-col rounded-2xl border-2 border-neutral-200 bg-white shadow-sm overflow-hidden max-h-[calc(100vh-8rem)]">
-          <div className="shrink-0 px-4 py-2.5 bg-sky-100 border-b-2 border-sky-200">
+          <div className="shrink-0 px-4 py-2.5 bg-accent-muted border-b-2 border-accent/20">
             <h2 className="text-xs font-bold text-neutral-900 uppercase tracking-wide flex items-center gap-1.5">
-              <span className="text-violet-600 font-bold">∞</span>
+              <span className="text-primary font-bold">∞</span>
               Together AI
             </h2>
           </div>
@@ -173,12 +173,12 @@ export default function Calendar() {
               <div key={i} className={m.role === 'user' ? 'flex justify-end' : ''}>
                 <div
                   className={`max-w-[92%] rounded-lg px-2.5 py-1.5 ${m.role === 'user'
-                    ? 'bg-violet-100 border border-violet-200 text-violet-900'
+                    ? 'bg-accent-muted border border-primary/20 text-neutral-900'
                     : 'bg-neutral-100 border border-neutral-200 text-neutral-900'
                     }`}
                 >
                   {m.role === 'ai' && <span className="text-[9px] font-semibold text-neutral-500 uppercase block mb-0.5">AI Assistant</span>}
-                  {m.role === 'user' && <span className="text-[9px] font-semibold text-violet-600 uppercase block mb-0.5">You</span>}
+                  {m.role === 'user' && <span className="text-[9px] font-semibold text-primary uppercase block mb-0.5">You</span>}
                   <p className="text-xs font-medium leading-snug">{m.text}</p>
                 </div>
               </div>
@@ -189,7 +189,7 @@ export default function Calendar() {
               <input
                 type="text"
                 placeholder="Ask anything..."
-                className="flex-1 min-w-0 h-9 px-3 rounded-lg border-2 border-neutral-200 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-violet-400"
+                className="flex-1 min-w-0 h-9 px-3 rounded-lg border-2 border-neutral-200 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
@@ -212,16 +212,16 @@ export default function Calendar() {
       {/* Event types legend */}
       <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-600">
         <span className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded bg-violet-600" /> Today
+          <span className="w-3 h-3 rounded bg-primary" /> Today
         </span>
         <span className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded bg-amber-500" /> Deadline
+          <span className="w-3 h-3 rounded bg-highlight" /> Deadline
         </span>
         <span className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded bg-sky-100 border border-sky-200" /> Class
+          <span className="w-3 h-3 rounded bg-accent-muted border border-accent/20" /> Class
         </span>
         <span className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded bg-emerald-100 border border-emerald-200" /> Meeting
+          <span className="w-3 h-3 rounded bg-success/20 border border-success/30" /> Meeting
         </span>
       </div>
     </div>

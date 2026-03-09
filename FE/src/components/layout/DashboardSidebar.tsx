@@ -99,7 +99,7 @@ export function DashboardSidebar() {
                 title={label}
                 className={`self-stretch flex items-center gap-3 rounded-xl py-2 transition-colors duration-150 ${collapsed ? 'justify-center px-2' : 'justify-start px-2.5'
                   } ${active
-                    ? 'bg-amber-500/20 text-amber-400'
+                    ? 'bg-highlight/20 text-highlight'
                     : 'text-neutral-400 hover:bg-neutral-700 hover:text-white'
                   }`}
               >
@@ -139,7 +139,7 @@ export function DashboardSidebar() {
               <div className="px-2">
                 <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-1.5">Next reward 75%</p>
                 <div className="h-2 w-full bg-neutral-700 rounded-full overflow-hidden">
-                  <div className="h-full w-3/4 bg-violet-500 rounded-full" />
+                  <div className="h-full w-3/4 bg-primary rounded-full" />
                 </div>
                 <p className="text-[10px] text-neutral-400 mt-1">Level 24 + Premium</p>
               </div>

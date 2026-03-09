@@ -38,15 +38,15 @@ export default function Welcome() {
             <input
               type="password"
               placeholder="********"
-              className="w-full px-4 py-3 bg-white border border-neutral-300 rounded-lg text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-sky-400/50 focus:border-sky-400 min-h-[44px]"
+              className="w-full px-4 py-3 bg-white border border-neutral-300 rounded-lg text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent min-h-[44px]"
             />
           </div>
-          <Button type="submit" size="lg" className="w-full min-h-[48px] rounded-xl !bg-sky-400 !text-white hover:!bg-sky-500 border-0 font-semibold uppercase">
+          <Button type="submit" size="lg" className="w-full min-h-[48px] rounded-xl !bg-accent !text-primary-foreground hover:!opacity-90 border-0 font-semibold uppercase">
             Log in
           </Button>
         </form>
         <p className="text-center text-sm text-neutral-500 pt-2 border-t border-neutral-200">
-          Don&apos;t have an account? <Link to="/sign-up" className="font-semibold text-sky-600 hover:text-sky-700">Sign up</Link>
+          Don&apos;t have an account? <Link to="/sign-up" className="font-semibold text-accent hover:opacity-90">Sign up</Link>
         </p>
       </div>
     </div>

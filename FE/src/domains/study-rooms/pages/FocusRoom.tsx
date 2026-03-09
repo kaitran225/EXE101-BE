@@ -40,7 +40,7 @@ export default function FocusRoom() {
           <Button
             variant="primary"
             size="sm"
-            className="!bg-red-600 !border-red-600 hover:!bg-red-700"
+            className="!bg-error !border-error hover:!opacity-90"
             onClick={() => setShowEndModal(true)}
           >
             End
@@ -54,16 +54,16 @@ export default function FocusRoom() {
         {/* Left sidebar */}
         <aside className="min-w-0 flex flex-col gap-4 p-4 border-r-2 border-neutral-200 bg-white overflow-y-auto">
           <Card className="p-4 border-2 border-neutral-200 shadow-sm">
-            <div className="flex items-center gap-2 text-orange-500 mb-1">
+            <div className="flex items-center gap-2 text-highlight mb-1">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path d="M12 23c-.2 0-.4-.1-.5-.2-.3-.2-7.5-5.2-9.2-6.4-.4-.3-.5-.8-.2-1.2.3-.4.8-.5 1.2-.2 1.5 1 7.3 5 8.7 5.9.4.2.6.6.6 1.1 0 .5-.2.9-.6 1.1l-1.2.8c-.3.2-.7.2-1 .1l-1.2-.6c-.2-.1-.4-.3-.5-.5l-.6-1.2c-.2-.3-.1-.7.1-1l.8-1.2c.2-.4.2-.9-.1-1.3-.6-.8-1.4-1.5-2.2-2.1-1.2-.9-2.5-1.6-3.8-2.1-.4-.2-.9-.1-1.2.2l-1 1.2c-.2.3-.2.7 0 1l.6 1.2c.1.2.3.4.5.5l1.2.6c.3.1.7.1 1-.1l1.2-.8c.4-.2.9-.2 1.3.1.8.6 1.6 1.3 2.2 2.1.2.4.2.9-.1 1.3l-.8 1.2c-.2.3-.2.7-.1 1l.6 1.2c.1.2.3.4.5.5l1.2.6c.3.1.7.2 1-.1l1.2-.8c.5-.3 1.1-.2 1.4.3.2.3.2.7.1 1.1-1.7 1.2-9.2 6.4-9.2 6.4-.2.1-.3.2-.5.2z" />
               </svg>
               <span className="text-xs font-semibold uppercase tracking-wide text-neutral-600">Current streak</span>
             </div>
-            <p className="text-2xl font-bold text-orange-500">15 Days</p>
+            <p className="text-2xl font-bold text-highlight">15 Days</p>
           </Card>
           <Card className="p-4 border-2 border-neutral-200 shadow-sm flex-1 min-h-0 flex flex-col">
-            <h2 className="text-xs font-semibold uppercase tracking-wide text-sky-600 mb-3">Today&apos;s work</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-accent mb-3">Today&apos;s work</h2>
             <ul className="space-y-2 flex-1 min-h-0 overflow-y-auto">
               {TODAY_TASKS.map((t, i) => (
                 <li key={i} className="flex items-start gap-2">
@@ -151,7 +151,7 @@ export default function FocusRoom() {
 
         {/* Right: Chat */}
         <aside className="min-w-0 flex flex-col border-l-2 border-neutral-200 bg-white">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-sky-600 px-4 py-3 border-b-2 border-neutral-200">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-accent px-4 py-3 border-b-2 border-neutral-200">
             Conversation
           </h2>
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
@@ -159,7 +159,7 @@ export default function FocusRoom() {
               <div key={i} className={m.ai ? 'flex justify-center' : m.own ? 'flex justify-end' : ''}>
                 <div className={m.ai ? 'flex gap-2 max-w-[85%]' : 'max-w-[85%]'}>
                   {m.ai && (
-                    <span className="w-7 h-7 rounded-full bg-violet-100 flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
+                    <span className="w-7 h-7 rounded-full bg-accent-muted flex-shrink-0 flex items-center justify-center overflow-hidden" aria-hidden>
                       <AiBotIcon className="w-6 h-6" />
                     </span>
                   )}
@@ -168,7 +168,7 @@ export default function FocusRoom() {
                       m.ai
                         ? 'bg-neutral-100 border-neutral-200 text-neutral-600 text-xs'
                         : m.own
-                          ? 'bg-violet-100 border-violet-200 text-violet-900'
+                          ? 'bg-accent-muted border-primary/20 text-neutral-900'
                           : 'bg-neutral-50 border-neutral-200 text-neutral-900'
                     }`}
                   >
@@ -194,8 +194,8 @@ export default function FocusRoom() {
               attachmentCount={attachments.length}
               secondaryActions={
                 <>
-                  <button type="button" onClick={() => setSummarizeOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Summarize</button>
-                  <button type="button" onClick={() => setDialogOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Open chat in popup</button>
+                  <button type="button" onClick={() => setSummarizeOpen(true)} className="text-xs font-medium text-primary hover:text-primary-hover">Summarize</button>
+                  <button type="button" onClick={() => setDialogOpen(true)} className="text-xs font-medium text-primary hover:text-primary-hover">Open chat in popup</button>
                 </>
               }
             />
@@ -223,21 +223,21 @@ export default function FocusRoom() {
             className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl border-2 border-neutral-200 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-gradient-to-br from-violet-50 to-white px-8 pt-10 pb-12">
+            <div className="bg-gradient-to-br from-accent-muted to-white px-8 pt-10 pb-12">
               <p className="text-2xl md:text-3xl font-bold text-neutral-900 text-center mb-10">
                 Done! You did well today.
               </p>
               <div className="flex justify-center gap-4 md:gap-8">
                 <div className="flex-1 max-w-[140px] rounded-xl bg-white/80 border-2 border-neutral-200 px-4 py-5 text-center shadow-sm">
-                  <p className="text-2xl md:text-3xl font-bold text-violet-600 tabular-nums">1h 42m</p>
+                  <p className="text-2xl md:text-3xl font-bold text-primary tabular-nums">1h 42m</p>
                   <p className="text-[11px] text-neutral-500 uppercase tracking-wide mt-1.5">Time studied</p>
                 </div>
                 <div className="flex-1 max-w-[140px] rounded-xl bg-white/80 border-2 border-neutral-200 px-4 py-5 text-center shadow-sm">
-                  <p className="text-2xl md:text-3xl font-bold text-sky-600 tabular-nums">04</p>
+                  <p className="text-2xl md:text-3xl font-bold text-accent tabular-nums">04</p>
                   <p className="text-[11px] text-neutral-500 uppercase tracking-wide mt-1.5">Quizzes</p>
                 </div>
                 <div className="flex-1 max-w-[140px] rounded-xl bg-white/80 border-2 border-neutral-200 px-4 py-5 text-center shadow-sm">
-                  <p className="text-2xl md:text-3xl font-bold text-orange-500 tabular-nums">23</p>
+                  <p className="text-2xl md:text-3xl font-bold text-highlight tabular-nums">23</p>
                   <p className="text-[11px] text-neutral-500 uppercase tracking-wide mt-1.5">Flashcards</p>
                 </div>
               </div>

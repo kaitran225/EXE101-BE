@@ -1,5 +1,6 @@
 import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom'
 import { Button } from './components/common'
+import { ThemeSwitch } from './components/ThemeSwitch'
 import { AuthLayout } from './components/layout/AuthLayout'
 import { DashboardLayout } from './components/layout/DashboardLayout'
 import Login from './pages/Login'
@@ -49,21 +50,22 @@ export default function App() {
   const isAuth = AUTH_PATHS.includes(location.pathname)
 
   return (
-    <div className={isStandalone ? 'min-h-screen bg-neutral-100' : ''}>
+    <div className={isStandalone ? 'min-h-screen bg-neutral-100 dark:bg-neutral-900' : ''}>
       {isStandalone && !isAuth && (
-        <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-neutral-200/80 shadow-sm">
+        <header className="sticky top-0 z-50 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border-b border-neutral-200/80 dark:border-neutral-700/80 shadow-sm">
           <nav className="flex flex-wrap items-center gap-2 px-3 py-2 md:px-4 md:gap-3 max-w-[1200px] mx-auto" aria-label="Main">
             <Link to="/dashboard" className="flex items-center hover:opacity-90 transition-opacity">
               <img src="/together/horizontal-icon.svg" alt="Together" className="h-7 w-auto" />
             </Link>
-            <Link to="/welcome" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Welcome</Link>
-            <Link to="/dashboard" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Dashboard</Link>
-            <Link to="/study-rooms" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Study Rooms</Link>
-            <Link to="/teams" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Teams</Link>
-            <Link to="/meet-ai" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">AI Tutor</Link>
-            <Link to="/profile" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Profile</Link>
-            <Link to="/debug" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-150">Components</Link>
+            <Link to="/welcome" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150">Welcome</Link>
+            <Link to="/dashboard" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150">Dashboard</Link>
+            <Link to="/study-rooms" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150">Study Rooms</Link>
+            <Link to="/teams" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150">Teams</Link>
+            <Link to="/meet-ai" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150">AI Tutor</Link>
+            <Link to="/profile" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150">Profile</Link>
+            <Link to="/debug" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150">Debug</Link>
             <div className="ml-auto flex items-center gap-2">
+              <ThemeSwitch />
               <Link to="/login">
                 <Button variant="ghost" size="sm">Login</Button>
               </Link>

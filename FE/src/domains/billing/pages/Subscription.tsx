@@ -80,8 +80,8 @@ export default function Subscription() {
         </div>
 
         {/* TEAMS — Most Popular */}
-        <div className="relative flex min-w-0 flex-col justify-between rounded-2xl border-2 border-sky-200 bg-sky-100/80 p-4 shadow-md sm:p-5 lg:min-h-[380px] lg:p-6">
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded border-2 border-violet-500 bg-violet-500 px-3 py-1.5">
+        <div className="relative flex min-w-0 flex-col justify-between rounded-2xl border-2 border-accent/20 bg-accent-muted/80 p-4 shadow-md sm:p-5 lg:min-h-[380px] lg:p-6">
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded border-2 border-primary bg-primary px-3 py-1.5">
             <span className="text-[10px] font-bold uppercase tracking-wide text-white">Most Popular</span>
           </div>
           <div className="flex flex-col">

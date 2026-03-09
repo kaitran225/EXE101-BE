@@ -8,7 +8,7 @@ export default function Dashboard() {
       {/* Top row: 40% | 40% | 20% */}
       <div className="grid gap-3 w-full grid-cols-1 sm:grid-cols-[40fr_40fr_20fr]">
         <Card className={`flex items-center gap-2 py-2.5 ${cardCompact}`}>
-          <div className="flex-shrink-0 text-orange-500">
+          <div className="flex-shrink-0 text-highlight">
             <svg width="24" height="28" viewBox="0 0 40 47" fill="none" className="w-6 h-7" aria-hidden>
               <path d="M5 27.21C5 29.35 5.44 31.38 6.31 33.3 7.19 35.22 8.44 36.9 10.06 38.34 10.02 38.14 10 37.95 10 37.79 10 37.62 10 37.44 10 37.23 10 35.91 10.25 34.67 10.75 33.52 11.25 32.36 11.98 31.31 12.94 30.36L20 23.5l7.06 6.86c.96.95 1.69 2 2.19 3.15.5 1.15.75 2.39.75 3.71 0 .21-.02.41-.06.63.94-1.21 2.19-2.89 3.81-4.33 1.63-1.44 2.88-3.12 3.76-5.04C34.56 31.38 35 29.35 35 27.21c0-2.06-.39-4.01-1.16-5.84-.77-1.84-1.88-3.47-3.34-4.92-.83.54-1.71.94-2.62 1.21a8.1 8.1 0 0 1-2.5.4c-2.58 0-4.82-.85-6.72-2.54-1.9-1.69-2.99-3.77-3.28-6.25-1.63 1.36-3.06 2.77-4.31 4.24-1.25 1.46-2.3 2.95-3.16 4.46-.85 1.5-1.5 3.04-1.94 4.6C5.22 24.14 5 25.69 5 27.21z" fill="currentColor" />
             </svg>
@@ -19,7 +19,7 @@ export default function Dashboard() {
           </div>
         </Card>
         <Card className={`flex items-center gap-2 py-2.5 ${cardCompact}`}>
-          <div className="flex-shrink-0 text-indigo-400">
+          <div className="flex-shrink-0 text-primary">
             <svg width="24" height="24" viewBox="0 0 50 50" fill="none" className="w-6 h-6" aria-hidden>
               <rect x="2" y="2" width="46" height="46" rx="23" stroke="currentColor" strokeWidth="3" />
               <rect x="25" y="15.1" width="14" height="14" transform="rotate(45 25 15.1)" stroke="currentColor" strokeWidth="3" />
@@ -62,7 +62,7 @@ export default function Dashboard() {
             {teamCards.map((team, i) => (
               <div key={i} className="p-2 rounded-md border border-neutral-200 bg-neutral-50/50 flex flex-col gap-1">
                 <p className="text-xs font-semibold text-neutral-900 truncate">{team.name}</p>
-                <span className="px-1 py-0.5 bg-emerald-100 text-emerald-800 text-[9px] font-medium rounded w-fit">
+                <span className="px-1 py-0.5 bg-success/20 text-success text-[9px] font-medium rounded w-fit">
                   {team.active}
                 </span>
                 <Link to="/teams">
@@ -86,7 +86,7 @@ export default function Dashboard() {
               <div key={i} className="flex-1 flex flex-col items-center justify-end gap-0.5 min-w-0 h-full">
                 {b.label && <span className="text-[9px] font-semibold text-neutral-600">{b.label}</span>}
                 <div
-                  className={`w-full rounded-t min-h-[6px] ${b.active ? 'bg-violet-500' : 'bg-neutral-300'}`}
+                  className={`w-full rounded-t min-h-[6px] ${b.active ? 'bg-primary' : 'bg-neutral-300'}`}
                   style={{ height: `${b.h}%` }}
                 />
               </div>
@@ -131,7 +131,7 @@ export default function Dashboard() {
             {teamCards.map((room, i) => (
               <div key={i} className="p-2 rounded-md border border-neutral-200 bg-neutral-50/50 flex flex-col gap-1">
                 <p className="text-xs font-semibold text-neutral-900 truncate">{room.name}</p>
-                <span className="px-1 py-0.5 bg-emerald-100 text-emerald-800 text-[9px] font-medium rounded w-fit">
+                <span className="px-1 py-0.5 bg-success/20 text-success text-[9px] font-medium rounded w-fit">
                   {room.active}
                 </span>
                 <Link to="/study-room">

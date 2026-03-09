@@ -35,7 +35,7 @@ export default function Personalize() {
         <span className="text-sm font-semibold text-neutral-600 uppercase tracking-wide">Step 1/3</span>
         <div className="flex-1 flex items-center gap-2">
           <div className="flex-1 h-2 bg-neutral-200 rounded-full overflow-hidden">
-            <div className="h-full bg-sky-600 rounded-full transition-[width]" style={{ width: '33%' }} />
+            <div className="h-full bg-accent rounded-full transition-[width]" style={{ width: '33%' }} />
           </div>
           <span className="text-sm font-medium text-neutral-600 w-10">33%</span>
         </div>
@@ -70,7 +70,7 @@ export default function Personalize() {
                   onClick={() => setGoal(g.value)}
                   className={`py-3 px-4 rounded-xl border-2 text-center transition-colors ${
                     goal === g.value
-                      ? 'bg-sky-600 border-sky-600 text-white'
+                      ? 'bg-accent border-accent text-primary-foreground'
                       : 'bg-white border-neutral-300 text-neutral-900 hover:border-neutral-400'
                   }`}
                 >
@@ -92,8 +92,8 @@ export default function Personalize() {
         </div>
       </Card>
 
-      <div className="rounded-xl border-2 border-dashed border-sky-300 bg-sky-50/50 p-4 flex items-center gap-4">
-        <span className="w-12 h-12 rounded-full border-2 border-dashed border-sky-400 flex items-center justify-center text-sky-600 shrink-0" aria-hidden>
+      <div className="rounded-xl border-2 border-dashed border-accent/30 bg-accent-muted/50 p-4 flex items-center gap-4">
+        <span className="w-12 h-12 rounded-full border-2 border-dashed border-accent flex items-center justify-center text-accent shrink-0" aria-hidden>
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
           </svg>

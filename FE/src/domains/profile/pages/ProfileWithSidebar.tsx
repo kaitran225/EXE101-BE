@@ -49,13 +49,13 @@ export default function ProfileWithSidebar() {
           <div>
             <h1 className="text-2xl font-bold text-neutral-900 uppercase tracking-tight">{displayName}</h1>
             <p className="text-sm text-neutral-600">Software Engineering · Level 24</p>
-            <Button variant="secondary" size="sm" className="mt-2 border-2 border-violet-300 text-violet-700 hover:bg-violet-50">
+            <Button variant="secondary" size="sm" className="mt-2 border-2 border-primary/30 text-primary hover:bg-accent-muted">
               Share profile
             </Button>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <input type="search" placeholder="Search..." className="w-40 px-3 py-2 rounded-lg border-2 border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" aria-label="Search" />
+          <input type="search" placeholder="Search..." className="w-40 px-3 py-2 rounded-lg border-2 border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent" aria-label="Search" />
           <button type="button" className="p-2 rounded-lg border-2 border-neutral-200 hover:bg-neutral-50" aria-label="Settings">
             <svg className="w-5 h-5 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           </button>
@@ -81,7 +81,7 @@ export default function ProfileWithSidebar() {
                     {group.tasks.map((t, j) => (
                       <li key={j} className="flex items-center justify-between gap-2 text-sm">
                         <span className="text-neutral-900 truncate">{t.title}</span>
-                        <span className={`shrink-0 px-2 py-0.5 rounded text-[10px] font-bold uppercase ${t.status === 'on-time' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                        <span className={`shrink-0 px-2 py-0.5 rounded text-[10px] font-bold uppercase ${t.status === 'on-time' ? 'bg-success/20 text-success' : 'bg-highlight/20 text-highlight'}`}>
                           {t.status === 'on-time' ? 'On time' : 'Late'} {t.pct}%
                         </span>
                       </li>
@@ -90,30 +90,30 @@ export default function ProfileWithSidebar() {
                 </li>
               ))}
             </ul>
-            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-sky-600 hover:text-sky-800">View full →</Link>
+            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-accent hover:text-accent">View full →</Link>
           </Card>
           <Card className="p-5 border-2 border-neutral-200" heading="Achievements">
             <div className="flex flex-wrap gap-3">
               {[1, 2, 3].map((i) => (
-                <span key={i} className="w-12 h-12 rounded-full bg-violet-500 flex items-center justify-center text-white" aria-hidden>
+                <span key={i} className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white" aria-hidden>
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </span>
               ))}
-              <span className="w-12 h-12 rounded-full bg-violet-200 flex items-center justify-center text-violet-700" aria-hidden>
+              <span className="w-12 h-12 rounded-full bg-accent-muted flex items-center justify-center text-primary" aria-hidden>
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
               </span>
               <span className="w-12 h-12 rounded-full border-2 border-dashed border-neutral-300 flex items-center justify-center text-neutral-400" aria-hidden>
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
               </span>
             </div>
-            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-sky-600 hover:text-sky-800">View full →</Link>
+            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-accent hover:text-accent">View full →</Link>
           </Card>
           <Card className="p-5 border-2 border-neutral-200" heading="Learning goals">
             <div className="flex flex-wrap gap-2">
               {LEARNING_GOALS.map((g) => (
-                <button key={g} type="button" className="px-3 py-2 rounded-xl border-2 border-sky-200 bg-sky-50 text-sky-900 text-xs font-semibold flex items-center gap-1.5 hover:bg-sky-100 transition-colors">
+                <button key={g} type="button" className="px-3 py-2 rounded-xl border-2 border-accent/20 bg-accent-muted text-neutral-900 text-xs font-semibold flex items-center gap-1.5 hover:bg-accent-muted transition-colors">
                   {g}
-                  <span className="text-sky-500"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg></span>
+                  <span className="text-accent"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg></span>
                 </button>
               ))}
             </div>
@@ -130,12 +130,12 @@ export default function ProfileWithSidebar() {
               {[2, 3, 4, 5, 6, 7, 8].map((d, i) => (
                 <div key={d} className="p-1.5 rounded-lg border border-neutral-200 bg-neutral-50/50 min-h-[40px]">
                   <span className="text-xs font-medium text-neutral-900">{d}</span>
-                  {i === 1 && <p className="text-[8px] text-sky-600 mt-0.5 truncate">10:00</p>}
-                  {i === 3 && <p className="text-[8px] text-amber-600 mt-0.5 truncate">Exam</p>}
+                  {i === 1 && <p className="text-[8px] text-accent mt-0.5 truncate">10:00</p>}
+                  {i === 3 && <p className="text-[8px] text-highlight mt-0.5 truncate">Exam</p>}
                 </div>
               ))}
             </div>
-            <Link to="/calendar" className="inline-block mt-3 text-xs font-semibold text-sky-600 hover:text-sky-800">View full →</Link>
+            <Link to="/calendar" className="inline-block mt-3 text-xs font-semibold text-accent hover:text-accent">View full →</Link>
           </Card>
           <Card className="p-5 border-2 border-neutral-200" heading="Study time by month">
             <div className="flex items-end gap-0.5 h-20">
@@ -143,7 +143,7 @@ export default function ProfileWithSidebar() {
                 <div key={i} className="flex-1 flex flex-col items-center gap-0.5 min-w-0">
                   <span className="text-[8px] font-medium text-neutral-500 truncate w-full text-center">{['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][i]}</span>
                   <div className="w-full rounded-t min-h-[3px]" style={{ height: `${(h / 24) * 100}%` }}>
-                    <div className={`h-full w-full rounded-t ${i === HIGHLIGHT_MONTH ? 'bg-violet-500' : 'bg-sky-200'}`} />
+                    <div className={`h-full w-full rounded-t ${i === HIGHLIGHT_MONTH ? 'bg-primary' : 'bg-accent/20'}`} />
                   </div>
                 </div>
               ))}
@@ -170,7 +170,7 @@ export default function ProfileWithSidebar() {
                 </li>
               ))}
             </ul>
-            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-sky-600 hover:text-sky-800">View full →</Link>
+            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-accent hover:text-accent">View full →</Link>
           </Card>
         </div>
 
@@ -179,7 +179,7 @@ export default function ProfileWithSidebar() {
         <Card className="p-5 border-2 border-neutral-200" heading="Skills">
             <div className="flex flex-wrap gap-2">
               {SKILLS.map((s) => (
-                <span key={s} className="px-3 py-1 rounded-full bg-violet-100 text-violet-800 text-xs font-medium">
+                <span key={s} className="px-3 py-1 rounded-full bg-accent-muted text-primary text-xs font-medium">
                   {s}
                 </span>
               ))}
@@ -207,7 +207,7 @@ export default function ProfileWithSidebar() {
           <Card className="p-5 border-2 border-neutral-200" heading="Next reward">
             <div className="mb-2">
               <div className="h-2 w-full bg-neutral-200 rounded-full overflow-hidden">
-                <div className="h-full bg-sky-500 rounded-full" style={{ width: '75%' }} />
+                <div className="h-full bg-accent rounded-full" style={{ width: '75%' }} />
               </div>
               <p className="text-[10px] text-neutral-500 mt-1">75% · Level 24 + Premium</p>
             </div>

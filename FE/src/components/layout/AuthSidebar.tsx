@@ -17,8 +17,8 @@ export function AuthSidebar() {
           className="flex items-center gap-2 self-start mb-10"
           aria-label="together home"
         >
-          <span className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-transparent">∞</span>
-          <span className="text-lg font-semibold text-sky-400">together</span>
+          <span className="text-2xl font-bold text-gradient-brand">∞</span>
+          <span className="text-lg font-semibold text-vodka">together</span>
         </Link>
         <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight mb-4">
           Learn together. Progress together.
@@ -30,7 +30,7 @@ export function AuthSidebar() {
           <Link
             to="/welcome"
             className={`text-sm font-medium transition-colors ${
-              location.pathname === '/welcome' ? 'text-amber-400' : 'text-neutral-400 hover:text-white'
+              location.pathname === '/welcome' ? 'text-highlight' : 'text-neutral-400 hover:text-white'
             }`}
           >
             Log in
@@ -38,7 +38,7 @@ export function AuthSidebar() {
           <Link
             to="/sign-up"
             className={`text-sm font-medium transition-colors ${
-              location.pathname === '/sign-up' ? 'text-amber-400' : 'text-neutral-400 hover:text-white'
+              location.pathname === '/sign-up' ? 'text-highlight' : 'text-neutral-400 hover:text-white'
             }`}
           >
             Sign up

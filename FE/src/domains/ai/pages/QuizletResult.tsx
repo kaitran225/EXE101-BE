@@ -9,11 +9,11 @@ export default function QuizletResult() {
     <div className="min-h-screen bg-neutral-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-xl border border-neutral-200 shadow-lg max-w-2xl w-full overflow-hidden">
         <div className="flex-shrink-0 flex items-center justify-end gap-2 px-4 py-3 border-b border-neutral-200">
-          <span className="px-3 py-1.5 rounded-lg bg-sky-100 text-sky-800 text-xs font-semibold">
+          <span className="px-3 py-1.5 rounded-lg bg-accent-muted text-accent text-xs font-semibold">
             Time {r.timeSpent}
           </span>
           <Link to="/quizlet">
-            <Button variant="secondary" size="sm" className="!bg-red-50 !border-red-200 !text-red-800 hover:!bg-red-100">
+            <Button variant="secondary" size="sm" className="!bg-error/10 !border-error/50 !text-error hover:!bg-error/20">
               Exit
             </Button>
           </Link>
@@ -26,7 +26,7 @@ export default function QuizletResult() {
               <ul className="space-y-3">
                 {r.wrongQuestions.map((w, i) => (
                   <li key={i} className="flex gap-2">
-                    <span className="w-1 flex-shrink-0 rounded-full bg-orange-500" aria-hidden />
+                    <span className="w-1 flex-shrink-0 rounded-full bg-highlight" aria-hidden />
                     <div>
                       <p className="text-sm font-medium text-neutral-900">{w.topic}</p>
                       <p className="text-xs text-neutral-500">

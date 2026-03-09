@@ -82,10 +82,10 @@ export function QuizletQuizModal({ onClose, questions = MOCK_QUESTIONS }: Quizle
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex-shrink-0 flex items-center justify-end gap-4 px-10 py-5 border-b border-neutral-200">
-            <span className="px-4 py-2 rounded-lg bg-sky-100 text-sky-800 text-xs font-semibold">
+            <span className="px-4 py-2 rounded-lg bg-accent-muted text-accent text-xs font-semibold">
               Time {result.timeSpent}
             </span>
-            <Button variant="secondary" size="sm" className="!bg-red-50 !border-red-200 !text-red-800 hover:!bg-red-100" onClick={onClose}>
+            <Button variant="secondary" size="sm" className="!bg-error/10 !border-error/50 !text-error hover:!bg-error/20" onClick={onClose}>
               Exit
             </Button>
           </div>
@@ -100,7 +100,7 @@ export function QuizletQuizModal({ onClose, questions = MOCK_QUESTIONS }: Quizle
                   <ul className="space-y-5">
                     {result.wrongQuestions.map((w, i) => (
                       <li key={i} className="flex gap-4">
-                        <span className="w-1 flex-shrink-0 rounded-full bg-orange-500 mt-0.5" aria-hidden />
+                        <span className="w-1 flex-shrink-0 rounded-full bg-highlight mt-0.5" aria-hidden />
                         <div>
                           <p className="text-sm font-medium text-neutral-900">{w.topic}</p>
                           <p className="text-xs text-neutral-500 mt-1">
@@ -125,7 +125,7 @@ export function QuizletQuizModal({ onClose, questions = MOCK_QUESTIONS }: Quizle
                       <p className="text-xs font-medium text-neutral-900 mb-1.5">{s.title}</p>
                       <div className="h-2 w-full bg-neutral-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-blue-500 rounded-full transition-all"
+                          className="h-full bg-accent rounded-full transition-all"
                           style={{ width: `${s.percent}%` }}
                         />
                       </div>
@@ -168,10 +168,10 @@ export function QuizletQuizModal({ onClose, questions = MOCK_QUESTIONS }: Quizle
             Question {currentIndex + 1} / {questions.length}
           </span>
           <div className="flex items-center gap-4">
-            <span className="px-4 py-2 rounded-lg bg-sky-100 text-sky-800 text-[11px] font-semibold">
+            <span className="px-4 py-2 rounded-lg bg-accent-muted text-accent text-[11px] font-semibold">
               Time {String(Math.floor((Date.now() - startTime) / 60000)).padStart(2, '0')}:{String(Math.floor(((Date.now() - startTime) / 1000) % 60)).padStart(2, '0')}
             </span>
-            <Button variant="secondary" size="sm" className="!bg-red-50 !border-red-200 !text-red-800 hover:!bg-red-100" onClick={onClose}>
+            <Button variant="secondary" size="sm" className="!bg-error/10 !border-error/50 !text-error hover:!bg-error/20" onClick={onClose}>
               Exit
             </Button>
           </div>

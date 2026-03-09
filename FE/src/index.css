@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 
-/* Design tokens: study vibe, robust, modern */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens: study vibe, robust, modern. Palettes from theme/colors.ts. */
 @theme {
   /* Border: thicker default for whole app */
   --default-border-width: 3px;
@@ -15,20 +17,72 @@
   --color-neutral-50: #fafafa;
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
   --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
   --color-neutral-900: #171717;
 
-  /* Study accent: primary (links, active), highlight (streak, CTAs) */
-  --color-primary: #4f46e5;
-  --color-primary-hover: #4338ca;
-  --color-highlight: #f97316;
-  --color-highlight-hover: #ea580c;
-  --color-focus-area: #7c3aed;
+  /* Jenny Henderson */
+  --color-midnight: #013D5A;
+  --color-lionsmane: #FCF3E3;
+  --color-celeste: #BDD3CE;
+  --color-herb: #708C69;
+  --color-marigold: #F8A258;
 
-  /* Semantic */
+  /* Purple set */
+  --color-chinese-black: #0D0E20;
+  --color-persian-indigo: #2D1C7F;
+  --color-majorelle-blue: #7546E8;
+  --color-vodka: #C8B3F6;
+  --color-max-blue-purple: #B0A9E5;
+
+  /* ATLITUDE */
+  --color-atlitude-1: #F2E6EE;
+  --color-atlitude-2: #FFCCF2;
+  --color-atlitude-3: #977DFF;
+  --color-atlitude-4: #0033FF;
+  --color-atlitude-5: #0600AB;
+  --color-atlitude-6: #00033D;
+
+  /* MINDFULPALETTES */
+  --color-mindful-1: #FBF5F0;
+  --color-mindful-2: #C7C2CE;
+  --color-mindful-3: #FBD5BD;
+  --color-mindful-4: #8A83DA;
+  --color-mindful-5: #463699;
+  --color-mindful-6: #262335;
+
+  /* Semantic (default: ATLITUDE + purple + jenny highlight) */
+  --color-primary: #977DFF;
+  --color-primary-hover: #2D1C7F;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #0033FF;
+  --color-accent-muted: #F2E6EE;
+  --color-surface: #F2E6EE;
+  --color-background: #fafafa;
+  --color-highlight: #F8A258;
+  --color-highlight-hover: #ea580c;
+  --color-focus-area: #7546E8;
+  --color-success: #059669;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
   --color-border: #e5e5e5;
   --color-border-strong: rgba(0, 0, 0, 0.2);
-  --color-error: #dc2626;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(to right, var(--color-atlitude-3), var(--color-atlitude-4));
+  --gradient-atlitude-1: linear-gradient(to bottom, var(--color-atlitude-1), var(--color-atlitude-3));
+  --gradient-atlitude-2: linear-gradient(to bottom, var(--color-atlitude-2), var(--color-atlitude-3), var(--color-atlitude-4));
+  --gradient-atlitude-3: linear-gradient(to bottom, var(--color-atlitude-3), var(--color-atlitude-4), var(--color-atlitude-5));
+  --gradient-atlitude-4: linear-gradient(to bottom, var(--color-atlitude-4), var(--color-atlitude-5), var(--color-atlitude-6));
+  --gradient-mindful-01: linear-gradient(to bottom, var(--color-mindful-1), var(--color-mindful-3));
+  --gradient-mindful-02: linear-gradient(to bottom, var(--color-mindful-2), var(--color-mindful-3));
+  --gradient-mindful-03: linear-gradient(to bottom, var(--color-mindful-2), var(--color-mindful-4));
+  --gradient-mindful-04: linear-gradient(to bottom, var(--color-mindful-3), var(--color-mindful-4), var(--color-mindful-6));
+  --gradient-mindful-05: linear-gradient(to bottom, var(--color-mindful-5), var(--color-mindful-6));
 
   /* Spacing (slightly tighter for resized app) */
   --spacing-section: 1.25rem;
@@ -64,9 +118,43 @@
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-primary;
   }
+  /* Dark theme: override design tokens when .dark is on html */
+  .dark {
+    --color-neutral-50: #171717;
+    --color-neutral-100: #262626;
+    --color-neutral-200: #404040;
+    --color-neutral-300: #525252;
+    --color-neutral-400: #737373;
+    --color-neutral-500: #a3a3a3;
+    --color-neutral-600: #d4d4d4;
+    --color-neutral-700: #e5e5e5;
+    --color-neutral-800: #f5f5f5;
+    --color-neutral-900: #fafafa;
+    --color-background: #171717;
+    --color-surface: #262626;
+    --color-accent-muted: #2D1C7F;
+    --color-border: #404040;
+    --color-border-strong: rgba(255, 255, 255, 0.15);
+  }
+  .dark .label-study {
+    @apply text-neutral-900;
+  }
 }
 
 /* Label: uppercase, bold, tracking (study vibe) */
 .label-study {
   @apply text-sm font-bold uppercase tracking-wide text-neutral-900;
+}
+
+/* Gradient utilities (brand logo/text) */
+@layer components {
+  .bg-gradient-brand {
+    background: var(--gradient-brand);
+  }
+  .text-gradient-brand {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }

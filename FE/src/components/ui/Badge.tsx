@@ -4,8 +4,8 @@ type BadgeVariant = 'default' | 'highlight' | 'primary' | 'outline'
 
 const variantClasses: Record<BadgeVariant, string> = {
   default: 'bg-neutral-100 text-neutral-900 border border-neutral-200',
-  highlight: 'bg-orange-100 text-orange-600 border border-orange-200',
-  primary: 'bg-indigo-100 text-indigo-700 border border-indigo-200',
+  highlight: 'bg-accent-muted text-highlight border border-highlight/30',
+  primary: 'bg-accent-muted text-primary border border-primary/30',
   outline: 'bg-white text-neutral-900 border border-neutral-900',
 }
 

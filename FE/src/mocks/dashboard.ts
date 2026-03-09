@@ -26,9 +26,9 @@ export const studyBars = studyBarsRaw.map((b) => ({
 }))
 
 export const upcomingItems = [
-  { tag: 'DEADLINE', tagClass: 'bg-orange-500/90 text-white', title: 'Physics Lab Report', time: 'Tomorrow, 11:59 PM' },
-  { tag: 'PROJECT', tagClass: 'bg-amber-200 text-neutral-800', title: 'Web Dev Mockups Review', time: 'Fri, 11 AM' },
-  { tag: 'MEETING', tagClass: 'bg-sky-200 text-sky-900', title: 'Calculus Study Group', time: 'Sat, 2:00 PM' },
+  { tag: 'DEADLINE', tagClass: 'bg-highlight/90 text-white', title: 'Physics Lab Report', time: 'Tomorrow, 11:59 PM' },
+  { tag: 'PROJECT', tagClass: 'bg-highlight/30 text-neutral-800', title: 'Web Dev Mockups Review', time: 'Fri, 11 AM' },
+  { tag: 'MEETING', tagClass: 'bg-accent/20 text-neutral-900', title: 'Calculus Study Group', time: 'Sat, 2:00 PM' },
 ]
 
 export const teamCards = [

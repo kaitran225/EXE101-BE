@@ -37,6 +37,6 @@ export default function Callback() {
       .catch(() => setError('Request failed'))
   }, [searchParams, navigate])
 
-  if (error) return <p style={{ color: 'red' }}>{error}</p>
+  if (error) return <p className="text-error">{error}</p>
   return <p>Completing login…</p>
 }

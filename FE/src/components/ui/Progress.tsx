@@ -18,14 +18,14 @@ export function Progress({ value, max = 100, label, caption, className = '' }: P
         </div>
       )}
       <div
-        className="h-2 w-full bg-white border border-neutral-900/20 rounded overflow-hidden"
+        className="h-2 w-full bg-white border border-border rounded overflow-hidden"
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={max}
       >
         <div
-          className="h-full bg-neutral-900 transition-[width] duration-300"
+          className="h-full bg-primary transition-[width] duration-300"
           style={{ width: `${pct}%` }}
         />
       </div>

@@ -178,12 +178,12 @@ function ScrumBoardContent() {
                       </span>
                     )}
                     {task.done && (
-                      <span className="absolute top-1 right-1 text-emerald-500" aria-hidden>
+                      <span className="absolute top-1 right-1 text-success" aria-hidden>
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                       </span>
                     )}
                     {task.missed && (
-                      <span className="absolute top-1 right-1 text-amber-500" aria-hidden>
+                      <span className="absolute top-1 right-1 text-highlight" aria-hidden>
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       </span>
                     )}
@@ -221,9 +221,9 @@ function ScrumBoardContent() {
             <p className="text-[10px] text-neutral-500 mb-2">Click a task to edit.</p>
             <section className="mb-2">
               <h3 className="text-[10px] font-bold uppercase text-neutral-600 mb-1">Priority Alerts</h3>
-              <div className="flex gap-1.5 p-2 rounded-md bg-amber-50 border border-amber-200">
-                <span className="text-amber-600 text-[10px]">▲</span>
-                <p className="text-[10px] text-amber-800">Bottleneck: &quot;Integrate AI Dashboard UI&quot; delayed.</p>
+              <div className="flex gap-1.5 p-2 rounded-md bg-highlight/10 border border-highlight/30">
+                <span className="text-highlight text-[10px]">▲</span>
+                <p className="text-[10px] text-neutral-800">Bottleneck: &quot;Integrate AI Dashboard UI&quot; delayed.</p>
               </div>
             </section>
             <section className="mb-2">
@@ -233,7 +233,7 @@ function ScrumBoardContent() {
                   <li key={u.name} className="flex items-center gap-1.5">
                     <span className="text-[10px] text-neutral-700 w-16 truncate">{u.name}</span>
                     <div className="flex-1 h-1.5 bg-neutral-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-violet-500 rounded-full" style={{ width: `${u.pct}%` }} />
+                      <div className="h-full bg-primary rounded-full" style={{ width: `${u.pct}%` }} />
                     </div>
                     <span className="text-[9px] font-medium text-neutral-600 w-6">{u.pct}%</span>
                   </li>
@@ -348,7 +348,7 @@ function SprintBoardContent() {
                     {task.progress != null && (
                       <div className="mt-1">
                         <div className="h-1 w-full bg-neutral-200 rounded-full overflow-hidden">
-                          <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${task.progress}%` }} />
+                          <div className="h-full bg-primary rounded-full" style={{ width: `${task.progress}%` }} />
                         </div>
                       </div>
                     )}
@@ -357,7 +357,7 @@ function SprintBoardContent() {
                       <div className="flex items-center gap-0.5">
                         {task.due && <span className="text-[9px] text-neutral-500">{task.due}</span>}
                         {task.status && <span className="text-[9px] text-neutral-600">{task.status}</span>}
-                        {task.needsFeedback && <span className="px-1 py-0.5 text-[9px] font-medium border border-amber-400 text-amber-700 rounded">Feedback</span>}
+                        {task.needsFeedback && <span className="px-1 py-0.5 text-[9px] font-medium border border-highlight/50 text-highlight rounded">Feedback</span>}
                       </div>
                     </div>
                   </button>
@@ -408,7 +408,7 @@ function SprintBoardContent() {
             </section>
             <section className="p-2 rounded-md bg-neutral-50 border border-neutral-200">
               <h3 className="text-[10px] font-bold uppercase tracking-wide text-neutral-900 mb-1 flex items-center gap-0.5">
-                AI Assistant <span className="text-indigo-500">◆</span>
+                AI Assistant <span className="text-primary">◆</span>
               </h3>
               <p className="text-[10px] text-neutral-700 mb-1.5">Update documentation.</p>
               <Button variant="primary" size="sm" className="py-1 text-xs h-6">Accept</Button>
