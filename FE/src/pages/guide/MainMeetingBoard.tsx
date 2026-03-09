@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Badge, Button } from '../../components/ui'
+import { Badge, Button } from '../../components/common'
 
 const PARTICIPANTS = [
   { name: 'Alex', host: true },

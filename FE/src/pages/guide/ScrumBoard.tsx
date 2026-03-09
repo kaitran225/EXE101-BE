@@ -1,4 +1,4 @@
-import { Card } from '../../components/ui'
+import { Card } from '../../components/common'
 
 export default function ScrumBoard() {
   return (

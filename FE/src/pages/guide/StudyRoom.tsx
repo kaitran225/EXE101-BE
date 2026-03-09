@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AiBotIcon } from '../../components/AiBotIcon'
-import { Button, Card } from '../../components/ui'
+import { AiBotIcon, Button, Card } from '../../components/common'
 
 const CHAT_MESSAGES = [
   { user: 'Jordan', time: '2:45 PM', text: 'Anyone want to take a 5-min break at the top of the hour?', own: false },

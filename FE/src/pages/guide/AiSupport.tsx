@@ -1,8 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { AiBotIcon } from '../../components/AiBotIcon'
-import { Button, Card, Input, Progress, Textarea } from '../../components/ui'
-import { QuizletQuizModal } from '../../components/QuizletQuizModal'
+import { AiBotIcon, Button, Card, ChatInputBar, CloseIcon, DocumentIcon, MenuIcon, Progress, QuizletQuizModal, Textarea } from '../../components/common'
 
 /** Mock AI-generated quizlet card sets (same as Focus Room) */
 const MOCK_QUIZLET_CARDS = [
@@ -44,19 +42,15 @@ export default function AiSupport() {
   const [notes, setNotes] = useState('')
   const [quizletCards, setQuizletCards] = useState<typeof MOCK_QUIZLET_CARDS | null>(null)
   const [showQuizModal, setShowQuizModal] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const dialogFileInputRef = useRef<HTMLInputElement>(null)
   const summarizeInputRef = useRef<HTMLInputElement>(null)
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, isDialog: boolean) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const list = e.target.files
     if (!list?.length) return
-    const ref = isDialog ? dialogFileInputRef : fileInputRef
     const newEntries = Array.from(list)
       .filter((f) => f.size <= MAX_FILE_SIZE_MB * 1024 * 1024)
       .map((f) => ({ id: `${Date.now()}-${f.name}`, file: f }))
     setAttachments((prev) => [...prev, ...newEntries])
-    if (ref.current) ref.current.value = ''
   }
 
   const removeAttachment = (id: string) => {
@@ -224,41 +218,20 @@ export default function AiSupport() {
             ))}
           </div>
           <div className="p-4 border-t-2 border-neutral-200 shrink-0">
-            <input
-              ref={fileInputRef}
-              type="file"
-              multiple
-              accept={ACCEPT_FILES}
-              className="hidden"
-              onChange={(e) => handleFileChange(e, false)}
-              aria-label="Attach file"
+            <ChatInputBar
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onSend={() => {}}
+              onFileChange={handleFileChange}
+              acceptFiles={ACCEPT_FILES}
+              placeholder="Type your question..."
+              secondaryActions={
+                <>
+                  <button type="button" onClick={() => setSummarizeOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Summarize</button>
+                  <button type="button" onClick={() => setDialogOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Open chat in popup</button>
+                </>
+              }
             />
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
-                aria-label="Attach file"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                </svg>
-              </button>
-              <div className="flex-1 min-w-0">
-              <Input
-                placeholder="Type your question..."
-                className="w-full h-10 min-h-0 py-0 rounded-lg border-2 border-neutral-200 text-sm"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                aria-label="Message"
-              />
-            </div>
-            <Button variant="primary" size="sm" className="h-10 rounded-lg shrink-0 px-4">Send</Button>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 mt-2">
-              <button type="button" onClick={() => setSummarizeOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Summarize</button>
-              <button type="button" onClick={() => setDialogOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Open chat in popup</button>
-            </div>
           </div>
         </aside>
       </div>
@@ -288,9 +261,7 @@ export default function AiSupport() {
                 className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900"
                 aria-label="Close"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <CloseIcon className="w-5 h-5" />
               </button>
             </div>
             <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
@@ -317,55 +288,32 @@ export default function AiSupport() {
                 </div>
               ))}
             </div>
-            <div className="p-3 border-t-2 border-neutral-200 bg-white space-y-2">
-              {attachments.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {attachments.map(({ id, file }) => (
-                    <span
-                      key={id}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-neutral-100 text-neutral-700 text-xs"
-                    >
-                      <span className="max-w-[100px] truncate">{file.name}</span>
-                      <button type="button" onClick={() => removeAttachment(id)} className="text-neutral-500 hover:text-neutral-900" aria-label={`Remove ${file.name}`}>
-                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              )}
-              <div className="flex items-center gap-2">
-                <input
-                  ref={dialogFileInputRef}
-                  type="file"
-                  multiple
-                  accept={ACCEPT_FILES}
-                  className="hidden"
-                  onChange={(e) => handleFileChange(e, true)}
-                  aria-label="Attach file"
-                />
-                <button
-                  type="button"
-                  onClick={() => dialogFileInputRef.current?.click()}
-                  className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
-                  aria-label="Attach file"
-                >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                  </svg>
-                </button>
-                <div className="flex-1 min-w-0">
-                <Input
-                  placeholder="Ask anything..."
-                  className="w-full h-10 min-h-0 py-0 rounded-lg border-2 border-neutral-200 text-sm"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  aria-label="Message"
-                />
-              </div>
-                <Button variant="primary" size="sm" className="h-10 rounded-lg shrink-0 px-4">
-                  Send
-                </Button>
-              </div>
+            <div className="p-3 border-t-2 border-neutral-200 bg-white">
+              <ChatInputBar
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onSend={() => {}}
+                onFileChange={handleFileChange}
+                acceptFiles={ACCEPT_FILES}
+                placeholder="Ask anything..."
+                attachmentsSlot={
+                  attachments.length > 0 ? (
+                    <div className="flex flex-wrap gap-1.5">
+                      {attachments.map(({ id, file }) => (
+                        <span
+                          key={id}
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-neutral-100 text-neutral-700 text-xs"
+                        >
+                          <span className="max-w-[100px] truncate">{file.name}</span>
+                          <button type="button" onClick={() => removeAttachment(id)} className="text-neutral-500 hover:text-neutral-900" aria-label={`Remove ${file.name}`}>
+                            <CloseIcon className="w-3 h-3" />
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  ) : undefined
+                }
+              />
             </div>
           </div>
         </div>
@@ -382,7 +330,7 @@ export default function AiSupport() {
                   <Button variant="primary" size="sm" className="rounded-lg text-xs font-bold">Focus room</Button>
                 </Link>
                 <button type="button" onClick={() => setSummarizeOpen(false)} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900" aria-label="Close">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                  <CloseIcon className="w-5 h-5" />
                 </button>
               </div>
             </div>
@@ -415,7 +363,7 @@ export default function AiSupport() {
                     {SUMMARY_HISTORY.map((item) => (
                       <li key={item.id}>
                         <button type="button" className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50 text-left hover:bg-neutral-100 text-sm font-medium text-neutral-900">
-                          <span className="text-neutral-400 shrink-0" aria-hidden><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707L12 3.586A1 1 0 0010.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></span>
+                          <span className="text-neutral-400 shrink-0" aria-hidden><DocumentIcon className="w-4 h-4" /></span>
                           <span className="min-w-0 truncate flex-1">{item.name}</span>
                           <span className="text-[10px] text-neutral-500 shrink-0">{item.time}</span>
                         </button>
@@ -426,7 +374,7 @@ export default function AiSupport() {
               </div>
               <div className="p-4 flex flex-col min-h-0">
                 <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide mb-2 flex items-center gap-1">
-                <svg className="w-3.5 h-3.5 text-neutral-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                <MenuIcon className="w-3.5 h-3.5 text-neutral-500" />
                 Executive summary</p>
                 <div className="flex-1 min-h-[200px] rounded-xl border-2 border-neutral-200 bg-white p-4 overflow-y-auto">
                   {summaryText ? (

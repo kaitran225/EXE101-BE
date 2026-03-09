@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { AiBotIcon } from '../../components/AiBotIcon'
-import { Button, Card, Input, Textarea } from '../../components/ui'
+import { AiBotIcon, AttachIcon, Button, Card, ChatInputBar, CloseIcon, DocumentIcon, MenuIcon, Textarea } from '../../components/common'
 
 const QUICK_PROMPTS = [
   'Explain this concept in simple terms',
@@ -39,7 +38,6 @@ export default function MeetAi() {
   const [summarizeOpen, setSummarizeOpen] = useState(false)
   const [droppedFile, setDroppedFile] = useState<File | null>(null)
   const [summaryText, setSummaryText] = useState('')
-  const dialogFileInputRef = useRef<HTMLInputElement>(null)
   const summarizeInputRef = useRef<HTMLInputElement>(null)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +47,6 @@ export default function MeetAi() {
       .filter((f) => f.size <= MAX_FILE_SIZE_MB * 1024 * 1024)
       .map((f) => ({ id: `${Date.now()}-${f.name}`, file: f }))
     setAttachments((prev) => [...prev, ...newEntries])
-    if (dialogFileInputRef.current) dialogFileInputRef.current.value = ''
   }
 
   const removeAttachment = (id: string) => setAttachments((prev) => prev.filter((a) => a.id !== id))
@@ -94,9 +91,7 @@ export default function MeetAi() {
             aria-label="Attach file — open Summarize"
             title="Attach file — opens Summarize to drop or select PDF"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-            </svg>
+            <AttachIcon className="w-4 h-4" />
           </button>
         </div>
         <div className="flex flex-wrap gap-2 mb-3">
@@ -203,7 +198,7 @@ export default function MeetAi() {
                   <Button variant="primary" size="sm" className="rounded-lg text-xs font-bold">Focus room</Button>
                 </Link>
                 <button type="button" onClick={() => setSummarizeOpen(false)} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900" aria-label="Close">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                  <CloseIcon className="w-5 h-5" />
                 </button>
               </div>
             </div>
@@ -236,7 +231,7 @@ export default function MeetAi() {
                     {SUMMARY_HISTORY.map((item) => (
                       <li key={item.id}>
                         <button type="button" className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50 text-left hover:bg-neutral-100 text-sm font-medium text-neutral-900">
-                          <span className="text-neutral-400 shrink-0" aria-hidden><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707L12 3.586A1 1 0 0010.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></span>
+                          <span className="text-neutral-400 shrink-0" aria-hidden><DocumentIcon className="w-4 h-4" /></span>
                           <span className="min-w-0 truncate flex-1">{item.name}</span>
                           <span className="text-[10px] text-neutral-500 shrink-0">{item.time}</span>
                         </button>
@@ -247,7 +242,7 @@ export default function MeetAi() {
               </div>
               <div className="p-4 flex flex-col min-h-0">
                 <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide mb-2 flex items-center gap-1">
-                <svg className="w-3.5 h-3.5 text-neutral-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                <MenuIcon className="w-3.5 h-3.5 text-neutral-500" />
                 Executive summary</p>
                 <div className="flex-1 min-h-[200px] rounded-xl border-2 border-neutral-200 bg-white p-4 overflow-y-auto">
                   {summaryText ? (
@@ -278,7 +273,7 @@ export default function MeetAi() {
                 <h2 className="text-sm font-bold text-neutral-900 uppercase tracking-wide">Together AI — Chat</h2>
               </div>
               <button type="button" onClick={() => setChatDialogOpen(false)} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900" aria-label="Close">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                <CloseIcon className="w-5 h-5" />
               </button>
             </div>
             <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
@@ -296,27 +291,29 @@ export default function MeetAi() {
                 </div>
               ))}
             </div>
-            <div className="p-3 border-t-2 border-neutral-200 space-y-2">
-              {attachments.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {attachments.map(({ id, file }) => (
-                    <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-neutral-100 text-neutral-700 text-xs">
-                      <span className="max-w-[100px] truncate">{file.name}</span>
-                      <button type="button" onClick={() => removeAttachment(id)} className="text-neutral-500 hover:text-neutral-900" aria-label={`Remove ${file.name}`}>
-                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              )}
-              <div className="flex gap-2">
-                <input ref={dialogFileInputRef} type="file" multiple accept={ACCEPT_FILES} className="hidden" onChange={handleFileChange} aria-label="Attach file" />
-                <button type="button" onClick={() => dialogFileInputRef.current?.click()} className="shrink-0 w-10 h-10 rounded-lg border-2 border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-neutral-100" aria-label="Attach file">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" /></svg>
-                </button>
-                <Input placeholder="Ask anything..." className="flex-1 rounded-lg border-2 border-neutral-200 text-sm" value={chatInput} onChange={(e) => setChatInput(e.target.value)} aria-label="Message" />
-                <Button variant="primary" size="sm" className="rounded-lg shrink-0">Send</Button>
-              </div>
+            <div className="p-3 border-t-2 border-neutral-200">
+              <ChatInputBar
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onSend={() => {}}
+                onFileChange={handleFileChange}
+                acceptFiles={ACCEPT_FILES}
+                placeholder="Ask anything..."
+                attachmentsSlot={
+                  attachments.length > 0 ? (
+                    <div className="flex flex-wrap gap-1.5">
+                      {attachments.map(({ id, file }) => (
+                        <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-neutral-100 text-neutral-700 text-xs">
+                          <span className="max-w-[100px] truncate">{file.name}</span>
+                          <button type="button" onClick={() => removeAttachment(id)} className="text-neutral-500 hover:text-neutral-900" aria-label={`Remove ${file.name}`}>
+                            <CloseIcon className="w-3 h-3" />
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  ) : undefined
+                }
+              />
             </div>
           </div>
         </div>

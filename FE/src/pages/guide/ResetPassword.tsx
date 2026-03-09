@@ -1,5 +1,5 @@
 import { useNavigate, Link } from 'react-router-dom'
-import { Button, Input } from '../../components/ui'
+import { Button, Input } from '../../components/common'
 
 export default function ResetPassword() {
   const navigate = useNavigate()

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Card } from '../../components/ui'
+import { Card } from '../../components/common'
 
 export default function StudyRoomDashboard() {
   return (

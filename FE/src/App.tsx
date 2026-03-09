@@ -1,5 +1,5 @@
 import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom'
-import { Button } from './components/ui'
+import { Button } from './components/common'
 import { AuthLayout } from './components/layout/AuthLayout'
 import { GuideLayout } from './components/layout/GuideLayout'
 import Login from './pages/Login'

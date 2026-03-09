@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Button, Card } from '../../components/ui'
-import { QuizletQuizModal } from '../../components/QuizletQuizModal'
+import { Button, Card, QuizletQuizModal } from '../../components/common'
 
 /** Mock quizlet sets (e.g. from AI or selection) */
 const MOCK_SETS = [

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Button } from './ui'
+import { Button, CloseIcon } from './common'
 
 /** Shared task shape for the edit sidebar (Scrum + Sprint) */
 export type TaskForEdit = {
@@ -99,9 +99,7 @@ export function TaskEditSidebar({ task, onSave, onClose, statusOptions = DEFAULT
           className="p-1.5 rounded-md text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 transition-colors"
           aria-label="Close"
         >
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <CloseIcon className="w-4 h-4" />
         </button>
       </div>
 

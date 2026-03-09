@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import type { MeResponse } from '../../types/dto'
 import { authApi, readApi, workflowApi, getStoredToken, clearStoredToken } from '../../api/client'
 import { getFakeMeResponse } from '../../mocks/user'
-import { Button, Card, Progress, Badge } from '../../components/ui'
+import { Button, Card, Progress, Badge } from '../../components/common'
 
 const SKILLS = ['Python', 'Algorithms', 'UX Design', 'Data Science', 'AI Ethics', 'Team Leadership']
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button, Card, Textarea } from '../components/ui'
+import { Button, Card, Textarea } from '../components/common'
 
 const todayTasks = [
   { title: 'Read Chapter 4 – Biology', due: 'Due 2:00 PM' },

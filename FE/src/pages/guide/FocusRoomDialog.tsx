@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button, Card } from '../../components/ui'
+import { Button, Card } from '../../components/common'
 
 export default function FocusRoomDialog() {
   return (

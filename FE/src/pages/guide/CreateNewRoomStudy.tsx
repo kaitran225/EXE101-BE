@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button, Card, Input, Textarea, Select } from '../../components/ui'
+import { Button, Card, Input, Textarea, Select } from '../../components/common'
 
 const topicOptions = [
   { value: 'math', label: 'Mathematics' },

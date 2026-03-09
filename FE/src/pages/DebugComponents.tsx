@@ -7,7 +7,7 @@ import {
   Progress,
   Select,
   Textarea,
-} from '../components/ui'
+} from '../components/common'
 
 const SECTIONS = [
   'buttons',

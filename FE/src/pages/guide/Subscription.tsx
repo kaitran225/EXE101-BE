@@ -1,4 +1,4 @@
-import { Button } from '../../components/ui'
+import { Button } from '../../components/common'
 
 const FREE_FEATURES = [
   'Study rooms',

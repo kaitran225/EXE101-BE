@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Button, Card } from '../../components/ui'
+import { Button, Card, DocumentIcon } from '../../components/common'
 import { TaskEditSidebar, type TaskForEdit } from '../../components/TaskEditSidebar'
 
 // Scrum task: different columns have different optional fields
@@ -496,7 +496,7 @@ function SprintBoardContent() {
               </div>
               <ul className="space-y-1">
                 <li className="flex items-center gap-1.5 text-[10px] text-neutral-700">
-                  <svg className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-3.414-3.414A1 1 0 0015.586 5H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                  <DocumentIcon className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" />
                   project_spec_v2.pdf <span className="text-[9px] text-neutral-400">2h</span>
                 </li>
                 <li className="flex items-center gap-1.5 text-[10px] text-neutral-700">

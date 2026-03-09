@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Card } from '../../components/ui'
+import { Button, Card } from '../../components/common'
 
 const TABS = [
   { id: 'all', label: 'All' },

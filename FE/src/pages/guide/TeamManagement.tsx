@@ -1,4 +1,4 @@
-import { Button, Card } from '../../components/ui'
+import { Button, Card } from '../../components/common'
 
 export default function TeamManagement() {
   return (

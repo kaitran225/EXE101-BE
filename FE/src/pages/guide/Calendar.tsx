@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Button } from '../../components/ui'
+import { Button } from '../../components/common'
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 

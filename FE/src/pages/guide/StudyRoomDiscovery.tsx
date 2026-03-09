@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card, Input } from '../../components/ui'
+import { Button, Card, Input } from '../../components/common'
 
 const FILTERS = [
   { key: 'all', label: 'All' },

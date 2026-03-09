@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button } from '../../components/ui'
+import { Button } from '../../components/common'
 
 /** Standalone result page: same analysis UI as the modal */
 const MOCK_RESULT = {

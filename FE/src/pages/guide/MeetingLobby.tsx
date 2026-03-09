@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, Input } from '../../components/ui'
+import { Button, Card, Input } from '../../components/common'
 
 export default function MeetingLobby() {
   const navigate = useNavigate()

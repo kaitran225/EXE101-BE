@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from '../../components/ui'
+import { Button } from '../../components/common'
 
 /* My Teams: large cards */
 const myTeamsData = [

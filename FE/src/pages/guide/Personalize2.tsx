@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button, Card, Textarea } from '../../components/ui'
+import { Button, Card, Textarea } from '../../components/common'
 
 export default function Personalize2() {
   return (

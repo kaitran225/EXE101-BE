@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Input } from '../../components/ui'
+import { Button, Input } from '../../components/common'
 
 const RECOMMENDED_ROOMS = [
   { id: '1', title: 'Advanced Calculus Group', subject: 'MATHEMATICS', active: 12 },

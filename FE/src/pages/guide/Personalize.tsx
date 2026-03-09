@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card, Input, Select } from '../../components/ui'
+import { Button, Card, Input, Select } from '../../components/common'
 
 const MAJOR_OPTIONS = [
   { value: '', label: 'Select your major' },
