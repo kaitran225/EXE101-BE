@@ -28,12 +28,12 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
             {item.href && !isLast ? (
               <a
                 href={item.href}
-                className="text-sm font-normal text-neutral-900 underline hover:text-neutral-700"
+                className="text-sm font-normal text-neutral-900 dark:text-neutral-100 underline hover:text-neutral-700 dark:hover:text-neutral-300"
               >
                 {item.label}
               </a>
             ) : (
-              <span className={`text-sm ${isLast ? 'font-bold' : 'font-normal'} text-neutral-900`}>
+              <span className={`text-sm ${isLast ? 'font-bold' : 'font-normal'} text-neutral-900 dark:text-neutral-100`}>
                 {item.label}
               </span>
             )}

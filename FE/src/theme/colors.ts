@@ -1,87 +1,87 @@
 /**
  * Single source of truth for all colors and gradients.
  * Used for non-CSS usage (e.g. charts) and as reference for @theme in index.css.
+ * All names are descriptive (no brand names).
  */
 
-/** Jenny Henderson palette */
+/** Palette A: dark, cream, slate, green, amber */
 export const jenny = {
-  midnight: '#013D5A',
-  lionsmane: '#FCF3E3',
-  celeste: '#BDD3CE',
-  herb: '#708C69',
-  marigold: '#F8A258',
+  dark: '#171717',
+  cream: '#FCF3E3',
+  slate: '#64748b',
+  green: '#708C69',
+  amber: '#F8A258',
 } as const
 
-/** Purple set (Chinese Black, Persian Indigo, etc.) */
+/** Palette B: ink, indigo-deep, violet, lavender, indigo */
 export const purple = {
-  chineseBlack: '#0D0E20',
-  persianIndigo: '#2D1C7F',
-  majorelleBlue: '#7546E8',
-  vodka: '#C8B3F6',
-  maxBluePurple: '#B0A9E5',
+  ink: '#171717',
+  indigoDeep: '#4c1d95',
+  violet: '#7546E8',
+  lavender: '#C8B3F6',
+  indigo: '#6366f1',
 } as const
 
-/** ATLITUDE palette */
+/** Palette C: surface-light, pink-light, violet, blue, blue-deep, indigo-deep */
 export const atlitude = {
-  atlitude1: '#F2E6EE',
-  atlitude2: '#FFCCF2',
-  atlitude3: '#977DFF',
-  atlitude4: '#0033FF',
-  atlitude5: '#0600AB',
-  atlitude6: '#00033D',
+  surfaceLight: '#fafafa',
+  pinkLight: '#FFCCF2',
+  violet: '#977DFF',
+  blue: '#0033FF',
+  blueDeep: '#0600AB',
+  indigoDeep: '#4c1d95',
 } as const
 
-/** MINDFULPALETTES */
+/** Palette D: surface-alt, gray-light, surface-muted, indigo, violet-deep, dark */
 export const mindful = {
-  mindful1: '#FBF5F0',
-  mindful2: '#C7C2CE',
-  mindful3: '#FBD5BD',
-  mindful4: '#8A83DA',
-  mindful5: '#463699',
-  mindful6: '#262335',
+  surfaceAlt: '#fafafa',
+  grayLight: '#ececec',
+  surfaceMuted: '#fafafa',
+  indigo: '#6366f1',
+  violetDeep: '#463699',
+  dark: '#171717',
 } as const
 
 export const palettes = { jenny, purple, atlitude, mindful } as const
 
-/** ATLITUDE gradients (linear, top to bottom) */
+/** Palette C gradients (linear, top to bottom) */
 export const gradientsAtlitude = {
-  gradient1: `linear-gradient(to bottom, ${atlitude.atlitude1}, ${atlitude.atlitude3})`,
-  gradient2: `linear-gradient(to bottom, ${atlitude.atlitude2}, ${atlitude.atlitude3}, ${atlitude.atlitude4})`,
-  gradient3: `linear-gradient(to bottom, ${atlitude.atlitude3}, ${atlitude.atlitude4}, ${atlitude.atlitude5})`,
-  gradient4: `linear-gradient(to bottom, ${atlitude.atlitude4}, ${atlitude.atlitude5}, ${atlitude.atlitude6})`,
+  gradient1: `linear-gradient(in oklch to bottom, ${atlitude.surfaceLight}, ${atlitude.violet})`,
+  gradient2: `linear-gradient(in oklch to bottom, ${atlitude.pinkLight}, ${atlitude.violet}, ${atlitude.blue})`,
+  gradient3: `linear-gradient(in oklch to bottom, ${atlitude.violet}, ${atlitude.blue}, ${atlitude.blueDeep})`,
+  gradient4: `linear-gradient(in oklch to bottom, ${atlitude.blue}, ${atlitude.blueDeep}, ${atlitude.indigoDeep})`,
 } as const
 
-/** MINDFULPALETTES gradients */
+/** Palette D gradients */
 export const gradientsMindful = {
-  gradient01: `linear-gradient(to bottom, ${mindful.mindful1}, ${mindful.mindful3})`,
-  gradient02: `linear-gradient(to bottom, ${mindful.mindful2}, ${mindful.mindful3})`,
-  gradient03: `linear-gradient(to bottom, ${mindful.mindful2}, ${mindful.mindful4})`,
-  gradient04: `linear-gradient(to bottom, ${mindful.mindful3}, ${mindful.mindful4}, ${mindful.mindful6})`,
-  gradient05: `linear-gradient(to bottom, ${mindful.mindful5}, ${mindful.mindful6})`,
+  gradient01: `linear-gradient(in oklch to bottom, ${mindful.surfaceAlt}, ${mindful.surfaceMuted})`,
+  gradient02: `linear-gradient(in oklch to bottom, ${mindful.grayLight}, ${mindful.surfaceMuted})`,
+  gradient03: `linear-gradient(in oklch to bottom, ${mindful.grayLight}, ${mindful.indigo})`,
+  gradient04: `linear-gradient(in oklch to bottom, ${mindful.surfaceMuted}, ${mindful.indigo}, ${mindful.dark})`,
+  gradient05: `linear-gradient(in oklch to bottom, ${mindful.violetDeep}, ${mindful.dark})`,
 } as const
 
 export const gradients = { atlitude: gradientsAtlitude, mindful: gradientsMindful } as const
 
-/** Brand gradient (logo/text): ATLITUDE 3 → 4 */
-export const gradientBrand = `linear-gradient(to right, ${atlitude.atlitude3}, ${atlitude.atlitude4})`
+/** Brand gradient (logo/text): violet → blue */
+export const gradientBrand = `linear-gradient(in oklch to right, ${atlitude.violet}, ${atlitude.blue})`
 
 /**
- * Semantic colors: default mapping uses ATLITUDE + Purple for a coherent look.
- * Change these to switch the app palette.
+ * Semantic colors: used by the app for backgrounds, text, buttons, etc.
  */
 export const semantic = {
-  primary: atlitude.atlitude3,
-  primaryHover: purple.persianIndigo,
-  accent: atlitude.atlitude4,
-  accentMuted: atlitude.atlitude1,
-  surface: atlitude.atlitude1,
+  primary: atlitude.violet,
+  primaryHover: purple.indigoDeep,
+  accent: atlitude.blue,
+  accentMuted: atlitude.surfaceLight,
+  surface: atlitude.surfaceLight,
   background: '#fafafa',
-  highlight: jenny.marigold,
+  highlight: jenny.amber,
   highlightHover: '#ea580c',
   success: '#059669',
-  warning: '#d97706',
-  error: '#dc2626',
-  border: '#e5e5e5',
+  warning: '#ea580c',
+  error: '#b91c1c',
+  border: '#d4d4d4',
   primaryForeground: '#ffffff',
 } as const
 

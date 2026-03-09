@@ -31,10 +31,10 @@ export function Select({
         <select
           id={selectId}
           className={`
-            w-full appearance-none px-4 py-3 pr-10 bg-white border border-neutral-900/20 rounded-[var(--radius-card)]
-            text-neutral-900
+            w-full appearance-none px-4 py-3 pr-10 bg-white dark:bg-neutral-800 border border-neutral-900/20 dark:border-neutral-600 rounded-[var(--radius-card)]
+            text-neutral-900 dark:text-neutral-100
             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-            disabled:opacity-50 disabled:bg-neutral-100
+            disabled:opacity-50 disabled:bg-neutral-100 dark:disabled:bg-neutral-700
             min-h-[44px]
             ${error ? 'border-error ring-1 ring-error' : ''}
             ${className}

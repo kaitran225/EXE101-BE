@@ -13,12 +13,12 @@ export function Progress({ value, max = 100, label, caption, className = '' }: P
   return (
     <div className={`flex flex-col gap-1 w-full ${className}`}>
       {label && (
-        <div className="flex justify-between items-center gap-2 text-xs font-bold text-neutral-900 uppercase tracking-wide">
+        <div className="flex justify-between items-center gap-2 text-xs font-bold text-neutral-900 dark:text-neutral-100 uppercase tracking-wide">
           {label}
         </div>
       )}
       <div
-        className="h-2 w-full bg-white border border-border rounded overflow-hidden"
+        className="h-2 w-full bg-white dark:bg-neutral-700 border border-border rounded overflow-hidden"
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
@@ -29,7 +29,7 @@ export function Progress({ value, max = 100, label, caption, className = '' }: P
           style={{ width: `${pct}%` }}
         />
       </div>
-      {caption && <div className="text-sm text-neutral-500">{caption}</div>}
+      {caption && <div className="text-sm text-neutral-500 dark:text-neutral-400">{caption}</div>}
     </div>
   )
 }

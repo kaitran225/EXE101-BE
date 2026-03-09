@@ -8,7 +8,7 @@ const BASE_PRESETS: { label: string; hex: string }[] = [
   { label: 'Primary (ATLITUDE 3)', hex: '#977DFF' },
   { label: 'Accent (ATLITUDE 4)', hex: '#0033FF' },
   { label: 'Indigo', hex: '#4b0082' },
-  { label: 'Midnight blue', hex: '#191970' },
+  { label: 'Midnight blue', hex: '#171717' },
   { label: 'Marigold (Jenny)', hex: '#F8A258' },
 ]
 
@@ -19,16 +19,16 @@ const YOUR_EIGHT_COLORS: { hex: string; role: string }[] = [
   { hex: '#ffc757', role: 'Highlight / CTA' },
   { hex: '#4b0082', role: 'Primary' },
   { hex: '#171717', role: 'Text / dark' },
-  { hex: '#e1e1ff', role: 'Surface alt' },
-  { hex: '#191970', role: 'Primary dark' },
+  { hex: '#fafafa', role: 'Surface alt' },
+  { hex: '#171717', role: 'Primary dark' },
 ]
 
 const PALETTE_A: { hex: string; role: string }[] = [
   { hex: '#f7f7f7', role: 'Background' },
   { hex: '#ffffff', role: 'Surface' },
-  { hex: '#e1e1ff', role: 'Surface alt' },
+  { hex: '#fafafa', role: 'Surface alt' },
   { hex: '#4b0082', role: 'Primary' },
-  { hex: '#191970', role: 'Primary dark' },
+  { hex: '#171717', role: 'Primary dark' },
   { hex: '#85b8fd', role: 'Accent (light)' },
   { hex: '#ffc757', role: 'Highlight' },
   { hex: '#171717', role: 'Text / dark' },
@@ -37,8 +37,8 @@ const PALETTE_A: { hex: string; role: string }[] = [
 const PALETTE_B: { hex: string; role: string }[] = [
   { hex: '#f7f7f7', role: 'Background' },
   { hex: '#ffffff', role: 'Surface' },
-  { hex: '#e1e1ff', role: 'Surface alt' },
-  { hex: '#191970', role: 'Primary' },
+  { hex: '#fafafa', role: 'Surface alt' },
+  { hex: '#171717', role: 'Primary' },
   { hex: '#4b0082', role: 'Primary hover / accent' },
   { hex: '#85b8fd', role: 'Accent light' },
   { hex: '#ffc757', role: 'Highlight' },
@@ -50,7 +50,7 @@ const PALETTE_C: { hex: string; role: string }[] = [
   { hex: '#ffffff', role: 'Surface' },
   { hex: '#4b0082', role: 'Primary' },
   { hex: '#171717', role: 'Primary dark / text' },
-  { hex: '#e1e1ff', role: 'Accent (soft)' },
+  { hex: '#fafafa', role: 'Accent (soft)' },
   { hex: '#ffc757', role: 'Highlight' },
 ]
 

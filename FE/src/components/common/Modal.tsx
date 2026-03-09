@@ -20,19 +20,19 @@ export function Modal({ open, onClose, title, size = 'max-w-md', children }: Mod
       aria-labelledby={title ? 'modal-title' : undefined}
     >
       <div
-        className={`bg-white rounded-xl border-2 border-neutral-200 w-full shadow-xl overflow-hidden ${size}`}
+        className={`bg-white dark:bg-neutral-800 rounded-xl border-2 border-neutral-200 dark:border-neutral-600 w-full shadow-xl overflow-hidden ${size}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200">
+        <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200 dark:border-neutral-600">
           {title && (
-            <h2 id="modal-title" className="text-sm font-bold text-neutral-900 uppercase tracking-wide">
+            <h2 id="modal-title" className="text-sm font-bold text-neutral-900 dark:text-neutral-100 uppercase tracking-wide">
               {title}
             </h2>
           )}
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900 ml-auto"
+            className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-100 ml-auto"
             aria-label="Close"
           >
             <CloseIcon className="w-5 h-5" />

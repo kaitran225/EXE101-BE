@@ -119,6 +119,30 @@ export function hexToHsl(hex: string): Hsl | null {
   return rgbToHsl(rgb.r, rgb.g, rgb.b)
 }
 
+/** Hue family for grouping palettes. Order for display: neutral, red, orange, yellow, green, cyan, blue, purple, pink. */
+export type HueFamily =
+  | 'neutral' | 'red' | 'orange' | 'yellow' | 'green' | 'cyan' | 'blue' | 'purple' | 'pink'
+
+export const HUE_FAMILY_ORDER: HueFamily[] = [
+  'neutral', 'red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'purple', 'pink',
+]
+
+export function getHueFamily(hex: string): HueFamily {
+  const hsl = hexToHsl(hex)
+  if (!hsl) return 'neutral'
+  const { h, s, l } = hsl
+  if (s < 12 || l >= 98 || l <= 5) return 'neutral'
+  if (h < 15 || h >= 345) return 'red'
+  if (h >= 15 && h < 45) return 'orange'
+  if (h >= 45 && h < 70) return 'yellow'
+  if (h >= 70 && h < 160) return 'green'
+  if (h >= 160 && h < 195) return 'cyan'
+  if (h >= 195 && h < 255) return 'blue'
+  if (h >= 255 && h < 330) return 'purple'
+  if (h >= 330 && h < 345) return 'pink'
+  return 'neutral'
+}
+
 export function hslToHex(h: number, s: number, l: number): string {
   const rgb = hslToRgb(h, s, l)
   return rgbToHex(rgb.r, rgb.g, rgb.b)
@@ -167,4 +191,29 @@ export function textColorOn(hex: string): 'white' | 'black' {
   const rgb = hexToRgb(hex)
   if (!rgb) return 'black'
   return relativeLuminance(rgb) > 0.4 ? 'black' : 'white'
+}
+
+/**
+ * Parse a CSS color value to #RRGGBB. Supports #hex, rgb(r,g,b), rgba(r,g,b,a).
+ * For rgba, blends onto white and returns opaque hex so you can copy a single hex to remove/replace.
+ */
+export function cssColorToHex(cssValue: string): string | null {
+  const v = cssValue.trim()
+  if (!v) return null
+  const hexNorm = normalizeHex(v)
+  if (hexNorm) return hexNorm
+  const rgbMatch = v.match(/rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*[\d.]+)?\s*\)/)
+  if (rgbMatch) {
+    let r = Number(rgbMatch[1])
+    let g = Number(rgbMatch[2])
+    let b = Number(rgbMatch[3])
+    const a = v.includes('rgba') ? parseFloat(v.replace(/^.*,\s*([\d.]+)\s*\)/, '$1')) : 1
+    if (a < 1) {
+      r = Math.round(r * a + 255 * (1 - a))
+      g = Math.round(g * a + 255 * (1 - a))
+      b = Math.round(b * a + 255 * (1 - a))
+    }
+    return rgbToHex(r, g, b)
+  }
+  return null
 }

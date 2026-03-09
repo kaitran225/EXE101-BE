@@ -56,7 +56,7 @@ export function ChatInputBar({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
+          className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 dark:bg-neutral-700 text-white flex items-center justify-center hover:bg-neutral-800 dark:hover:bg-neutral-600 transition-colors"
           aria-label={ariaLabelAttach}
         >
           <AttachIcon className="w-5 h-5" />
@@ -75,7 +75,7 @@ export function ChatInputBar({
         </Button>
       </div>
       {!attachmentsSlot && attachmentCount > 0 && (
-        <p className="text-xs text-neutral-500 mt-1.5">{attachmentCount} file(s) attached</p>
+        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1.5">{attachmentCount} file(s) attached</p>
       )}
       {secondaryActions && (
         <div className="flex flex-wrap items-center gap-2 mt-2">{secondaryActions}</div>
