@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Button, CloseIcon } from './common'
+import { DEFAULT_STATUS_OPTIONS } from '../mocks'
 
 /** Shared task shape for the edit sidebar (Scrum + Sprint) */
 export type TaskForEdit = {
@@ -32,8 +33,6 @@ type TaskEditSidebarProps = {
   /** When set, assignee is shown as a card with name and skill tags instead of an input */
   assigneeDisplay?: { name: string; skills: string[] }
 }
-
-const DEFAULT_STATUS_OPTIONS = ['To Do', 'In Progress', 'Review', 'Done']
 
 export function TaskEditSidebar({ task, onSave, onClose, statusOptions = DEFAULT_STATUS_OPTIONS, assigneeDisplay }: TaskEditSidebarProps) {
   const [title, setTitle] = useState(task.title)

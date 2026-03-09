@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router-dom'
-import { Button, Input } from '../ui'
+import { Button, Input } from '../common'
 
 const navItems = [
   { to: '/dashboard', label: 'Dashboard' },

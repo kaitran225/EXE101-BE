@@ -1,12 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Button } from './ui'
-
-export type QuizQuestion = {
-  id: number
-  question: string
-  options: string[]
-  correctIndex: number
-}
+import { MOCK_QUESTIONS, type QuizQuestion } from '../mocks'
 
 export type QuizResult = {
   score: number
@@ -16,19 +10,6 @@ export type QuizResult = {
   wrongQuestions: { topic: string; questionNumbers: number[] }[]
   suggestedTopics: { title: string; percent: number }[]
 }
-
-const MOCK_QUESTIONS: QuizQuestion[] = [
-  { id: 1, question: 'Back propagation is primarily used to calculate the gradient of the loss function with respect to the weights.', options: ['True', 'False'], correctIndex: 0 },
-  { id: 2, question: 'Gradient descent always converges to the global minimum in neural network training.', options: ['True', 'False'], correctIndex: 1 },
-  { id: 3, question: 'Adam optimizer combines the benefits of Momentum and RMSprop.', options: ['True', 'False'], correctIndex: 0 },
-  { id: 4, question: 'Learning rate has no effect on convergence speed.', options: ['True', 'False'], correctIndex: 1 },
-  { id: 5, question: 'SGD with momentum can help escape shallow local minima.', options: ['True', 'False'], correctIndex: 0 },
-  { id: 6, question: 'Batch normalization is applied before the activation function.', options: ['True', 'False'], correctIndex: 1 },
-  { id: 7, question: 'Dropout is used during training to prevent overfitting.', options: ['True', 'False'], correctIndex: 0 },
-  { id: 8, question: 'ReLU can cause "dying ReLU" when neurons output zero for all inputs.', options: ['True', 'False'], correctIndex: 0 },
-  { id: 9, question: 'The chain rule is not used in backpropagation.', options: ['True', 'False'], correctIndex: 1 },
-  { id: 10, question: 'Optimization algorithms like Adam adapt the learning rate per parameter.', options: ['True', 'False'], correctIndex: 0 },
-]
 
 function computeResult(answers: (number | null)[], questions: QuizQuestion[], timeSpent: string): QuizResult {
   let correctCount = 0

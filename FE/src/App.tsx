@@ -1,16 +1,16 @@
 import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom'
 import { Button } from './components/common'
 import { AuthLayout } from './components/layout/AuthLayout'
-import { GuideLayout } from './components/layout/GuideLayout'
+import { DashboardLayout } from './components/layout/DashboardLayout'
 import Login from './pages/Login'
 import Callback from './pages/Callback'
-import Dashboard from './pages/Dashboard'
 import DebugComponents from './pages/DebugComponents'
 import {
   Welcome,
   SignUp,
   ConfirmMail,
   ResetPassword,
+  Dashboard,
   StudyRoomDiscovery,
   CreateNewRoomStudy,
   CreateRoom,
@@ -38,7 +38,7 @@ import {
   Transaction,
   Subscription,
   Shop,
-} from './pages/guide'
+} from './pages/app'
 
 const STANDALONE_PATHS = ['/login', '/callback', '/welcome', '/sign-up', '/confirm-mail', '/reset-password', '/debug']
 const AUTH_PATHS = ['/welcome', '/sign-up', '/confirm-mail', '/reset-password']
@@ -83,36 +83,36 @@ export default function App() {
         <Route path="/confirm-mail" element={<AuthLayout><ConfirmMail /></AuthLayout>} />
         <Route path="/reset-password" element={<AuthLayout><ResetPassword /></AuthLayout>} />
         <Route path="/debug" element={<DebugComponents />} />
-        <Route path="/dashboard" element={<GuideLayout><Dashboard /></GuideLayout>} />
-        <Route path="/study-rooms" element={<GuideLayout><StudyRoomDiscovery /></GuideLayout>} />
-        <Route path="/study-rooms/create" element={<GuideLayout><CreateRoom /></GuideLayout>} />
-        <Route path="/study-rooms/create-new" element={<GuideLayout><CreateNewRoomStudy /></GuideLayout>} />
-        <Route path="/study-rooms/recommend" element={<GuideLayout><RecommendRoomMatching /></GuideLayout>} />
+        <Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+        <Route path="/study-rooms" element={<DashboardLayout><StudyRoomDiscovery /></DashboardLayout>} />
+        <Route path="/study-rooms/create" element={<DashboardLayout><CreateRoom /></DashboardLayout>} />
+        <Route path="/study-rooms/create-new" element={<DashboardLayout><CreateNewRoomStudy /></DashboardLayout>} />
+        <Route path="/study-rooms/recommend" element={<DashboardLayout><RecommendRoomMatching /></DashboardLayout>} />
         <Route path="/study-room" element={<StudyRoom />} />
-        <Route path="/study-room-dashboard" element={<GuideLayout><StudyRoomDashboard /></GuideLayout>} />
+        <Route path="/study-room-dashboard" element={<DashboardLayout><StudyRoomDashboard /></DashboardLayout>} />
         <Route path="/focus-room" element={<FocusRoom />} />
-        <Route path="/focus-room-dialog" element={<GuideLayout><FocusRoomDialog /></GuideLayout>} />
-        <Route path="/meetings" element={<GuideLayout><MeetingLobby /></GuideLayout>} />
-        <Route path="/meetings/room" element={<GuideLayout><MainMeetingBoard /></GuideLayout>} />
-        <Route path="/teams/board" element={<GuideLayout><BoardPage /></GuideLayout>} />
+        <Route path="/focus-room-dialog" element={<DashboardLayout><FocusRoomDialog /></DashboardLayout>} />
+        <Route path="/meetings" element={<DashboardLayout><MeetingLobby /></DashboardLayout>} />
+        <Route path="/meetings/room" element={<DashboardLayout><MainMeetingBoard /></DashboardLayout>} />
+        <Route path="/teams/board" element={<DashboardLayout><BoardPage /></DashboardLayout>} />
         <Route path="/sprint-board" element={<Navigate to="/teams/board?tab=sprint" replace />} />
-        <Route path="/sprint-member-board" element={<GuideLayout><SprintMemberBoard /></GuideLayout>} />
-        <Route path="/teams" element={<GuideLayout><AllTeams /></GuideLayout>} />
-        <Route path="/team-management" element={<GuideLayout><TeamManagement /></GuideLayout>} />
+        <Route path="/sprint-member-board" element={<DashboardLayout><SprintMemberBoard /></DashboardLayout>} />
+        <Route path="/teams" element={<DashboardLayout><AllTeams /></DashboardLayout>} />
+        <Route path="/team-management" element={<DashboardLayout><TeamManagement /></DashboardLayout>} />
         <Route path="/scrum-board" element={<Navigate to="/teams/board?tab=scrum" replace />} />
-        <Route path="/meet-ai" element={<GuideLayout><MeetAi /></GuideLayout>} />
-        <Route path="/ai-support" element={<GuideLayout><AiSupport /></GuideLayout>} />
-        <Route path="/quizlet" element={<GuideLayout><Quizlet /></GuideLayout>} />
-        <Route path="/quizlet-result" element={<GuideLayout><QuizletResult /></GuideLayout>} />
-        <Route path="/profile" element={<GuideLayout><ProfileWithSidebar /></GuideLayout>} />
-        <Route path="/personalize" element={<GuideLayout><Personalize /></GuideLayout>} />
-        <Route path="/personalize-2" element={<GuideLayout><Personalize2 /></GuideLayout>} />
-        <Route path="/personalize-3" element={<GuideLayout><Personalize3 /></GuideLayout>} />
-        <Route path="/calendar" element={<GuideLayout><Calendar /></GuideLayout>} />
-        <Route path="/notifications" element={<GuideLayout><Notification /></GuideLayout>} />
-        <Route path="/transaction" element={<GuideLayout><Transaction /></GuideLayout>} />
-        <Route path="/subscription" element={<GuideLayout><Subscription /></GuideLayout>} />
-        <Route path="/shop" element={<GuideLayout><Shop /></GuideLayout>} />
+        <Route path="/meet-ai" element={<DashboardLayout><MeetAi /></DashboardLayout>} />
+        <Route path="/ai-support" element={<DashboardLayout><AiSupport /></DashboardLayout>} />
+        <Route path="/quizlet" element={<DashboardLayout><Quizlet /></DashboardLayout>} />
+        <Route path="/quizlet-result" element={<DashboardLayout><QuizletResult /></DashboardLayout>} />
+        <Route path="/profile" element={<DashboardLayout><ProfileWithSidebar /></DashboardLayout>} />
+        <Route path="/personalize" element={<DashboardLayout><Personalize /></DashboardLayout>} />
+        <Route path="/personalize-2" element={<DashboardLayout><Personalize2 /></DashboardLayout>} />
+        <Route path="/personalize-3" element={<DashboardLayout><Personalize3 /></DashboardLayout>} />
+        <Route path="/calendar" element={<DashboardLayout><Calendar /></DashboardLayout>} />
+        <Route path="/notifications" element={<DashboardLayout><Notification /></DashboardLayout>} />
+        <Route path="/transaction" element={<DashboardLayout><Transaction /></DashboardLayout>} />
+        <Route path="/subscription" element={<DashboardLayout><Subscription /></DashboardLayout>} />
+        <Route path="/shop" element={<DashboardLayout><Shop /></DashboardLayout>} />
       </Routes>
     </div>
   )
