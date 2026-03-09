@@ -86,8 +86,8 @@ export default function Subscription() {
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Free</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">$0</span>
-                <span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span>
+                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-4xl sm:leading-[3rem]">0VND</span>
+                {/* <span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span> */}
               </div>
               <p className="text-sm font-normal leading-6 text-neutral-700 sm:text-base">Perfect for individuals</p>
             </div>
@@ -108,8 +108,8 @@ export default function Subscription() {
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Personal</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">66.000VND</span>
-                <span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span>
+                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-4xl sm:leading-[3rem]">66.000VND</span>
+                {/* <span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span> */}
               </div>
               <p className="text-sm font-normal leading-6 text-neutral-700 sm:text-base">Perfect for individuals</p>
             </div>
@@ -136,8 +136,8 @@ export default function Subscription() {
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Teams</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">225.000VND</span>
-                <span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span>
+                <span className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-4xl sm:leading-[3rem]">225.000VND</span>
+                {/* <span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span> */}
               </div>
               <p className="text-sm font-normal leading-6 text-neutral-900 sm:text-base">For serious students</p>
             </div>
@@ -161,8 +161,8 @@ export default function Subscription() {
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Combo</h3>
               <p className="text-base font-semibold leading-6 text-neutral-700 sm:text-lg">(Teams + Personal)</p>
-              <div className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-5xl sm:leading-[3rem]">103.000VND</div>
-<span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span>
+              <div className="text-4xl font-bold leading-[2.5rem] text-neutral-900 sm:text-4xl sm:leading-[3rem]">103.000VND</div>
+{/* <span className="text-base font-normal leading-7 text-neutral-900 sm:text-lg">/mo</span> */}
               <p className="text-sm font-normal leading-6 text-neutral-700 sm:text-base">For institutions & large groups</p>
             </div>
             <ul className="flex flex-col gap-2 pb-6 sm:gap-3 sm:pb-8">
@@ -173,11 +173,14 @@ export default function Subscription() {
               ))}
             </ul>
           </div>
-          <Button variant="secondary" size="md" className="w-full uppercase">Contact</Button>
+          <div className="flex gap-2">
+            <Button variant="secondary" size="md" className="flex-1 uppercase">Start</Button>
+            {/* <Button variant="secondary" size="md" className="flex-1 uppercase">3 days trial</Button> */}
+          </div>
         </div>
       </div>
 
-      <section className="flex flex-col items-center gap-4 pt-10 sm:pt-12">
+      {/* <section className="flex flex-col items-center gap-4 pt-10 sm:pt-12">
         <h2 className="text-center text-xs font-bold uppercase tracking-wider text-neutral-600 sm:text-sm">
           Trusted by these institutions
         </h2>
@@ -188,7 +191,7 @@ export default function Subscription() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }

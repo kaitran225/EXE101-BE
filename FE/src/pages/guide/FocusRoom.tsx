@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { AiBotIcon } from '../../components/AiBotIcon'
-import { Button, Card, Textarea } from '../../components/ui'
+import { Button, Card, Input, Textarea } from '../../components/ui'
 import { QuizletQuizModal } from '../../components/QuizletQuizModal'
+
+const MAX_FILE_SIZE_MB = 10
+const ACCEPT_FILES = '.pdf,.doc,.docx,.txt,.md,image/*'
 
 /** Mock AI-generated quizlet card sets */
 const MOCK_QUIZLET_CARDS = [
@@ -18,10 +21,10 @@ const TODAY_TASKS = [
 ]
 
 const CHAT_MESSAGES = [
-  { user: 'Jordan', time: '2:45 PM', text: 'Anyone want to take a 5-min break at the top of the hour?', own: false },
+  { user: 'Together AI', time: '2:45 PM', text: 'Anyone want to take a 5-min break at the top of the hour?', own: false },
   { user: 'Alex', time: '2:46 PM', text: "I'm down! I need to finish this set of derivatives first though.", own: true },
   { user: 'Together AI', time: '', text: 'Sam has been focused for 45 minutes.', ai: true },
-  { user: 'Sam', time: '2:48 PM', text: 'Thanks all. Just finished Chapter 4.', own: false },
+  { user: 'Together AI', time: '2:48 PM', text: 'Thanks all. Just finished Chapter 4.', own: false },
 ]
 
 export default function FocusRoom() {
@@ -29,6 +32,21 @@ export default function FocusRoom() {
   const [notes, setNotes] = useState('')
   const [quizletCards, setQuizletCards] = useState<typeof MOCK_QUIZLET_CARDS | null>(null)
   const [showQuizModal, setShowQuizModal] = useState(false)
+  const [input, setInput] = useState('')
+  const [attachments, setAttachments] = useState<{ id: string; file: File }[]>([])
+  const [summarizeOpen, setSummarizeOpen] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const list = e.target.files
+    if (!list?.length) return
+    const newEntries = Array.from(list)
+      .filter((f) => f.size <= MAX_FILE_SIZE_MB * 1024 * 1024)
+      .map((f) => ({ id: `${Date.now()}-${f.name}`, file: f }))
+    setAttachments((prev) => [...prev, ...newEntries])
+    if (fileInputRef.current) fileInputRef.current.value = ''
+  }
 
   return (
     <div className="fixed inset-0 z-40 flex flex-col h-screen w-screen bg-white">
@@ -191,15 +209,67 @@ export default function FocusRoom() {
               </div>
             ))}
           </div>
-          <div className="p-4 border-t-2 border-neutral-200">
+          <div className="p-4 border-t-2 border-neutral-200 shrink-0">
             <input
-              type="text"
-              placeholder="Type a message..."
-              className="w-full px-4 py-2.5 rounded-lg border-2 border-neutral-200 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-sky-400"
+              ref={fileInputRef}
+              type="file"
+              multiple
+              accept={ACCEPT_FILES}
+              className="hidden"
+              onChange={handleFileChange}
+              aria-label="Attach file"
             />
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
+                aria-label="Attach file"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                </svg>
+              </button>
+              <div className="flex-1 min-w-0">
+                <Input
+                placeholder="Type your question..."
+                className="w-full h-10 min-h-0 py-0 rounded-lg border-2 border-neutral-200 text-sm"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                aria-label="Message"
+                />
+              </div>
+              <Button variant="primary" size="sm" className="h-10 rounded-lg shrink-0 px-4">Send</Button>
+            </div>
+            {attachments.length > 0 && (
+              <p className="text-xs text-neutral-500 mt-1.5">{attachments.length} file(s) attached</p>
+            )}
+            <div className="flex flex-wrap items-center gap-2 mt-2">
+              <button type="button" onClick={() => setSummarizeOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Summarize</button>
+              <button type="button" onClick={() => setDialogOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Open chat in popup</button>
+            </div>
           </div>
         </aside>
       </div>
+
+      {summarizeOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setSummarizeOpen(false)}>
+          <div className="bg-white rounded-xl border-2 border-neutral-200 p-6 max-w-md w-full shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-sm font-bold text-neutral-900 mb-2">Summarize</h3>
+            <p className="text-sm text-neutral-600 mb-4">Summarize feature — coming soon.</p>
+            <Button variant="primary" size="sm" onClick={() => setSummarizeOpen(false)}>Close</Button>
+          </div>
+        </div>
+      )}
+      {dialogOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setDialogOpen(false)}>
+          <div className="bg-white rounded-xl border-2 border-neutral-200 p-6 max-w-md w-full shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-sm font-bold text-neutral-900 mb-2">Open chat in popup</h3>
+            <p className="text-sm text-neutral-600 mb-4">Chat popup — coming soon.</p>
+            <Button variant="primary" size="sm" onClick={() => setDialogOpen(false)}>Close</Button>
+          </div>
+        </div>
+      )}
 
       {showQuizModal && (
         <QuizletQuizModal onClose={() => setShowQuizModal(false)} />

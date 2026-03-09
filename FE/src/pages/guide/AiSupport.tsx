@@ -233,25 +233,27 @@ export default function AiSupport() {
               onChange={(e) => handleFileChange(e, false)}
               aria-label="Attach file"
             />
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="shrink-0 w-10 h-10 rounded-lg border-2 border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-neutral-100"
+                className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
                 aria-label="Attach file"
               >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
                 </svg>
               </button>
+              <div className="flex-1 min-w-0">
               <Input
                 placeholder="Type your question..."
-                className="flex-1 rounded-lg border-2 border-neutral-200 text-sm"
+                className="w-full h-10 min-h-0 py-0 rounded-lg border-2 border-neutral-200 text-sm"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 aria-label="Message"
               />
-              <Button variant="primary" size="sm" className="rounded-lg shrink-0">Send</Button>
+            </div>
+            <Button variant="primary" size="sm" className="h-10 rounded-lg shrink-0 px-4">Send</Button>
             </div>
             <div className="flex flex-wrap items-center gap-2 mt-2">
               <button type="button" onClick={() => setSummarizeOpen(true)} className="text-xs font-medium text-violet-600 hover:text-violet-800">Summarize</button>
@@ -331,7 +333,7 @@ export default function AiSupport() {
                   ))}
                 </div>
               )}
-              <div className="flex gap-2">
+              <div className="flex items-center gap-2">
                 <input
                   ref={dialogFileInputRef}
                   type="file"
@@ -344,21 +346,23 @@ export default function AiSupport() {
                 <button
                   type="button"
                   onClick={() => dialogFileInputRef.current?.click()}
-                  className="shrink-0 w-10 h-10 rounded-lg border-2 border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-neutral-100"
+                  className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
                   aria-label="Attach file"
                 >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
                   </svg>
                 </button>
+                <div className="flex-1 min-w-0">
                 <Input
                   placeholder="Ask anything..."
-                  className="flex-1 rounded-lg border-2 border-neutral-200 text-sm"
+                  className="w-full h-10 min-h-0 py-0 rounded-lg border-2 border-neutral-200 text-sm"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   aria-label="Message"
                 />
-                <Button variant="primary" size="sm" className="rounded-lg shrink-0">
+              </div>
+                <Button variant="primary" size="sm" className="h-10 rounded-lg shrink-0 px-4">
                   Send
                 </Button>
               </div>
