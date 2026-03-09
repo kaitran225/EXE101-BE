@@ -17,10 +17,11 @@ export function Textarea({ label, error, id, className = '', ...props }: Textare
       <textarea
         id={textareaId}
         className={`
-          w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
-          text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400
+          w-full px-4 py-3 bg-white dark:bg-[var(--color-surface)] border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
+          text-neutral-900 dark:text-neutral-900 placeholder:text-neutral-500 dark:placeholder:text-neutral-500
+          transition-colors duration-150 ease-out transition-shadow duration-150
           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-          disabled:opacity-50 disabled:bg-neutral-100 dark:disabled:bg-neutral-700
+          disabled:opacity-70 disabled:bg-neutral-100 dark:disabled:bg-[var(--color-surface)] dark:disabled:text-neutral-500 dark:disabled:placeholder:text-neutral-500
           min-h-[120px] resize-y
           ${error ? 'border-error ring-1 ring-error' : ''}
           ${className}

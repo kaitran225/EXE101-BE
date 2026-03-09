@@ -12,9 +12,7 @@ export interface ChatInputBarProps {
   acceptFiles?: string
   placeholder?: string
   attachmentCount?: number
-  /** Custom attachment chips/list (e.g. AiSupport dialog). When set, attachmentCount text is not shown. */
   attachmentsSlot?: React.ReactNode
-  /** Optional row below input (e.g. Summarize / Open chat in popup links). */
   secondaryActions?: React.ReactNode
   ariaLabelMessage?: string
   ariaLabelAttach?: string
@@ -56,7 +54,7 @@ export function ChatInputBar({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 dark:bg-neutral-700 text-white flex items-center justify-center hover:bg-neutral-800 dark:hover:bg-neutral-600 transition-colors"
+          className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 dark:bg-[var(--color-surface)] text-white flex items-center justify-center hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
           aria-label={ariaLabelAttach}
         >
           <AttachIcon className="w-5 h-5" />
@@ -64,7 +62,7 @@ export function ChatInputBar({
         <div className="flex-1 min-w-0">
           <Input
             placeholder={placeholder}
-            className="w-full h-10 min-h-0 py-0 rounded-lg border-2 border-neutral-200 text-sm"
+            className="w-full h-10 min-h-0 py-0 rounded-lg border-2 border-neutral-200 dark:border-[var(--color-charcoal)] text-sm"
             value={value}
             onChange={onChange}
             aria-label={ariaLabelMessage}
@@ -75,7 +73,7 @@ export function ChatInputBar({
         </Button>
       </div>
       {!attachmentsSlot && attachmentCount > 0 && (
-        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1.5">{attachmentCount} file(s) attached</p>
+        <p className="text-xs text-neutral-500 dark:text-neutral-500 mt-1.5">{attachmentCount} file(s) attached</p>
       )}
       {secondaryActions && (
         <div className="flex flex-wrap items-center gap-2 mt-2">{secondaryActions}</div>

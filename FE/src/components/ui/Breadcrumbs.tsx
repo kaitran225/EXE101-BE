@@ -13,7 +13,7 @@ export interface BreadcrumbsProps {
 }
 
 const chevronIcon = (
-  <svg width="5" height="7" viewBox="0 0 5 7" fill="none" className="text-neutral-900 dark:text-neutral-100">
+  <svg width="5" height="7" viewBox="0 0 5 7" fill="none" className="text-neutral-900 dark:text-neutral-900">
     <path
       d="M2.68333 3.5L0 0.816667L0.816667 0L4.31667 3.5L0.816667 7L0 6.18333L2.68333 3.5Z"
       fill="currentColor"
@@ -55,12 +55,12 @@ export function Breadcrumbs({
             ) : item.href && !isLast ? (
               <a
                 href={item.href}
-                className="text-sm font-normal text-neutral-900 dark:text-neutral-100 underline hover:text-neutral-700 dark:hover:text-neutral-300"
+                className="text-sm font-normal text-neutral-900 dark:text-neutral-900 underline hover:text-neutral-700 dark:hover:text-neutral-600"
               >
                 {item.label}
               </a>
             ) : (
-              <span className={`text-sm ${isLast ? 'font-bold' : 'font-normal'} text-neutral-900 dark:text-neutral-100`}>
+              <span className={`text-sm ${isLast ? 'font-bold' : 'font-normal'} text-neutral-900 dark:text-neutral-900`}>
                 {item.label}
               </span>
             )}

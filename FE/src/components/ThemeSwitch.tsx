@@ -7,7 +7,7 @@ export function ThemeSwitch() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border bg-white dark:bg-neutral-800 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-neutral-900"
+      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border bg-white dark:bg-[var(--color-surface)] dark:border-neutral-600 text-neutral-700 dark:text-neutral-900 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-neutral-900"
       aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
       title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
     >

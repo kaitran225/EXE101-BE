@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom'
-import { ThemeSwitch } from '../ThemeSwitch'
 
 const user = { name: 'Nam', handle: '@nam' }
 
@@ -98,7 +97,7 @@ export function DashboardHeader() {
 
   return (
     <header
-      className="flex-shrink-0 flex items-center gap-2 px-3 md:px-4 py-1.5 bg-white/90 dark:bg-neutral-800/90 backdrop-blur-xl border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-sm transition-shadow duration-200"
+      className="flex-shrink-0 flex items-center gap-2 px-3 md:px-4 py-1.5 bg-white/90 dark:bg-[var(--color-surface)]/90 backdrop-blur-xl border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-sm transition-shadow duration-200"
       role="banner"
     >
       <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-2">
@@ -147,17 +146,16 @@ export function DashboardHeader() {
         </div>
         <button
           type="button"
-          className="p-1.5 rounded-xl text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 flex-shrink-0 transition-colors duration-150"
+          className="p-1.5 rounded-xl text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-500 dark:hover:bg-neutral-700 dark:hover:text-neutral-900 flex-shrink-0 transition-colors duration-150"
           aria-label="Settings"
         >
           <svg className="w-4 h-4" viewBox="0 0 21 20" fill="none" aria-hidden>
             <path d="M7.3 20L6.9 16.8C6.68 16.72 6.48 16.62 6.29 16.5 6.1 16.38 5.91 16.26 5.73 16.13L2.75 17.38 0 12.63l2.58-2.95c-.02-.12-.03-.23-.03-.34 0-.11 0-.22.03-.33L0 7.38 2.75 2.63l5.73 1.25c.18-.13.37-.26.56-.37.2-.12.4-.22.6-.3L9.05 0h3.8l.4 3.2c.22.08.42.18.62.3.2.12.39.25.56.38l5.73-1.25L20.1 7.38l-2.58 2.95c.02.12.03.23.03.34 0 .11 0 .22-.03.33L20.08 12.63 17.33 17.37l-4.95-1.25c-.18.13-.36.26-.56.38-.2.12-.4.22-.6.3L12.8 20H7.3z" fill="currentColor" fillOpacity="0.5" />
           </svg>
         </button>
-        <ThemeSwitch />
         <Link
           to="/notifications"
-          className="p-1.5 rounded-xl text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 flex-shrink-0 transition-colors duration-150"
+          className="p-1.5 rounded-xl text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-500 dark:hover:bg-neutral-700 dark:hover:text-neutral-900 flex-shrink-0 transition-colors duration-150"
           aria-label="Notifications"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,8 +173,8 @@ export function DashboardHeader() {
             N
           </span>
           <div className="hidden sm:block text-left min-w-0">
-            <p className="text-xs font-medium text-neutral-900 dark:text-neutral-100 truncate leading-tight">{user.name}</p>
-            <p className="text-[10px] text-neutral-500 dark:text-neutral-400 truncate leading-tight">{user.handle}</p>
+            <p className="text-xs font-medium text-neutral-900 dark:text-neutral-900 truncate leading-tight">{user.name}</p>
+            <p className="text-[10px] text-neutral-500 dark:text-neutral-500 truncate leading-tight">{user.handle}</p>
           </div>
         </Link>
         <Link

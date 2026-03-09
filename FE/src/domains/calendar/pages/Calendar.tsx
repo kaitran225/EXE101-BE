@@ -1,38 +1,7 @@
 import { useState, useMemo } from 'react'
 import { Button } from '../../../components/common'
 import { WEEKDAYS, INITIAL_AI_MESSAGE, buildFakeEvents, getMockAiReply, EVENT_STYLES, type ChatMessage } from '../../../mocks'
-
-function toDateKey(d: Date) {
-  const y = d.getFullYear()
-  const m = String(d.getMonth() + 1).padStart(2, '0')
-  const day = String(d.getDate()).padStart(2, '0')
-  return `${y}-${m}-${day}`
-}
-
-function isSameDay(a: Date, b: Date) {
-  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
-}
-
-function getCalendarDays(year: number, month: number): { date: Date; isCurrentMonth: boolean }[] {
-  const first = new Date(year, month, 1)
-  const last = new Date(year, month + 1, 0)
-  const start = new Date(first)
-  const startDow = start.getDay()
-  const mondayOffset = startDow === 0 ? -6 : 1 - startDow
-  start.setDate(first.getDate() + mondayOffset)
-  const out: { date: Date; isCurrentMonth: boolean }[] = []
-  const cur = new Date(start)
-  const end = new Date(last)
-  end.setDate(end.getDate() + 1)
-  while (cur < end || out.length % 7 !== 0) {
-    out.push({
-      date: new Date(cur),
-      isCurrentMonth: cur.getMonth() === month,
-    })
-    cur.setDate(cur.getDate() + 1)
-  }
-  return out
-}
+import { toDateKey, isSameDay, getCalendarDays } from '../../../utils/calendarUtils'
 
 export default function Calendar() {
   const today = useMemo(() => new Date(), [])
@@ -84,7 +53,7 @@ export default function Calendar() {
         {/* Calendar column */}
         <div className="flex-1 min-w-0 flex flex-col gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <h1 className="text-xl font-bold text-neutral-900 tracking-tight">{monthLabel}</h1>
+            <h1 className="text-xl font-bold text-neutral-900 dark:text-neutral-900 tracking-tight">{monthLabel}</h1>
             <div className="flex flex-wrap items-center gap-2">
               <Button variant="secondary" size="sm" onClick={goPrev} aria-label="Previous month">
                 ← Prev
@@ -105,13 +74,13 @@ export default function Calendar() {
               </Button>
             </div>
           </div>
-          <div className="rounded-2xl border-2 border-neutral-200 bg-white overflow-hidden shadow-sm">
+          <div className="rounded-2xl border-2 border-neutral-200 dark:border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] overflow-hidden shadow-sm">
             {/* Weekday labels — separate row */}
-            <div className="grid grid-cols-7 border-b-2 border-neutral-200 bg-neutral-100 [&>*]:border-r [&>*]:border-neutral-200 [&>*:nth-child(7)]:border-r-0">
+            <div className="grid grid-cols-7 border-b-2 border-neutral-200 dark:border-[var(--color-charcoal)] bg-neutral-100 dark:bg-[var(--color-surface)] [&>*]:border-r [&>*]:border-neutral-200 [&>*]:dark:border-[var(--color-charcoal)] [&>*:nth-child(7)]:border-r-0">
               {WEEKDAYS.map((d) => (
                 <div
                   key={d}
-                  className="py-3 text-center text-xs font-semibold uppercase tracking-wide text-neutral-600"
+                  className="py-3 text-center text-xs font-semibold uppercase tracking-wide text-neutral-600 dark:text-neutral-500"
                 >
                   {d}
                 </div>
@@ -126,15 +95,15 @@ export default function Calendar() {
                 return (
                   <div
                     key={i}
-                    className={`min-h-[100px] p-2 flex flex-col border-b border-r border-neutral-200 bg-white hover:bg-neutral-50/80 transition-colors ${!isCurrentMonth ? 'bg-neutral-50/60' : ''
+                    className={`min-h-[100px] p-2 flex flex-col border-b border-r border-neutral-200 dark:border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] hover:bg-neutral-50/80 dark:hover:bg-neutral-200/30 transition-colors ${!isCurrentMonth ? 'bg-neutral-50/60 dark:bg-[var(--color-surface)]/50' : ''
                       }`}
                   >
                     <span
                       className={`inline-flex w-7 h-7 items-center justify-center rounded-full text-sm font-semibold shrink-0 ${isToday
                         ? 'bg-primary text-primary-foreground'
                         : isCurrentMonth
-                          ? 'text-neutral-900'
-                          : 'text-neutral-400'
+                          ? 'text-neutral-900 dark:text-neutral-900'
+                          : 'text-neutral-400 dark:text-neutral-500'
                         }`}
                     >
                       {date.getDate()}
@@ -150,7 +119,7 @@ export default function Calendar() {
                         </div>
                       ))}
                       {events.length > 3 && (
-                        <span className="text-[10px] text-neutral-500 font-medium">+{events.length - 3} more</span>
+                        <span className="text-[10px] text-neutral-500 dark:text-neutral-500 font-medium">+{events.length - 3} more</span>
                       )}
                     </div>
                   </div>
@@ -161,9 +130,9 @@ export default function Calendar() {
         </div>
 
         {/* AI Support panel — fixed width, consistent input/Send height */}
-        <aside className="w-full lg:w-[340px] shrink-0 flex flex-col rounded-2xl border-2 border-neutral-200 bg-white shadow-sm overflow-hidden max-h-[calc(100vh-8rem)]">
-          <div className="shrink-0 px-4 py-2.5 bg-accent-muted border-b-2 border-accent/20">
-            <h2 className="text-xs font-bold text-neutral-900 uppercase tracking-wide flex items-center gap-1.5">
+        <aside className="w-full lg:w-[340px] shrink-0 flex flex-col rounded-2xl border-2 border-neutral-200 dark:border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] shadow-sm overflow-hidden max-h-[calc(100vh-8rem)]">
+          <div className="shrink-0 px-4 py-2.5 bg-accent-muted dark:bg-primary/20 border-b-2 border-accent/20 dark:border-primary/30">
+            <h2 className="text-xs font-bold text-neutral-900 dark:text-neutral-900 uppercase tracking-wide flex items-center gap-1.5">
               <span className="text-primary font-bold">∞</span>
               Together AI
             </h2>
@@ -173,23 +142,23 @@ export default function Calendar() {
               <div key={i} className={m.role === 'user' ? 'flex justify-end' : ''}>
                 <div
                   className={`max-w-[92%] rounded-lg px-2.5 py-1.5 ${m.role === 'user'
-                    ? 'bg-accent-muted border border-primary/20 text-neutral-900'
-                    : 'bg-neutral-100 border border-neutral-200 text-neutral-900'
+                    ? 'bg-accent-muted dark:bg-primary/20 border border-primary/20 dark:border-primary/30 text-neutral-900 dark:text-neutral-900'
+                    : 'bg-neutral-100 dark:bg-[var(--color-surface)] border border-neutral-200 dark:border-[var(--color-charcoal)] text-neutral-900 dark:text-neutral-900'
                     }`}
                 >
-                  {m.role === 'ai' && <span className="text-[9px] font-semibold text-neutral-500 uppercase block mb-0.5">AI Assistant</span>}
+                  {m.role === 'ai' && <span className="text-[9px] font-semibold text-neutral-500 dark:text-neutral-500 uppercase block mb-0.5">AI Assistant</span>}
                   {m.role === 'user' && <span className="text-[9px] font-semibold text-primary uppercase block mb-0.5">You</span>}
                   <p className="text-xs font-medium leading-snug">{m.text}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="shrink-0 p-3 border-t-2 border-neutral-200 space-y-2">
+          <div className="shrink-0 p-3 border-t-2 border-neutral-200 dark:border-[var(--color-charcoal)] space-y-2">
             <div className="flex gap-2 items-stretch">
               <input
                 type="text"
                 placeholder="Ask anything..."
-                className="flex-1 min-w-0 h-9 px-3 rounded-lg border-2 border-neutral-200 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                className="flex-1 min-w-0 h-9 px-3 rounded-lg border-2 border-neutral-200 dark:border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] text-neutral-900 dark:text-neutral-900 placeholder:text-neutral-500 dark:placeholder:text-neutral-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
@@ -210,7 +179,7 @@ export default function Calendar() {
         </aside>
       </div>
       {/* Event types legend */}
-      <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-600">
+      <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-600 dark:text-neutral-500">
         <span className="flex items-center gap-2">
           <span className="w-3 h-3 rounded bg-primary" /> Today
         </span>

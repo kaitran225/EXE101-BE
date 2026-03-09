@@ -10,7 +10,7 @@ export interface ProgressProps {
   caption?: React.ReactNode
   /** Bar color variant */
   variant?: ProgressVariant
-  /** Bar height (thicker bars: sm 8px, md 12px, lg 16px) */
+  /** Bar height (sm 12px, md 16px, lg 20px) */
   size?: ProgressSize
   /** Show percentage text */
   showPercentage?: boolean
@@ -26,9 +26,9 @@ const variantClasses: Record<ProgressVariant, string> = {
 }
 
 const sizeClasses: Record<ProgressSize, string> = {
-  sm: 'h-2',
-  md: 'h-3',
-  lg: 'h-4',
+  sm: 'h-3',
+  md: 'h-4',
+  lg: 'h-5',
 }
 
 export function Progress({
@@ -45,7 +45,7 @@ export function Progress({
   return (
     <div className={`flex flex-col gap-1 w-full ${className}`}>
       {(label || showPercentage) && (
-        <div className="flex justify-between items-center gap-2 text-xs font-bold text-neutral-900 dark:text-neutral-100 uppercase tracking-wide">
+        <div className="flex justify-between items-center gap-2 text-xs font-bold text-neutral-900 dark:text-neutral-900 uppercase tracking-wide">
           {label}
           {showPercentage && <span>{Math.round(pct)}%</span>}
         </div>
@@ -62,7 +62,7 @@ export function Progress({
           style={{ width: `${pct}%` }}
         />
       </div>
-      {caption && <div className="text-sm text-neutral-500 dark:text-neutral-400">{caption}</div>}
+      {caption && <div className="text-sm text-neutral-500 dark:text-neutral-500">{caption}</div>}
     </div>
   )
 }

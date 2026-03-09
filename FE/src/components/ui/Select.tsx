@@ -31,10 +31,11 @@ export function Select({
         <select
           id={selectId}
           className={`
-            w-full appearance-none px-4 py-3 pr-10 bg-white dark:bg-neutral-800 border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
-            text-neutral-900 dark:text-neutral-100
+            w-full appearance-none px-4 py-3 pr-10 bg-white dark:bg-[var(--color-surface)] border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
+            text-neutral-900 dark:text-neutral-900
+            transition-colors duration-150 ease-out transition-shadow duration-150
             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-            disabled:opacity-50 disabled:bg-neutral-100 dark:disabled:bg-neutral-700
+            disabled:opacity-70 disabled:bg-neutral-100 dark:disabled:bg-[var(--color-surface)] dark:disabled:text-neutral-500
             min-h-[44px]
             ${error ? 'border-error ring-1 ring-error' : ''}
             ${className}

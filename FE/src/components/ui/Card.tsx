@@ -14,16 +14,17 @@ export function Card({ heading, shadow, className = '', style, children, ...prop
   return (
     <div
       className={`
-        bg-white dark:bg-neutral-800 border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
+        bg-white dark:bg-[var(--color-surface)] border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
         ${!shadow ? 'shadow-[var(--shadow-card)]' : ''}
         p-6 md:p-8
+        transition-shadow duration-200 ease-out
         ${className}
       `.trim().replace(/\s+/g, ' ')}
       style={{ ...style, ...shadowStyle }}
       {...props}
     >
       {heading && (
-        <h3 className="pb-2 mb-4 border-b border-[var(--color-charcoal)] text-lg font-bold text-neutral-900 dark:text-neutral-100">
+        <h3 className="pb-2 mb-4 border-b border-[var(--color-charcoal)] text-lg font-bold text-neutral-900 dark:text-neutral-900">
           {heading}
         </h3>
       )}
