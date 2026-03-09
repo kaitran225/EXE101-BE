@@ -70,6 +70,7 @@
   --color-error: #b91c1c;
   --color-border: #d4d4d4;
   --color-border-strong: rgba(0, 0, 0, 0.2);
+  --color-charcoal: #36454F;
 
   /* Gradients */
   --gradient-brand: linear-gradient(in oklch to right, var(--color-violet), var(--color-blue));
@@ -82,6 +83,11 @@
   --gradient-mindful-03: linear-gradient(in oklch to bottom, var(--color-gray-light), var(--color-indigo-mid));
   --gradient-mindful-04: linear-gradient(in oklch to bottom, var(--color-surface-muted), var(--color-indigo-mid), var(--color-dark));
   --gradient-mindful-05: linear-gradient(in oklch to bottom, var(--color-violet-deep), var(--color-dark));
+  --gradient-sunset: linear-gradient(in oklch to right, var(--color-amber), var(--color-error));
+  --gradient-ocean: linear-gradient(in oklch to right, var(--color-blue), var(--color-success));
+  --gradient-twilight: linear-gradient(in oklch to right, var(--color-indigo-deep), var(--color-violet), var(--color-pink-light));
+  --gradient-frost: linear-gradient(in oklch to right, var(--color-surface-light), var(--color-lavender), var(--color-indigo));
+  --gradient-ember: linear-gradient(in oklch to right, var(--color-highlight), var(--color-error), var(--color-indigo-deep));
 
   /* Spacing (slightly tighter for resized app) */
   --spacing-section: 1.25rem;
@@ -89,6 +95,16 @@
   --radius-card: 0.625rem;
   --radius-button: 0.625rem;
   --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08);
+  --shadow-1: none;
+  --shadow-2: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-3: 0 2px 4px rgb(0 0 0 / 0.06);
+  --shadow-4: 0 4px 6px rgb(0 0 0 / 0.08);
+  --shadow-5: 0 6px 12px rgb(0 0 0 / 0.1);
+  --shadow-6: 0 8px 16px rgb(0 0 0 / 0.12);
+  --shadow-7: 0 12px 24px rgb(0 0 0 / 0.14);
+  --shadow-8: 0 16px 32px rgb(0 0 0 / 0.16);
+  --shadow-9: 0 20px 40px rgb(0 0 0 / 0.18);
+  --shadow-10: 0 25px 50px rgb(0 0 0 / 0.2);
 }
 
 /* Base */
@@ -134,6 +150,7 @@
     --color-accent-muted: #4c1d95;
     --color-border: #404040;
     --color-border-strong: rgba(255, 255, 255, 0.15);
+    --color-charcoal: #2a343d;
   }
   .dark .label-study {
     @apply text-neutral-900;
@@ -145,15 +162,37 @@
   @apply text-sm font-bold uppercase tracking-wide text-neutral-900;
 }
 
-/* Gradient utilities (brand logo/text) */
+/* Gradient utilities */
 @layer components {
-  .bg-gradient-brand {
-    background: var(--gradient-brand);
-  }
+  .bg-gradient-brand { background: var(--gradient-brand); }
+  .bg-gradient-atlitude-1 { background: var(--gradient-atlitude-1); }
+  .bg-gradient-atlitude-2 { background: var(--gradient-atlitude-2); }
+  .bg-gradient-atlitude-3 { background: var(--gradient-atlitude-3); }
+  .bg-gradient-atlitude-4 { background: var(--gradient-atlitude-4); }
+  .bg-gradient-mindful-01 { background: var(--gradient-mindful-01); }
+  .bg-gradient-mindful-02 { background: var(--gradient-mindful-02); }
+  .bg-gradient-mindful-03 { background: var(--gradient-mindful-03); }
+  .bg-gradient-mindful-04 { background: var(--gradient-mindful-04); }
+  .bg-gradient-mindful-05 { background: var(--gradient-mindful-05); }
+  .bg-gradient-sunset { background: var(--gradient-sunset); }
+  .bg-gradient-ocean { background: var(--gradient-ocean); }
+  .bg-gradient-twilight { background: var(--gradient-twilight); }
+  .bg-gradient-frost { background: var(--gradient-frost); }
+  .bg-gradient-ember { background: var(--gradient-ember); }
   .text-gradient-brand {
     background: var(--gradient-brand);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
+  .shadow-1 { box-shadow: var(--shadow-1); }
+  .shadow-2 { box-shadow: var(--shadow-2); }
+  .shadow-3 { box-shadow: var(--shadow-3); }
+  .shadow-4 { box-shadow: var(--shadow-4); }
+  .shadow-5 { box-shadow: var(--shadow-5); }
+  .shadow-6 { box-shadow: var(--shadow-6); }
+  .shadow-7 { box-shadow: var(--shadow-7); }
+  .shadow-8 { box-shadow: var(--shadow-8); }
+  .shadow-9 { box-shadow: var(--shadow-9); }
+  .shadow-10 { box-shadow: var(--shadow-10); }
 }

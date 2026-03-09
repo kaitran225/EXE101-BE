@@ -15,9 +15,19 @@ const sizeClasses: Record<Size, string> = {
   lg: 'px-6 py-3 text-base min-h-[2.75rem]',
 }
 
+function SpinnerIcon({ className = 'w-4 h-4' }: { className?: string }) {
+  return (
+    <svg className={`animate-spin ${className}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" strokeDasharray="42 24" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant
   size?: Size
+  /** Show spinner and disable button */
+  loading?: boolean
 }
 
 export function Button({
@@ -25,9 +35,12 @@ export function Button({
   size = 'md',
   className = '',
   disabled,
+  loading = false,
+  children,
   ...props
 }: ButtonProps) {
   const isFullWidth = className.includes('w-full')
+  const isDisabled = disabled || loading
   return (
     <button
       type="button"
@@ -39,8 +52,11 @@ export function Button({
         ${sizeClasses[size]}
         ${className}
       `.trim().replace(/\s+/g, ' ')}
-      disabled={disabled}
+      disabled={isDisabled}
       {...props}
-    />
+    >
+      {loading && <SpinnerIcon className="w-4 h-4 shrink-0" />}
+      {children}
+    </button>
   )
 }

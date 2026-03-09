@@ -1,3 +1,6 @@
+type ProgressVariant = 'default' | 'success' | 'warning' | 'error' | 'info'
+type ProgressSize = 'sm' | 'md' | 'lg'
+
 export interface ProgressProps {
   value: number
   max?: number
@@ -5,27 +8,57 @@ export interface ProgressProps {
   label?: React.ReactNode
   /** Optional label below or beside */
   caption?: React.ReactNode
+  /** Bar color variant */
+  variant?: ProgressVariant
+  /** Bar height (thicker bars: sm 8px, md 12px, lg 16px) */
+  size?: ProgressSize
+  /** Show percentage text */
+  showPercentage?: boolean
   className?: string
 }
 
-export function Progress({ value, max = 100, label, caption, className = '' }: ProgressProps) {
+const variantClasses: Record<ProgressVariant, string> = {
+  default: 'bg-primary',
+  success: 'bg-success',
+  warning: 'bg-warning',
+  error: 'bg-error',
+  info: 'bg-blue',
+}
+
+const sizeClasses: Record<ProgressSize, string> = {
+  sm: 'h-2',
+  md: 'h-3',
+  lg: 'h-4',
+}
+
+export function Progress({
+  value,
+  max = 100,
+  label,
+  caption,
+  variant = 'default',
+  size = 'md',
+  showPercentage = false,
+  className = '',
+}: ProgressProps) {
   const pct = max <= 0 ? 0 : Math.min(100, Math.max(0, (value / max) * 100))
   return (
     <div className={`flex flex-col gap-1 w-full ${className}`}>
-      {label && (
+      {(label || showPercentage) && (
         <div className="flex justify-between items-center gap-2 text-xs font-bold text-neutral-900 dark:text-neutral-100 uppercase tracking-wide">
           {label}
+          {showPercentage && <span>{Math.round(pct)}%</span>}
         </div>
       )}
       <div
-        className="h-2 w-full bg-white dark:bg-neutral-700 border border-border rounded overflow-hidden"
+        className={`${sizeClasses[size]} w-full bg-white dark:bg-neutral-700 border border-[var(--color-charcoal)] rounded overflow-hidden`}
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={max}
       >
         <div
-          className="h-full bg-primary transition-[width] duration-300"
+          className={`h-full ${variantClasses[variant]} transition-[width] duration-300`}
           style={{ width: `${pct}%` }}
         />
       </div>

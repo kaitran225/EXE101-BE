@@ -85,6 +85,14 @@ export const semantic = {
   primaryForeground: '#ffffff',
 } as const
 
+export const gradientsExtra = {
+  sunset: `linear-gradient(in oklch to right, ${jenny.amber}, ${semantic.error})`,
+  ocean: `linear-gradient(in oklch to right, ${atlitude.blue}, ${semantic.success})`,
+  twilight: `linear-gradient(in oklch to right, ${purple.indigoDeep}, ${atlitude.violet}, ${atlitude.pinkLight})`,
+  frost: `linear-gradient(in oklch to right, ${atlitude.surfaceLight}, ${purple.lavender}, ${purple.indigo})`,
+  ember: `linear-gradient(in oklch to right, ${jenny.amber}, ${semantic.error}, ${purple.indigoDeep})`,
+} as const
+
 export type SemanticColorKey = keyof typeof semantic
 
 export function getSemanticColor(name: SemanticColorKey): string {

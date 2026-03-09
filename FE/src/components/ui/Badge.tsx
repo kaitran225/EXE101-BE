@@ -1,12 +1,16 @@
 import type { HTMLAttributes } from 'react'
 
-type BadgeVariant = 'default' | 'highlight' | 'primary' | 'outline'
+type BadgeVariant = 'default' | 'highlight' | 'primary' | 'outline' | 'success' | 'warning' | 'error' | 'info'
 
 const variantClasses: Record<BadgeVariant, string> = {
-  default: 'bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 border border-neutral-200 dark:border-neutral-600',
+  default: 'bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 border border-[var(--color-charcoal)]',
   highlight: 'bg-accent-muted text-highlight border border-highlight/30',
   primary: 'bg-accent-muted text-primary border border-primary/30',
-  outline: 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 border border-neutral-900 dark:border-neutral-400',
+  outline: 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 border border-[var(--color-charcoal)]',
+  success: 'bg-success/15 text-success border border-success/40',
+  warning: 'bg-warning/15 text-warning border border-warning/40',
+  error: 'bg-error/15 text-error border border-error/40',
+  info: 'bg-blue/15 text-blue border border-blue/40',
 }
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {

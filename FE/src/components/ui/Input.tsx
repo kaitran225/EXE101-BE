@@ -17,7 +17,7 @@ export function Input({ label, error, id, className = '', ...props }: InputProps
       <input
         id={inputId}
         className={`
-          w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-900/20 dark:border-neutral-600 rounded-[var(--radius-card)]
+          w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
           text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400
           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
           disabled:opacity-50 disabled:bg-neutral-100 dark:disabled:bg-neutral-700

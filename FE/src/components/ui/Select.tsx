@@ -31,7 +31,7 @@ export function Select({
         <select
           id={selectId}
           className={`
-            w-full appearance-none px-4 py-3 pr-10 bg-white dark:bg-neutral-800 border border-neutral-900/20 dark:border-neutral-600 rounded-[var(--radius-card)]
+            w-full appearance-none px-4 py-3 pr-10 bg-white dark:bg-neutral-800 border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
             text-neutral-900 dark:text-neutral-100
             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
             disabled:opacity-50 disabled:bg-neutral-100 dark:disabled:bg-neutral-700

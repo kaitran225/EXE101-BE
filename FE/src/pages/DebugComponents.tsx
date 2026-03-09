@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import {
   AiBotIcon,
   AttachIcon,
@@ -16,9 +16,8 @@ import {
   Select,
   Textarea,
 } from '../components/common'
-import { useTheme } from '../contexts/ThemeContext'
 import { semantic } from '../theme/colors'
-import { textColorOn, cssColorToHex, getHueFamily, HUE_FAMILY_ORDER, hexToHsl } from '../utils/colorUtils'
+import { textColorOn, getHueFamily, HUE_FAMILY_ORDER, hexToHsl } from '../utils/colorUtils'
 
 /* ─── Types ─── */
 type ColorItem = { id: string; name: string; hex: string }
@@ -50,6 +49,30 @@ const ALERT_COLORS: { name: string; hex: string }[] = [
   { name: 'Successful', hex: '#51CC56' },
 ]
 
+const BRAND_COLORS = [
+  { name: 'ashBlack', hex: '#212529' },
+  { name: 'corporatePurple', hex: '#8942FE' },
+  { name: 'lightYellow', hex: '#FFEBA2' },
+] as const
+
+const VIOLET_PALETTE = [
+  { name: 'electricPurple', hex: '#b129ff' },
+  { name: 'pureWhite', hex: '#ffffff' },
+  { name: 'selectiveYellow', hex: '#ffba00' },
+] as const
+
+const BRAND_GUIDE_SPECIAL = [
+  { name: 'cobalt', hex: '#4C00FF' },
+  { name: 'poppy', hex: '#FF5252' },
+  { name: 'white', hex: '#FFFFFF' },
+] as const
+
+const KEEP_PALETTE = [
+  { name: 'pink-2', hex: '#ff1ac4' },
+  { name: 'magenta', hex: '#b30085' },
+  { name: 'blue-light', hex: '#4f99fc' },
+] as const
+
 function getUnifiedColorsByFamily(): Map<string, ColorItem[]> {
   const flat: ColorItem[] = []
   const seenHex = new Set<string>()
@@ -63,6 +86,10 @@ function getUnifiedColorsByFamily(): Map<string, ColorItem[]> {
   NEUTRALS.forEach(({ name, hex }) => add(name, hex))
   SYSTEM_GREYS.forEach(({ name, hex }) => add(name, hex))
   ALERT_COLORS.forEach(({ name, hex }) => add(name, hex))
+  BRAND_COLORS.forEach(({ name, hex }) => add(name, hex))
+  VIOLET_PALETTE.forEach(({ name, hex }) => add(name, hex))
+  BRAND_GUIDE_SPECIAL.forEach(({ name, hex }) => add(name, hex))
+  KEEP_PALETTE.forEach(({ name, hex }) => add(name, hex))
 
   const byFamily = new Map<string, ColorItem[]>()
   for (const family of HUE_FAMILY_ORDER) byFamily.set(family, [])
@@ -82,40 +109,31 @@ function getUnifiedColorsByFamily(): Map<string, ColorItem[]> {
   return byFamily
 }
 
-const THEME_COLOR_TOKEN_NAMES = [
-  'neutral-50', 'neutral-100', 'neutral-200', 'neutral-300', 'neutral-400',
-  'neutral-500', 'neutral-600', 'neutral-700', 'neutral-800', 'neutral-900',
-  'dark', 'cream', 'slate', 'green', 'amber',
-  'ink', 'indigo-deep', 'violet-mid', 'lavender', 'indigo',
-  'surface-light', 'pink-light', 'violet', 'blue', 'blue-deep',
-  'surface-alt', 'gray-light', 'surface-muted', 'indigo-mid', 'violet-deep',
-  'primary', 'primary-hover', 'primary-foreground', 'accent', 'accent-muted',
-  'surface', 'background', 'highlight', 'highlight-hover', 'focus-area',
-  'success', 'warning', 'error', 'border', 'border-strong',
-] as const
-
 const GRADIENT_NAMES = [
   'gradient-brand', 'gradient-atlitude-1', 'gradient-atlitude-2', 'gradient-atlitude-3', 'gradient-atlitude-4',
   'gradient-mindful-01', 'gradient-mindful-02', 'gradient-mindful-03', 'gradient-mindful-04', 'gradient-mindful-05',
 ] as const
 
-const SECTIONS = [
-  'logo-brandmarks', 'typography', 'colors-tokens', 'elevation', 'grid', 'spacing',
-  'icons', 'buttons', 'controls', 'inputs', 'errors-search', 'navigation',
-  'table', 'sidebar', 'upload-view', 'dialog-popup', 'chat-messages', 'quiz-popup',
-  'cards', 'badges', 'progress', 'breadcrumbs', 'modals', 'chat-input', 'dividers-links',
-] as const
-
 /* ─── Small sub-components ─── */
-function ColorSwatch({ hex, name }: { hex: string; name: string }) {
+function BigColorTile({ hex, name }: { hex: string; name: string }) {
   const tc = textColorOn(hex)
+  const isLight = tc === 'black'
   return (
-    <div className="flex items-center gap-2 rounded-lg border border-neutral-300 dark:border-neutral-600 p-2 min-w-0" style={{ backgroundColor: hex }}>
-      <span className={`text-xs font-mono font-semibold shrink-0 ${tc === 'white' ? 'text-white' : 'text-neutral-900'}`}>{hex}</span>
-      <span className={`text-xs truncate flex-1 min-w-0 ${tc === 'white' ? 'text-white/95' : 'text-neutral-700'}`}>{name}</span>
-      <button type="button" onClick={(e) => { e.stopPropagation(); void navigator.clipboard.writeText(hex) }}
-        className={`shrink-0 text-[10px] font-medium px-1.5 py-0.5 rounded border ${tc === 'white' ? 'border-white/50 text-white hover:bg-white/20' : 'border-neutral-400 text-neutral-700 hover:bg-neutral-200'}`}
-        title="Copy hex">Copy</button>
+    <div
+      className="relative min-h-[140px] sm:min-h-[160px] rounded-xl border-2 border-[var(--color-charcoal)] overflow-hidden shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
+      style={{ backgroundColor: hex }}
+    >
+      <div className={`absolute inset-x-0 bottom-0 p-3 sm:p-4 ${isLight ? 'bg-black/20' : 'bg-white/20'} backdrop-blur-sm`}>
+        <p className={`text-sm sm:text-base font-bold truncate ${isLight ? 'text-neutral-900' : 'text-white'} drop-shadow-sm`}>{name}</p>
+        <p className={`text-xs sm:text-sm font-mono font-semibold mt-0.5 ${isLight ? 'text-neutral-800' : 'text-white/95'}`}>{hex}</p>
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); void navigator.clipboard.writeText(hex) }}
+          className={`mt-2 text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-lg border-2 transition-colors ${isLight ? 'border-neutral-800 text-neutral-900 bg-white/90 hover:bg-white' : 'border-white text-white hover:bg-white/20'}`}
+        >
+          Copy hex
+        </button>
+      </div>
     </div>
   )
 }
@@ -129,6 +147,27 @@ function SectionHeading({ id, title, description }: { id: string; title: string;
   )
 }
 
+function getCalendarDays(year: number, month: number): { date: Date; isCurrentMonth: boolean }[] {
+  const first = new Date(year, month, 1)
+  const last = new Date(year, month + 1, 0)
+  const start = new Date(first)
+  const startDow = start.getDay()
+  const mondayOffset = startDow === 0 ? -6 : 1 - startDow
+  start.setDate(first.getDate() + mondayOffset)
+  const out: { date: Date; isCurrentMonth: boolean }[] = []
+  const cur = new Date(start)
+  const end = new Date(last)
+  end.setDate(end.getDate() + 1)
+  while (cur < end || out.length % 7 !== 0) {
+    out.push({ date: new Date(cur), isCurrentMonth: cur.getMonth() === month })
+    cur.setDate(cur.getDate() + 1)
+  }
+  return out
+}
+
+const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+const CHART_COLORS = ['var(--color-primary)', 'var(--color-success)', 'var(--color-warning)', 'var(--color-error)', 'var(--color-blue)', 'var(--color-highlight)']
+
 /* ─── Main Page ─── */
 export default function DebugComponents() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -137,48 +176,23 @@ export default function DebugComponents() {
   const [chatDialogOpen, setChatDialogOpen] = useState(false)
   const [quizOpen, setQuizOpen] = useState(false)
   const [chatValue, setChatValue] = useState('')
-  const { theme } = useTheme()
-  const [themeTokenValues, setThemeTokenValues] = useState<Record<string, string>>({})
-
-  useEffect(() => {
-    const root = document.documentElement
-    const style = getComputedStyle(root)
-    const next: Record<string, string> = {}
-    THEME_COLOR_TOKEN_NAMES.forEach((name) => {
-      const value = style.getPropertyValue(`--color-${name}`).trim()
-      if (value) next[name] = value
-    })
-    setThemeTokenValues(next)
-  }, [theme])
-
-  const copyTokenHex = (value: string) => {
-    const hex = cssColorToHex(value)
-    void navigator.clipboard.writeText(hex ?? value)
-  }
-
+  const [demoTabIndex, setDemoTabIndex] = useState(0)
+  const [accordionOpen, setAccordionOpen] = useState<number | null>(0)
+  const [currentStep, setCurrentStep] = useState(1)
+  const [calendarViewDate, setCalendarViewDate] = useState(() => new Date())
+  const calendarDays = useMemo(() => getCalendarDays(calendarViewDate.getFullYear(), calendarViewDate.getMonth()), [calendarViewDate.getFullYear(), calendarViewDate.getMonth()])
+  const today = useMemo(() => new Date(), [])
+  const isSameDay = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
   const unifiedByFamily = useMemo(() => getUnifiedColorsByFamily(), [])
-
-  const sectionLabel = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 
   return (
     <div className="min-h-screen bg-background w-full p-6 md:p-8">
       <div className="w-full max-w-[100%] space-y-12">
-        {/* ─── Header & Nav ─── */}
-        <header className="pb-6 border-b border-border">
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">EOS Design System — Debug</h1>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-1">Full component library and design token reference.</p>
-          <nav className="flex flex-wrap gap-2 mt-4">
-            {SECTIONS.map((id) => (
-              <a key={id} href={`#${id}`} className="text-xs font-medium text-primary underline hover:no-underline">{sectionLabel(id)}</a>
-            ))}
-          </nav>
-        </header>
-
         {/* ════════════════════════════════════════════════════════════
             1. LOGO & BRANDMARKS
         ════════════════════════════════════════════════════════════ */}
         <section id="logo-brandmarks" className="scroll-mt-8 space-y-6">
-          <SectionHeading id="" title="Logo & Brandmarks" description="Single brandmarks, logo variants, and app icon sizes from the EOS design system." />
+          <SectionHeading id="" title="Logo & Brandmarks" description="Single brandmarks, logo variants, and app icon sizes from the KTR design system." />
           <Card>
             <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">Single Brandmarks</h3>
             <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4">
@@ -195,9 +209,9 @@ export default function DebugComponents() {
           <Card>
             <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">Logo</h3>
             <div className="flex flex-wrap gap-6 items-center">
-              <span className="text-2xl font-bold text-primary tracking-tight">eos</span>
-              <span className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">eos</span>
-              <span className="text-2xl font-bold text-gradient-brand tracking-tight">eos</span>
+              <span className="text-2xl font-bold text-primary tracking-tight">KTR</span>
+              <span className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">KTR</span>
+              <span className="text-2xl font-bold text-gradient-brand tracking-tight">KTR</span>
             </div>
           </Card>
           <Card>
@@ -304,84 +318,57 @@ export default function DebugComponents() {
             3. COLORS & THEME TOKENS
         ════════════════════════════════════════════════════════════ */}
         <section id="colors-tokens" className="scroll-mt-8 space-y-6">
-          <SectionHeading id="" title="Colors & Theme Tokens" description="Theme tokens with resolved hex (light/dark), system greys, alert colors, palette swatches, and gradient previews." />
+          <SectionHeading id="" title="Theme Tokens — All Colors by Hue" description="Full palette by hue family. Big, vibrant swatches; copy hex from each tile." />
 
-          {/* Theme tokens */}
-          <Card>
-            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Theme Tokens</h3>
-            <div className="flex flex-wrap gap-3">
-              {THEME_COLOR_TOKEN_NAMES.map((name) => {
-                const value = themeTokenValues[name]
-                const hex = value ? cssColorToHex(value) : null
-                const displayValue = hex ?? value ?? '—'
-                return (
-                  <div key={name} className="flex items-center gap-2 p-2 rounded-lg border border-border dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
-                    <span className="w-10 h-10 rounded-lg border border-neutral-300 dark:border-neutral-600 shrink-0" style={value ? { backgroundColor: value } : undefined} title={value ?? name} />
-                    <div className="min-w-0">
-                      <p className="text-xs font-medium text-neutral-900 dark:text-neutral-200 truncate">{name}</p>
-                      <p className="text-[10px] text-neutral-500 dark:text-neutral-400 font-mono truncate" title={displayValue}>{displayValue}</p>
-                    </div>
-                    <button type="button" onClick={() => value && copyTokenHex(value)} disabled={!value}
-                      className="shrink-0 text-xs font-medium px-2 py-1 rounded border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-600 transition-colors disabled:opacity-50"
-                      title="Copy hex">Copy</button>
-                  </div>
-                )
-              })}
-            </div>
-          </Card>
-
-          {/* System greys & alert colors */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">System Greys</h3>
-              <div className="grid grid-cols-3 gap-3">
-                {SYSTEM_GREYS.map((c) => <ColorSwatch key={c.name} hex={c.hex} name={c.name} />)}
-              </div>
-            </Card>
-            <Card>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Alerts & Notifications</h3>
-              <div className="grid grid-cols-3 gap-3">
-                {ALERT_COLORS.map((c) => <ColorSwatch key={c.name} hex={c.hex} name={c.name} />)}
-              </div>
-            </Card>
-          </div>
-
-          {/* All colors by hue family */}
-          <Card className="w-full">
-            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">All Colors by Hue</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+          {/* All colors by hue — big and vibrant only */}
+          <Card className="w-full p-4 sm:p-6">
+            <div className="space-y-10">
               {HUE_FAMILY_ORDER.map((family) => {
                 const raw = unifiedByFamily.get(family) ?? []
                 const items = family === 'neutral' ? raw.slice(0, 18) : raw
                 if (items.length === 0) return null
                 const label = family.charAt(0).toUpperCase() + family.slice(1)
                 return (
-                  <span key={family} className="contents">
-                    <div className="col-span-full flex items-center gap-2 mt-4 mb-1 first:mt-0 pt-2 first:pt-0 border-t border-border first:border-t-0">
-                      <span className="text-xs font-bold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{label}</span>
-                      <span className="text-[10px] text-neutral-400 dark:text-neutral-500">({items.length})</span>
+                  <div key={family}>
+                    <div className="flex items-center gap-3 mb-4">
+                      <h3 className="text-lg sm:text-xl font-bold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">{label}</h3>
+                      <span className="text-sm font-semibold text-primary dark:text-primary">{items.length} colors</span>
+                      <div className="flex-1 h-px bg-[var(--color-charcoal)]" />
                     </div>
-                    {items.map((item) => <ColorSwatch key={item.id} hex={item.hex} name={item.name} />)}
-                  </span>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5">
+                      {items.map((item) => (
+                        <BigColorTile key={item.id} hex={item.hex} name={item.name} />
+                      ))}
+                    </div>
+                  </div>
                 )
               })}
             </div>
           </Card>
 
-          {/* Gradient previews */}
+          {/* 10 Background gradients */}
           <Card>
-            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Gradients (oklch interpolation)</h3>
-            <div className="space-y-3">
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Background Gradients (10)</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
               {GRADIENT_NAMES.map((name) => (
-                <div key={name} className="flex items-center gap-3">
-                  <div className="h-10 flex-1 rounded-lg border border-neutral-200 dark:border-neutral-600" style={{ background: `var(--${name})` }} />
-                  <span className="text-xs font-mono text-neutral-500 dark:text-neutral-400 shrink-0 w-40 truncate">{name}</span>
+                <div key={name} className="flex flex-col gap-2">
+                  <div className="h-16 rounded-lg border border-[var(--color-charcoal)]" style={{ background: `var(--${name})` }} />
+                  <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 truncate">{name}</span>
                 </div>
               ))}
-              <div className="flex items-center gap-3 pt-2">
-                <div className="w-32 h-10 rounded-lg bg-gradient-brand" />
-                <span className="text-lg font-bold text-gradient-brand">Brand text gradient</span>
-              </div>
+            </div>
+            <p className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-2">Use <code className="bg-neutral-100 dark:bg-neutral-700 px-1 rounded">.bg-gradient-brand</code> etc.</p>
+          </Card>
+
+          {/* 10 Shadow variants */}
+          <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Shadow Variants (10)</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+                <div key={n} className="rounded-lg border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 p-4" style={{ boxShadow: `var(--shadow-${n})` }}>
+                  <span className="text-xs font-bold">shadow-{n}</span>
+                </div>
+              ))}
             </div>
           </Card>
         </section>
@@ -394,9 +381,9 @@ export default function DebugComponents() {
           <Card>
             <div className="flex flex-wrap gap-8 justify-center py-4">
               {([
-                { label: 'Default', shadow: 'shadow-none border border-neutral-200 dark:border-neutral-600' },
-                { label: 'Active', shadow: 'shadow-md border border-neutral-200 dark:border-neutral-600' },
-                { label: 'Floating', shadow: 'shadow-xl border border-neutral-200 dark:border-neutral-600' },
+                { label: 'Default', shadow: 'shadow-none border border-[var(--color-charcoal)]' },
+                { label: 'Active', shadow: 'shadow-md border border-[var(--color-charcoal)]' },
+                { label: 'Floating', shadow: 'shadow-xl border border-[var(--color-charcoal)]' },
               ] as const).map((e) => (
                 <div key={e.label} className={`w-40 h-28 rounded-xl bg-white dark:bg-neutral-800 flex items-center justify-center ${e.shadow}`}>
                   <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{e.label}</span>
@@ -415,7 +402,7 @@ export default function DebugComponents() {
             <div className="flex items-center gap-4 text-xs text-neutral-500 dark:text-neutral-400 mb-3">
               <span>12C</span><span>80W</span><span>30G</span><span>100M</span><span className="ml-auto">1440 x 960px</span>
             </div>
-            <div className="grid grid-cols-12 gap-[6px] h-48 rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-900 p-2">
+            <div className="grid grid-cols-12 gap-[6px] h-48 rounded-lg overflow-hidden border border-[var(--color-charcoal)] bg-neutral-50 dark:bg-neutral-900 p-2">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div key={i} className="bg-primary/10 dark:bg-primary/20 rounded-sm h-full" />
               ))}
@@ -441,6 +428,106 @@ export default function DebugComponents() {
         </section>
 
         {/* ════════════════════════════════════════════════════════════
+            CALENDAR
+        ════════════════════════════════════════════════════════════ */}
+        <section id="calendar" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Calendar" description="Month grid with Prev/Next/Today. Used in app calendar view." />
+          <Card>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+              <h3 className="text-base font-bold text-neutral-900 dark:text-neutral-100">
+                {calendarViewDate.toLocaleString('en-US', { month: 'long', year: 'numeric' })}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="secondary" size="sm" onClick={() => setCalendarViewDate((d) => new Date(d.getFullYear(), d.getMonth() - 1))}>Prev</Button>
+                <Button variant="primary" size="sm" onClick={() => setCalendarViewDate(new Date(today.getFullYear(), today.getMonth()))}>Today</Button>
+                <Button variant="secondary" size="sm" onClick={() => setCalendarViewDate((d) => new Date(d.getFullYear(), d.getMonth() + 1))}>Next</Button>
+              </div>
+            </div>
+            <div className="rounded-xl border border-[var(--color-charcoal)] overflow-hidden">
+              <div className="grid grid-cols-7 border-b border-[var(--color-charcoal)] bg-neutral-100 dark:bg-neutral-800">
+                {WEEKDAYS.map((d) => (
+                  <div key={d} className="py-2 text-center text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400">{d}</div>
+                ))}
+              </div>
+              <div className="grid grid-cols-7 bg-white dark:bg-neutral-900">
+                {calendarDays.map(({ date, isCurrentMonth }, i) => (
+                  <div
+                    key={i}
+                    className={`min-h-[44px] p-1 flex items-center justify-center text-sm border-r border-b border-neutral-200 dark:border-neutral-700 last:border-r-0 ${!isCurrentMonth ? 'text-neutral-400 dark:text-neutral-500 bg-neutral-50 dark:bg-neutral-800/50' : 'text-neutral-900 dark:text-neutral-100'} ${isSameDay(date, today) ? 'ring-2 ring-primary bg-primary/10 font-bold' : ''}`}
+                  >
+                    {date.getDate()}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
+            CHARTS (color variants)
+        ════════════════════════════════════════════════════════════ */}
+        <section id="charts" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Charts" description="Bar, line, pie/donut with theme color variants." />
+          <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">Bar chart (theme colors)</h3>
+            <div className="flex items-end gap-2 h-40">
+              {[60, 85, 45, 90, 70, 55].map((h, i) => (
+                <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                  <div className="w-full rounded-t min-h-[8px] transition-[height] duration-300" style={{ height: `${h}%`, backgroundColor: CHART_COLORS[i % CHART_COLORS.length] }} />
+                  <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400">{['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'][i]}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
+          <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">Line chart (primary / success / warning)</h3>
+            <div className="h-32 relative flex items-end">
+              <svg className="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
+                <polyline fill="none" stroke="var(--color-primary)" strokeWidth="2" points="0,60 50,45 100,70 150,30 200,50 250,20 300,40" />
+                <polyline fill="none" stroke="var(--color-success)" strokeWidth="2" points="0,70 50,55 100,50 150,60 200,45 250,55 300,35" />
+                <polyline fill="none" stroke="var(--color-warning)" strokeWidth="2" points="0,80 50,65 100,80 150,50 200,70 250,60 300,55" />
+              </svg>
+            </div>
+            <div className="flex flex-wrap gap-4 mt-2 text-xs">
+              <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-primary" /> Series A</span>
+              <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-success" /> Series B</span>
+              <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-warning" /> Series C</span>
+            </div>
+          </Card>
+          <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">Pie / Donut (theme colors)</h3>
+            <div className="flex flex-wrap items-center justify-center gap-8">
+              <div className="relative w-32 h-32">
+                <svg viewBox="0 0 36 36" className="w-32 h-32 -rotate-90">
+                  {(() => {
+                    const C = 2 * Math.PI * 16
+                    const pcts = [30, 25, 20, 15, 10]
+                    let offset = 0
+                    return pcts.map((pct, i) => {
+                      const dash = (pct / 100) * C
+                      const o = -offset
+                      offset += dash
+                      return (
+                        <circle key={i} cx="18" cy="18" r="16" fill="none" stroke={CHART_COLORS[i]} strokeWidth="4" strokeDasharray={`${dash} ${C}`} strokeDashoffset={o} />
+                      )
+                    })
+                  })()}
+                </svg>
+                <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-neutral-900 dark:text-neutral-100">100%</span>
+              </div>
+              <div className="flex flex-col gap-2">
+                {['Primary', 'Success', 'Warning', 'Error', 'Blue'].map((label, i) => (
+                  <span key={label} className="flex items-center gap-2 text-xs">
+                    <span className="w-4 h-4 rounded shrink-0" style={{ backgroundColor: CHART_COLORS[i] }} />
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
             7. ICONS
         ════════════════════════════════════════════════════════════ */}
         <section id="icons" className="scroll-mt-8 space-y-6">
@@ -454,7 +541,7 @@ export default function DebugComponents() {
                 { Icon: MenuIcon, name: 'MenuIcon' },
                 { Icon: DocumentIcon, name: 'DocumentIcon' },
               ] as const).map(({ Icon, name }) => (
-                <div key={name} className="flex flex-col items-center gap-3 p-3 rounded-lg border border-border dark:border-neutral-600">
+                <div key={name} className="flex flex-col items-center gap-3 p-3 rounded-lg border border-[var(--color-charcoal)]">
                   <div className="flex items-center gap-3">
                     <Icon className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
                     <Icon className="w-5 h-5 text-neutral-700 dark:text-neutral-300" />
@@ -718,7 +805,7 @@ export default function DebugComponents() {
                   ))}
                 </tbody>
               </table>
-            </div>
+          </div>
           </Card>
 
           {/* App Input/Select/Textarea components */}
@@ -726,10 +813,10 @@ export default function DebugComponents() {
             <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">App Components</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-4">
-                <Input placeholder="Placeholder only" />
-                <Input label="With label" placeholder="Placeholder" />
-                <Input label="With error" error="This field is required." defaultValue="invalid" />
-                <Input label="Disabled" disabled placeholder="Disabled" />
+              <Input placeholder="Placeholder only" />
+              <Input label="With label" placeholder="Placeholder" />
+              <Input label="With error" error="This field is required." defaultValue="invalid" />
+              <Input label="Disabled" disabled placeholder="Disabled" />
               </div>
               <div className="space-y-4">
                 <Select label="Select option" options={[{ value: '', label: 'Choose…' }, { value: 'a', label: 'Option A' }, { value: 'b', label: 'Option B' }]} />
@@ -773,7 +860,7 @@ export default function DebugComponents() {
               <div className="space-y-4">
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">⌕</span>
-                  <input type="search" placeholder="Search" className="w-full pl-9 pr-8 h-12 rounded-lg border border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm" />
+                  <input type="search" placeholder="Search" className="w-full pl-9 pr-8 h-12 rounded-lg border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm" />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 cursor-pointer">×</span>
                 </div>
                 <div className="relative">
@@ -788,7 +875,7 @@ export default function DebugComponents() {
                 </div>
                 <div className="relative opacity-50">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">⌕</span>
-                  <input type="search" disabled placeholder="Search" className="w-full pl-9 pr-8 h-12 rounded-lg border border-neutral-200 dark:border-neutral-600 bg-neutral-100 dark:bg-neutral-700 text-neutral-400 text-sm cursor-not-allowed" />
+                  <input type="search" disabled placeholder="Search" className="w-full pl-9 pr-8 h-12 rounded-lg border border-[var(--color-charcoal)] bg-neutral-100 dark:bg-neutral-700 text-neutral-400 text-sm cursor-not-allowed" />
                 </div>
               </div>
               <div className="space-y-3">
@@ -845,7 +932,7 @@ export default function DebugComponents() {
               <div>
                 <p className="text-xs font-bold uppercase text-neutral-500 dark:text-neutral-400 mb-3">Navigation buttons</p>
                 <div className="flex items-center gap-4">
-                  <button type="button" className="w-10 h-10 rounded-lg border border-neutral-200 dark:border-neutral-600 text-neutral-500 dark:text-neutral-400 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-700">‹</button>
+                  <button type="button" className="w-10 h-10 rounded-lg border border-[var(--color-charcoal)] text-neutral-500 dark:text-neutral-400 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-700">‹</button>
                   <button type="button" className="w-10 h-10 rounded-lg bg-primary text-primary-foreground flex items-center justify-center">›</button>
                 </div>
               </div>
@@ -853,7 +940,7 @@ export default function DebugComponents() {
               <div>
                 <p className="text-xs font-bold uppercase text-neutral-500 dark:text-neutral-400 mb-3">Tabbar</p>
                 <div className="space-y-3">
-                  <div className="inline-flex rounded-full border border-neutral-200 dark:border-neutral-600 p-1 gap-0">
+                  <div className="inline-flex rounded-full border border-[var(--color-charcoal)] p-1 gap-0">
                     <button type="button" className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/30">Selected Item</button>
                     {['Item', 'Item', 'Item'].map((t, i) => <button key={i} type="button" className="px-4 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 text-xs font-medium hover:bg-neutral-100 dark:hover:bg-neutral-700">{t}</button>)}
                   </div>
@@ -868,16 +955,16 @@ export default function DebugComponents() {
           </Card>
           <Card>
             <p className="text-xs font-bold uppercase text-neutral-500 dark:text-neutral-400 mb-3">Header</p>
-            <div className="flex items-center gap-4 p-4 rounded-xl border border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800">
+            <div className="flex items-center gap-4 p-4 rounded-xl border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800">
               <div className="flex-1 min-w-0">
                 <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100">Section title</h3>
                 <p className="text-xs text-neutral-500 dark:text-neutral-400">Subtitle</p>
               </div>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">⌕</span>
-                <input type="search" placeholder="Search..." className="pl-9 pr-4 h-10 rounded-lg border border-neutral-200 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-sm text-neutral-900 dark:text-neutral-100 w-40" />
+                <input type="search" placeholder="Search..." className="pl-9 pr-4 h-10 rounded-lg border border-[var(--color-charcoal)] bg-neutral-50 dark:bg-neutral-700 text-sm text-neutral-900 dark:text-neutral-100 w-40" />
               </div>
-              <button type="button" className="h-10 px-4 rounded-lg border border-neutral-200 dark:border-neutral-600 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center gap-1.5">Filter ⊞</button>
+              <button type="button" className="h-10 px-4 rounded-lg border border-[var(--color-charcoal)] text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center gap-1.5">Filter ⊞</button>
               <button type="button" className="h-10 px-6 rounded-lg bg-primary text-primary-foreground text-sm font-medium">Action button</button>
             </div>
           </Card>
@@ -955,7 +1042,7 @@ export default function DebugComponents() {
             <Card>
               <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">Search Filter</h3>
               <div className="space-y-3 max-w-xs">
-                <div className="flex items-center gap-2 h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800">
+                <div className="flex items-center gap-2 h-10 px-3 rounded-lg border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800">
                   <span className="text-sm text-neutral-500 dark:text-neutral-400 flex-1">Select</span>
                   <span className="text-neutral-400">▾</span>
                   <span className="w-7 h-7 rounded bg-primary/10 text-primary flex items-center justify-center text-xs">▼</span>
@@ -978,10 +1065,10 @@ export default function DebugComponents() {
           <Card>
             <div className="flex flex-wrap gap-4 items-start">
               {/* Expanded light */}
-              <div className="w-56 rounded-xl border border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800 overflow-hidden">
+              <div className="w-56 rounded-xl border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 overflow-hidden">
                 <div className="px-4 py-3 flex items-center gap-2 border-b border-neutral-100 dark:border-neutral-700">
                   <span className="text-primary text-lg">✦</span>
-                  <span className="text-sm font-bold text-neutral-900 dark:text-neutral-100">eos</span>
+                  <span className="text-sm font-bold text-neutral-900 dark:text-neutral-100">KTR</span>
                 </div>
                 <div className="p-3">
                   <div className="h-9 px-3 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center text-neutral-400 text-xs mb-3">⌕ Search</div>
@@ -1003,7 +1090,7 @@ export default function DebugComponents() {
               <div className="w-56 rounded-xl border border-neutral-700 bg-neutral-900 overflow-hidden">
                 <div className="px-4 py-3 flex items-center gap-2 border-b border-neutral-700">
                   <span className="text-primary text-lg">✦</span>
-                  <span className="text-sm font-bold text-white">eos</span>
+                  <span className="text-sm font-bold text-white">KTR</span>
                 </div>
                 <div className="p-3">
                   <div className="h-9 px-3 rounded-lg bg-primary/20 flex items-center text-primary/60 text-xs mb-3">⌕ Search</div>
@@ -1022,7 +1109,7 @@ export default function DebugComponents() {
               </div>
 
               {/* Icon only */}
-              <div className="w-16 rounded-xl border border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800 overflow-hidden flex flex-col items-center py-3 gap-3">
+              <div className="w-16 rounded-xl border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 overflow-hidden flex flex-col items-center py-3 gap-3">
                 <span className="text-primary text-lg">✦</span>
                 <div className="h-px w-8 bg-neutral-200 dark:bg-neutral-600" />
                 {['⌕', '⊞', '📅', '♥', '📊', '👤'].map((icon, i) => (
@@ -1060,7 +1147,7 @@ export default function DebugComponents() {
               <div>
                 <p className="text-xs font-bold uppercase text-neutral-500 dark:text-neutral-400 mb-3">Uploading progress</p>
                 <div className="space-y-4">
-                  <div className="rounded-lg border border-neutral-200 dark:border-neutral-600 p-3 bg-white dark:bg-neutral-800">
+                  <div className="rounded-lg border border-[var(--color-charcoal)] p-3 bg-white dark:bg-neutral-800">
                     <p className="text-xs font-medium text-primary mb-1">Uploading...</p>
                     <div className="flex items-center gap-2 mb-2">
                       <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate flex-1">BS40-5BP_National_Insurance_Number-001</p>
@@ -1071,7 +1158,7 @@ export default function DebugComponents() {
                       <div className="h-full bg-primary rounded-full w-3/5" />
                     </div>
                   </div>
-                  <div className="rounded-lg border border-neutral-200 dark:border-neutral-600 p-3 bg-white dark:bg-neutral-800">
+                  <div className="rounded-lg border border-[var(--color-charcoal)] p-3 bg-white dark:bg-neutral-800">
                     <p className="text-xs font-medium text-primary mb-1">Uploading...</p>
                     <div className="flex items-center gap-2 mb-2">
                       <p className="text-xs text-neutral-500 dark:text-neutral-400 flex-1">3 of 76 files</p>
@@ -1093,7 +1180,7 @@ export default function DebugComponents() {
                     { name: 'BS40-5BP_Patients_Management.2023.doc', size: '120kb', color: 'bg-green-500' },
                     { name: 'BS40-5BP_National_Insurance.doc', size: '120kb', color: 'bg-neutral-500' },
                   ].map((file, i) => (
-                    <div key={i} className="flex items-center gap-3 rounded-lg border border-neutral-200 dark:border-neutral-600 p-3 bg-white dark:bg-neutral-800">
+                    <div key={i} className="flex items-center gap-3 rounded-lg border border-[var(--color-charcoal)] p-3 bg-white dark:bg-neutral-800">
                       <div className={`w-10 h-10 rounded-lg ${file.color} flex items-center justify-center text-white text-xs font-bold shrink-0`}>DOC</div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">{file.name}</p>
@@ -1155,8 +1242,8 @@ export default function DebugComponents() {
           {/* Inline chat preview */}
           <Card>
             <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">Inline Chat Panel</h3>
-            <div className="rounded-xl border-2 border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800 overflow-hidden max-w-xl">
-              <div className="flex items-center gap-2 px-4 py-3 border-b-2 border-neutral-200 dark:border-neutral-600">
+            <div className="rounded-xl border-2 border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 overflow-hidden max-w-xl">
+              <div className="flex items-center gap-2 px-4 py-3 border-b-2 border-[var(--color-charcoal)]">
                 <AiBotIcon className="w-7 h-7" />
                 <h4 className="text-sm font-semibold uppercase tracking-wide text-accent dark:text-primary">Conversation</h4>
               </div>
@@ -1191,7 +1278,7 @@ export default function DebugComponents() {
                   </div>
                 </div>
               </div>
-              <div className="p-3 border-t-2 border-neutral-200 dark:border-neutral-600">
+              <div className="p-3 border-t-2 border-[var(--color-charcoal)]">
                 <ChatInputBar value="" onChange={() => {}} onSend={() => {}} onFileChange={() => {}} placeholder="Type your question..." />
               </div>
             </div>
@@ -1206,8 +1293,8 @@ export default function DebugComponents() {
           {/* Chat popup modal */}
           {chatDialogOpen && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setChatDialogOpen(false)}>
-              <div className="bg-white dark:bg-neutral-800 rounded-2xl border-2 border-neutral-200 dark:border-neutral-600 shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
-                <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-900">
+              <div className="bg-white dark:bg-neutral-800 rounded-2xl border-2 border-[var(--color-charcoal)] shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between px-4 py-3 border-b-2 border-[var(--color-charcoal)] bg-neutral-50 dark:bg-neutral-900">
                   <div className="flex items-center gap-2">
                     <AiBotIcon className="w-8 h-8" />
                     <h2 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 uppercase tracking-wide">Together AI — Chat</h2>
@@ -1232,7 +1319,7 @@ export default function DebugComponents() {
                     </div>
                   </div>
                 </div>
-                <div className="p-3 border-t-2 border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800">
+                <div className="p-3 border-t-2 border-[var(--color-charcoal)] bg-white dark:bg-neutral-800">
                   <ChatInputBar value={chatValue} onChange={(e) => setChatValue(e.target.value)} onSend={() => {}} onFileChange={() => {}} placeholder="Ask anything..." />
                 </div>
               </div>
@@ -1247,7 +1334,7 @@ export default function DebugComponents() {
           <SectionHeading id="" title="Quiz Popup" description="QuizletQuizModal: quiz-in-progress and results views." />
           <Card>
             <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">Quiz In-Progress Preview</h3>
-            <div className="rounded-xl border-2 border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800 p-6 max-w-2xl">
+            <div className="rounded-xl border-2 border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 p-6 max-w-2xl">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100">Question 1 / 5</span>
                 <div className="flex gap-2">
@@ -1268,10 +1355,10 @@ export default function DebugComponents() {
           </Card>
           <Card>
             <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-4">Results Preview</h3>
-            <div className="rounded-xl border-2 border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800 p-6 max-w-2xl">
+            <div className="rounded-xl border-2 border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 p-6 max-w-2xl">
               <h4 className="text-lg font-bold uppercase text-neutral-900 dark:text-neutral-100 text-center mb-8">Analysis results</h4>
               <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="rounded-xl border border-neutral-200 dark:border-neutral-600 bg-neutral-50/50 dark:bg-neutral-700/50 p-6">
+                <div className="rounded-xl border border-[var(--color-charcoal)] bg-neutral-50/50 dark:bg-neutral-700/50 p-6">
                   <p className="text-xs font-bold uppercase text-neutral-700 dark:text-neutral-300 mb-3">Questions you got wrong</p>
                   <div className="flex gap-3">
                     <span className="w-1 rounded-full bg-highlight shrink-0" />
@@ -1281,7 +1368,7 @@ export default function DebugComponents() {
                     </div>
                   </div>
                 </div>
-                <div className="rounded-xl border border-neutral-200 dark:border-neutral-600 bg-neutral-50/50 dark:bg-neutral-700/50 p-6">
+                <div className="rounded-xl border border-[var(--color-charcoal)] bg-neutral-50/50 dark:bg-neutral-700/50 p-6">
                   <p className="text-xs font-bold uppercase text-neutral-700 dark:text-neutral-300 mb-3">Suggested topics</p>
                   {[{ t: 'Optimization algorithms', p: 45 }, { t: 'Optimization algorithms', p: 62 }, { t: 'Optimization algorithms', p: 78 }].map((s, i) => (
                     <div key={i} className="mb-2 last:mb-0">
@@ -1309,7 +1396,7 @@ export default function DebugComponents() {
           </Card>
           {quizOpen && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setQuizOpen(false)}>
-              <div className="bg-white dark:bg-neutral-800 rounded-2xl border-2 border-neutral-200 dark:border-neutral-600 shadow-xl w-full max-w-3xl min-h-[34rem] max-h-[95vh] overflow-hidden flex flex-col" onClick={(e) => e.stopPropagation()}>
+              <div className="bg-white dark:bg-neutral-800 rounded-2xl border-2 border-[var(--color-charcoal)] shadow-xl w-full max-w-3xl min-h-[34rem] max-h-[95vh] overflow-hidden flex flex-col" onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between gap-5 px-10 py-5 border-b border-neutral-200 dark:border-neutral-600">
                   <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100">Question 1 / 3</span>
                   <div className="flex items-center gap-4">
@@ -1339,13 +1426,444 @@ export default function DebugComponents() {
         </section>
 
         {/* ════════════════════════════════════════════════════════════
+            ALERTS & NOTIFICATIONS
+        ════════════════════════════════════════════════════════════ */}
+        <section id="alerts" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Alerts & Notifications" description="Success, warning, error, info with dismiss, icon, title+description." />
+          <Card>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3 p-4 rounded-lg border border-[var(--color-charcoal)] bg-success/10 border-success/40">
+                <span className="text-success text-lg shrink-0">✓</span>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Success</p>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">Your changes have been saved.</p>
+                </div>
+                <button type="button" className="ml-auto text-neutral-500 hover:text-neutral-700" aria-label="Dismiss">×</button>
+              </div>
+              <div className="flex items-start gap-3 p-4 rounded-lg border border-[var(--color-charcoal)] bg-warning/10 border-warning/40">
+                <span className="text-warning text-lg shrink-0">!</span>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Warning</p>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">Please review before continuing.</p>
+                </div>
+                <button type="button" className="ml-auto text-neutral-500 hover:text-neutral-700" aria-label="Dismiss">×</button>
+              </div>
+              <div className="flex items-start gap-3 p-4 rounded-lg border border-[var(--color-charcoal)] bg-error/10 border-error/40">
+                <span className="text-error text-lg shrink-0">✕</span>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Error</p>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">Something went wrong. Try again.</p>
+                </div>
+                <button type="button" className="ml-auto text-neutral-500 hover:text-neutral-700" aria-label="Dismiss">×</button>
+              </div>
+              <div className="flex items-start gap-3 p-4 rounded-lg border border-[var(--color-charcoal)] bg-blue/10 border-blue/40">
+                <span className="text-blue text-lg shrink-0">i</span>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Info</p>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">New feature available in settings.</p>
+                </div>
+                <button type="button" className="ml-auto text-neutral-500 hover:text-neutral-700" aria-label="Dismiss">×</button>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
+            AVATARS
+        ════════════════════════════════════════════════════════════ */}
+        <section id="avatars" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Avatars" description="Sizes 24–64px, initials fallback, status indicator, group overlap." />
+          <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Sizes</h3>
+            <div className="flex flex-wrap items-end gap-6">
+              {[24, 32, 40, 48, 64].map((size) => (
+                <div key={size} className="flex flex-col items-center gap-1">
+                  <div className="rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold border border-[var(--color-charcoal)]" style={{ width: size, height: size, fontSize: size * 0.4 }}>JD</div>
+                  <span className="text-[10px] text-neutral-500">{size}px</span>
+                </div>
+              ))}
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Status</h3>
+            <div className="flex flex-wrap gap-6">
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full bg-neutral-300 dark:bg-neutral-600 flex items-center justify-center text-sm font-bold border border-[var(--color-charcoal)]">AB</div>
+                <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-success border-2 border-white dark:border-neutral-800" title="Online" />
+              </div>
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full bg-neutral-300 dark:bg-neutral-600 flex items-center justify-center text-sm font-bold border border-[var(--color-charcoal)]">CD</div>
+                <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-neutral-400 border-2 border-white dark:border-neutral-800" title="Offline" />
+              </div>
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full bg-neutral-300 dark:bg-neutral-600 flex items-center justify-center text-sm font-bold border border-[var(--color-charcoal)]">EF</div>
+                <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-warning border-2 border-white dark:border-neutral-800" title="Busy" />
+              </div>
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Group</h3>
+            <div className="flex -space-x-2">
+              {['JD', 'AB', 'CD', 'EF'].map((initials, i) => (
+                <div key={i} className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary border-2 border-white dark:border-neutral-800 border-[var(--color-charcoal)]" title={initials}>{initials}</div>
+              ))}
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
+            TABS
+        ════════════════════════════════════════════════════════════ */}
+        <section id="tabs" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Tabs" description="Underline, pill, and segmented control with content." />
+          <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Underline</h3>
+            <div className="border-b border-[var(--color-charcoal)] mb-4">
+              <div className="flex gap-6">
+                {['Overview', 'Details', 'Settings'].map((tab, i) => (
+                  <button key={tab} type="button" onClick={() => setDemoTabIndex(i)} className={`pb-3 text-sm font-medium border-b-2 transition-colors ${demoTabIndex === i ? 'border-primary text-primary' : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'}`} style={{ marginBottom: -1 }}>{tab}</button>
+                ))}
+              </div>
+            </div>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">Content for tab: {['Overview', 'Details', 'Settings'][demoTabIndex]}</p>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Pill</h3>
+            <div className="flex flex-wrap gap-2 p-1 rounded-lg bg-neutral-100 dark:bg-neutral-700 border border-[var(--color-charcoal)] w-fit">
+              {['All', 'Active', 'Archived'].map((tab, i) => (
+                <button key={tab} type="button" onClick={() => setDemoTabIndex(i)} className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${demoTabIndex === i ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-sm border border-[var(--color-charcoal)]' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'}`}>{tab}</button>
+              ))}
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Segmented</h3>
+            <div className="inline-flex rounded-lg border border-[var(--color-charcoal)] overflow-hidden">
+              {['List', 'Grid', 'Map'].map((tab, i) => (
+                <button key={tab} type="button" onClick={() => setDemoTabIndex(i)} className={`px-4 py-2 text-sm font-medium ${i > 0 ? 'border-l border-[var(--color-charcoal)]' : ''} ${demoTabIndex === i ? 'bg-primary text-primary-foreground' : 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-700'}`}>{tab}</button>
+              ))}
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
+            TOOLTIPS
+        ════════════════════════════════════════════════════════════ */}
+        <section id="tooltips" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Tooltips" description="Top, bottom, left, right. Dark and light." />
+          <Card>
+            <div className="flex flex-wrap gap-8 justify-center py-8">
+              <div className="relative group">
+                <span className="px-3 py-2 rounded-lg bg-neutral-900 text-white text-xs font-medium whitespace-nowrap absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">Top tooltip</span>
+                <span className="px-4 py-2 rounded-lg border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 text-sm">Hover (top)</span>
+              </div>
+              <div className="relative group">
+                <span className="px-3 py-2 rounded-lg bg-neutral-900 text-white text-xs font-medium whitespace-nowrap absolute top-full left-1/2 -translate-x-1/2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">Bottom tooltip</span>
+                <span className="px-4 py-2 rounded-lg border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 text-sm">Hover (bottom)</span>
+              </div>
+              <div className="relative group">
+                <span className="px-3 py-2 rounded-lg bg-neutral-900 text-white text-xs font-medium whitespace-nowrap absolute right-full top-1/2 -translate-y-1/2 mr-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">Left</span>
+                <span className="px-4 py-2 rounded-lg border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 text-sm">Hover (left)</span>
+              </div>
+              <div className="relative group">
+                <span className="px-3 py-2 rounded-lg bg-neutral-900 text-white text-xs font-medium whitespace-nowrap absolute left-full top-1/2 -translate-y-1/2 ml-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">Right</span>
+                <span className="px-4 py-2 rounded-lg border border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 text-sm">Hover (right)</span>
+              </div>
+            </div>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 text-center mt-2">Light tooltip variant:</p>
+            <div className="flex justify-center pt-2">
+              <div className="relative group">
+                <span className="px-3 py-2 rounded-lg bg-white border border-[var(--color-charcoal)] text-neutral-900 text-xs font-medium shadow-lg whitespace-nowrap absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">Light tooltip</span>
+                <span className="px-4 py-2 rounded-lg border border-[var(--color-charcoal)] bg-neutral-100 dark:bg-neutral-700 text-sm">Hover</span>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
+            TAGS / LABELS
+        ════════════════════════════════════════════════════════════ */}
+        <section id="tags" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Tags & Labels" description="Colored dot + text, removable. Smaller than badges." />
+          <Card>
+            <div className="flex flex-wrap gap-3 items-center">
+              <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs border border-[var(--color-charcoal)] bg-neutral-50 dark:bg-neutral-800">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" /> Primary
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs border border-[var(--color-charcoal)] bg-success/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-success" /> Success
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs border border-[var(--color-charcoal)] bg-warning/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-warning" /> Warning
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs border border-[var(--color-charcoal)] bg-error/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-error" /> Error
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs border border-[var(--color-charcoal)] bg-neutral-50 dark:bg-neutral-800">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" /> Removable
+                <button type="button" className="ml-0.5 text-neutral-500 hover:text-neutral-700" aria-label="Remove">×</button>
+              </span>
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
+            SKELETON LOADERS
+        ════════════════════════════════════════════════════════════ */}
+        <section id="skeletons" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Skeleton Loaders" description="Card, list, avatar+text, table row. animate-pulse." />
+          <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Card skeleton</h3>
+            <div className="rounded-lg border border-[var(--color-charcoal)] p-4 space-y-3">
+              <div className="h-24 rounded-lg bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+              <div className="h-4 w-3/4 rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+              <div className="h-4 w-1/2 rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">List skeleton</h3>
+            <div className="space-y-2">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-10 rounded-lg bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+              ))}
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Avatar + text</h3>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-neutral-200 dark:bg-neutral-700 animate-pulse shrink-0" />
+              <div className="flex-1 space-y-2">
+                <div className="h-4 w-32 rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+                <div className="h-3 w-48 rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+              </div>
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Table row</h3>
+            <div className="flex gap-4 border-b border-[var(--color-charcoal)] pb-3">
+              <div className="h-4 w-8 rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse shrink-0" />
+              <div className="h-4 flex-1 rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+              <div className="h-4 w-20 rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse shrink-0" />
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
+            LOADING STATES
+        ════════════════════════════════════════════════════════════ */}
+        <section id="loading-states" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Loading States" description="Button loading, input loading, card loading, page loading, inline spinner." />
+          <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Button loading</h3>
+            <div className="flex flex-wrap gap-3">
+              <Button variant="primary" loading>Loading</Button>
+              <Button variant="secondary" loading>Saving</Button>
+              <Button variant="ghost" loading>Submit</Button>
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Input loading</h3>
+            <div className="max-w-sm">
+              <div className="relative">
+                <Input label="Email" placeholder="you@example.com" disabled />
+                <div className="absolute right-3 top-[2.25rem] flex items-center justify-center pointer-events-none">
+                  <svg className="animate-spin w-5 h-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden>
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" strokeDasharray="42 24" strokeLinecap="round" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Card loading (skeleton)</h3>
+            <div className="rounded-lg border border-[var(--color-charcoal)] p-4 space-y-3 max-w-xs">
+              <div className="h-20 rounded-lg bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+              <div className="h-4 w-[80%] rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+              <div className="h-4 w-1/2 rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+              <div className="h-8 w-24 rounded-lg bg-neutral-200 dark:bg-neutral-700 animate-pulse mt-2" />
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Inline spinner (sizes)</h3>
+            <div className="flex flex-wrap items-center gap-6">
+              <svg className="animate-spin w-4 h-4 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" strokeDasharray="42 24" strokeLinecap="round" /></svg>
+              <svg className="animate-spin w-6 h-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" strokeDasharray="42 24" strokeLinecap="round" /></svg>
+              <svg className="animate-spin w-8 h-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" strokeDasharray="42 24" strokeLinecap="round" /></svg>
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Page loading (overlay)</h3>
+            <div className="relative h-32 rounded-lg border border-[var(--color-charcoal)] bg-neutral-50 dark:bg-neutral-900 overflow-hidden">
+              <div className="absolute inset-0 bg-white/80 dark:bg-neutral-900/80 flex items-center justify-center">
+                <div className="flex flex-col items-center gap-3">
+                  <svg className="animate-spin w-10 h-10 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" strokeDasharray="42 24" strokeLinecap="round" /></svg>
+                  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Loading…</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
+            ACCORDION / COLLAPSIBLE
+        ════════════════════════════════════════════════════════════ */}
+        <section id="accordion" className="scroll-mt-8 space-y-6">
+          <SectionHeading id="" title="Accordion & Collapsible" description="Expand/collapse. Single or multiple open." />
+          <Card>
+            <div className="space-y-1 border border-[var(--color-charcoal)] rounded-lg overflow-hidden">
+              {['Section A', 'Section B', 'Section C'].map((title, i) => (
+                <div key={title}>
+                  <button type="button" onClick={() => setAccordionOpen(accordionOpen === i ? null : i)} className="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-neutral-900 dark:text-neutral-100 bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 border-b border-[var(--color-charcoal)] last:border-b-0">
+                    {title}
+                    <span className="text-neutral-500">{accordionOpen === i ? '−' : '+'}</span>
+                  </button>
+                  {accordionOpen === i && (
+                    <div className="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400 bg-white dark:bg-neutral-800 border-b border-[var(--color-charcoal)] last:border-b-0">
+                      Content for {title}. Single-open mode.
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Card>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════
             19. CARDS
         ════════════════════════════════════════════════════════════ */}
         <section id="cards" className="scroll-mt-8 space-y-6">
-          <SectionHeading id="" title="Cards" />
-          <div className="grid md:grid-cols-2 gap-4">
+          <SectionHeading id="" title="Cards" description="Image, footer, horizontal, hoverable variants with charcoal border." />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Card>Plain card with no heading.</Card>
             <Card heading="Card with heading">Content under the heading.</Card>
+            <Card className="overflow-hidden p-0">
+              <div className="h-24 bg-gradient-brand" />
+              <div className="p-4">
+                <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-primary/20 text-primary mb-2">Badge</span>
+                <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Card with image</h3>
+                <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">Placeholder gradient as image area.</p>
+              </div>
+            </Card>
+            <Card className="flex flex-col">
+              <p className="flex-1 text-sm text-neutral-700 dark:text-neutral-300">Card with footer actions.</p>
+              <div className="flex gap-2 pt-4 mt-4 border-t border-[var(--color-charcoal)]">
+                <Button variant="secondary" size="sm">Cancel</Button>
+                <Button variant="primary" size="sm">Save</Button>
+              </div>
+            </Card>
+            <Card className="flex flex-row items-center gap-4 p-4 md:p-6">
+              <div className="w-16 h-16 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                <span className="text-2xl text-primary">&#10038;</span>
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Horizontal card</h3>
+                <p className="text-xs text-neutral-600 dark:text-neutral-400">Layout with icon and text side by side.</p>
+              </div>
+            </Card>
+            <Card className="transition-shadow duration-200 hover:shadow-[var(--shadow-6)] cursor-pointer">Hoverable card (shadow on hover).</Card>
+          </div>
+
+          <h2 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mt-8 mb-2">App card variants</h2>
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Room, Team, Member, Subscription, Package, Stats, Task, Note, Event, Flashcard, Pack, Upgrade.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {/* Room card */}
+            <Card className="p-4 flex flex-col gap-2 hover:shadow-[var(--shadow-4)] transition-shadow cursor-pointer">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary text-lg">&#10038;</div>
+                <div className="min-w-0">
+                  <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 truncate">Focus Room</h3>
+                  <p className="text-[10px] text-neutral-500 dark:text-neutral-400">3 online · 12 max</p>
+                </div>
+              </div>
+              <p className="text-xs text-neutral-600 dark:text-neutral-400">Deep work, cameras on.</p>
+              <Button variant="primary" size="sm" className="w-full mt-auto">Join</Button>
+            </Card>
+
+            {/* Team card */}
+            <Card className="p-4 flex flex-col overflow-hidden">
+              <span className="inline-block px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded bg-neutral-700 text-white w-fit">Study</span>
+              <div className="w-full aspect-[4/3] max-h-[80px] rounded-md border-2 border-dashed border-[var(--color-charcoal)] bg-neutral-50 dark:bg-neutral-700 flex items-center justify-center text-[9px] text-neutral-400 mt-2">[Image]</div>
+              <p className="mt-2 text-xs font-bold text-neutral-900 dark:text-neutral-100">Team Alpha</p>
+              <p className="text-[11px] text-neutral-600 dark:text-neutral-400">Sprint 2 · Design</p>
+              <div className="mt-2 flex items-center gap-1">
+                <div className="flex -space-x-1.5">
+                  {[1, 2, 3].map((i) => <div key={i} className="w-5 h-5 rounded-full bg-neutral-400 border-2 border-white dark:border-neutral-800" />)}
+                </div>
+                <span className="text-[9px] font-semibold text-neutral-500 uppercase">5 members</span>
+              </div>
+            </Card>
+
+            {/* Member card */}
+            <Card className="p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-sm shrink-0">JD</div>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100 truncate">Jane Doe</p>
+                <p className="text-[10px] text-neutral-500 dark:text-neutral-400">Designer · Active</p>
+                <div className="flex gap-1 mt-1">
+                  <Badge variant="outline" className="!py-0.5 !text-[9px]">React</Badge>
+                  <Badge variant="outline" className="!py-0.5 !text-[9px]">UI</Badge>
+                </div>
+              </div>
+            </Card>
+
+            {/* Subscription card */}
+            <Card className="p-4 flex flex-col border-2 border-primary/30">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-bold uppercase text-primary">Pro</span>
+                <Badge variant="success">Active</Badge>
+              </div>
+              <p className="text-lg font-bold text-neutral-900 dark:text-neutral-100">$9.99/mo</p>
+              <p className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-0.5">Billing renews Dec 15</p>
+              <Button variant="secondary" size="sm" className="w-full mt-3">Manage</Button>
+            </Card>
+
+            {/* Package card (Shop) */}
+            <Card className="p-4 flex flex-col relative">
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 rounded bg-neutral-900 dark:bg-neutral-700 px-2 py-0.5">
+                <span className="text-[9px] font-bold uppercase text-white">Popular</span>
+              </div>
+              <div className="flex flex-col items-center text-center mt-2">
+                <div className="w-10 h-10 rounded-full bg-white dark:bg-neutral-700 flex items-center justify-center text-primary text-lg">★</div>
+                <h3 className="mt-2 text-sm font-bold text-neutral-900 dark:text-neutral-100">Starter Pack</h3>
+                <p className="text-base font-bold text-neutral-900 dark:text-neutral-100">1,000 Coins</p>
+                <p className="text-xs text-neutral-500">$4.99</p>
+              </div>
+              <Button variant="primary" size="sm" className="w-full mt-3">Buy</Button>
+            </Card>
+
+            {/* Stats / KPI card */}
+            <Card className="p-4 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-lg bg-highlight/20 flex items-center justify-center text-highlight shrink-0">
+                <span className="text-xl">🔥</span>
+              </div>
+              <div className="min-w-0">
+                <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide">Current streak</p>
+                <p className="text-xl font-bold text-neutral-900 dark:text-neutral-100">15 Days</p>
+              </div>
+            </Card>
+
+            {/* Task card */}
+            <Card className="p-4 flex items-center gap-3">
+              <div className="w-5 h-5 rounded border-2 border-[var(--color-charcoal)] bg-white dark:bg-neutral-800 shrink-0" />
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">Review PR #42</p>
+                <p className="text-[10px] text-neutral-500 dark:text-neutral-400">Due tomorrow</p>
+              </div>
+            </Card>
+
+            {/* Note card */}
+            <Card className="p-4 flex flex-col">
+              <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide mb-1">Quick note</p>
+              <p className="text-sm text-neutral-700 dark:text-neutral-300 line-clamp-3">Meeting notes: action items for Q1. Follow up with design on tokens.</p>
+              <p className="text-[10px] text-neutral-400 mt-2">2 min ago</p>
+            </Card>
+
+            {/* Event card */}
+            <Card className="p-4 flex gap-3 border-l-4 border-primary">
+              <div className="text-center shrink-0">
+                <p className="text-[10px] font-bold uppercase text-neutral-500">Wed</p>
+                <p className="text-lg font-bold text-neutral-900 dark:text-neutral-100 leading-none">14</p>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Team standup</p>
+                <p className="text-[10px] text-neutral-500 dark:text-neutral-400">9:00 AM · 30 min</p>
+              </div>
+            </Card>
+
+            {/* Flashcard / Quizlet card */}
+            <Card className="p-4 flex flex-col gap-2 border-2 border-neutral-200 dark:border-neutral-600">
+              <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-primary/20 text-primary w-fit">Quizlet</span>
+              <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Design Systems</p>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">12 cards</p>
+              <div className="flex gap-2 mt-auto">
+                <Button variant="secondary" size="sm" className="flex-1">Flashcards</Button>
+                <Button variant="primary" size="sm" className="flex-1">Do quiz</Button>
+              </div>
+            </Card>
+
+            {/* Upgrade / CTA card */}
+            <Card className="p-4 bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-2 border-primary/30">
+              <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Unlock all features</p>
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">Get Pro for unlimited rooms and analytics.</p>
+              <Button variant="primary" size="sm" className="w-full mt-3">Upgrade</Button>
+            </Card>
           </div>
         </section>
 
@@ -1353,13 +1871,18 @@ export default function DebugComponents() {
             20. BADGES
         ════════════════════════════════════════════════════════════ */}
         <section id="badges" className="scroll-mt-8 space-y-6">
-          <SectionHeading id="" title="Badges" />
+          <SectionHeading id="" title="Badges" description="All 8 variants: default, highlight, primary, outline, success, warning, error, info." />
           <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">All variants</h3>
             <div className="flex flex-wrap gap-3">
               <Badge variant="default">Default</Badge>
               <Badge variant="highlight">Highlight</Badge>
               <Badge variant="primary">Primary</Badge>
               <Badge variant="outline">Outline</Badge>
+              <Badge variant="success">Success</Badge>
+              <Badge variant="warning">Warning</Badge>
+              <Badge variant="error">Error</Badge>
+              <Badge variant="info">Info</Badge>
             </div>
           </Card>
         </section>
@@ -1368,11 +1891,46 @@ export default function DebugComponents() {
             21. PROGRESS
         ════════════════════════════════════════════════════════════ */}
         <section id="progress" className="scroll-mt-8 space-y-6">
-          <SectionHeading id="" title="Progress" />
+          <SectionHeading id="" title="Progress" description="Bar thickness (sm/md/lg), variants including info, showPercentage, stepper." />
           <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Variants</h3>
+            <div className="space-y-4 max-w-md mb-6">
+              <Progress value={65} variant="default" showPercentage />
+              <Progress value={65} variant="success" showPercentage />
+              <Progress value={65} variant="warning" showPercentage />
+              <Progress value={65} variant="error" showPercentage />
+              <Progress value={65} variant="info" showPercentage />
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Sizes (thicker bars)</h3>
+            <div className="space-y-4 max-w-md mb-6">
+              <Progress value={70} size="sm" />
+              <Progress value={70} size="md" />
+              <Progress value={70} size="lg" />
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Stepper (Step 1 → Step 2 → Step 3)</h3>
+            <div className="max-w-xl mb-6">
+              <div className="flex items-center">
+                {[1, 2, 3].map((step) => {
+                  const completed = step < currentStep
+                  const active = step === currentStep
+                  return (
+                    <span key={step} className="contents">
+                      <div className="flex flex-col items-center">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 shrink-0 ${completed ? 'bg-primary text-primary-foreground border-primary' : active ? 'bg-primary text-primary-foreground border-primary ring-2 ring-primary/30' : 'bg-neutral-200 dark:bg-neutral-600 text-neutral-500 dark:text-neutral-400 border-[var(--color-charcoal)]'}`}>{step}</div>
+                        <span className={`text-xs font-medium mt-2 ${active ? 'text-primary' : 'text-neutral-600 dark:text-neutral-400'}`}>Step {step}</span>
+                      </div>
+                      {step < 3 && <div className="flex-1 min-w-[32px] max-w-[80px] h-1 rounded-full mx-1 bg-neutral-200 dark:bg-neutral-600" style={{ width: 48 }}><div className={`h-full rounded-full transition-[width] duration-300 ${completed ? 'w-full bg-primary' : 'w-0'}`} /></div>}
+                    </span>
+                  )
+                })}
+              </div>
+              <div className="flex gap-2 mt-4">
+                <Button variant="secondary" size="sm" onClick={() => setCurrentStep((s) => Math.max(1, s - 1))} disabled={currentStep <= 1}>Previous</Button>
+                <Button variant="primary" size="sm" onClick={() => setCurrentStep((s) => Math.min(3, s + 1))} disabled={currentStep >= 3}>Next</Button>
+              </div>
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">With label</h3>
             <div className="space-y-6 max-w-md">
-              <Progress value={0} />
-              <Progress value={45} />
               <Progress value={75} max={100} label="LEVEL 14" />
               <Progress value={2450} max={3000} label="XP" caption="2,450 / 3,000 XP" />
             </div>
@@ -1383,12 +1941,24 @@ export default function DebugComponents() {
             22. BREADCRUMBS
         ════════════════════════════════════════════════════════════ */}
         <section id="breadcrumbs" className="scroll-mt-8 space-y-6">
-          <SectionHeading id="" title="Breadcrumbs" />
+          <SectionHeading id="" title="Breadcrumbs" description="Separator (chevron/slash/dot), maxItems collapse." />
           <Card>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mb-3">Separators</h3>
             <div className="space-y-3">
-              <Breadcrumbs items={[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Calendar' }]} />
-              <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Profile', href: '/profile' }, { label: 'Account' }]} />
+              <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Profile', href: '/profile' }, { label: 'Account' }]} separator="chevron" />
+              <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Profile', href: '/profile' }, { label: 'Account' }]} separator="slash" />
+              <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Profile', href: '/profile' }, { label: 'Account' }]} separator="dot" />
             </div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100 mt-6 mb-3">Collapsed (maxItems=3)</h3>
+            <Breadcrumbs
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Products', href: '/products' },
+                { label: 'Category', href: '/category' },
+                { label: 'Item' },
+              ]}
+              maxItems={3}
+            />
           </Card>
         </section>
 
@@ -1422,7 +1992,7 @@ export default function DebugComponents() {
             <div className="space-y-4">
               <p className="text-neutral-700 dark:text-neutral-300">Content above divider.</p>
               <hr className="border-border" />
-              <p className="text-neutral-700 dark:text-neutral-300">Content below divider. Use <code className="text-sm bg-neutral-100 dark:bg-neutral-700 px-1 rounded border border-border dark:border-neutral-600">border-border</code> for hr.</p>
+              <p className="text-neutral-700 dark:text-neutral-300">Content below divider. Use <code className="text-sm bg-neutral-100 dark:bg-neutral-700 px-1 rounded border border-[var(--color-charcoal)]">border-border</code> for hr.</p>
               <div className="flex flex-wrap gap-4 pt-2">
                 <a href="#dividers-links" className="text-primary underline hover:no-underline">Primary link</a>
                 <a href="#dividers-links" className="text-accent underline hover:no-underline">Accent link</a>
