@@ -1,5 +1,5 @@
 import { useNavigate, Link } from 'react-router-dom'
-import { Button, Input } from '../../../components/common'
+import { Badge, Button, Card, Input } from '../../../components/common'
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -11,10 +11,11 @@ export default function SignUp() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-full w-full">
-      <div className="w-full max-w-[380px] p-6 md:p-8 rounded-xl border border-neutral-200 bg-white shadow-sm flex flex-col gap-6">
-        <div className="text-center">
-          <h2 className="text-neutral-900 text-2xl font-bold uppercase tracking-wide">Sign up</h2>
-          <p className="text-neutral-600 text-sm mt-1">Welcome to your workspace!</p>
+      <Card className="w-full max-w-[400px] p-7 md:p-8 flex flex-col gap-6 border-2 border-neutral-200 dark:border-[var(--color-charcoal)] shadow-lg bg-white/95 dark:bg-[var(--color-surface)]">
+        <div className="text-center space-y-2">
+          <Badge variant="milestone" className="normal-case tracking-normal">Create your study account</Badge>
+          <h2 className="text-neutral-900 dark:text-neutral-900 text-3xl font-bold tracking-tight">Sign up</h2>
+          <p className="text-neutral-600 dark:text-neutral-500 text-sm mt-1">Join Together and build your learning streak.</p>
         </div>
         <form onSubmit={handleRegister} className="flex flex-col gap-4">
           <Input label="EMAIL" placeholder="name@university.edu" type="email" />
@@ -28,7 +29,7 @@ export default function SignUp() {
         <p className="text-center text-sm text-neutral-500">
           Already have an account? <Link to="/welcome" className="font-semibold text-accent hover:opacity-90">Log in</Link>
         </p>
-      </div>
+      </Card>
     </div>
   )
 }

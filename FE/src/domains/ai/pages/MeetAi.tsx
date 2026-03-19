@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { AiBotIcon, AttachIcon, Button, Card, ChatInputBar, CloseIcon, DocumentIcon, MenuIcon, Textarea } from '../../../components/common'
+import { AiBotIcon, AttachIcon, Button, Card, ChatInputBar, CloseIcon, DocumentIcon, IconButton, Input, MenuIcon, Modal, Textarea } from '../../../components/common'
 import { QUICK_PROMPTS, RECENT_CHATS, MEET_AI_MESSAGES as MESSAGES, MAX_FILE_SIZE_MB, ACCEPT_FILES, MAX_PDF_MB, SUMMARY_HISTORY } from '../../../mocks'
 
 export default function MeetAi() {
@@ -57,15 +57,13 @@ export default function MeetAi() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button
+          <IconButton
             type="button"
             onClick={() => setSummarizeOpen(true)}
-            className="absolute bottom-3 right-3 w-9 h-9 rounded-lg border-2 border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-neutral-100"
-            aria-label="Attach file — open Summarize"
-            title="Attach file — opens Summarize to drop or select PDF"
-          >
-            <AttachIcon className="w-4 h-4" />
-          </button>
+            className="absolute bottom-3 right-3 w-9 h-9 border-2 border-neutral-200 text-neutral-600 hover:bg-neutral-100"
+            label="Attach file — open Summarize"
+            icon={<AttachIcon className="w-4 h-4" />}
+          />
         </div>
         <div className="flex flex-wrap gap-2 mb-3">
           <Button variant="primary" size="md">Send</Button>
@@ -73,21 +71,23 @@ export default function MeetAi() {
             <Button variant="secondary" size="md">Open full chat</Button>
           </Link>
         </div>
-        <button type="button" onClick={() => setChatDialogOpen(true)} className="text-xs font-medium text-primary hover:text-primary-hover mb-4">
+        <Button type="button" variant="ghost" size="sm" onClick={() => setChatDialogOpen(true)} className="!px-0 !py-0 min-h-0 text-xs font-medium text-primary hover:text-primary-hover mb-4">
           Open chat in popup
-        </button>
+        </Button>
         <div className="pt-4 border-t border-neutral-200">
           <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-2">Quick prompts</p>
           <div className="flex flex-wrap gap-2">
             {QUICK_PROMPTS.map((prompt) => (
-              <button
+              <Button
                 key={prompt}
                 type="button"
+                variant="secondary"
+                size="sm"
                 onClick={() => setQuery(prompt)}
-                className="px-3 py-1.5 rounded-lg text-xs font-medium text-neutral-700 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 transition-colors"
+                className="px-3 py-1.5 min-h-0 text-xs font-medium text-neutral-700 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 transition-colors"
               >
                 {prompt}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -161,27 +161,24 @@ export default function MeetAi() {
       </aside>
 
       {/* Summarize popup — opened by attachment icon; user drops/selects file here */}
-      {summarizeOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setSummarizeOpen(false)}>
-          <div className="bg-white rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+      <Modal open={summarizeOpen} onClose={() => setSummarizeOpen(false)} title="Summarize" size="max-w-4xl">
+          <div className="bg-white rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200">
-              <h2 className="text-sm font-bold text-neutral-900 uppercase tracking-wide">Summarize</h2>
               <div className="flex items-center gap-2">
                 <Link to="/focus-room">
                   <Button variant="primary" size="sm" className="rounded-lg text-xs font-bold">Focus room</Button>
                 </Link>
-                <button type="button" onClick={() => setSummarizeOpen(false)} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900" aria-label="Close">
-                  <CloseIcon className="w-5 h-5" />
-                </button>
+                <IconButton type="button" onClick={() => setSummarizeOpen(false)} className="p-2 text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900" label="Close" icon={<CloseIcon className="w-5 h-5" />} />
               </div>
             </div>
             <div className="flex-1 grid grid-cols-1 md:grid-cols-[1fr_1fr] min-h-0 overflow-hidden">
               <div className="p-4 border-r border-neutral-200 flex flex-col gap-4 overflow-y-auto">
                 <div>
                   <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide mb-2">Drop file here</p>
-                  <input ref={summarizeInputRef} type="file" accept=".pdf,application/pdf" className="hidden" onChange={handleSummarizeFile} aria-label="Choose PDF" />
-                  <button
+                  <Input ref={summarizeInputRef} type="file" accept=".pdf,application/pdf" className="hidden" onChange={handleSummarizeFile} aria-label="Choose PDF" />
+                  <Button
                     type="button"
+                    variant="ghost"
                     onClick={() => summarizeInputRef.current?.click()}
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
@@ -191,23 +188,21 @@ export default function MeetAi() {
                     <span className="text-sm font-semibold text-neutral-600">Drop PDF</span>
                     <span className="text-xs">Max {MAX_PDF_MB}MB</span>
                     {droppedFile && <span className="text-xs font-medium text-primary mt-1 truncate max-w-full px-2">{droppedFile.name}</span>}
-                  </button>
+                  </Button>
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide">History</p>
-                    <button type="button" className="p-1 rounded text-neutral-500 hover:bg-neutral-200" aria-label="Refresh">
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
-                    </button>
+                    <IconButton type="button" size="sm" variant="ghost" className="p-1 rounded text-neutral-500 hover:bg-neutral-200" label="Refresh" icon={<svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>} />
                   </div>
                   <ul className="space-y-1.5">
                     {SUMMARY_HISTORY.map((item) => (
                       <li key={item.id}>
-                        <button type="button" className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50 text-left hover:bg-neutral-100 text-sm font-medium text-neutral-900">
+                        <Button type="button" variant="ghost" size="sm" className="w-full !justify-start flex items-center gap-2 px-3 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50 text-left hover:bg-neutral-100 text-sm font-medium text-neutral-900">
                           <span className="text-neutral-400 shrink-0" aria-hidden><DocumentIcon className="w-4 h-4" /></span>
                           <span className="min-w-0 truncate flex-1">{item.name}</span>
                           <span className="text-[10px] text-neutral-500 shrink-0">{item.time}</span>
-                        </button>
+                        </Button>
                       </li>
                     ))}
                   </ul>
@@ -233,21 +228,17 @@ export default function MeetAi() {
               </div>
             </div>
           </div>
-        </div>
-      )}
+      </Modal>
 
       {/* Chat dialog popup */}
-      {chatDialogOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setChatDialogOpen(false)}>
-          <div className="bg-white rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+      <Modal open={chatDialogOpen} onClose={() => setChatDialogOpen(false)} title="Together AI - Chat" size="max-w-2xl">
+          <div className="bg-white rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200 bg-neutral-50">
               <div className="flex items-center gap-2">
                 <AiBotIcon className="w-8 h-8" />
                 <h2 className="text-sm font-bold text-neutral-900 uppercase tracking-wide">Together AI — Chat</h2>
               </div>
-              <button type="button" onClick={() => setChatDialogOpen(false)} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900" aria-label="Close">
-                <CloseIcon className="w-5 h-5" />
-              </button>
+              <IconButton type="button" onClick={() => setChatDialogOpen(false)} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900" label="Close" icon={<CloseIcon className="w-5 h-5" />} />
             </div>
             <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
               {MESSAGES.map((msg) => (
@@ -278,9 +269,7 @@ export default function MeetAi() {
                       {attachments.map(({ id, file }) => (
                         <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-neutral-100 text-neutral-700 text-xs">
                           <span className="max-w-[100px] truncate">{file.name}</span>
-                          <button type="button" onClick={() => removeAttachment(id)} className="text-neutral-500 hover:text-neutral-900" aria-label={`Remove ${file.name}`}>
-                            <CloseIcon className="w-3 h-3" />
-                          </button>
+                          <IconButton type="button" size="sm" variant="ghost" onClick={() => removeAttachment(id)} className="!p-0 min-h-0 text-neutral-500 hover:text-neutral-900" label={`Remove ${file.name}`} icon={<CloseIcon className="w-3 h-3" />} />
                         </span>
                       ))}
                     </div>
@@ -289,8 +278,7 @@ export default function MeetAi() {
               />
             </div>
           </div>
-        </div>
-      )}
+      </Modal>
     </div>
   )
 }

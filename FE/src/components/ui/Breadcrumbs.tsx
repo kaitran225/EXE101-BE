@@ -13,7 +13,7 @@ export interface BreadcrumbsProps {
 }
 
 const chevronIcon = (
-  <svg width="5" height="7" viewBox="0 0 5 7" fill="none" className="text-neutral-900 dark:text-neutral-900">
+  <svg width="5" height="7" viewBox="0 0 5 7" fill="none" className="text-primary">
     <path
       d="M2.68333 3.5L0 0.816667L0.816667 0L4.31667 3.5L0.816667 7L0 6.18333L2.68333 3.5Z"
       fill="currentColor"
@@ -37,7 +37,7 @@ export function Breadcrumbs({
       : items
 
   const Sep = () => (
-    <span className="text-neutral-500 px-1" aria-hidden>
+    <span className="text-primary/70 px-1" aria-hidden>
       {separator === 'chevron' ? chevronIcon : separator === 'slash' ? '/' : '·'}
     </span>
   )
@@ -51,11 +51,11 @@ export function Breadcrumbs({
           <span key={i} className="inline-flex items-center gap-1">
             {i > 0 && <Sep />}
             {isEllipsis ? (
-              <span className="text-sm text-neutral-500">...</span>
+              <span className="text-sm text-primary/70">...</span>
             ) : item.href && !isLast ? (
               <a
                 href={item.href}
-                className="text-sm font-normal text-neutral-900 dark:text-neutral-900 underline hover:text-neutral-700 dark:hover:text-neutral-600"
+                className="text-sm font-medium text-primary underline underline-offset-2 hover:text-accent"
               >
                 {item.label}
               </a>

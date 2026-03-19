@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from '../../../components/common'
+import { Button, IconButton, Input, SettingsIcon } from '../../../components/common'
 import { myTeamsData, archivedData } from '../../../mocks'
 
 function MyTeamCard({ tag, code, subtitle, members }: (typeof myTeamsData)[0]) {
@@ -89,19 +89,14 @@ export default function AllTeams() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </span>
-            <input
+            <Input
               type="search"
               placeholder="Search..."
-              className="w-full pl-8 pr-2 py-1.5 text-sm border border-neutral-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-neutral-300 focus:border-neutral-300"
+              className="w-full h-9 min-h-0 pl-8 pr-2 py-1.5 text-sm border border-neutral-200 rounded-lg bg-white"
               aria-label="Search"
             />
           </div>
-          <button type="button" className="w-9 h-9 rounded-lg border border-neutral-200 bg-white text-neutral-600 flex items-center justify-center hover:bg-neutral-50 hover:border-neutral-400" aria-label="Settings">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-            </svg>
-          </button>
+          <IconButton type="button" className="w-9 h-9" icon={<SettingsIcon className="w-4 h-4" />} label="Settings" />
           <Link to="/notifications" className="w-9 h-9 rounded-lg border border-neutral-200 bg-white text-neutral-600 flex items-center justify-center hover:bg-neutral-50 hover:border-neutral-400" aria-label="Notifications">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />

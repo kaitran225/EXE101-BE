@@ -1251,21 +1251,21 @@ export default function DebugComponents() {
               <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-900 mb-4">Column Heading</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <p className="text-[10px] text-neutral-400">Selectable</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-neutral-600 dark:text-neutral-600">Selectable</p>
                   {['Default', 'Hover', 'Sorted'].map((s) => (
-                    <div key={s} className={`flex items-center gap-2 px-3 py-2 rounded-lg ${s === 'Hover' ? 'bg-primary/5' : 'bg-neutral-50 dark:bg-neutral-900'}`}>
+                    <div key={s} className={`flex items-center gap-2 px-3 py-2 rounded-lg border border-transparent ${s === 'Hover' ? 'bg-primary/5 border-primary/20 dark:border-primary/25' : 'bg-neutral-50 dark:bg-[var(--color-surface)] dark:border-[var(--color-charcoal)]'}`}>
                       <span className="w-4 h-4 rounded border-2 border-neutral-300 dark:border-neutral-500 shrink-0" />
-                      <span className="text-sm font-medium text-neutral-900 dark:text-neutral-200">Label</span>
-                      <span className="ml-auto text-neutral-400 text-xs">{s === 'Sorted' ? '↕' : '↕'}</span>
+                      <span className="text-sm font-medium text-neutral-900 dark:text-neutral-900">Label</span>
+                      <span className="ml-auto text-neutral-500 dark:text-neutral-500 text-xs">{s === 'Sorted' ? '↕' : '↕'}</span>
                     </div>
                   ))}
                 </div>
                 <div className="space-y-2">
-                  <p className="text-[10px] text-neutral-400">Inselectable</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-neutral-600 dark:text-neutral-600">Inselectable</p>
                   {['Default', 'Hover', 'Sorted'].map((s) => (
-                    <div key={s} className={`flex items-center gap-2 px-3 py-2 rounded-lg ${s === 'Hover' ? 'bg-primary/5' : 'bg-neutral-50 dark:bg-neutral-900'}`}>
-                      <span className="text-sm font-medium text-neutral-900 dark:text-neutral-200">Label</span>
-                      <span className="ml-auto text-neutral-400 text-xs">{s === 'Sorted' ? '↕' : '↕'}</span>
+                    <div key={s} className={`flex items-center gap-2 px-3 py-2 rounded-lg border border-transparent ${s === 'Hover' ? 'bg-primary/5 border-primary/20 dark:border-primary/25' : 'bg-neutral-50 dark:bg-[var(--color-surface)] dark:border-[var(--color-charcoal)]'}`}>
+                      <span className="text-sm font-medium text-neutral-900 dark:text-neutral-900">Label</span>
+                      <span className="ml-auto text-neutral-500 dark:text-neutral-500 text-xs">{s === 'Sorted' ? '↕' : '↕'}</span>
                     </div>
                   ))}
                 </div>

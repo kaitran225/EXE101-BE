@@ -1,5 +1,5 @@
 import { useNavigate, Link } from 'react-router-dom'
-import { Button, Input } from '../../../components/common'
+import { Badge, Button, Card, Input } from '../../../components/common'
 
 export default function ResetPassword() {
   const navigate = useNavigate()
@@ -11,8 +11,11 @@ export default function ResetPassword() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-full w-full">
-      <div className="w-full max-w-[380px] p-6 md:p-8 rounded-xl border border-neutral-200 bg-white shadow-sm flex flex-col gap-6">
-        <h2 className="text-neutral-900 text-2xl font-bold uppercase tracking-wide text-center">Reset password</h2>
+      <Card className="w-full max-w-[400px] p-7 md:p-8 border-2 border-neutral-200 dark:border-[var(--color-charcoal)] shadow-lg bg-white/95 dark:bg-[var(--color-surface)] flex flex-col gap-6">
+        <div className="text-center space-y-2">
+          <Badge variant="primary" className="normal-case tracking-normal">Secure your account</Badge>
+          <h2 className="text-neutral-900 dark:text-neutral-900 text-3xl font-bold tracking-tight">Reset password</h2>
+        </div>
         <form onSubmit={handleConfirm} className="flex flex-col gap-4">
           <Input label="PASSWORD" placeholder="********" type="password" />
           <Input label="CONFIRM PASSWORD" placeholder="********" type="password" />
@@ -24,7 +27,7 @@ export default function ResetPassword() {
         <p className="text-center text-sm text-neutral-500">
           <Link to="/welcome" className="font-semibold text-accent hover:opacity-90">Back to log in</Link>
         </p>
-      </div>
+      </Card>
     </div>
   )
 }

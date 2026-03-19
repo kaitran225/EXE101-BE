@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card, Input, Select } from '../../../components/common'
+import { Button, Card, Input, Select, SegmentedControl } from '../../../components/common'
 
 const MAJOR_OPTIONS = [
   { value: '', label: 'Select your major' },
@@ -62,23 +62,11 @@ export default function Personalize() {
 
           <div>
             <p className="text-sm font-medium text-neutral-900 mb-3">Daily study goal</p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {STUDY_GOALS.map((g) => (
-                <button
-                  key={g.value}
-                  type="button"
-                  onClick={() => setGoal(g.value)}
-                  className={`py-3 px-4 rounded-xl border-2 text-center transition-colors ${
-                    goal === g.value
-                      ? 'bg-accent border-accent text-primary-foreground'
-                      : 'bg-white border-neutral-300 text-neutral-900 hover:border-neutral-400'
-                  }`}
-                >
-                  <span className="block font-bold text-lg">{g.label}</span>
-                  <span className="block text-xs font-medium opacity-90 mt-0.5">{g.sub}</span>
-                </button>
-              ))}
-            </div>
+            <SegmentedControl
+              value={goal}
+              onChange={setGoal}
+              options={STUDY_GOALS.map((g) => ({ value: g.value, label: `${g.label} ${g.sub}` }))}
+            />
           </div>
         </div>
 

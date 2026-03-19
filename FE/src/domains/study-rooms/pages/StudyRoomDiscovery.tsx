@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card, Input } from '../../../components/common'
+import { Badge, Button, Card, Input, SegmentedControl } from '../../../components/common'
 import { FILTERS, FAKE_ROOMS, MY_ROOM_IDS, SUGGESTED_IDS, STUDY_ROOMS_TABS, type Room } from '../../../mocks'
 
 type TabKey = (typeof STUDY_ROOMS_TABS)[number]['key']
@@ -36,6 +36,7 @@ export default function StudyRoomDiscovery() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row justify-between items-start gap-3 pb-4 border-b-2 border-neutral-200">
         <div>
+          <Badge variant="milestone" className="mb-2 normal-case tracking-normal">Find your best study vibe</Badge>
           <h1 className="text-2xl font-bold text-neutral-900 mb-1 uppercase tracking-tight">Study rooms</h1>
           <p className="text-sm text-neutral-600">Find a room or create your own to study with others.</p>
         </div>
@@ -58,22 +59,11 @@ export default function StudyRoomDiscovery() {
 
       {/* Tabs: Explore | My rooms | Suggested */}
       <div className="flex flex-wrap items-center gap-3">
-        <div className="flex gap-1 border-b-2 border-neutral-200">
-          {STUDY_ROOMS_TABS.map((t) => (
-            <button
-              key={t.key}
-              type="button"
-              onClick={() => setTab(t.key)}
-              className={`px-4 py-2.5 text-sm font-semibold rounded-t transition-colors -mb-px ${
-                tab === t.key
-                  ? 'bg-white border-2 border-neutral-200 border-b-0 text-accent'
-                  : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+        <SegmentedControl
+          value={tab}
+          onChange={(next) => setTab(next as TabKey)}
+          options={STUDY_ROOMS_TABS.map((t) => ({ value: t.key, label: t.label }))}
+        />
         <Link to="/study-rooms/recommend">
           <Button variant="secondary" size="sm" className="border-2 border-neutral-200">Matching room</Button>
         </Link>
@@ -82,29 +72,36 @@ export default function StudyRoomDiscovery() {
       <div className="flex flex-col gap-3">
         <div className="flex gap-1.5 flex-wrap">
           {FILTERS.map((f) => (
-            <button
+            <Button
               key={f.key}
-              type="button"
+              size="sm"
+              variant="secondary"
               onClick={() => setCategory(f.key)}
-              className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors border-2 ${
+              className={`px-2.5 py-1 text-xs rounded-lg min-h-0 border-2 ${
                 category === f.key
                   ? 'font-bold text-neutral-900 bg-accent-muted text-accent border-accent/20'
                   : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 border-neutral-200'
               }`}
             >
               {f.label}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
 
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {roomsToShow.length === 0 ? (
-          <p className="col-span-full text-neutral-500 text-sm py-8 text-center">
-            {tab === 'my'
-              ? 'You haven’t joined any rooms yet. Switch to Explore to find one.'
-              : 'No rooms match. Try a different search or category.'}
-          </p>
+          <Card variant="featured" className="col-span-full p-8 text-center">
+            <p className="text-sm font-semibold text-neutral-900 mb-1">No rooms found</p>
+            <p className="text-sm text-neutral-500">
+              {tab === 'my'
+                ? 'You haven’t joined any rooms yet. Switch to Explore to find one.'
+                : 'No rooms match this filter. Try different keywords or category.'}
+            </p>
+            <div className="mt-4">
+              <Button variant="tonal" size="sm" onClick={() => { setSearch(''); setCategory('all') }}>Reset filters</Button>
+            </div>
+          </Card>
         ) : (
           roomsToShow.map((room) => (
             <Card key={room.id} className="cursor-pointer hover:shadow-md transition-shadow flex flex-col p-4 border-2 border-neutral-200">
@@ -116,9 +113,9 @@ export default function StudyRoomDiscovery() {
               {room.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 mb-2">
                   {room.tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className="px-1.5 py-0.5 text-[10px] font-medium bg-neutral-100 text-neutral-700 rounded border border-neutral-200">
+                    <Badge key={tag} variant="default" className="px-1.5 py-0.5 text-[10px] normal-case tracking-normal font-medium text-neutral-700">
                       {tag}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
               )}

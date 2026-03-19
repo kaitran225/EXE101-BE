@@ -1,9 +1,5 @@
-import { useEffect } from 'react'
-import { authApi } from '../api/client'
+import { Navigate } from 'react-router-dom'
 
 export default function Login() {
-  useEffect(() => {
-    window.location.href = authApi.loginUrl()
-  }, [])
-  return <p>Redirecting to login…</p>
+  return <Navigate to="/welcome" replace />
 }

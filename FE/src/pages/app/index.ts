@@ -17,3 +17,4 @@ export { ProfileWithSidebar, Personalize, Personalize2, Personalize3 } from '../
 export { Calendar } from '../../domains/calendar'
 export { Notification } from '../../domains/notifications'
 export { Transaction, Subscription, Shop } from '../../domains/billing'
+export { AdminDashboard, AdminUsers, AdminAccountSettings } from '../../domains/admin'

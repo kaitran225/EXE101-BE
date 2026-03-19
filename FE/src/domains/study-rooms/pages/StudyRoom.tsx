@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AiBotIcon, Button, Card } from '../../../components/common'
+import { AiBotIcon, Button, Card, ChatInputBar, IconButton, Modal } from '../../../components/common'
 import { STUDY_ROOM_CHAT_MESSAGES as CHAT_MESSAGES, STUDY_ROOM_PARTICIPANTS as PARTICIPANTS } from '../../../mocks'
 
 export default function StudyRoom() {
@@ -10,7 +10,7 @@ export default function StudyRoom() {
   const [videoOn, setVideoOn] = useState(true)
 
   return (
-    <div className="fixed inset-0 z-40 flex flex-col h-screen w-screen bg-neutral-200 gap-3 p-3">
+    <div className="min-h-screen w-full flex flex-col bg-neutral-200 dark:bg-[var(--color-background)] gap-3 p-3">
       {/* Header — solid white, stronger border and shadow for contrast */}
       <header
         className="flex-shrink-0 flex items-center justify-between gap-4 px-4 md:px-5 py-2 bg-white border-2 border-neutral-300 rounded-2xl shadow-md"
@@ -100,16 +100,13 @@ export default function StudyRoom() {
             ))}
           </div>
           <div className="p-4 border-t-2 border-neutral-300">
-            <input
-              type="text"
-              placeholder="Type a message..."
-              className="w-full pl-3 pr-2.5 py-1.5 text-sm border-2 border-neutral-300 rounded-xl bg-white text-neutral-900 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+            <ChatInputBar
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
+              onSend={() => {}}
+              onFileChange={() => {}}
+              placeholder="Type a message..."
             />
-            <Button variant="ghost" size="sm" className="w-full mt-1.5 text-neutral-500 font-medium text-xs py-1">
-              Send
-            </Button>
           </div>
         </aside>
       </div>
@@ -119,48 +116,10 @@ export default function StudyRoom() {
         className="flex-shrink-0 flex items-center justify-center gap-4 px-4 md:px-5 py-2 bg-white border-2 border-neutral-300 rounded-2xl shadow-md"
       >
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setMicOn(!micOn)}
-            className={`w-10 h-10 rounded-xl border-2 flex items-center justify-center transition-colors ${
-              micOn ? 'bg-white border-neutral-300 text-neutral-700 hover:bg-neutral-50 hover:border-neutral-400' : 'bg-red-100 border-red-400 text-red-700'
-            }`}
-            aria-label={micOn ? 'Mute' : 'Unmute'}
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={() => setVideoOn(!videoOn)}
-            className={`w-10 h-10 rounded-xl border-2 flex items-center justify-center transition-colors ${
-              videoOn ? 'bg-white border-neutral-300 text-neutral-700 hover:bg-neutral-50 hover:border-neutral-400' : 'bg-red-100 border-red-400 text-red-700'
-            }`}
-            aria-label={videoOn ? 'Turn off camera' : 'Turn on camera'}
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="w-10 h-10 rounded-xl border-2 border-neutral-300 bg-white text-neutral-700 flex items-center justify-center hover:bg-neutral-50 hover:border-neutral-400"
-            aria-label="Share screen"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="w-10 h-10 rounded-xl border-2 border-neutral-300 bg-white text-neutral-700 flex items-center justify-center hover:bg-neutral-50 hover:border-neutral-400"
-            aria-label="Participants"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </button>
+          <IconButton onClick={() => setMicOn(!micOn)} label={micOn ? 'Mute' : 'Unmute'} className={`border-2 ${micOn ? 'bg-white border-neutral-300 text-neutral-700 hover:bg-neutral-50 hover:border-neutral-400' : 'bg-red-100 border-red-400 text-red-700'}`} icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>} />
+          <IconButton onClick={() => setVideoOn(!videoOn)} label={videoOn ? 'Turn off camera' : 'Turn on camera'} className={`border-2 ${videoOn ? 'bg-white border-neutral-300 text-neutral-700 hover:bg-neutral-50 hover:border-neutral-400' : 'bg-red-100 border-red-400 text-red-700'}`} icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>} />
+          <IconButton label="Share screen" className="border-2 border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-50 hover:border-neutral-400" icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>} />
+          <IconButton label="Participants" className="border-2 border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-50 hover:border-neutral-400" icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>} />
         </div>
         <Link to="/study-rooms" className="ml-4">
           <Button variant="secondary" size="sm" className="gap-1.5 rounded-xl text-[11px] font-bold py-1.5 h-8 border-2 border-neutral-900">
@@ -173,15 +132,8 @@ export default function StudyRoom() {
       </footer>
 
       {/* End session modal — Card component uses dashboard theme */}
-      {showEndModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
-          onClick={() => setShowEndModal(false)}
-        >
-          <Card
-            className="p-5 max-w-md w-full"
-            onClick={(e) => e.stopPropagation()}
-          >
+      <Modal open={showEndModal} onClose={() => setShowEndModal(false)} size="max-w-md" title="End study session?">
+          <Card className="p-5 max-w-md w-full">
             <p className="text-lg font-bold text-neutral-900 text-center mb-4">
               End study session?
             </p>
@@ -207,8 +159,7 @@ export default function StudyRoom() {
               </div>
             </div>
           </Card>
-        </div>
-      )}
+      </Modal>
     </div>
   )
 }

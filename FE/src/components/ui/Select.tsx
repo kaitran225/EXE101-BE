@@ -31,10 +31,10 @@ export function Select({
         <select
           id={selectId}
           className={`
-            w-full appearance-none px-4 py-3 pr-10 bg-white dark:bg-[var(--color-surface)] border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
+            w-full appearance-none px-4 py-3 pr-10 bg-gradient-to-b from-white to-neutral-50 dark:from-[var(--color-surface)] dark:to-neutral-100/70 border border-[var(--color-charcoal)] rounded-[var(--radius-card)]
             text-neutral-900 dark:text-neutral-900
             transition-colors duration-150 ease-out transition-shadow duration-150
-            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
+            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent focus:shadow-[var(--shadow-3)]
             disabled:opacity-70 disabled:bg-neutral-100 dark:disabled:bg-[var(--color-surface)] dark:disabled:text-neutral-500
             min-h-[44px]
             ${error ? 'border-error ring-1 ring-error' : ''}
@@ -51,7 +51,7 @@ export function Select({
           ))}
         </select>
         <span
-          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500"
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-primary"
           aria-hidden
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

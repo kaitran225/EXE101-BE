@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Button, Input } from '../ui'
+import { Button, IconButton, Input } from '../ui'
 import { AttachIcon } from '../icons'
 
 const DEFAULT_ACCEPT_FILES = '.pdf,.doc,.docx,.txt,.md,image/*'
@@ -51,24 +51,24 @@ export function ChatInputBar({
       />
       {attachmentsSlot}
       <div className="flex items-center gap-2">
-        <button
-          type="button"
+        <IconButton
+          icon={<AttachIcon className="w-5 h-5" />}
+          label={ariaLabelAttach}
+          variant="primary"
+          size="md"
           onClick={() => fileInputRef.current?.click()}
-          className="shrink-0 w-10 h-10 rounded-lg bg-neutral-900 dark:bg-[var(--color-surface)] text-white flex items-center justify-center hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
-          aria-label={ariaLabelAttach}
-        >
-          <AttachIcon className="w-5 h-5" />
-        </button>
+          className="shrink-0"
+        />
         <div className="flex-1 min-w-0">
           <Input
             placeholder={placeholder}
-            className="w-full h-10 min-h-0 py-0 rounded-lg border-2 border-neutral-200 dark:border-[var(--color-charcoal)] text-sm"
+            className="w-full h-10 min-h-0 py-0 rounded-lg border-2 border-neutral-200 dark:border-[var(--color-charcoal)] text-sm shadow-[var(--shadow-1)]"
             value={value}
             onChange={onChange}
             aria-label={ariaLabelMessage}
           />
         </div>
-        <Button variant="primary" size="sm" className="h-10 rounded-lg shrink-0 px-4" onClick={onSend}>
+        <Button variant="cta" size="sm" className="h-10 rounded-lg shrink-0 px-4" onClick={onSend}>
           Send
         </Button>
       </div>

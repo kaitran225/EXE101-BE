@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button, Card, Input, Textarea, Select } from '../../../components/common'
+import { Button, Card, Input, RadioGroup, Textarea, Select } from '../../../components/common'
 import { topicOptions, durationOptions } from '../../../mocks'
 
 export default function CreateNewRoomStudy() {
@@ -27,7 +27,13 @@ export default function CreateNewRoomStudy() {
                 <p className="font-bold">Public Room</p>
                 <p className="text-sm text-neutral-500">Anyone can join this room via the browser.</p>
               </div>
-              <input type="radio" name="access" defaultChecked aria-label="Public" />
+              <RadioGroup
+                name="access"
+                value="public"
+                options={[{ value: 'public', label: '' }]}
+                onChange={() => {}}
+                className="items-end"
+              />
             </div>
             <Input label="Max members (optional)" type="number" placeholder="10" />
           </div>

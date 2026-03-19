@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Badge, Button } from '../../../components/common'
+import { Badge, Button, Card } from '../../../components/common'
 import { MEETING_PARTICIPANTS as PARTICIPANTS, SUMMARY_ITEMS, MEETING_TASKS as TASKS } from '../../../mocks'
 
 export default function MainMeetingBoard() {
@@ -7,8 +7,8 @@ export default function MainMeetingBoard() {
   return (
     <div className="flex h-full min-h-0 flex-col gap-0">
       {/* Recording indicator */}
-      <div className="flex justify-end pb-2">
-        <Badge variant="highlight" className="rounded-md">
+      <div className="flex justify-end pb-3">
+        <Badge variant="streak" className="rounded-md normal-case tracking-normal">
           ● Recording Live
         </Badge>
       </div>
@@ -18,12 +18,13 @@ export default function MainMeetingBoard() {
         {/* Video grid 2x2 */}
         <div className="grid min-h-0 grid-cols-2 gap-3 sm:gap-4">
           {PARTICIPANTS.map((p) => (
-            <div
+            <Card
               key={p.name}
-              className="flex flex-col rounded-xl border-2 border-neutral-300 bg-neutral-100/80 overflow-hidden"
+              variant="interactive"
+              className="flex flex-col rounded-xl border-2 border-neutral-300 bg-neutral-100/80 overflow-hidden p-0"
             >
               <div className="flex flex-1 flex-col items-center justify-center p-4 text-center">
-                <span className="mb-2 text-xs font-bold uppercase text-neutral-500">Video</span>
+                <span className="mb-2 text-xs font-bold uppercase text-neutral-500">Live feed</span>
                 <span className="text-sm text-neutral-600">[ Video feed: {p.name} ]</span>
               </div>
               <div className="flex items-center gap-2 border-t border-neutral-200 bg-white/80 px-3 py-2">
@@ -32,7 +33,7 @@ export default function MainMeetingBoard() {
                   {p.name}{p.host ? ' (Host)' : ''}
                 </span>
               </div>
-            </div>
+            </Card>
           ))}
           {/* You (Camera Off) */}
           <div className="flex flex-col rounded-xl border-2 border-dashed border-neutral-400 bg-neutral-50 overflow-hidden">
@@ -50,7 +51,7 @@ export default function MainMeetingBoard() {
         </div>
 
         {/* AI Companion sidebar */}
-        <aside className="flex min-h-0 flex-col rounded-xl border-2 border-neutral-300 bg-white overflow-hidden">
+        <aside className="flex min-h-0 flex-col rounded-xl border-2 border-neutral-300 bg-white overflow-hidden shadow-sm">
           <div className="flex items-center gap-2 border-b border-neutral-200 px-4 py-3">
             <div className="h-4 w-4 shrink-0 rounded border-2 border-neutral-400 bg-white" aria-hidden />
             <h2 className="text-sm font-bold uppercase tracking-wide text-neutral-900">AI Companion</h2>
@@ -60,7 +61,7 @@ export default function MainMeetingBoard() {
             {/* Real-time summary */}
             <section>
               <div className="flex items-center justify-between gap-2 mb-2">
-                <h3 className="text-xs font-bold uppercase tracking-wide text-neutral-700">Real-time summary</h3>
+                <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-700">Real-time summary</h3>
                 <Button variant="ghost" size="sm" className="text-[10px] font-bold uppercase">
                   Auto-updating
                 </Button>
@@ -75,7 +76,7 @@ export default function MainMeetingBoard() {
 
             {/* Task suggestions */}
             <section>
-              <h3 className="text-xs font-bold uppercase tracking-wide text-neutral-700 mb-3">Task suggestions</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-700 mb-3">Task suggestions</h3>
               <ul className="space-y-3">
                 {TASKS.map((t, i) => (
                   <li key={i} className="flex items-start gap-2">
@@ -91,7 +92,7 @@ export default function MainMeetingBoard() {
 
             {/* Post-meeting report */}
             <section>
-              <h3 className="text-xs font-bold uppercase tracking-wide text-neutral-700 mb-2">Post-meeting report</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-700 mb-2">Post-meeting report</h3>
               <div className="flex items-center gap-2 rounded-lg border-2 border-dashed border-neutral-300 bg-neutral-50 p-4">
                 <div className="h-4 w-4 shrink-0 rounded border-2 border-neutral-400 bg-white" aria-hidden />
                 <p className="text-xs text-neutral-600">
@@ -107,7 +108,7 @@ export default function MainMeetingBoard() {
       <div className="flex shrink-0 flex-wrap items-center justify-between gap-4 border-t-2 border-neutral-200 bg-white px-4 py-3">
         <div className="flex items-center gap-2 sm:gap-4">
           {['MIC', 'CAM', 'SCR', 'HND'].map((label) => (
-            <Button key={label} variant="secondary" size="sm" className="uppercase">
+            <Button key={label} variant="tonal" size="sm" className="uppercase">
               {label}
             </Button>
           ))}

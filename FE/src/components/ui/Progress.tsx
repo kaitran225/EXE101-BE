@@ -18,7 +18,7 @@ export interface ProgressProps {
 }
 
 const variantClasses: Record<ProgressVariant, string> = {
-  default: 'bg-primary',
+  default: 'bg-gradient-to-r from-primary to-accent',
   success: 'bg-success',
   warning: 'bg-warning',
   error: 'bg-error',
@@ -51,14 +51,14 @@ export function Progress({
         </div>
       )}
       <div
-        className={`${sizeClasses[size]} w-full bg-white dark:bg-neutral-700 border border-[var(--color-charcoal)] rounded overflow-hidden`}
+        className={`${sizeClasses[size]} w-full bg-white/70 dark:bg-neutral-700 border border-[var(--color-charcoal)] rounded-full overflow-hidden`}
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={max}
       >
         <div
-          className={`h-full ${variantClasses[variant]} transition-[width] duration-300`}
+          className={`h-full ${variantClasses[variant]} transition-[width] duration-500 ease-out`}
           style={{ width: `${pct}%` }}
         />
       </div>

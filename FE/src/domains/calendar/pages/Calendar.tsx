@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Button } from '../../../components/common'
+import { Button, Input } from '../../../components/common'
 import { WEEKDAYS, INITIAL_AI_MESSAGE, buildFakeEvents, getMockAiReply, EVENT_STYLES, type ChatMessage } from '../../../mocks'
 import { toDateKey, isSameDay, getCalendarDays } from '../../../utils/calendarUtils'
 
@@ -155,10 +155,9 @@ export default function Calendar() {
           </div>
           <div className="shrink-0 p-3 border-t-2 border-neutral-200 dark:border-[var(--color-charcoal)] space-y-2">
             <div className="flex gap-2 items-stretch">
-              <input
-                type="text"
+              <Input
                 placeholder="Ask anything..."
-                className="flex-1 min-w-0 h-9 px-3 rounded-lg border-2 border-neutral-200 dark:border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] text-neutral-900 dark:text-neutral-900 placeholder:text-neutral-500 dark:placeholder:text-neutral-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                className="flex-1 min-w-0 h-9 min-h-0 px-3 py-0 rounded-lg border-2 border-neutral-200 dark:border-[var(--color-charcoal)] text-sm"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && sendMessage()}

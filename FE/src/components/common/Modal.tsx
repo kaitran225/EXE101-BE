@@ -13,17 +13,17 @@ export function Modal({ open, onClose, title, size = 'max-w-md', children }: Mod
   if (!open) return null
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/55 backdrop-blur-[2px] animate-fade-in"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
     >
       <div
-        className={`bg-white dark:bg-[var(--color-surface)] rounded-xl border-2 border-[var(--color-charcoal)] w-full shadow-xl overflow-hidden animate-scale-in ${size}`}
+        className={`bg-white dark:bg-[var(--color-surface)] rounded-xl border-2 border-[var(--color-charcoal)] w-full shadow-[var(--shadow-6)] overflow-hidden animate-scale-in ${size}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-4 py-3 border-b-2 border-[var(--color-charcoal)]">
+        <div className="flex items-center justify-between px-4 py-3 border-b-2 border-[var(--color-charcoal)] bg-gradient-to-r from-accent-muted/40 to-white dark:from-primary/15 dark:to-[var(--color-surface)]">
           {title && (
             <h2 id="modal-title" className="text-sm font-bold text-neutral-900 dark:text-neutral-900 uppercase tracking-wide">
               {title}

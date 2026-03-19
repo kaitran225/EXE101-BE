@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { MeResponse } from '../../../types/dto'
-import { authApi, readApi, workflowApi, getStoredToken, clearStoredToken } from '../../../api/client'
+import { authApi, readApi, workflowApi, getStoredToken } from '../../../api/client'
 import { getFakeMeResponse, SKILLS, LEARNING_GOALS, COMPLETED_BY_DATE, MONTHLY_HOURS, HIGHLIGHT_MONTH, QUIZZES, NOTES } from '../../../mocks'
-import { Button, Card, Progress, Badge } from '../../../components/common'
+import { Button, Card, Progress, Badge, IconButton, Input } from '../../../components/common'
+import { useAuth } from '../../../contexts/AuthContext'
 
 export default function ProfileWithSidebar() {
+  const { logout } = useAuth()
   const [user, setUser] = useState<MeResponse | null>(null)
   const [readHealth, setReadHealth] = useState<string>('—')
   const [workflowHealth, setWorkflowHealth] = useState<string>('—')
@@ -40,11 +42,17 @@ export default function ProfileWithSidebar() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </span>
-            <button type="button" className="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-white border-2 border-neutral-300 flex items-center justify-center text-neutral-600 hover:bg-neutral-50" aria-label="Edit profile">
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-              </svg>
-            </button>
+            <IconButton
+              type="button"
+              className="absolute bottom-0 right-0 w-6 h-6"
+              variant="default"
+              label="Edit profile"
+              icon={(
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              )}
+            />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-neutral-900 uppercase tracking-tight">{displayName}</h1>
@@ -55,13 +63,9 @@ export default function ProfileWithSidebar() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <input type="search" placeholder="Search..." className="w-40 px-3 py-2 rounded-lg border-2 border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent" aria-label="Search" />
-          <button type="button" className="p-2 rounded-lg border-2 border-neutral-200 hover:bg-neutral-50" aria-label="Settings">
-            <svg className="w-5 h-5 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-          </button>
-          <button type="button" className="p-2 rounded-lg border-2 border-neutral-200 hover:bg-neutral-50" aria-label="Notifications">
-            <svg className="w-5 h-5 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-          </button>
+          <Input type="search" placeholder="Search..." className="w-40 h-10 min-h-0 px-3 py-2 rounded-lg border-2 border-neutral-200 text-sm" aria-label="Search" />
+          <IconButton type="button" className="p-2 w-10 h-10" aria-label="Settings" label="Settings" icon={<svg className="w-5 h-5 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>} />
+          <IconButton type="button" className="p-2 w-10 h-10" aria-label="Notifications" label="Notifications" icon={<svg className="w-5 h-5 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>} />
         </div>
       </div>
 
@@ -111,10 +115,10 @@ export default function ProfileWithSidebar() {
           <Card className="p-5 border-2 border-neutral-200" heading="Learning goals">
             <div className="flex flex-wrap gap-2">
               {LEARNING_GOALS.map((g) => (
-                <button key={g} type="button" className="px-3 py-2 rounded-xl border-2 border-accent/20 bg-accent-muted text-neutral-900 text-xs font-semibold flex items-center gap-1.5 hover:bg-accent-muted transition-colors">
+                <Button key={g} type="button" variant="secondary" size="sm" className="px-3 py-2 rounded-xl border-2 border-accent/20 bg-accent-muted text-neutral-900 text-xs font-semibold flex items-center gap-1.5 hover:bg-accent-muted transition-colors">
                   {g}
                   <span className="text-accent"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg></span>
-                </button>
+                </Button>
               ))}
             </div>
           </Card>
@@ -164,9 +168,9 @@ export default function ProfileWithSidebar() {
             <ul className="space-y-2">
               {NOTES.map((n, i) => (
                 <li key={i}>
-                  <button type="button" className="w-full text-left px-3 py-2 rounded-lg border-2 border-neutral-200 hover:bg-neutral-50 text-sm font-medium text-neutral-900 truncate">
+                  <Button type="button" variant="secondary" className="w-full text-left px-3 py-2 rounded-lg border-2 border-neutral-200 hover:bg-neutral-50 text-sm font-medium text-neutral-900 truncate justify-start">
                     {n}
-                  </button>
+                  </Button>
                 </li>
               ))}
             </ul>
@@ -202,7 +206,7 @@ export default function ProfileWithSidebar() {
               <Badge variant={readHealth === 'UP' ? 'primary' : 'outline'}>Read {readHealth}</Badge>
               <Badge variant={workflowHealth === 'UP' ? 'primary' : 'outline'}>Workflow {workflowHealth}</Badge>
             </div>
-            <Button variant="secondary" size="sm" className="w-full" onClick={() => { clearStoredToken(); setUser(null); window.location.href = '/' }}>Logout</Button>
+            <Button variant="secondary" size="sm" className="w-full" onClick={logout}>Logout</Button>
           </Card>
           <Card className="p-5 border-2 border-neutral-200" heading="Next reward">
             <div className="mb-2">

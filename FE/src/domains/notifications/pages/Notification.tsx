@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Card } from '../../../components/common'
+import { Badge, Button, Card, IconButton, SegmentedControl, SettingsIcon } from '../../../components/common'
 import { NOTIFICATION_TABS, NOTIFICATIONS, type NotificationItem, type NotificationType } from '../../../mocks'
 
 const TABS = NOTIFICATION_TABS
@@ -69,33 +69,15 @@ export default function Notification() {
           <h1 className="text-3xl font-bold text-neutral-900 tracking-tight">Notification Board</h1>
           <p className="text-neutral-600 mt-1">Don&apos;t miss out on study announcements and group activities.</p>
         </div>
-        <button
-          type="button"
-          className="p-2.5 rounded-xl border border-neutral-200 hover:bg-neutral-50 text-neutral-600 hover:text-neutral-900 transition-colors"
-          aria-label="Notification settings"
-        >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-        </button>
+        <IconButton icon={<SettingsIcon className="w-5 h-5" />} label="Notification settings" />
       </div>
 
-      <div className="flex gap-2 border-b border-neutral-200 pb-2">
-        {TABS.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            onClick={() => setTab(t.id)}
-            className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${
-              tab === t.id
-                ? 'bg-accent text-primary-foreground'
-                : 'bg-white text-neutral-700 border border-neutral-200 hover:bg-neutral-50'
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
+      <div className="border-b border-neutral-200 pb-2">
+        <SegmentedControl
+          value={tab}
+          onChange={(next) => setTab(next as TabId)}
+          options={TABS.map((t) => ({ value: t.id, label: t.label }))}
+        />
       </div>
 
       <ul className="space-y-3">
@@ -111,12 +93,12 @@ export default function Notification() {
                 <h3 className="font-bold text-neutral-900">{n.title}</h3>
                 <p className="text-sm text-neutral-600 mt-1">{n.description}</p>
                 {n.priority && (
-                  <span className="inline-block mt-2 text-xs font-semibold text-highlight">Priority</span>
+                  <Badge variant="warning" className="mt-2">Priority</Badge>
                 )}
               </div>
-              <span className="text-xs font-medium text-neutral-500 shrink-0 px-2 py-1 rounded bg-neutral-100">
+              <Badge variant="default" className="shrink-0">
                 {n.time}
-              </span>
+              </Badge>
             </Card>
           </li>
         ))}

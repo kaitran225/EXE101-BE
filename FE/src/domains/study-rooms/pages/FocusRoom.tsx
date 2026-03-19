@@ -23,7 +23,7 @@ export default function FocusRoom() {
   }
 
   return (
-    <div className="fixed inset-0 z-40 flex flex-col h-screen w-screen bg-white">
+    <div className="min-h-screen flex flex-col w-full bg-white dark:bg-[var(--color-surface)]">
       {/* Header: just Focus Room bar */}
       <header className="flex items-center justify-between gap-4 px-6 py-4 border-b-2 border-neutral-200 bg-white shrink-0">
         <div className="flex items-center gap-2">
@@ -194,8 +194,8 @@ export default function FocusRoom() {
               attachmentCount={attachments.length}
               secondaryActions={
                 <>
-                  <button type="button" onClick={() => setSummarizeOpen(true)} className="text-xs font-medium text-primary hover:text-primary-hover">Summarize</button>
-                  <button type="button" onClick={() => setDialogOpen(true)} className="text-xs font-medium text-primary hover:text-primary-hover">Open chat in popup</button>
+                  <Button type="button" variant="ghost" size="sm" onClick={() => setSummarizeOpen(true)} className="!px-0 !py-0 min-h-0 text-xs font-medium text-primary hover:text-primary-hover">Summarize</Button>
+                  <Button type="button" variant="ghost" size="sm" onClick={() => setDialogOpen(true)} className="!px-0 !py-0 min-h-0 text-xs font-medium text-primary hover:text-primary-hover">Open chat in popup</Button>
                 </>
               }
             />
@@ -217,12 +217,8 @@ export default function FocusRoom() {
       )}
 
       {/* End session modal — large, app theme, session statistics */}
-      {showEndModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/40" onClick={() => setShowEndModal(false)}>
-          <div
-            className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl border-2 border-neutral-200 overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
+      <Modal open={showEndModal} onClose={() => setShowEndModal(false)} size="max-w-2xl" title="End Session Summary">
+          <div className="w-full rounded-2xl bg-white dark:bg-[var(--color-surface)] shadow-2xl border-2 border-neutral-200 dark:border-[var(--color-charcoal)] overflow-hidden">
             <div className="bg-gradient-to-br from-accent-muted to-white px-8 pt-10 pb-12">
               <p className="text-2xl md:text-3xl font-bold text-neutral-900 text-center mb-10">
                 Done! You did well today.
@@ -251,8 +247,7 @@ export default function FocusRoom() {
               </Link>
             </div>
           </div>
-        </div>
-      )}
+      </Modal>
     </div>
   )
 }
