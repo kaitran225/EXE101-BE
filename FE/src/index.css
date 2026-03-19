@@ -57,13 +57,13 @@
   --color-primary: #ccff00;
   --color-primary-hover: #b8e600;
   --color-primary-foreground: #000000;
-  --color-accent: #a0c4ff;
+  --color-accent: #7aa7ff;
   --color-accent-muted: #242424;
   --color-surface: #1a1a1a;
   --color-background: #000000;
-  --color-highlight: #ff7f50;
-  --color-highlight-hover: #e86a3d;
-  --color-focus-area: #bdb2ff;
+  --color-highlight: #F8C662;
+  --color-highlight-hover: #f0b24f;
+  --color-focus-area: #6d20ff;
   --color-success: #34c759;
   --color-warning: #fdffb6;
   --color-error: #ff453a;

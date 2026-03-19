@@ -10,14 +10,14 @@ export default function Transaction() {
       <Card>
         <Table>
           <TableHead>
-            <TableRow className="border-b border-neutral-200">
+            <TableRow className="border-b border-white/10">
               <TableHeaderCell className="py-2">Date</TableHeaderCell>
               <TableHeaderCell className="py-2">Type</TableHeaderCell>
               <TableHeaderCell className="py-2 text-right">Amount</TableHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow className="border-b border-neutral-100">
+            <TableRow className="border-b border-white/10">
               <TableCell className="py-2">Today</TableCell>
               <TableCell className="py-2"><Badge variant="milestone" className="normal-case tracking-normal">XP earned</Badge></TableCell>
               <TableCell className="py-2 text-right font-semibold text-success">+50</TableCell>

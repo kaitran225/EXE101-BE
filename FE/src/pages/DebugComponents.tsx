@@ -28,6 +28,7 @@ import { textColorOn, getHueFamily, HUE_FAMILY_ORDER, hexToHsl } from '../utils/
 import { getCalendarDays, isSameDay, toDateKey } from '../utils/calendarUtils'
 import { WEEKDAYS, buildFakeEvents, EVENT_STYLES } from '../mocks'
 import { ThemeSwitch } from '../components/ThemeSwitch'
+import { CHART_COLORS } from '../theme/studyPalette'
 
 /* ─── Types ─── */
 type ColorItem = { id: string; name: string; hex: string }
@@ -156,8 +157,6 @@ function SectionHeading({ id, title, description }: { id: string; title: string;
     </section>
   )
 }
-
-const CHART_COLORS = ['var(--color-primary)', 'var(--color-success)', 'var(--color-warning)', 'var(--color-error)', 'var(--color-blue)', 'var(--color-highlight)']
 
 /* ─── Main Page ─── */
 export default function DebugComponents() {

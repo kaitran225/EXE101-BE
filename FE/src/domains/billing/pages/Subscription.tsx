@@ -33,7 +33,7 @@ export default function Subscription() {
 
       <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-4">
         {/* FREE */}
-        <div className="flex min-w-0 flex-col justify-between rounded-2xl border-2 border-neutral-300 bg-white p-4 shadow-sm sm:p-5 lg:min-h-[380px] lg:p-6">
+        <div className="flex min-w-0 flex-col justify-between rounded-2xl border border-white/10 bg-[var(--color-surface)] p-4 shadow-none sm:p-5 lg:min-h-[380px] lg:p-6">
           <div className="flex flex-col">
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Free</h3>
@@ -55,7 +55,7 @@ export default function Subscription() {
         </div>
 
         {/* PERSONAL */}
-        <div className="flex min-w-0 flex-col justify-between rounded-2xl border-2 border-neutral-300 bg-white p-4 shadow-sm sm:p-5 lg:min-h-[380px] lg:p-6">
+        <div className="flex min-w-0 flex-col justify-between rounded-2xl border border-white/10 bg-[var(--color-surface)] p-4 shadow-none sm:p-5 lg:min-h-[380px] lg:p-6">
           <div className="flex flex-col">
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Personal</h3>
@@ -80,9 +80,9 @@ export default function Subscription() {
         </div>
 
         {/* TEAMS — Most Popular */}
-        <div className="relative flex min-w-0 flex-col justify-between rounded-2xl border-2 border-accent/20 bg-accent-muted/80 p-4 shadow-md sm:p-5 lg:min-h-[380px] lg:p-6">
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded border-2 border-primary bg-primary px-3 py-1.5">
-            <span className="text-[10px] font-bold uppercase tracking-wide text-white">Most Popular</span>
+        <div className="relative flex min-w-0 flex-col justify-between rounded-2xl border border-primary/30 bg-[var(--color-surface)] p-4 shadow-none sm:p-5 lg:min-h-[380px] lg:p-6">
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded border border-primary bg-primary px-3 py-1.5">
+            <span className="text-[10px] font-bold uppercase tracking-wide text-primary-foreground">Most Popular</span>
           </div>
           <div className="flex flex-col">
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
@@ -102,13 +102,13 @@ export default function Subscription() {
             </ul>
           </div>
           <div className="flex gap-2">
-            <Button variant="secondary" size="md" className="flex-1 border-2 border-neutral-800 bg-white text-neutral-900 uppercase hover:bg-neutral-100">Start</Button>
-            <Button variant="secondary" size="md" className="flex-1 border-2 border-neutral-800 bg-white text-neutral-900 uppercase hover:bg-neutral-100">3 days trial</Button>
+            <Button variant="secondary" size="md" className="flex-1 uppercase">Start</Button>
+            <Button variant="secondary" size="md" className="flex-1 uppercase">3 days trial</Button>
           </div>
         </div>
 
         {/* COMBO (TEAMS + PERSONAL) Custom */}
-        <div className="flex min-w-0 flex-col justify-between rounded-2xl border-2 border-neutral-300 bg-white p-4 shadow-sm sm:p-5 lg:min-h-[380px] lg:p-6">
+        <div className="flex min-w-0 flex-col justify-between rounded-2xl border border-white/10 bg-[var(--color-surface)] p-4 shadow-none sm:p-5 lg:min-h-[380px] lg:p-6">
           <div className="flex flex-col">
             <div className="flex flex-col gap-2 pb-3 sm:pb-4">
               <h3 className="text-xl font-bold uppercase leading-8 text-neutral-900 sm:text-2xl">Combo</h3>
@@ -138,7 +138,7 @@ export default function Subscription() {
         </h2>
         <div className="grid w-full max-w-[520px] grid-cols-2 gap-4 sm:grid-cols-4">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="flex h-14 items-center justify-center rounded-lg border border-neutral-300 bg-white sm:h-16">
+            <div key={i} className="flex h-14 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-surface)] sm:h-16">
               <span className="text-xs font-medium text-neutral-400 sm:text-sm">LOGO</span>
             </div>
           ))}

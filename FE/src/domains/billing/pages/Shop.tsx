@@ -27,7 +27,7 @@ export default function Shop() {
         <p className="max-w-[26rem] text-center text-xs leading-5 text-neutral-700 sm:text-sm">
           Boost your learning experience with additional coins.
         </p>
-        <p className="rounded-md bg-neutral-100 px-3 py-1.5 text-xs font-semibold text-neutral-900">
+        <p className="rounded-md border border-white/10 bg-[var(--color-surface)] px-3 py-1.5 text-xs font-semibold text-neutral-900">
           {balance.toLocaleString()} Coins
         </p>
       </div>
@@ -39,19 +39,19 @@ export default function Shop() {
             key={pack.id}
             className={`relative flex min-w-0 flex-col justify-between rounded-xl border-2 p-4 sm:p-5 ${
               pack.popular
-                ? 'border-neutral-900 bg-white'
-                : 'border-neutral-300 bg-neutral-100/80'
+                ? 'border-primary/50 bg-primary/10'
+                : 'border-white/10 bg-[var(--color-surface)]'
             }`}
           >
             {pack.popular && (
-              <div className="absolute -top-2 left-1/2 -translate-x-1/2 rounded bg-neutral-900 px-2 py-1">
-                <span className="text-[10px] font-bold uppercase tracking-wide text-white">
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 rounded bg-primary px-2 py-1">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-primary-foreground">
                   Most Popular
                 </span>
               </div>
             )}
             <div className="flex flex-col items-center text-center">
-              <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-neutral-700 shadow-sm">
+              <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-[var(--color-surface)] text-neutral-400">
                 {PACK_ICONS[pack.iconKey]}
               </div>
               <h3 className="mb-1 text-sm font-bold uppercase leading-6 text-neutral-900 sm:text-base">
@@ -77,10 +77,10 @@ export default function Shop() {
 
       {/* Promo code — compact */}
       <div className="pt-6">
-        <Card className="rounded-xl border-2 border-dashed border-neutral-300 bg-neutral-50/80 p-4 sm:p-5">
+        <Card className="rounded-xl border border-dashed border-white/10 bg-[var(--color-surface)] p-4 sm:p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:gap-4">
             <div className="flex flex-1 items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-neutral-200 text-neutral-600">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-charcoal)] text-neutral-500">
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                   <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                   <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
@@ -107,13 +107,13 @@ export default function Shop() {
       </div>
 
       {/* Footer — compact */}
-      <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-neutral-200 pt-6 text-xs text-neutral-600">
+      <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-neutral-500">
         <div className="flex flex-wrap gap-4">
           <Link to="/transaction" className="font-medium text-neutral-900 hover:underline">
             Transaction history
           </Link>
-          <a href="#" className="hover:underline">Terms of service</a>
-          <a href="#" className="hover:underline">Support</a>
+          <a href="#" className="text-neutral-500 hover:underline">Terms of service</a>
+          <a href="#" className="text-neutral-500 hover:underline">Support</a>
         </div>
         <div className="flex items-center gap-1.5">
           <svg className="h-3.5 w-3.5 shrink-0 text-neutral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>

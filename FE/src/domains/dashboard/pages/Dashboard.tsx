@@ -102,7 +102,7 @@ export default function Dashboard() {
               <div key={i} className="flex-1 flex flex-col items-center justify-end gap-1 min-w-0 h-full">
                 {b.label && <span className="text-[10px] font-semibold text-neutral-600">{b.label}</span>}
                 <div
-                  className={`w-full rounded-t-full min-h-[10px] ${b.active ? 'bg-primary' : 'bg-[var(--color-charcoal)]'}`}
+                  className={`w-full rounded-t-full min-h-[10px] ${b.active ? 'bg-[var(--color-focus-area)]' : 'bg-[var(--color-charcoal)]'}`}
                   style={{ height: `${b.h}%` }}
                 />
               </div>

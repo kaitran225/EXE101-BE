@@ -186,7 +186,7 @@ export default function Calendar() {
           <span className="w-3 h-3 rounded bg-highlight" /> Deadline
         </span>
         <span className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded bg-accent-muted border border-accent/20" /> Class
+          <span className="w-3 h-3 rounded bg-[var(--color-focus-area)] border border-[var(--color-focus-area)]/30" /> Class
         </span>
         <span className="flex items-center gap-2">
           <span className="w-3 h-3 rounded bg-success/20 border border-success/30" /> Meeting

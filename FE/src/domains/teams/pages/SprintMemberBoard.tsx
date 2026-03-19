@@ -8,7 +8,9 @@ export default function SprintMemberBoard() {
         {['Alex', 'Jordan', 'Sam', 'Casey'].map((name, i) => (
           <Card key={i}>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-neutral-200 flex items-center justify-center text-sm font-bold">{name[0]}</div>
+              <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/15 border border-[var(--color-accent)]/30 flex items-center justify-center text-sm font-bold text-[var(--color-accent)]">
+                {name[0]}
+              </div>
               <div>
                 <p className="font-bold">{name}</p>
                 <p className="text-sm text-neutral-500">Member</p>

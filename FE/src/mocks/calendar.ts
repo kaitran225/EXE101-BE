@@ -51,6 +51,6 @@ export function getMockAiReply(userText: string, viewDate: Date): string {
 export const EVENT_STYLES: Record<CalendarEvent['type'], string> = {
   today: 'bg-primary text-primary-foreground font-semibold',
   deadline: 'bg-highlight text-white font-medium',
-  class: 'bg-accent-muted text-neutral-900 border border-accent/20',
+  class: 'bg-[var(--color-focus-area)] text-black border border-[var(--color-focus-area)]/30',
   meeting: 'bg-success/20 text-neutral-900 border border-success/30',
 }
