@@ -189,7 +189,7 @@ export default function DebugComponents() {
             <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4">
               {['Motivation', 'Unity', 'Activity', 'Strength', 'Health', 'Rising', 'Harmony', 'Interaction', 'Healing'].map((name) => (
                 <div key={name} className="flex flex-col items-center gap-2">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary/30 dark:to-primary/10 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center">
                     <span className="text-2xl text-primary">&#10038;</span>
                   </div>
                   <span className="text-xs font-bold text-neutral-900 dark:text-neutral-900">{name}</span>
@@ -202,7 +202,7 @@ export default function DebugComponents() {
             <div className="flex flex-wrap gap-6 items-center">
               <span className="text-2xl font-bold text-primary tracking-tight">KTR</span>
               <span className="text-2xl font-bold text-neutral-900 dark:text-neutral-900 tracking-tight">KTR</span>
-              <span className="text-2xl font-bold text-gradient-brand tracking-tight">KTR</span>
+              <span className="text-2xl font-bold text-primary tracking-tight">KTR</span>
             </div>
           </Card>
           <Card>
@@ -348,7 +348,7 @@ export default function DebugComponents() {
                 </div>
               ))}
             </div>
-            <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-2">Use <code className="bg-neutral-100 dark:bg-neutral-700 px-1 rounded">.bg-gradient-brand</code> etc.</p>
+            <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-2">Flat brand: <code className="bg-[var(--color-charcoal)] px-1 rounded">bg-primary</code> / solid tokens.</p>
           </Card>
 
           {/* 10 Shadow variants */}
@@ -1187,7 +1187,7 @@ export default function DebugComponents() {
           </Card>
           <Card>
             <p className="text-xs font-bold uppercase text-neutral-500 dark:text-neutral-500 mb-3">Header</p>
-            <div className="flex items-center gap-4 p-4 rounded-xl border border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)]">
+            <div className="flex items-center gap-4 px-4 py-2 rounded-[var(--radius-card)] border border-neutral-200 dark:border-neutral-700 bg-white/70 dark:bg-[var(--color-surface)]/70 backdrop-blur-xl shadow-[var(--shadow-2)]">
               <div className="flex-1 min-w-0">
                 <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-900">Section title</h3>
                 <p className="text-xs text-neutral-500 dark:text-neutral-500">Subtitle</p>
@@ -1297,7 +1297,7 @@ export default function DebugComponents() {
           <Card>
             <div className="flex flex-wrap gap-4 items-start">
               {/* Expanded light */}
-              <div className="w-56 rounded-xl border border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] overflow-hidden">
+              <div className="w-56 rounded-[var(--radius-card)] border border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] overflow-hidden shadow-[var(--shadow-2)]">
                 <div className="px-4 py-3 flex items-center gap-2 border-b border-neutral-100 dark:border-neutral-700">
                   <span className="text-primary text-lg">✦</span>
                   <span className="text-sm font-bold text-neutral-900 dark:text-neutral-900">KTR</span>
@@ -1319,7 +1319,7 @@ export default function DebugComponents() {
               </div>
 
               {/* Dark with active */}
-              <div className="w-56 rounded-xl border border-neutral-700 dark:border-neutral-600 bg-neutral-900 dark:bg-[var(--color-surface)] overflow-hidden">
+              <div className="w-56 rounded-[var(--radius-card)] border border-neutral-700 dark:border-neutral-600 bg-neutral-900 dark:bg-[var(--color-surface)] overflow-hidden shadow-[var(--shadow-2)]">
                 <div className="px-4 py-3 flex items-center gap-2 border-b border-neutral-700 dark:border-neutral-600">
                   <span className="text-primary text-lg">✦</span>
                   <span className="text-sm font-bold text-white">KTR</span>
@@ -1341,10 +1341,10 @@ export default function DebugComponents() {
               </div>
 
               {/* Icon only */}
-              <div className="w-16 rounded-xl border border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] overflow-hidden flex flex-col items-center py-3 gap-3">
+              <div className="w-16 rounded-[var(--radius-card)] border border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] overflow-hidden flex flex-col items-center py-3 gap-3 shadow-[var(--shadow-2)]">
                 <span className="text-primary text-lg">✦</span>
                 <div className="h-px w-8 bg-neutral-200 dark:bg-neutral-600" />
-                {['⌕', '⊞', '📅', '♥', '📊', '👤'].map((icon, i) => (
+                {['S', 'G', 'C', 'H', 'T', 'U'].map((icon, i) => (
                   <div key={i} className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm ${i === 4 ? 'bg-primary/10 text-primary' : 'text-neutral-500 dark:text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-700'}`}>{icon}</div>
                 ))}
                 <div className="mt-auto w-8 h-8 rounded-full bg-neutral-200 dark:bg-neutral-600" />
@@ -2057,7 +2057,7 @@ export default function DebugComponents() {
             <Card>Plain card with no heading.</Card>
             <Card heading="Card with heading">Content under the heading.</Card>
             <Card className="overflow-hidden p-0">
-              <div className="h-24 bg-gradient-brand" />
+              <div className="h-24 bg-primary" />
               <div className="p-4">
                 <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-primary/20 text-primary mb-2">Badge</span>
                 <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-900">Card with image</h3>
@@ -2154,7 +2154,7 @@ export default function DebugComponents() {
             {/* Stats / KPI card */}
             <Card className="p-4 flex items-center gap-3">
               <div className="w-12 h-12 rounded-lg bg-highlight/20 flex items-center justify-center text-highlight shrink-0">
-                <span className="text-xl">🔥</span>
+                <span className="text-xl font-bold text-primary" aria-hidden>!</span>
               </div>
               <div className="min-w-0">
                 <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wide">Current streak</p>
@@ -2202,7 +2202,7 @@ export default function DebugComponents() {
             </Card>
 
             {/* Upgrade / CTA card */}
-            <Card className="p-4 bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-2 border-primary/30">
+            <Card className="p-4 bg-primary/15 border border-primary/40">
               <p className="text-sm font-bold text-neutral-900 dark:text-neutral-900">Unlock all features</p>
               <p className="text-xs text-neutral-600 dark:text-neutral-500 mt-1">Get Pro for unlimited rooms and analytics.</p>
               <Button variant="primary" size="sm" className="w-full mt-3">Upgrade</Button>

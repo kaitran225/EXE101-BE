@@ -142,7 +142,7 @@ function ScrumBoardContent() {
         </div>
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 overflow-x-auto pb-1 min-h-0">
           {columns.map((col) => (
-            <div key={col.id} className="flex flex-col min-w-[220px] bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-100/70 dark:to-[var(--color-surface)] rounded-lg border border-neutral-200 p-2.5">
+            <div key={col.id} className="flex flex-col min-w-[220px] bg-[#141414] rounded-2xl border border-white/10 p-2.5 shadow-none">
               <div className="flex items-center justify-between mb-1.5">
                 <span className="text-xs font-bold text-neutral-900">{col.title} ({col.tasks.length})</span>
                 <IconButton type="button" size="sm" variant="ghost" className="p-0.5 text-neutral-400 hover:text-neutral-600 text-[10px]" label="Options" icon={<span>⋯</span>} />
@@ -317,7 +317,7 @@ function SprintBoardContent() {
         </div>
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 overflow-x-auto pb-1 min-h-0">
           {columns.map((col) => (
-            <div key={col.id} className="flex flex-col min-w-[220px] bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-100/70 dark:to-[var(--color-surface)] rounded-lg border border-neutral-200 p-2.5">
+            <div key={col.id} className="flex flex-col min-w-[220px] bg-[#141414] rounded-2xl border border-white/10 p-2.5 shadow-none">
               <div className="flex items-center justify-between mb-1.5">
                 <span className="text-xs font-bold text-neutral-900">{col.title}</span>
                 <IconButton type="button" size="sm" variant="ghost" className="p-0.5 text-neutral-400 hover:text-neutral-600 text-[10px]" label="Add" icon={<span>+</span>} />

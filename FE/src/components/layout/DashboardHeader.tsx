@@ -104,7 +104,7 @@ export function DashboardHeader() {
 
   return (
     <header
-      className="flex-shrink-0 flex items-center gap-2 px-3 md:px-4 py-1.5 bg-gradient-to-r from-white to-accent-muted/40 dark:from-[var(--color-surface)] dark:to-primary/10 backdrop-blur-xl border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-sm transition-shadow duration-200"
+      className="flex-shrink-0 flex items-center gap-2 px-4 py-3 bg-[var(--color-surface)] border border-white/10 rounded-[var(--radius-card)] shadow-none"
       role="banner"
     >
       <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-2">
@@ -120,7 +120,7 @@ export function DashboardHeader() {
                       {item.label}
                     </Link>
                   ) : (
-                    <span className={isLast ? 'font-bold text-neutral-900' : 'font-normal text-neutral-900'}>
+                    <span className={isLast ? 'font-bold text-neutral-900' : 'font-normal text-neutral-500'}>
                       {item.label}
                     </span>
                   )}
@@ -130,7 +130,7 @@ export function DashboardHeader() {
           </nav>
         ) : titleOnly ? (
           <div className="flex flex-col gap-0.5 min-w-0">
-            <h1 className="text-base md:text-lg font-bold text-neutral-900 truncate tracking-tight">
+            <h1 className="text-base md:text-lg font-bold text-neutral-900 truncate tracking-tight uppercase tracking-[0.08em]">
               {isHome ? 'Home' : titleOnly}
             </h1>
             {subtitle && (
@@ -142,24 +142,24 @@ export function DashboardHeader() {
         ) : (
           <>
             <span className="text-xs text-neutral-600">Welcome to</span>
-            <Link to="/dashboard" className="text-sm font-bold text-orange-500 hover:text-orange-600 truncate transition-colors duration-150 active:opacity-80">
-              ∞ together
+            <Link to="/dashboard" className="text-sm font-bold text-primary hover:brightness-110 truncate transition-colors duration-150 active:opacity-80">
+              together
             </Link>
           </>
         )}
       </div>
       <div className="flex shrink-0 items-center justify-end gap-2 md:gap-3">
-        <div className="relative w-full min-w-0 max-w-[11rem]">
-        </div>
         <IconButton
           type="button"
-          className="p-1.5 rounded-xl text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-500 dark:hover:bg-neutral-700 dark:hover:text-neutral-900 flex-shrink-0 transition-colors duration-150"
+          variant="ghost"
+          size="sm"
+          className="text-neutral-500 dark:text-neutral-500 flex-shrink-0"
           label="Settings"
           icon={<svg className="w-4 h-4" viewBox="0 0 21 20" fill="none" aria-hidden><path d="M7.3 20L6.9 16.8C6.68 16.72 6.48 16.62 6.29 16.5 6.1 16.38 5.91 16.26 5.73 16.13L2.75 17.38 0 12.63l2.58-2.95c-.02-.12-.03-.23-.03-.34 0-.11 0-.22.03-.33L0 7.38 2.75 2.63l5.73 1.25c.18-.13.37-.26.56-.37.2-.12.4-.22.6-.3L9.05 0h3.8l.4 3.2c.22.08.42.18.62.3.2.12.39.25.56.38l5.73-1.25L20.1 7.38l-2.58 2.95c.02.12.03.23.03.34 0 .11 0 .22-.03.33L20.08 12.63 17.33 17.37l-4.95-1.25c-.18.13-.36.26-.56.38-.2.12-.4.22-.6.3L12.8 20H7.3z" fill="currentColor" fillOpacity="0.5" /></svg>}
         />
         <Link
           to="/notifications"
-          className="p-1.5 rounded-xl text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-500 dark:hover:bg-neutral-700 dark:hover:text-neutral-900 flex-shrink-0 transition-colors duration-150"
+          className="w-8 h-8 inline-flex items-center justify-center rounded-full text-neutral-500 hover:bg-white/10 hover:text-neutral-900 flex-shrink-0 transition-colors duration-150"
           aria-label="Notifications"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,17 +168,17 @@ export function DashboardHeader() {
         </Link>
         <Link
           to="/profile"
-          className="flex items-center gap-1.5 p-1 pr-2 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-700 flex-shrink-0 transition-colors duration-150 active:scale-[0.98]"
+          className="flex items-center gap-1.5 p-1 pr-2 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700 flex-shrink-0 transition-colors duration-150 active:scale-[0.98]"
         >
           <span
-            className="w-7 h-7 rounded-full bg-accent-muted text-primary flex items-center justify-center text-[10px] font-semibold flex-shrink-0"
+            className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-semibold flex-shrink-0"
             aria-hidden
           >
             N
           </span>
           <div className="hidden sm:block text-left min-w-0">
-            <p className="text-xs font-medium text-neutral-900 dark:text-neutral-900 truncate leading-tight">{user?.fullName ?? 'Guest'}</p>
-            <p className="text-[10px] text-neutral-500 dark:text-neutral-500 truncate leading-tight">@{user?.username ?? 'guest'}</p>
+            <p className="text-xs font-medium text-neutral-900 truncate leading-tight">{user?.fullName ?? 'Guest'}</p>
+            <p className="text-[10px] text-neutral-500 truncate leading-tight">@{user?.username ?? 'guest'}</p>
           </div>
         </Link>
         <Button
@@ -186,16 +186,16 @@ export function DashboardHeader() {
           onClick={logout}
           variant="secondary"
           size="sm"
-          className="hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-xl border border-[var(--color-charcoal)] text-neutral-700 dark:text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+          className="hidden sm:inline-flex"
         >
           Logout
         </Button>
         <Link
           to="/focus-room"
-          className={`hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-xl flex-shrink-0 transition-all duration-150 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-1 ${
+          className={`hidden sm:inline-flex px-4 py-2 text-xs font-bold rounded-full flex-shrink-0 transition-all duration-150 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${
             isHome
-              ? 'bg-accent-muted text-primary border border-primary/20 hover:bg-accent-muted/80 focus:ring-primary'
-              : 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-400/50'
+              ? 'bg-[#fdffb6] text-black hover:brightness-95 focus:ring-[#fdffb6]'
+              : 'bg-error text-white hover:brightness-95 focus:ring-error'
           }`}
         >
           Focus room

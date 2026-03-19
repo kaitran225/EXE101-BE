@@ -4,10 +4,11 @@ type Variant = 'default' | 'ghost' | 'primary' | 'tonal'
 type Size = 'sm' | 'md' | 'lg'
 
 const variantClasses: Record<Variant, string> = {
-  default: 'bg-gradient-to-b from-white to-neutral-50 dark:from-[var(--color-surface)] dark:to-neutral-800/10 border border-[var(--color-charcoal)] text-neutral-700 dark:text-neutral-600 hover:shadow-[var(--shadow-3)] hover:bg-neutral-50 dark:hover:bg-neutral-700',
-  ghost: 'bg-transparent border border-transparent text-neutral-600 dark:text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-900',
-  primary: 'bg-gradient-to-r from-primary via-accent to-blue border border-primary/40 text-primary-foreground hover:shadow-[var(--shadow-6)] hover:opacity-95',
-  tonal: 'bg-accent-muted border border-primary/25 text-primary hover:bg-primary/10 hover:shadow-[var(--shadow-3)]',
+  default:
+    'bg-[var(--color-charcoal)] border border-white/10 text-neutral-900 hover:bg-neutral-300',
+  ghost: 'bg-transparent border border-transparent text-neutral-500 hover:bg-white/5 hover:text-neutral-900',
+  primary: 'bg-primary border-0 text-primary-foreground hover:brightness-95',
+  tonal: 'bg-white/10 border border-white/10 text-primary hover:bg-white/15',
 }
 
 const sizeClasses: Record<Size, string> = {
@@ -28,7 +29,7 @@ export function IconButton({ icon, label, variant = 'default', size = 'md', clas
     <button
       type="button"
       aria-label={label}
-      className={`inline-flex items-center justify-center rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-primary hover:scale-[1.03] active:scale-[0.98] ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}
+      className={`inline-flex items-center justify-center rounded-full transition-[filter,transform] duration-150 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black hover:opacity-95 active:scale-[0.98] ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}
       {...props}
     >
       {icon}

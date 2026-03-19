@@ -13,7 +13,7 @@ export function TableBody({ className = '', ...props }: HTMLAttributes<HTMLTable
 }
 
 export function TableRow({ className = '', ...props }: HTMLAttributes<HTMLTableRowElement>) {
-  return <tr className={`bg-white dark:bg-[var(--color-surface)] shadow-[var(--shadow-1)] ${className}`.trim()} {...props} />
+  return <tr className={`bg-[var(--color-surface)] shadow-none border-b border-white/5 ${className}`.trim()} {...props} />
 }
 
 export function TableHeaderCell({ className = '', ...props }: HTMLAttributes<HTMLTableCellElement>) {

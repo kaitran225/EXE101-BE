@@ -17,8 +17,8 @@ export function AuthSidebar() {
           className="flex items-center gap-2 self-start mb-10"
           aria-label="together home"
         >
-          <span className="text-2xl font-bold text-gradient-brand">∞</span>
-          <span className="text-lg font-semibold text-lavender">together</span>
+          <span className="text-2xl font-bold text-primary">∞</span>
+          <span className="text-lg font-semibold text-[#bdb2ff]">together</span>
         </Link>
         <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight mb-4">
           Learn together. Progress together.

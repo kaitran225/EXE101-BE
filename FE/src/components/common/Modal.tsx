@@ -20,19 +20,19 @@ export function Modal({ open, onClose, title, size = 'max-w-md', children }: Mod
       aria-labelledby={title ? 'modal-title' : undefined}
     >
       <div
-        className={`bg-white dark:bg-[var(--color-surface)] rounded-xl border-2 border-[var(--color-charcoal)] w-full shadow-[var(--shadow-6)] overflow-hidden animate-scale-in ${size}`}
+        className={`bg-[var(--color-surface)] rounded-[var(--radius-card)] border border-white/10 w-full shadow-none overflow-hidden animate-scale-in ${size}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-4 py-3 border-b-2 border-[var(--color-charcoal)] bg-gradient-to-r from-accent-muted/40 to-white dark:from-primary/15 dark:to-[var(--color-surface)]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#141414]">
           {title && (
-            <h2 id="modal-title" className="text-sm font-bold text-neutral-900 dark:text-neutral-900 uppercase tracking-wide">
+            <h2 id="modal-title" className="text-xs font-bold text-neutral-500 uppercase tracking-[0.15em]">
               {title}
             </h2>
           )}
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-900 ml-auto transition-colors duration-150 active:scale-95"
+            className="p-2 rounded-full text-neutral-500 hover:bg-white/10 hover:text-neutral-900 ml-auto transition-colors duration-150 active:scale-95"
             aria-label="Close"
           >
             <CloseIcon className="w-5 h-5" />

@@ -13,9 +13,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 ) {
   const inputId = id ?? `input-${Math.random().toString(36).slice(2)}`
   const appearanceClasses: Record<NonNullable<InputProps['appearance']>, string> = {
-    default: 'bg-white dark:bg-[var(--color-surface)] border border-[var(--color-charcoal)]',
-    filled: 'bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-100/70 dark:to-[var(--color-surface)] border border-[var(--color-charcoal)]',
-    quiet: 'bg-transparent border-b border-[var(--color-charcoal)] rounded-none px-1',
+    default: 'bg-[var(--color-charcoal)] border border-white/10',
+    filled: 'bg-[#141414] border border-white/10',
+    quiet: 'bg-transparent border-b border-white/15 rounded-none px-1',
   }
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -30,10 +30,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         className={`
           w-full px-4 py-3 rounded-[var(--radius-card)]
           ${appearanceClasses[appearance]}
-          text-neutral-900 dark:text-neutral-900 placeholder:text-neutral-500 dark:placeholder:text-neutral-500
-          transition-colors duration-150 ease-out transition-shadow duration-150
+          text-neutral-900 placeholder:text-neutral-500
+          transition-colors duration-150 ease-out
           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-          disabled:opacity-70 disabled:bg-neutral-100 dark:disabled:bg-[var(--color-surface)] dark:disabled:text-neutral-500 dark:disabled:placeholder:text-neutral-500
+          disabled:opacity-70 disabled:bg-neutral-200 disabled:text-neutral-500 disabled:placeholder:text-neutral-500
           min-h-[2.5rem]
           ${error ? 'border-error ring-1 ring-error' : ''}
           ${className}

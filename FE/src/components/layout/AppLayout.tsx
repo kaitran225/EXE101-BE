@@ -12,8 +12,8 @@ export function AppLayout() {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen flex flex-col bg-neutral-50">
-      <header className="bg-white border-b border-neutral-200 px-4 py-3 md:px-8 flex flex-wrap items-center justify-between gap-4">
+    <div className="min-h-screen flex flex-col bg-[var(--color-background)]">
+      <header className="bg-[var(--color-surface)] border-b border-white/10 px-4 py-3 md:px-8 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2">
             <img src="/together/horizontal-icon.svg" alt="Together" className="h-7 w-auto" />
@@ -24,10 +24,10 @@ export function AppLayout() {
               return (
                 <Link key={to} to={to}>
                   <span
-                    className={`px-2 py-1 text-sm font-medium rounded border ${
+                    className={`px-3 py-1.5 text-sm font-semibold rounded-full ${
                       active
-                        ? 'bg-white border-neutral-900 text-neutral-900 font-bold'
-                        : 'border-transparent text-neutral-900'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'text-neutral-500 hover:text-neutral-900'
                     }`}
                   >
                     {label}
@@ -56,21 +56,21 @@ export function AppLayout() {
         </div>
       </header>
 
-      <footer className="bg-white border-t border-neutral-200 px-4 py-3 mt-auto">
+      <footer className="bg-[var(--color-surface)] border-t border-white/10 px-4 py-3 mt-auto">
         <div className="max-w-[1200px] mx-auto flex flex-wrap justify-between items-center gap-4">
           <div className="flex items-center gap-4">
             <div>
               <p className="label-study text-[10px]">Current Streak</p>
               <p className="text-sm font-bold">12 Days</p>
             </div>
-            <div className="w-px h-8 bg-neutral-200" />
+            <div className="w-px h-8 bg-white/10" />
             <div className="w-64">
               <div className="flex justify-between text-[10px] font-bold uppercase">
                 <span>Level 14</span>
                 <span>2,450 / 3,000 XP</span>
               </div>
-              <div className="h-2 w-full bg-white border border-neutral-200 rounded overflow-hidden mt-1">
-                <div className="h-full bg-neutral-900 w-[81%]" />
+              <div className="h-2 w-full bg-[var(--color-charcoal)] rounded-full overflow-hidden mt-1">
+                <div className="h-full bg-primary w-[81%]" />
               </div>
             </div>
           </div>

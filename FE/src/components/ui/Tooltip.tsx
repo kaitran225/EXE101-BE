@@ -19,7 +19,7 @@ export function Tooltip({ content, children, side = 'top' }: TooltipProps) {
   return (
     <span className="relative inline-flex group">
       {children}
-      <span className={`px-3 py-2 rounded-lg bg-gradient-to-r from-neutral-900 to-primary dark:from-black dark:to-primary text-white text-xs font-medium whitespace-nowrap absolute ${positionClasses(side)} opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-[var(--shadow-4)]`}>
+      <span className={`px-3 py-2 rounded-full bg-primary text-primary-foreground text-xs font-semibold whitespace-nowrap absolute ${positionClasses(side)} opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-none`}>
         {content}
       </span>
     </span>

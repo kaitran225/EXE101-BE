@@ -4,17 +4,22 @@ type Variant = 'primary' | 'secondary' | 'ghost' | 'cta' | 'tonal'
 type Size = 'sm' | 'md' | 'lg'
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-gradient-to-r from-primary to-accent text-primary-foreground border border-primary/40 shadow-[var(--shadow-4)] hover:shadow-[var(--shadow-6)] focus-visible:outline-primary',
-  secondary: 'bg-white dark:bg-[var(--color-surface)] text-neutral-900 dark:text-neutral-900 border border-[var(--color-charcoal)] hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:shadow-[var(--shadow-3)] focus-visible:outline-primary',
-  ghost: 'bg-transparent text-neutral-900 dark:text-neutral-900 border border-transparent hover:bg-neutral-100 dark:hover:bg-neutral-700 focus-visible:outline-primary',
-  cta: 'bg-gradient-to-r from-primary via-accent to-blue text-primary-foreground border border-primary/40 shadow-[var(--shadow-5)] hover:shadow-[var(--shadow-6)] focus-visible:outline-primary',
-  tonal: 'bg-accent-muted text-primary border border-primary/25 hover:bg-primary/10 focus-visible:outline-primary',
+  primary:
+    'bg-primary text-primary-foreground border-0 shadow-none hover:brightness-95 focus-visible:outline-primary',
+  secondary:
+    'bg-[var(--color-charcoal)] text-neutral-900 border border-white/10 shadow-none hover:bg-neutral-300 focus-visible:outline-primary',
+  ghost:
+    'bg-transparent text-neutral-900 border border-transparent hover:bg-white/5 focus-visible:outline-primary',
+  cta:
+    'bg-[#ff7f50] text-black border-0 shadow-none hover:brightness-95 focus-visible:outline-[#ff7f50]',
+  tonal:
+    'bg-white/10 text-primary border border-white/10 hover:bg-white/15 focus-visible:outline-primary',
 }
 
 const sizeClasses: Record<Size, string> = {
-  sm: 'px-3 py-1.5 text-sm min-h-[2.25rem]',
-  md: 'px-4 py-2 text-sm min-h-[2.5rem]',
-  lg: 'px-6 py-3 text-base min-h-[2.75rem]',
+  sm: 'px-4 py-2 text-sm min-h-[2.25rem] rounded-full',
+  md: 'px-5 py-2.5 text-sm min-h-[2.5rem] rounded-full',
+  lg: 'px-6 py-3 text-base min-h-[2.75rem] rounded-full',
 }
 
 function SpinnerIcon({ className = 'w-4 h-4' }: { className?: string }) {
@@ -47,8 +52,8 @@ export function Button({
     <button
       type="button"
       className={`
-        ${isFullWidth ? 'flex w-full' : 'inline-flex'} items-center justify-center gap-2 font-medium rounded-lg
-        transition-all duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+        ${isFullWidth ? 'flex w-full' : 'inline-flex'} items-center justify-center gap-2 font-semibold
+        transition-[filter,transform,opacity] duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
         hover:opacity-95 active:scale-[0.98]
         disabled:opacity-50 disabled:pointer-events-none disabled:transform-none
         ${variantClasses[variant]}

@@ -7,21 +7,23 @@ import { ThemeSwitch } from '../ThemeSwitch'
 export function AuthHeaderBar() {
   return (
     <header
-      className="flex-shrink-0 flex items-center justify-between gap-2 px-4 py-2.5 bg-white/95 dark:bg-[var(--color-surface)]/95 backdrop-blur-xl border-2 border-neutral-200 dark:border-[var(--color-charcoal)] rounded-2xl shadow-sm"
+      className="flex-shrink-0 flex items-center justify-between gap-2 px-4 py-2.5 bg-[var(--color-surface)] border border-white/10 rounded-[var(--radius-card)] shadow-none"
       role="banner"
     >
       <Link to="/welcome" className="flex items-center gap-2 shrink-0">
-        <span className="text-lg font-bold text-gradient-brand">∞</span>
+        <span className="text-lg font-bold text-primary" aria-hidden>
+          ∞
+        </span>
         <span className="text-sm font-semibold text-accent">together</span>
       </Link>
       <div className="flex items-center gap-2.5">
         <ThemeSwitch />
-        <Link to="/sign-up" className="text-sm font-medium text-neutral-600 dark:text-neutral-600 hover:text-neutral-900 dark:hover:text-neutral-900">
+        <Link to="/sign-up" className="text-sm font-medium text-neutral-500 hover:text-neutral-900">
           Sign up
         </Link>
         <Link
           to="/welcome"
-          className="inline-flex items-center justify-center px-3 py-1.5 rounded-lg text-sm font-medium bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90"
+          className="inline-flex items-center justify-center px-4 py-2 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:brightness-95"
         >
           Log in
         </Link>

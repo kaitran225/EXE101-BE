@@ -18,12 +18,12 @@ export default function MeetingLobby() {
 
   return (
     <div className="w-full max-w-5xl mx-auto py-4 md:py-8 space-y-6">
-      <section className="rounded-2xl border-2 border-[var(--color-charcoal)] bg-gradient-to-r from-accent-muted/70 to-white dark:from-primary/15 dark:to-[var(--color-surface)] p-5 md:p-6">
+      <section className="rounded-[var(--radius-card)] border border-white/10 bg-[var(--color-surface)] p-5 md:p-6 shadow-none">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <Badge variant="focus" className="mb-2 normal-case tracking-normal">Collaborative study calls</Badge>
-            <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-neutral-900 tracking-tight">Meetings</h1>
-            <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-500 mt-1">
+            <h1 className="text-2xl md:text-3xl font-extrabold text-neutral-900 tracking-tight uppercase tracking-[0.06em]">Meetings</h1>
+            <p className="text-sm md:text-base text-neutral-500 mt-2">
               Run focused sessions with your team, share progress, and keep study momentum.
             </p>
           </div>

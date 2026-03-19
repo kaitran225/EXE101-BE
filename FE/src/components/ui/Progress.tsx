@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 type ProgressVariant = 'default' | 'success' | 'warning' | 'error' | 'info'
 type ProgressSize = 'sm' | 'md' | 'lg'
 
@@ -5,9 +7,9 @@ export interface ProgressProps {
   value: number
   max?: number
   /** Optional label above the bar (e.g. "LEVEL 14", "2,450 / 3,000 XP") */
-  label?: React.ReactNode
+  label?: ReactNode
   /** Optional label below or beside */
-  caption?: React.ReactNode
+  caption?: ReactNode
   /** Bar color variant */
   variant?: ProgressVariant
   /** Bar height (sm 12px, md 16px, lg 20px) */
@@ -18,7 +20,7 @@ export interface ProgressProps {
 }
 
 const variantClasses: Record<ProgressVariant, string> = {
-  default: 'bg-gradient-to-r from-primary to-accent',
+  default: 'bg-primary',
   success: 'bg-success',
   warning: 'bg-warning',
   error: 'bg-error',
@@ -51,7 +53,7 @@ export function Progress({
         </div>
       )}
       <div
-        className={`${sizeClasses[size]} w-full bg-white/70 dark:bg-neutral-700 border border-[var(--color-charcoal)] rounded-full overflow-hidden`}
+        className={`${sizeClasses[size]} w-full bg-[var(--color-charcoal)] border-0 rounded-full overflow-hidden`}
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
@@ -62,7 +64,7 @@ export function Progress({
           style={{ width: `${pct}%` }}
         />
       </div>
-      {caption && <div className="text-sm text-neutral-500 dark:text-neutral-500">{caption}</div>}
+      {caption && <div className="text-sm text-neutral-500">{caption}</div>}
     </div>
   )
 }

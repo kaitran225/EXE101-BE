@@ -3,10 +3,10 @@ import type { HTMLAttributes, ReactNode } from 'react'
 type AlertVariant = 'success' | 'warning' | 'error' | 'info'
 
 const variantClasses: Record<AlertVariant, string> = {
-  success: 'border-success/50 bg-gradient-to-r from-success/15 to-success/5 text-neutral-900 dark:text-neutral-900 shadow-[var(--shadow-2)]',
-  warning: 'border-warning/50 bg-gradient-to-r from-warning/15 to-warning/5 text-neutral-900 dark:text-neutral-900 shadow-[var(--shadow-2)]',
-  error: 'border-error/50 bg-gradient-to-r from-error/15 to-error/5 text-neutral-900 dark:text-neutral-900 shadow-[var(--shadow-2)]',
-  info: 'border-blue/50 bg-gradient-to-r from-blue/15 to-blue/5 text-neutral-900 dark:text-neutral-900 shadow-[var(--shadow-2)]',
+  success: 'border border-success/40 bg-success/20 text-neutral-900',
+  warning: 'border border-warning/40 bg-warning/25 text-black',
+  error: 'border border-error/40 bg-error/20 text-neutral-900',
+  info: 'border border-accent/40 bg-accent/20 text-neutral-900',
 }
 
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
@@ -19,7 +19,7 @@ export function Alert({ variant = 'info', title, icon, children, className = '',
   return (
     <div
       role="alert"
-      className={`rounded-lg border p-3 ${variantClasses[variant]} ${className}`.trim()}
+      className={`rounded-[var(--radius-card)] border p-3 shadow-none ${variantClasses[variant]} ${className}`.trim()}
       {...props}
     >
       <div className="flex items-start gap-2">

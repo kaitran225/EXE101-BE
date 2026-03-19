@@ -218,21 +218,21 @@ export default function FocusRoom() {
 
       {/* End session modal — large, app theme, session statistics */}
       <Modal open={showEndModal} onClose={() => setShowEndModal(false)} size="max-w-2xl" title="End Session Summary">
-          <div className="w-full rounded-2xl bg-white dark:bg-[var(--color-surface)] shadow-2xl border-2 border-neutral-200 dark:border-[var(--color-charcoal)] overflow-hidden">
-            <div className="bg-gradient-to-br from-accent-muted to-white px-8 pt-10 pb-12">
-              <p className="text-2xl md:text-3xl font-bold text-neutral-900 text-center mb-10">
+          <div className="w-full rounded-[var(--radius-card)] bg-[var(--color-surface)] shadow-none border border-white/10 overflow-hidden">
+            <div className="bg-[#141414] px-8 pt-10 pb-12">
+              <p className="text-2xl md:text-3xl font-extrabold text-neutral-900 text-center mb-10 uppercase tracking-wide">
                 Done! You did well today.
               </p>
               <div className="flex justify-center gap-4 md:gap-8">
-                <div className="flex-1 max-w-[140px] rounded-xl bg-white/80 border-2 border-neutral-200 px-4 py-5 text-center shadow-sm">
+                <div className="flex-1 max-w-[140px] rounded-2xl bg-[var(--color-charcoal)] border border-white/10 px-4 py-5 text-center shadow-none">
                   <p className="text-2xl md:text-3xl font-bold text-primary tabular-nums">1h 42m</p>
                   <p className="text-[11px] text-neutral-500 uppercase tracking-wide mt-1.5">Time studied</p>
                 </div>
-                <div className="flex-1 max-w-[140px] rounded-xl bg-white/80 border-2 border-neutral-200 px-4 py-5 text-center shadow-sm">
+                <div className="flex-1 max-w-[140px] rounded-2xl bg-[var(--color-charcoal)] border border-white/10 px-4 py-5 text-center shadow-none">
                   <p className="text-2xl md:text-3xl font-bold text-accent tabular-nums">04</p>
                   <p className="text-[11px] text-neutral-500 uppercase tracking-wide mt-1.5">Quizzes</p>
                 </div>
-                <div className="flex-1 max-w-[140px] rounded-xl bg-white/80 border-2 border-neutral-200 px-4 py-5 text-center shadow-sm">
+                <div className="flex-1 max-w-[140px] rounded-2xl bg-[var(--color-charcoal)] border border-white/10 px-4 py-5 text-center shadow-none">
                   <p className="text-2xl md:text-3xl font-bold text-highlight tabular-nums">23</p>
                   <p className="text-[11px] text-neutral-500 uppercase tracking-wide mt-1.5">Flashcards</p>
                 </div>

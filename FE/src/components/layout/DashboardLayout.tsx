@@ -16,11 +16,11 @@ interface DashboardLayoutProps {
  */
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className="h-screen flex overflow-hidden bg-gradient-to-br from-neutral-800 to-neutral-900 dark:from-neutral-900 dark:to-black">
+    <div className="h-screen flex overflow-hidden bg-[var(--color-background)]">
       <DashboardSidebar />
-      <div className="flex-1 flex flex-col min-w-0 min-h-0 m-2 gap-2">
+      <div className="flex-1 flex flex-col min-w-0 min-h-0 p-3 gap-3">
         <DashboardHeader />
-        <div className="flex min-h-0 flex-1 flex-col rounded-2xl overflow-hidden bg-white dark:bg-[var(--color-surface)] shadow-lg border-2 border-neutral-200 dark:border-neutral-700 transition-shadow duration-200 hover:shadow-[var(--shadow-5)]">
+        <div className="flex min-h-0 flex-1 flex-col rounded-[var(--radius-card)] overflow-hidden bg-transparent border border-white/10 shadow-none">
           <MainBoard>{children ?? <Outlet />}</MainBoard>
         </div>
       </div>

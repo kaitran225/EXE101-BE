@@ -2,10 +2,9 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Design tokens: study vibe, robust, modern. Palettes from theme/colors.ts. */
+/* Design tokens: Gen Z bento — flat solids, no gradients in UI primitives */
 @theme {
-  /* Border: thicker default for whole app */
-  --default-border-width: 3px;
+  --default-border-width: 0px;
 
   /* Typography */
   --font-sans: 'Lexend', ui-sans-serif, system-ui, sans-serif;
@@ -13,17 +12,17 @@
   --font-display: 'Roboto', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Liberation Mono', ui-monospace, monospace;
 
-  /* Neutral */
-  --color-neutral-50: #fafafa;
-  --color-neutral-100: #ececec;
-  --color-neutral-200: #d4d4d4;
-  --color-neutral-300: #d4d4d4;
-  --color-neutral-400: #a3a3a3;
-  --color-neutral-500: #737373;
-  --color-neutral-600: #525252;
-  --color-neutral-700: #404040;
-  --color-neutral-800: #262626;
-  --color-neutral-900: #171717;
+  /* Neutral — inverted scale: 50 = canvas ink, 900 = primary text on dark UI */
+  --color-neutral-50: #0a0a0a;
+  --color-neutral-100: #141414;
+  --color-neutral-200: #242424;
+  --color-neutral-300: #333333;
+  --color-neutral-400: #737373;
+  --color-neutral-500: #a3a3a3;
+  --color-neutral-600: #d4d4d4;
+  --color-neutral-700: #e5e5e5;
+  --color-neutral-800: #f0f0f0;
+  --color-neutral-900: #fafafa;
 
   /* Palette A */
   --color-dark: #171717;
@@ -54,57 +53,57 @@
   --color-indigo-mid: #6366f1;
   --color-violet-deep: #463699;
 
-  /* Semantic */
-  --color-primary: #977DFF;
-  --color-primary-hover: #4c1d95;
-  --color-primary-foreground: #ffffff;
-  --color-accent: #0033FF;
-  --color-accent-muted: #fafafa;
-  --color-surface: #fafafa;
-  --color-background: #fafafa;
-  --color-highlight: #F8A258;
-  --color-highlight-hover: #ea580c;
-  --color-focus-area: #7546E8;
-  --color-success: #059669;
-  --color-warning: #ea580c;
-  --color-error: #b91c1c;
-  --color-border: #d4d4d4;
-  --color-border-strong: rgba(0, 0, 0, 0.2);
-  --color-charcoal: #36454F;
+  /* Semantic — bento / Gen Z solids */
+  --color-primary: #ccff00;
+  --color-primary-hover: #b8e600;
+  --color-primary-foreground: #000000;
+  --color-accent: #a0c4ff;
+  --color-accent-muted: #242424;
+  --color-surface: #1a1a1a;
+  --color-background: #000000;
+  --color-highlight: #ff7f50;
+  --color-highlight-hover: #e86a3d;
+  --color-focus-area: #bdb2ff;
+  --color-success: #34c759;
+  --color-warning: #fdffb6;
+  --color-error: #ff453a;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.14);
+  --color-charcoal: #2a2a2a;
 
-  /* Gradients */
-  --gradient-brand: linear-gradient(in oklch to right, var(--color-violet), var(--color-blue));
-  --gradient-atlitude-1: linear-gradient(in oklch to bottom, var(--color-surface-light), var(--color-violet));
-  --gradient-atlitude-2: linear-gradient(in oklch to bottom, var(--color-pink-light), var(--color-violet), var(--color-blue));
-  --gradient-atlitude-3: linear-gradient(in oklch to bottom, var(--color-violet), var(--color-blue), var(--color-blue-deep));
-  --gradient-atlitude-4: linear-gradient(in oklch to bottom, var(--color-blue), var(--color-blue-deep), var(--color-indigo-deep));
-  --gradient-mindful-01: linear-gradient(in oklch to bottom, var(--color-surface-alt), var(--color-surface-muted));
-  --gradient-mindful-02: linear-gradient(in oklch to bottom, var(--color-gray-light), var(--color-surface-muted));
-  --gradient-mindful-03: linear-gradient(in oklch to bottom, var(--color-gray-light), var(--color-indigo-mid));
-  --gradient-mindful-04: linear-gradient(in oklch to bottom, var(--color-surface-muted), var(--color-indigo-mid), var(--color-dark));
-  --gradient-mindful-05: linear-gradient(in oklch to bottom, var(--color-violet-deep), var(--color-dark));
-  --gradient-sunset: linear-gradient(in oklch to right, var(--color-amber), var(--color-error));
-  --gradient-ocean: linear-gradient(in oklch to right, var(--color-blue), var(--color-success));
-  --gradient-twilight: linear-gradient(in oklch to right, var(--color-indigo-deep), var(--color-violet), var(--color-pink-light));
-  --gradient-frost: linear-gradient(in oklch to right, var(--color-surface-light), var(--color-lavender), var(--color-indigo));
-  --gradient-ember: linear-gradient(in oklch to right, var(--color-highlight), var(--color-error), var(--color-indigo-deep));
+  /* Flat “gradient” tokens = solid (legacy class names only) */
+  --gradient-brand: var(--color-primary);
+  --gradient-atlitude-1: var(--color-surface);
+  --gradient-atlitude-2: var(--color-accent);
+  --gradient-atlitude-3: var(--color-focus-area);
+  --gradient-atlitude-4: var(--color-highlight);
+  --gradient-mindful-01: var(--color-surface);
+  --gradient-mindful-02: var(--color-accent-muted);
+  --gradient-mindful-03: var(--color-accent);
+  --gradient-mindful-04: var(--color-charcoal);
+  --gradient-mindful-05: var(--color-background);
+  --gradient-sunset: var(--color-highlight);
+  --gradient-ocean: var(--color-accent);
+  --gradient-twilight: var(--color-focus-area);
+  --gradient-frost: var(--color-warning);
+  --gradient-ember: var(--color-error);
 
   /* Spacing (slightly tighter for resized app) */
   --spacing-section: 1.25rem;
   --spacing-container: 1.25rem;
-  --radius-card: 0.625rem;
-  --radius-button: 0.625rem;
-  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08);
+  --radius-card: 2rem;
+  --radius-button: 9999px;
+  --shadow-card: none;
   --shadow-1: none;
-  --shadow-2: 0 1px 2px rgb(0 0 0 / 0.04);
-  --shadow-3: 0 2px 4px rgb(0 0 0 / 0.06);
-  --shadow-4: 0 4px 6px rgb(0 0 0 / 0.08);
-  --shadow-5: 0 6px 12px rgb(0 0 0 / 0.1);
-  --shadow-6: 0 8px 16px rgb(0 0 0 / 0.12);
-  --shadow-7: 0 12px 24px rgb(0 0 0 / 0.14);
-  --shadow-8: 0 16px 32px rgb(0 0 0 / 0.16);
-  --shadow-9: 0 20px 40px rgb(0 0 0 / 0.18);
-  --shadow-10: 0 25px 50px rgb(0 0 0 / 0.2);
+  --shadow-2: none;
+  --shadow-3: none;
+  --shadow-4: none;
+  --shadow-5: none;
+  --shadow-6: none;
+  --shadow-7: none;
+  --shadow-8: none;
+  --shadow-9: none;
+  --shadow-10: none;
 }
 
 /* Base */
@@ -115,7 +114,8 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-neutral-50 text-neutral-900 antialiased;
+    background: var(--color-background);
+    color: #f5f5f5;
     margin: 0;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -151,58 +151,54 @@
       animation-duration: 0.01ms !important;
     }
   }
-  /* Dark theme: override design tokens when .dark is on html.
-   * Neutrals are inverted: 900 = light text, 100 = dark surfaces. */
+  /* Dark theme: same bento canvas (toggle still flips .dark for any legacy hooks) */
   .dark {
-    --color-neutral-50: #171717;
-    --color-neutral-100: #262626;
-    --color-neutral-200: #404040;
-    --color-neutral-300: #525252;
+    --color-neutral-50: #0a0a0a;
+    --color-neutral-100: #141414;
+    --color-neutral-200: #242424;
+    --color-neutral-300: #333333;
     --color-neutral-400: #737373;
     --color-neutral-500: #a3a3a3;
     --color-neutral-600: #d4d4d4;
-    --color-neutral-700: #d4d4d4;
-    --color-neutral-800: #ececec;
+    --color-neutral-700: #e5e5e5;
+    --color-neutral-800: #f0f0f0;
     --color-neutral-900: #fafafa;
-    --color-background: #171717;
-    --color-surface: #262626;
-    --color-accent-muted: #4c1d95;
-    --color-border: #525252;
-    --color-border-strong: rgba(255, 255, 255, 0.2);
-    --color-charcoal: #525252;
+    --color-background: #000000;
+    --color-surface: #1a1a1a;
+    --color-accent-muted: #242424;
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-strong: rgba(255, 255, 255, 0.14);
+    --color-charcoal: #2a2a2a;
   }
   .dark .label-study {
-    @apply text-neutral-900;
+    @apply text-neutral-400;
   }
 }
 
-/* Label: uppercase, bold, tracking (study vibe) */
+/* Label: uppercase, bold, wide tracking (bento) */
 .label-study {
-  @apply text-sm font-bold uppercase tracking-wide text-neutral-900;
+  @apply text-xs font-bold uppercase tracking-[0.2em] text-neutral-400;
 }
 
-/* Gradient utilities */
+/* Legacy “gradient” utility names = flat solids (no CSS gradients in UI) */
 @layer components {
-  .bg-gradient-brand { background: var(--gradient-brand); }
-  .bg-gradient-atlitude-1 { background: var(--gradient-atlitude-1); }
-  .bg-gradient-atlitude-2 { background: var(--gradient-atlitude-2); }
-  .bg-gradient-atlitude-3 { background: var(--gradient-atlitude-3); }
-  .bg-gradient-atlitude-4 { background: var(--gradient-atlitude-4); }
-  .bg-gradient-mindful-01 { background: var(--gradient-mindful-01); }
-  .bg-gradient-mindful-02 { background: var(--gradient-mindful-02); }
-  .bg-gradient-mindful-03 { background: var(--gradient-mindful-03); }
-  .bg-gradient-mindful-04 { background: var(--gradient-mindful-04); }
-  .bg-gradient-mindful-05 { background: var(--gradient-mindful-05); }
-  .bg-gradient-sunset { background: var(--gradient-sunset); }
-  .bg-gradient-ocean { background: var(--gradient-ocean); }
-  .bg-gradient-twilight { background: var(--gradient-twilight); }
-  .bg-gradient-frost { background: var(--gradient-frost); }
-  .bg-gradient-ember { background: var(--gradient-ember); }
+  .bg-gradient-brand { background-color: var(--gradient-brand); }
+  .bg-gradient-atlitude-1 { background-color: var(--gradient-atlitude-1); }
+  .bg-gradient-atlitude-2 { background-color: var(--gradient-atlitude-2); }
+  .bg-gradient-atlitude-3 { background-color: var(--gradient-atlitude-3); }
+  .bg-gradient-atlitude-4 { background-color: var(--gradient-atlitude-4); }
+  .bg-gradient-mindful-01 { background-color: var(--gradient-mindful-01); }
+  .bg-gradient-mindful-02 { background-color: var(--gradient-mindful-02); }
+  .bg-gradient-mindful-03 { background-color: var(--gradient-mindful-03); }
+  .bg-gradient-mindful-04 { background-color: var(--gradient-mindful-04); }
+  .bg-gradient-mindful-05 { background-color: var(--gradient-mindful-05); }
+  .bg-gradient-sunset { background-color: var(--gradient-sunset); }
+  .bg-gradient-ocean { background-color: var(--gradient-ocean); }
+  .bg-gradient-twilight { background-color: var(--gradient-twilight); }
+  .bg-gradient-frost { background-color: var(--gradient-frost); }
+  .bg-gradient-ember { background-color: var(--gradient-ember); }
   .text-gradient-brand {
-    background: var(--gradient-brand);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--color-primary);
   }
   .shadow-1 { box-shadow: var(--shadow-1); }
   .shadow-2 { box-shadow: var(--shadow-2); }
@@ -220,8 +216,7 @@
     transition: color 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out, box-shadow 200ms ease-out, transform 200ms ease-out, opacity 200ms ease-out;
   }
   .hover-lift:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-4);
+    transform: translateY(-1px);
   }
   .hover-lift:active {
     transform: translateY(0);

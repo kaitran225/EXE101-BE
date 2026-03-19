@@ -103,7 +103,7 @@ export function DashboardSidebar() {
 
   return (
     <aside
-      className={`relative h-full flex flex-col flex-shrink-0 bg-gradient-to-b from-neutral-800 to-neutral-900 text-white transition-[width] ${collapsed ? 'w-14' : 'w-56'
+      className={`relative h-full flex flex-col flex-shrink-0 bg-[var(--color-background)] border-r border-white/10 text-white transition-[width] ${collapsed ? 'w-14' : 'w-56'
         }`}
       aria-label="Dashboard navigation"
     >
@@ -113,9 +113,8 @@ export function DashboardSidebar() {
           className={`flex items-center p-1.5 rounded-xl hover:bg-neutral-700 text-neutral-300 hover:text-white transition-colors duration-150 ${collapsed ? 'justify-center' : ''}`}
           aria-label="App home"
         >
-          <div className="flex gap-2 h-16 items-center justify-center">
-            <img src="/together/horizontal-icon.svg" alt="Together" className="h-full relative -bottom-4 flex-shrink-0 align-bottom" />
-            {!collapsed && <span className="ml-2 text-sm font-bold text-white truncate"></span>}
+          <div className="flex h-10 items-center justify-center">
+            <img src="/together/horizontal-icon.svg" alt="Together" className="h-7 w-auto flex-shrink-0" />
           </div>
         </Link>
         <nav className="flex flex-col gap-0.5 flex-1 min-h-0 overflow-y-auto" aria-label="Main">
@@ -129,10 +128,10 @@ export function DashboardSidebar() {
                 key={`${to}-${label}`}
                 to={to}
                 title={label}
-                className={`self-stretch flex items-center gap-3 rounded-xl py-2 transition-colors duration-150 ${collapsed ? 'justify-center px-2' : 'justify-start px-2.5'
+                className={`self-stretch flex items-center gap-3 rounded-lg py-2 transition-colors duration-150 ${collapsed ? 'justify-center px-2' : 'justify-start px-2.5'
                   } ${active
-                    ? 'bg-highlight/20 text-highlight'
-                    : 'text-neutral-400 hover:bg-neutral-700 hover:text-white'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-neutral-500 hover:bg-white/5 hover:text-neutral-900'
                   }`}
               >
                 <NavIcon icon={navIcons[i]} />
@@ -143,7 +142,7 @@ export function DashboardSidebar() {
             )
           })}
         </nav>
-        <div className="pt-4 border-t border-neutral-600 space-y-3">
+      <div className="pt-4 border-t border-neutral-700 space-y-2">
           {collapsed ? (
             <Link
               to="/profile"
@@ -154,20 +153,17 @@ export function DashboardSidebar() {
             </Link>
           ) : (
             <>
-              <div>
-                <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-2 px-2">Global ranking</p>
-                <Link
-                  to="/profile"
-                  className="flex items-center gap-2 py-1.5 px-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
-                  aria-label="Go to profile"
-                >
-                  <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs font-medium text-white truncate">{user?.fullName ?? 'You'}</p>
-                    <p className="text-[10px] text-neutral-400">Level 24 · #777</p>
-                  </div>
-                </Link>
-              </div>
+              <Link
+                to="/profile"
+                className="flex items-center gap-2 py-1.5 px-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
+                aria-label="Go to profile"
+              >
+                <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-medium text-white truncate">{user?.fullName ?? 'You'}</p>
+                  <p className="text-[10px] text-neutral-400">Level 24 · #777</p>
+                </div>
+              </Link>
               <Button
                 type="button"
                 onClick={logout}
@@ -177,13 +173,6 @@ export function DashboardSidebar() {
               >
                 Logout
               </Button>
-              <div className="px-2">
-                <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wide mb-1.5">Next reward 75%</p>
-                <div className="h-2 w-full bg-neutral-700 rounded-full overflow-hidden">
-                  <div className="h-full w-3/4 bg-primary rounded-full" />
-                </div>
-                <p className="text-[10px] text-neutral-400 mt-1">Level 24 + Premium</p>
-              </div>
             </>
           )}
         </div>
@@ -192,7 +181,7 @@ export function DashboardSidebar() {
       <IconButton
         type="button"
         onClick={() => setCollapsed((c: boolean) => !c)}
-        className="absolute right-0 bottom-6 w-8 h-11 rounded-l-none rounded-tr-2xl rounded-br-2xl bg-neutral-800 text-neutral-300 transition-all duration-200 active:scale-95 -translate-y-1/2 translate-x-full z-10 hover:bg-gradient-to-r hover:from-neutral-800 hover:to-neutral-500 hover:text-white"
+        className="absolute right-0 bottom-6 w-8 h-11 rounded-l-none rounded-tr-2xl rounded-br-2xl bg-neutral-800 text-neutral-300 transition-all duration-200 active:scale-95 -translate-y-1/2 translate-x-full z-10 hover:bg-neutral-700 hover:text-white"
         label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         icon={<svg className={`w-4 h-4 transition-transform duration-200 ease-out ${collapsed ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" /></svg>}
       />

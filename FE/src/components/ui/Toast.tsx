@@ -5,11 +5,11 @@ import { CloseIcon } from '../icons'
 type ToastVariant = 'default' | 'success' | 'warning' | 'error' | 'info'
 
 const variantClasses: Record<ToastVariant, string> = {
-  default: 'border-[var(--color-charcoal)] bg-white dark:bg-[var(--color-surface)] shadow-[var(--shadow-3)]',
-  success: 'border-success/50 bg-gradient-to-r from-success/15 to-success/5 shadow-[var(--shadow-3)]',
-  warning: 'border-warning/50 bg-gradient-to-r from-warning/15 to-warning/5 shadow-[var(--shadow-3)]',
-  error: 'border-error/50 bg-gradient-to-r from-error/15 to-error/5 shadow-[var(--shadow-3)]',
-  info: 'border-blue/50 bg-gradient-to-r from-blue/15 to-blue/5 shadow-[var(--shadow-3)]',
+  default: 'border border-white/10 bg-[var(--color-surface)]',
+  success: 'border border-success/40 bg-success/20',
+  warning: 'border border-warning/40 bg-warning/25',
+  error: 'border border-error/40 bg-error/20',
+  info: 'border border-accent/40 bg-accent/20',
 }
 
 export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
@@ -21,9 +21,9 @@ export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
 
 export function Toast({ variant = 'default', icon, action, onClose, className = '', children, ...props }: ToastProps) {
   return (
-    <div className={`flex items-center gap-3 p-3 rounded-lg border ${variantClasses[variant]} ${className}`.trim()} {...props}>
+    <div className={`flex items-center gap-3 p-3 rounded-[var(--radius-card)] shadow-none ${variantClasses[variant]} ${className}`.trim()} {...props}>
       {icon && <span className="shrink-0">{icon}</span>}
-      <div className="text-sm font-medium text-neutral-900 dark:text-neutral-900 flex-1">{children}</div>
+      <div className="text-sm font-medium text-neutral-900 flex-1">{children}</div>
       {action}
       {onClose && (
         <IconButton
