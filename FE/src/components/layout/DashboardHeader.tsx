@@ -194,8 +194,8 @@ export function DashboardHeader() {
           to="/focus-room"
           className={`hidden sm:inline-flex px-4 py-2 text-xs font-bold rounded-full flex-shrink-0 transition-all duration-150 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${
             isHome
-              ? 'bg-[#fdffb6] text-black hover:brightness-95 focus:ring-[#fdffb6]'
-              : 'bg-error text-white hover:brightness-95 focus:ring-error'
+              ? 'bg-[var(--color-warning)] text-black hover:brightness-95 focus:ring-[var(--color-warning)]'
+              : 'bg-[var(--color-error)] text-white hover:brightness-95 focus:ring-[var(--color-error)]'
           }`}
         >
           Focus room

@@ -46,9 +46,9 @@
   --color-highlight: var(--pal-sunshine);
   --color-highlight-hover: #f2b20f;
   --color-focus-area: var(--pal-lilac);
-  --color-success: #34c759;
-  --color-warning: #fdffb6;
-  --color-error: #ff453a;
+  --color-success: var(--pal-pear);
+  --color-warning: var(--pal-orange);
+  --color-error: var(--pal-flame);
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-strong: rgba(255, 255, 255, 0.14);
   --color-charcoal: #2a2a2a;

@@ -11,7 +11,7 @@ const variantClasses: Record<Variant, string> = {
   ghost:
     'bg-transparent text-neutral-900 border border-transparent hover:bg-white/5 focus-visible:outline-primary',
   cta:
-    'bg-[#ff7f50] text-black border-0 shadow-none hover:brightness-95 focus-visible:outline-[#ff7f50]',
+    'bg-[var(--color-error)] text-black border-0 shadow-none hover:brightness-95 focus-visible:outline-[var(--color-error)]',
   tonal:
     'bg-white/10 text-primary border border-white/10 hover:bg-white/15 focus-visible:outline-primary',
 }

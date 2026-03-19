@@ -18,7 +18,7 @@ export function AuthSidebar() {
           aria-label="together home"
         >
           <span className="text-2xl font-bold text-primary">∞</span>
-          <span className="text-lg font-semibold text-[#A896F2]">together</span>
+          <span className="text-lg font-semibold text-[var(--color-focus-area)]">together</span>
         </Link>
         <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight mb-4">
           Learn together. Progress together.
