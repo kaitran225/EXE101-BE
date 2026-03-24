@@ -40,9 +40,15 @@ import {
   Transaction,
   Subscription,
   Shop,
-  AdminDashboard,
   AdminUsers,
   AdminAccountSettings,
+  AdminOverview,
+  AdminUserManagement,
+  AdminModeration,
+  AdminSocialRooms,
+  AdminReports,
+  AdminRevenue,
+  AdminSupport,
 } from './pages/app'
 
 const STANDALONE_PATHS = ['/callback', '/welcome', '/sign-up', '/confirm-mail', '/reset-password', '/debug']
@@ -112,7 +118,14 @@ export default function App() {
         <Route path="/transaction" element={<ProtectedDashboardRoute element={<Transaction />} />} />
         <Route path="/subscription" element={<ProtectedDashboardRoute element={<Subscription />} />} />
         <Route path="/shop" element={<ProtectedDashboardRoute element={<Shop />} />} />
-        <Route path="/admin" element={<AdminRoute element={<AdminDashboard />} />} />
+        <Route path="/admin" element={<Navigate to="/admin/overview" replace />} />
+        <Route path="/admin/overview" element={<AdminRoute element={<AdminOverview />} />} />
+        <Route path="/admin/users-management" element={<AdminRoute element={<AdminUserManagement />} />} />
+        <Route path="/admin/moderation" element={<AdminRoute element={<AdminModeration />} />} />
+        <Route path="/admin/social-rooms" element={<AdminRoute element={<AdminSocialRooms />} />} />
+        <Route path="/admin/reports" element={<AdminRoute element={<AdminReports />} />} />
+        <Route path="/admin/revenue" element={<AdminRoute element={<AdminRevenue />} />} />
+        <Route path="/admin/support" element={<AdminRoute element={<AdminSupport />} />} />
         <Route path="/admin/users" element={<AdminRoute element={<AdminUsers />} />} />
         <Route path="/admin/account" element={<AdminRoute element={<AdminAccountSettings />} />} />
       </Routes>

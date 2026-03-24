@@ -16,12 +16,16 @@ const userNavItems = [
 ] as const
 
 const adminNavItems = [
-  { to: '/admin', label: 'Admin Home' },
-  { to: '/admin/users', label: 'Admin Users' },
-  { to: '/admin/account', label: 'Admin Account' },
+  { to: '/admin/overview', label: 'Dashboard' },
+  { to: '/admin/users-management', label: 'Users' },
+  { to: '/admin/moderation', label: 'Moderation' },
+  { to: '/admin/social-rooms', label: 'Social Rooms' },
+  { to: '/admin/reports', label: 'Reports' },
+  { to: '/admin/revenue', label: 'Revenue' },
+  { to: '/admin/support', label: 'Support' },
 ] as const
 
-const iconKeys: Array<'home' | 'study' | 'meetings' | 'teams' | 'calendar' | 'gift' | 'shop' | 'ai' | 'admin' | 'users' | 'settings'> = [
+const iconKeys: Array<'home' | 'study' | 'meetings' | 'teams' | 'calendar' | 'gift' | 'shop' | 'ai' | 'admin' | 'users' | 'settings' | 'moderation' | 'rooms' | 'reports' | 'revenue' | 'support'> = [
   'home', 'study', 'meetings', 'teams', 'calendar', 'gift', 'shop', 'ai',
 ]
 
@@ -88,6 +92,35 @@ function NavIcon({ icon }: { icon: (typeof iconKeys)[number] }) {
         <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V22a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9c.36.48.57 1.08.6 1.7.03.62-.12 1.24-.44 1.76-.32.52-.8.94-1.36 1.19-.56.25-1.17.34-1.76.25" />
       </svg>
     ),
+    moderation: (
+      <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M12 3l8 4v6c0 5-3.5 7.5-8 8-4.5-.5-8-3-8-8V7l8-4z" />
+        <path d="M9 12l2 2 4-4" />
+      </svg>
+    ),
+    rooms: (
+      <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M3 10l9-7 9 7v10H3V10z" />
+        <path d="M9 20v-6h6v6" />
+      </svg>
+    ),
+    reports: (
+      <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M4 4h16v16H4z" />
+        <path d="M8 16l3-3 2 2 3-4" />
+      </svg>
+    ),
+    revenue: (
+      <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M4 19h16" />
+        <path d="M6 15l4-4 3 3 5-6" />
+      </svg>
+    ),
+    support: (
+      <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z" />
+      </svg>
+    ),
   }
   return icons[icon]
 }
@@ -98,8 +131,8 @@ export function DashboardSidebar() {
   const { user, logout } = useAuth()
   const role = (user?.role ?? 'USER') as UserRole
   const navItems = role === 'ADMIN' ? adminNavItems : userNavItems
-  const navIcons = role === 'ADMIN' ? (['admin', 'users', 'settings'] as const) : iconKeys
-  const homePath = role === 'ADMIN' ? '/admin' : '/dashboard'
+  const navIcons = role === 'ADMIN' ? (['admin', 'users', 'moderation', 'rooms', 'reports', 'revenue', 'support'] as const) : iconKeys
+  const homePath = role === 'ADMIN' ? '/admin/overview' : '/dashboard'
 
   return (
     <aside
