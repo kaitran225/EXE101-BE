@@ -34,9 +34,9 @@
   --pal-pear: #8FC766;
   --pal-sky: #5CB5F2;
   --pal-lilac: #A896F2;
-  --color-cream-100: #fffdf4;
-  --color-cream-200: #fff8df;
-  --color-cream-300: #f3ecd2;
+  --color-cream-100: #f1f3ec;
+  --color-cream-200: #e5e8de;
+  --color-cream-300: #d4d9cb;
 
   /* Semantic — bento / Gen Z solids */
   --color-primary: #b9e600;
@@ -52,8 +52,8 @@
   --color-success: var(--pal-pear);
   --color-warning: var(--pal-orange);
   --color-error: var(--pal-flame);
-  --color-border: rgba(15, 23, 42, 0.22);
-  --color-border-strong: rgba(15, 23, 42, 0.24);
+  --color-border: rgba(15, 23, 42, 0.26);
+  --color-border-strong: rgba(15, 23, 42, 0.28);
   --color-charcoal: var(--color-cream-300);
 
   /* Flat “gradient” tokens = solid (legacy class names only) */
