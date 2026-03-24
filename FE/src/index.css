@@ -36,22 +36,22 @@
   --pal-lilac: #A896F2;
 
   /* Semantic — bento / Gen Z solids */
-  --color-primary: #ccff00;
-  --color-primary-hover: #b8e600;
+  --color-primary: #b9e600;
+  --color-primary-hover: #a8cf00;
   --color-primary-foreground: #000000;
   --color-accent: var(--pal-sky);
-  --color-accent-muted: #dbe3ee;
-  --color-surface: #f8fafc;
-  --color-background: #eef3f9;
+  --color-accent-muted: #d1dbe8;
+  --color-surface: #f1f5f9;
+  --color-background: #e7edf5;
   --color-highlight: var(--pal-sunshine);
   --color-highlight-hover: #f2b20f;
   --color-focus-area: var(--pal-lilac);
   --color-success: var(--pal-pear);
   --color-warning: var(--pal-orange);
   --color-error: var(--pal-flame);
-  --color-border: rgba(15, 23, 42, 0.14);
+  --color-border: rgba(15, 23, 42, 0.18);
   --color-border-strong: rgba(15, 23, 42, 0.24);
-  --color-charcoal: #e2e8f0;
+  --color-charcoal: #d4dde8;
 
   /* Flat “gradient” tokens = solid (legacy class names only) */
   --gradient-brand: var(--color-primary);

@@ -86,7 +86,7 @@ export default function AiSupport() {
             <div className="rounded-xl bg-accent-muted border border-primary/20 p-3">
               <div className="flex justify-between items-center mb-1.5">
                 <span className="text-xs font-medium text-neutral-900">Tokens used</span>
-                <span className="text-xs font-semibold text-primary">64%</span>
+                <span className="text-xs font-semibold text-neutral-900 dark:text-primary">64%</span>
               </div>
               <Progress value={64} max={100} className="h-2 rounded-full" />
             </div>
@@ -160,7 +160,7 @@ export default function AiSupport() {
         <aside className="min-w-0 flex flex-col border-l-2 border-neutral-200 bg-white">
           <div className="flex items-center gap-2 px-4 py-3 border-b-2 border-neutral-200">
             <AiBotIcon className="w-7 h-7" />
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-accent">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-700 dark:text-accent">
               Conversation
             </h2>
           </div>
@@ -198,8 +198,8 @@ export default function AiSupport() {
               placeholder="Type your question..."
               secondaryActions={
                 <>
-                  <Button type="button" variant="ghost" size="sm" onClick={() => setSummarizeOpen(true)} className="!px-0 !py-0 min-h-0 text-xs font-medium text-primary hover:text-primary-hover">Summarize</Button>
-                  <Button type="button" variant="ghost" size="sm" onClick={() => setDialogOpen(true)} className="!px-0 !py-0 min-h-0 text-xs font-medium text-primary hover:text-primary-hover">Open chat in popup</Button>
+                  <Button type="button" variant="ghost" size="sm" onClick={() => setSummarizeOpen(true)} className="!px-0 !py-0 min-h-0 text-xs font-medium text-neutral-700 hover:text-neutral-900">Summarize</Button>
+                  <Button type="button" variant="ghost" size="sm" onClick={() => setDialogOpen(true)} className="!px-0 !py-0 min-h-0 text-xs font-medium text-neutral-700 hover:text-neutral-900">Open chat in popup</Button>
                 </>
               }
             />
@@ -300,7 +300,7 @@ export default function AiSupport() {
                     <svg className="w-12 h-12 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
                     <span className="text-sm font-semibold text-neutral-600">Drop PDF</span>
                     <span className="text-xs">Max {MAX_PDF_MB}MB</span>
-                    {droppedFile && <span className="text-xs font-medium text-primary mt-1 truncate max-w-full px-2">{droppedFile.name}</span>}
+                    {droppedFile && <span className="text-xs font-medium text-neutral-800 dark:text-primary mt-1 truncate max-w-full px-2">{droppedFile.name}</span>}
                   </Button>
                 </div>
                 <div>

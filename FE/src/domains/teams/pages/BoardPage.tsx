@@ -168,7 +168,7 @@ function ScrumBoardContent() {
                       </span>
                     )}
                     {task.missed && (
-                      <span className="absolute top-1 right-1 text-highlight" aria-hidden>
+                      <span className="absolute top-1 right-1 text-neutral-700 dark:text-highlight" aria-hidden>
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       </span>
                     )}
@@ -207,7 +207,7 @@ function ScrumBoardContent() {
             <section className="mb-2">
               <h3 className="text-[10px] font-bold uppercase text-neutral-600 mb-1">Priority Alerts</h3>
               <div className="flex gap-1.5 p-2 rounded-md bg-highlight/10 border border-highlight/30">
-                <span className="text-highlight text-[10px]">▲</span>
+                <span className="text-neutral-700 dark:text-highlight text-[10px]">▲</span>
                 <p className="text-[10px] text-neutral-800">Bottleneck: &quot;Integrate AI Dashboard UI&quot; delayed.</p>
               </div>
             </section>
@@ -398,7 +398,7 @@ function SprintBoardContent() {
             </section>
             <section className="p-2 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)]">
               <h3 className="text-[10px] font-bold uppercase tracking-wide text-neutral-900 mb-1 flex items-center gap-0.5">
-                AI Assistant <span className="text-primary">◆</span>
+                AI Assistant <span className="text-neutral-700 dark:text-primary">◆</span>
               </h3>
               <p className="text-[10px] text-neutral-700 mb-1.5">Update documentation.</p>
               <Button variant="primary" size="sm" className="py-1 text-xs h-6">Accept</Button>

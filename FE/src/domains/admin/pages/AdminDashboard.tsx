@@ -23,12 +23,12 @@ export default function AdminDashboard() {
         </Card>
         <Card className="p-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-500">Active users</p>
-          <p className="mt-2 text-3xl font-bold text-success">{activeCount}</p>
+          <p className="mt-2 text-3xl font-bold text-neutral-900 dark:text-success">{activeCount}</p>
           <Badge variant="focus" className="mt-2 normal-case tracking-normal">Healthy engagement</Badge>
         </Card>
         <Card className="p-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-500">Admin accounts</p>
-          <p className="mt-2 text-3xl font-bold text-primary">{adminCount}</p>
+          <p className="mt-2 text-3xl font-bold text-neutral-900 dark:text-primary">{adminCount}</p>
           <Badge variant="primary" className="mt-2 normal-case tracking-normal">Governance ready</Badge>
         </Card>
       </div>

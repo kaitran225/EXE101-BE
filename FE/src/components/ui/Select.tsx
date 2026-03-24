@@ -31,7 +31,7 @@ export function Select({
         <select
           id={selectId}
           className={`
-            w-full appearance-none px-4 py-3 pr-10 bg-[var(--color-charcoal)] border border-white/10 rounded-[var(--radius-card)]
+            w-full appearance-none px-4 py-3 pr-10 bg-[var(--color-charcoal)] border border-[var(--color-border)] rounded-[var(--radius-card)]
             text-neutral-900
             transition-colors duration-150 ease-out
             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
@@ -51,7 +51,7 @@ export function Select({
           ))}
         </select>
         <span
-          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-primary"
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-neutral-600 dark:text-neutral-500"
           aria-hidden
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

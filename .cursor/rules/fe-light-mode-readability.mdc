@@ -1,0 +1,33 @@
+---
+description: Ban neon text on light surfaces and enforce readable light-mode contrast
+alwaysApply: true
+---
+
+# FE Light Mode Readability Rule
+
+## Hard Rule
+- Neon foreground text on light surfaces is banned.
+- Banned pairings include `text-primary`, `text-highlight`, `text-accent` on `bg-white`, `bg-neutral-*`, `bg-[var(--color-surface)]`, `bg-[var(--color-background)]`, and other light fills.
+
+## Allowed Neon Usage
+- Neon/accent colors are allowed for:
+  - decorative icons, dots, and non-text accents,
+  - dark-surface contexts with sufficient contrast,
+  - large display-only emphasis where readability remains clear.
+
+## Required Text Defaults On Light Surfaces
+- Primary content: `text-neutral-900`
+- Secondary content: `text-neutral-800` or `text-neutral-700`
+- Meta/labels: `text-neutral-700` or `text-neutral-600`
+- Links/buttons must keep readable hover states (no neon-on-light body text).
+
+## Bad vs Good
+- Bad: `bg-[var(--color-surface)] text-primary`
+- Good: `bg-[var(--color-surface)] text-neutral-900`
+- Bad: `bg-neutral-100 text-highlight`
+- Good: `bg-neutral-100 text-neutral-800`
+
+## Reviewer Checklist
+- No neon text on light cards, tables, forms, chat bubbles, or muted panels.
+- Action labels and metadata remain readable in light mode.
+- Dark mode behavior is preserved after any light-mode readability change.

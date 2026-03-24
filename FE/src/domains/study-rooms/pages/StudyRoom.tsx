@@ -36,7 +36,7 @@ export default function StudyRoom() {
           >
             End
           </Button>
-          <span className="w-7 h-7 rounded-full bg-accent-muted text-primary border-2 border-primary/30 flex items-center justify-center text-[10px] font-semibold shrink-0" aria-hidden>
+          <span className="w-7 h-7 rounded-full bg-accent-muted text-neutral-800 dark:text-primary border-2 border-primary/30 flex items-center justify-center text-[10px] font-semibold shrink-0" aria-hidden>
             N
           </span>
         </div>

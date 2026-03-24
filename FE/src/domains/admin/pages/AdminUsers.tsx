@@ -84,7 +84,7 @@ export default function AdminUsers() {
             <Button type="submit" variant="primary" className="w-full">Create user</Button>
           </div>
         </form>
-        {message && <p className="text-sm text-primary mt-3">{message}</p>}
+        {message && <p className="text-sm text-neutral-700 dark:text-primary mt-3">{message}</p>}
       </Card>
 
       <Card className="p-0 overflow-hidden">

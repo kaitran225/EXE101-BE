@@ -57,7 +57,7 @@ export default function ProfileWithSidebar() {
           <div>
             <h1 className="text-2xl font-bold text-neutral-900 uppercase tracking-tight">{displayName}</h1>
             <p className="text-sm text-neutral-600">Software Engineering · Level 24</p>
-            <Button variant="secondary" size="sm" className="mt-2 border-2 border-primary/30 text-primary hover:bg-accent-muted">
+            <Button variant="secondary" size="sm" className="mt-2 border-2 border-primary/30 text-neutral-900 hover:bg-accent-muted">
               Share profile
             </Button>
           </div>
@@ -85,7 +85,7 @@ export default function ProfileWithSidebar() {
                     {group.tasks.map((t, j) => (
                       <li key={j} className="flex items-center justify-between gap-2 text-sm">
                         <span className="text-neutral-900 truncate">{t.title}</span>
-                        <span className={`shrink-0 px-2 py-0.5 rounded text-[10px] font-bold uppercase ${t.status === 'on-time' ? 'bg-success/20 text-success' : 'bg-highlight/20 text-highlight'}`}>
+                        <span className={`shrink-0 px-2 py-0.5 rounded text-[10px] font-bold uppercase ${t.status === 'on-time' ? 'bg-success/20 text-neutral-800 dark:text-success' : 'bg-highlight/20 text-neutral-800 dark:text-highlight'}`}>
                           {t.status === 'on-time' ? 'On time' : 'Late'} {t.pct}%
                         </span>
                       </li>
@@ -94,7 +94,7 @@ export default function ProfileWithSidebar() {
                 </li>
               ))}
             </ul>
-            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-accent hover:text-accent">View full →</Link>
+            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-neutral-700 hover:text-neutral-900">View full →</Link>
           </Card>
           <Card className="p-5 border-2 border-neutral-200" heading="Achievements">
             <div className="flex flex-wrap gap-3">
@@ -103,21 +103,21 @@ export default function ProfileWithSidebar() {
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </span>
               ))}
-              <span className="w-12 h-12 rounded-full bg-accent-muted flex items-center justify-center text-primary" aria-hidden>
+              <span className="w-12 h-12 rounded-full bg-accent-muted flex items-center justify-center text-neutral-800 dark:text-primary" aria-hidden>
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
               </span>
               <span className="w-12 h-12 rounded-full border-2 border-dashed border-neutral-300 flex items-center justify-center text-neutral-400" aria-hidden>
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
               </span>
             </div>
-            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-accent hover:text-accent">View full →</Link>
+            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-neutral-700 hover:text-neutral-900">View full →</Link>
           </Card>
           <Card className="p-5 border-2 border-neutral-200" heading="Learning goals">
             <div className="flex flex-wrap gap-2">
               {LEARNING_GOALS.map((g) => (
                 <Button key={g} type="button" variant="secondary" size="sm" className="px-3 py-2 rounded-xl border-2 border-accent/20 bg-accent-muted text-neutral-900 text-xs font-semibold flex items-center gap-1.5 hover:bg-accent-muted transition-colors">
                   {g}
-                  <span className="text-accent"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg></span>
+                  <span className="text-neutral-700 dark:text-accent"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg></span>
                 </Button>
               ))}
             </div>
@@ -134,12 +134,12 @@ export default function ProfileWithSidebar() {
               {[2, 3, 4, 5, 6, 7, 8].map((d, i) => (
                 <div key={d} className="p-1.5 rounded-lg border border-neutral-200 bg-neutral-50/50 min-h-[40px]">
                   <span className="text-xs font-medium text-neutral-900">{d}</span>
-                  {i === 1 && <p className="text-[8px] text-accent mt-0.5 truncate">10:00</p>}
-                  {i === 3 && <p className="text-[8px] text-highlight mt-0.5 truncate">Exam</p>}
+                  {i === 1 && <p className="text-[8px] text-neutral-700 dark:text-accent mt-0.5 truncate">10:00</p>}
+                  {i === 3 && <p className="text-[8px] text-neutral-800 dark:text-highlight mt-0.5 truncate">Exam</p>}
                 </div>
               ))}
             </div>
-            <Link to="/calendar" className="inline-block mt-3 text-xs font-semibold text-accent hover:text-accent">View full →</Link>
+            <Link to="/calendar" className="inline-block mt-3 text-xs font-semibold text-neutral-700 hover:text-neutral-900">View full →</Link>
           </Card>
           <Card className="p-5 border-2 border-neutral-200" heading="Study time by month">
             <div className="flex items-end gap-0.5 h-20">
@@ -174,7 +174,7 @@ export default function ProfileWithSidebar() {
                 </li>
               ))}
             </ul>
-            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-accent hover:text-accent">View full →</Link>
+            <Link to="/dashboard" className="inline-block mt-3 text-xs font-semibold text-neutral-700 hover:text-neutral-900">View full →</Link>
           </Card>
         </div>
 
@@ -183,7 +183,7 @@ export default function ProfileWithSidebar() {
         <Card className="p-5 border-2 border-neutral-200" heading="Skills">
             <div className="flex flex-wrap gap-2">
               {SKILLS.map((s) => (
-                <span key={s} className="px-3 py-1 rounded-full bg-accent-muted text-primary text-xs font-medium">
+                <span key={s} className="px-3 py-1 rounded-full bg-accent-muted text-neutral-800 dark:text-primary text-xs font-medium">
                   {s}
                 </span>
               ))}

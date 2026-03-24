@@ -129,7 +129,7 @@ export default function AdminAccountSettings() {
         </form>
       </Card>
 
-      {message && <p className="text-sm text-primary">{message}</p>}
+      {message && <p className="text-sm text-neutral-700 dark:text-primary">{message}</p>}
     </div>
   )
 }

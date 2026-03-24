@@ -18,7 +18,7 @@ export default function MeetingLobby() {
 
   return (
     <div className="w-full max-w-5xl mx-auto py-4 md:py-8 space-y-6">
-      <section className="rounded-[var(--radius-card)] border border-white/10 bg-[var(--color-surface)] p-5 md:p-6 shadow-none">
+      <section className="rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 md:p-6 shadow-none">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <Badge variant="focus" className="mb-2 normal-case tracking-normal">Collaborative study calls</Badge>
@@ -30,15 +30,15 @@ export default function MeetingLobby() {
           <div className="grid grid-cols-3 gap-2 md:gap-3 text-center">
             <Card className="p-3 md:p-4">
               <p className="text-[10px] uppercase tracking-wide text-neutral-500">Active now</p>
-              <p className="text-lg font-bold text-primary">12</p>
+              <p className="text-lg font-bold text-neutral-900 dark:text-primary">12</p>
             </Card>
             <Card className="p-3 md:p-4">
               <p className="text-[10px] uppercase tracking-wide text-neutral-500">Study teams</p>
-              <p className="text-lg font-bold text-success">24</p>
+              <p className="text-lg font-bold text-neutral-900 dark:text-success">24</p>
             </Card>
             <Card className="p-3 md:p-4">
               <p className="text-[10px] uppercase tracking-wide text-neutral-500">Daily goal</p>
-              <p className="text-lg font-bold text-highlight">2h</p>
+              <p className="text-lg font-bold text-neutral-900 dark:text-highlight">2h</p>
             </Card>
           </div>
         </div>
