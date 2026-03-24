@@ -25,8 +25,8 @@ export default function AdminSocialRooms() {
             {socialRoomsData.map((row) => (
               <TableRow key={row.roomName} className="hover:brightness-[1.01]">
                 <TableCell className="px-2 py-3 text-sm font-semibold text-neutral-900">{row.roomName}</TableCell>
-                <TableCell className="px-2 py-3 text-sm text-neutral-700">{row.owner}</TableCell>
-                <TableCell className="px-2 py-3 text-sm text-neutral-700">{row.participants}</TableCell>
+                <TableCell className="px-2 py-3 text-sm text-neutral-800">{row.owner}</TableCell>
+                <TableCell className="px-2 py-3 text-sm text-neutral-800">{row.participants}</TableCell>
                 <TableCell className="px-2 py-3"><AdminStatusBadge status={row.status} /></TableCell>
               </TableRow>
             ))}

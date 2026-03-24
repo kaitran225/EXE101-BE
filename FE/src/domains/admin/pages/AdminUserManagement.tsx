@@ -82,13 +82,13 @@ export default function AdminUserManagement() {
           <TableBody>
             {pageRows.map((row) => (
               <TableRow key={row.id} className="hover:brightness-[1.01]">
-                <TableCell className="px-2 py-3 text-xs font-semibold text-neutral-700">{row.id}</TableCell>
+                <TableCell className="px-2 py-3 text-xs font-semibold text-neutral-800">{row.id}</TableCell>
                 <TableCell className="px-2 py-3 text-sm font-medium text-neutral-900">{row.username}</TableCell>
-                <TableCell className="px-2 py-3 text-sm text-neutral-700">{row.email}</TableCell>
+                <TableCell className="px-2 py-3 text-sm text-neutral-800">{row.email}</TableCell>
                 <TableCell className="px-2 py-3"><AdminStatusBadge status={row.status} /></TableCell>
                 <TableCell className="px-2 py-3"><AdminStatusBadge status={row.plan} /></TableCell>
-                <TableCell className="px-2 py-3 text-sm text-neutral-700">{row.registerDate}</TableCell>
-                <TableCell className="px-2 py-3 text-sm text-neutral-700">{row.expiryDate}</TableCell>
+                <TableCell className="px-2 py-3 text-sm text-neutral-800">{row.registerDate}</TableCell>
+                <TableCell className="px-2 py-3 text-sm text-neutral-800">{row.expiryDate}</TableCell>
                 <TableCell className="px-2 py-3">
                   <div className="flex gap-2">
                     <Button variant="secondary" size="sm" onClick={() => setSelectedUser(row)}>View</Button>

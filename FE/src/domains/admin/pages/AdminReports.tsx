@@ -18,8 +18,8 @@ export default function AdminReports() {
         subtitle="Date range based reporting snapshot"
         action={
           <div className="flex flex-wrap items-center gap-2 justify-end">
-            <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-neutral-800" />
-            <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-neutral-800" />
+            <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-neutral-900" />
+            <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-neutral-900" />
             <Button
               size="sm"
               variant="secondary"

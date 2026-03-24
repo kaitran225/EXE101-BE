@@ -17,7 +17,7 @@ interface SupportChatListProps {
 export function SupportChatList({ users, selectedId, onSelect }: SupportChatListProps) {
   return (
     <aside className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
-      <h3 className="mb-3 text-xs font-bold uppercase tracking-[0.08em] text-neutral-600">User Chats</h3>
+      <h3 className="mb-3 text-xs font-bold uppercase tracking-[0.08em] text-neutral-700">User Chats</h3>
       <ul className="space-y-2">
         {users.map((u) => (
           <li key={u.id}>
@@ -34,8 +34,8 @@ export function SupportChatList({ users, selectedId, onSelect }: SupportChatList
                 <p className="truncate text-sm font-semibold text-neutral-900">{u.name}</p>
                 <AdminStatusBadge status={u.status} />
               </div>
-              <p className="text-xs text-neutral-600 line-clamp-1">{u.preview}</p>
-              <p className="mt-1 text-[10px] text-neutral-500">{u.plan}</p>
+              <p className="text-xs text-neutral-700 line-clamp-1">{u.preview}</p>
+              <p className="mt-1 text-[10px] text-neutral-600">{u.plan}</p>
             </button>
           </li>
         ))}

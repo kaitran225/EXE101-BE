@@ -40,7 +40,7 @@ export function SupportChatWindow({ user, messages, onSend }: SupportChatWindowP
               }`}
             >
               <p className="text-sm">{m.text}</p>
-              <p className="mt-1 text-[10px] opacity-80">{m.at}</p>
+              <p className="mt-1 text-[10px] opacity-90">{m.at}</p>
             </div>
           </div>
         ))}

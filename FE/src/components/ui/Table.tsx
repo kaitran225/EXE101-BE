@@ -13,11 +13,11 @@ export function TableBody({ className = '', ...props }: HTMLAttributes<HTMLTable
 }
 
 export function TableRow({ className = '', ...props }: HTMLAttributes<HTMLTableRowElement>) {
-  return <tr className={`bg-[var(--color-surface)] shadow-none border-b border-white/5 ${className}`.trim()} {...props} />
+  return <tr className={`bg-[var(--color-surface)] shadow-none border-b border-[var(--color-border)] ${className}`.trim()} {...props} />
 }
 
 export function TableHeaderCell({ className = '', ...props }: HTMLAttributes<HTMLTableCellElement>) {
-  return <th className={`text-left text-xs uppercase tracking-wide text-primary ${className}`.trim()} {...props} />
+  return <th className={`text-left text-xs uppercase tracking-wide text-neutral-700 dark:text-neutral-400 ${className}`.trim()} {...props} />
 }
 
 export function TableCell({ className = '', ...props }: HTMLAttributes<HTMLTableCellElement>) {
