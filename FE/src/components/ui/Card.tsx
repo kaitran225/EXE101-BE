@@ -16,12 +16,12 @@ export function Card({ heading, shadow, variant = 'default', className = '', sty
   const variantClasses: Record<CardVariant, string> = {
     default: '',
     interactive: 'hover:brightness-[1.03]',
-    featured: 'bg-[#242424]',
+    featured: 'bg-[var(--color-accent-muted)] border border-[var(--color-border)]',
   }
   return (
     <div
       className={`
-        bg-[var(--color-surface)] border-0 rounded-[var(--radius-card)]
+        bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-card)]
         shadow-none
         p-6 md:p-8
         transition-[filter,transform] duration-200 ease-out
@@ -32,7 +32,7 @@ export function Card({ heading, shadow, variant = 'default', className = '', sty
       {...props}
     >
       {heading && (
-        <h3 className="pb-2 mb-4 border-b border-white/10 text-sm font-bold uppercase tracking-[0.15em] text-neutral-500">
+        <h3 className="pb-2 mb-4 border-b border-[var(--color-border)] text-sm font-bold uppercase tracking-[0.15em] text-neutral-500">
           {heading}
         </h3>
       )}

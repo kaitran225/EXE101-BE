@@ -13,9 +13,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 ) {
   const inputId = id ?? `input-${Math.random().toString(36).slice(2)}`
   const appearanceClasses: Record<NonNullable<InputProps['appearance']>, string> = {
-    default: 'bg-[var(--color-charcoal)] border border-white/10',
-    filled: 'bg-[#141414] border border-white/10',
-    quiet: 'bg-transparent border-b border-white/15 rounded-none px-1',
+    default: 'bg-[var(--color-charcoal)] border border-[var(--color-border)]',
+    filled: 'bg-[var(--color-accent-muted)] border border-[var(--color-border)]',
+    quiet: 'bg-transparent border-b border-[var(--color-border)] rounded-none px-1',
   }
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -33,7 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           text-neutral-900 placeholder:text-neutral-500
           transition-colors duration-150 ease-out
           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-          disabled:opacity-70 disabled:bg-neutral-200 disabled:text-neutral-500 disabled:placeholder:text-neutral-500
+          disabled:opacity-70 disabled:bg-[var(--color-charcoal)] disabled:text-neutral-500 disabled:placeholder:text-neutral-500
           min-h-[2.5rem]
           ${error ? 'border-error ring-1 ring-error' : ''}
           ${className}

@@ -20,7 +20,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       <DashboardSidebar />
       <div className="flex-1 flex flex-col min-w-0 min-h-0 p-3 gap-3">
         <DashboardHeader />
-        <div className="flex min-h-0 flex-1 flex-col rounded-[var(--radius-card)] overflow-hidden bg-transparent border border-white/10 shadow-none">
+        <div className="flex min-h-0 flex-1 flex-col rounded-[var(--radius-card)] overflow-hidden bg-transparent border border-[var(--color-border)] shadow-none">
           <MainBoard>{children ?? <Outlet />}</MainBoard>
         </div>
       </div>

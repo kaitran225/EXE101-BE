@@ -7,7 +7,7 @@ import { ThemeSwitch } from '../ThemeSwitch'
 export function AuthHeaderBar() {
   return (
     <header
-      className="flex-shrink-0 flex items-center justify-between gap-2 px-4 py-2.5 bg-[var(--color-surface)] border border-white/10 rounded-[var(--radius-card)] shadow-none"
+      className="flex-shrink-0 flex items-center justify-between gap-2 px-4 py-2.5 bg-[var(--color-background)] border border-[var(--color-border)] rounded-[var(--radius-card)] shadow-none"
       role="banner"
     >
       <Link to="/welcome" className="flex items-center gap-2 shrink-0">

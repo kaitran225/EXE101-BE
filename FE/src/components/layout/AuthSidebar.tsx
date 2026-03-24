@@ -8,7 +8,7 @@ export function AuthSidebar() {
 
   return (
     <aside
-      className="h-full flex flex-col bg-neutral-800 text-white min-w-0 overflow-auto"
+      className="h-full flex flex-col bg-[var(--color-background)] text-neutral-900 min-w-0 overflow-auto border-r border-[var(--color-border)]"
       aria-label="Auth"
     >
       <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center min-h-0 flex-1">
@@ -20,17 +20,17 @@ export function AuthSidebar() {
           <span className="text-2xl font-bold text-primary">∞</span>
           <span className="text-lg font-semibold text-[var(--color-focus-area)]">together</span>
         </Link>
-        <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight mb-4">
+        <h1 className="text-neutral-900 text-2xl md:text-3xl font-extrabold leading-tight mb-4">
           Learn together. Progress together.
         </h1>
-        <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-md mb-10">
+        <p className="text-neutral-600 text-sm md:text-base leading-relaxed max-w-md mb-10">
           Together helps you stay motivated, study more effectively, and build real skills through social and personalized learning.
         </p>
-        <nav className="flex items-center gap-4 pt-6 border-t border-neutral-600" aria-label="Auth">
+        <nav className="flex items-center gap-4 pt-6 border-t border-[var(--color-border)]" aria-label="Auth">
           <Link
             to="/welcome"
             className={`text-sm font-medium transition-colors ${
-              location.pathname === '/welcome' ? 'text-highlight' : 'text-neutral-400 hover:text-white'
+              location.pathname === '/welcome' ? 'text-primary' : 'text-neutral-500 hover:text-neutral-900'
             }`}
           >
             Log in
@@ -38,7 +38,7 @@ export function AuthSidebar() {
           <Link
             to="/sign-up"
             className={`text-sm font-medium transition-colors ${
-              location.pathname === '/sign-up' ? 'text-highlight' : 'text-neutral-400 hover:text-white'
+              location.pathname === '/sign-up' ? 'text-primary' : 'text-neutral-500 hover:text-neutral-900'
             }`}
           >
             Sign up

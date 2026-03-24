@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { Button, IconButton } from '../common'
+import { ThemeSwitch } from '../ThemeSwitch'
 
 type BreadcrumbItem = { label: string; href?: string }
 
@@ -104,7 +105,7 @@ export function DashboardHeader() {
 
   return (
     <header
-      className="flex-shrink-0 flex items-center gap-2 px-4 py-3 bg-[var(--color-surface)] border border-white/10 rounded-[var(--radius-card)] shadow-none"
+      className="flex-shrink-0 flex items-center gap-2 px-4 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-card)] shadow-none"
       role="banner"
     >
       <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-2">
@@ -149,6 +150,7 @@ export function DashboardHeader() {
         )}
       </div>
       <div className="flex shrink-0 items-center justify-end gap-2 md:gap-3">
+        <ThemeSwitch />
         <IconButton
           type="button"
           variant="ghost"

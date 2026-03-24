@@ -103,7 +103,7 @@ export function DashboardSidebar() {
 
   return (
     <aside
-      className={`relative h-full flex flex-col flex-shrink-0 bg-[var(--color-background)] border-r border-white/10 text-white transition-[width] ${collapsed ? 'w-14' : 'w-56'
+      className={`relative h-full flex flex-col flex-shrink-0 bg-[var(--color-background)] border-r border-[var(--color-border)] text-white transition-[width] ${collapsed ? 'w-14' : 'w-56'
         }`}
       aria-label="Dashboard navigation"
     >

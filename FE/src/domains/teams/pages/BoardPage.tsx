@@ -24,7 +24,7 @@ export default function BoardPage() {
 
   return (
     <div className="flex flex-col h-full min-h-0">
-      <div className="flex items-center gap-1.5 border-b border-white/10 pb-2 mb-2">
+      <div className="flex items-center gap-1.5 border-b border-[var(--color-border)] pb-2 mb-2">
         <SegmentedControl
           value={tab}
           onChange={(next) => setTab(next as TabId)}
@@ -42,12 +42,12 @@ function TeamManagementContent({ members }: { members: typeof TEAM_MEMBERS }) {
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-2xl font-bold text-neutral-900">Team management</h1>
-      <Card heading="Members" className="border border-white/10 shadow-none">
+      <Card heading="Members" className="border border-[var(--color-border)] shadow-none">
       <ul className="space-y-0">
         {members.map((m, i) => (
           <li
             key={m.id}
-            className={`flex justify-between items-start gap-4 py-3 ${i < members.length - 1 ? 'border-b border-white/10' : ''}`}
+            className={`flex justify-between items-start gap-4 py-3 ${i < members.length - 1 ? 'border-b border-[var(--color-border)]' : ''}`}
           >
             <div className="min-w-0 flex-1">
               <span className="text-neutral-900 font-medium">
@@ -59,7 +59,7 @@ function TeamManagementContent({ members }: { members: typeof TEAM_MEMBERS }) {
                   {m.skills.map((skill, j) => (
                     <span
                       key={j}
-                      className="inline-block px-2.5 py-0.5 rounded-md bg-[var(--color-charcoal)] border border-white/10 text-xs font-medium text-neutral-800"
+                      className="inline-block px-2.5 py-0.5 rounded-md bg-[var(--color-charcoal)] border border-[var(--color-border)] text-xs font-medium text-neutral-800"
                     >
                       {skill}
                     </span>
@@ -73,7 +73,7 @@ function TeamManagementContent({ members }: { members: typeof TEAM_MEMBERS }) {
           </li>
         ))}
       </ul>
-      <Button variant="secondary" size="sm" className="mt-4 border border-white/10">
+      <Button variant="secondary" size="sm" className="mt-4 border border-[var(--color-border)]">
         Invite member
       </Button>
     </Card>
@@ -142,7 +142,7 @@ function ScrumBoardContent() {
         </div>
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 overflow-x-auto pb-1 min-h-0">
           {columns.map((col) => (
-            <div key={col.id} className="flex flex-col min-w-[220px] bg-[#141414] rounded-2xl border border-white/10 p-2.5 shadow-none">
+            <div key={col.id} className="flex flex-col min-w-[220px] bg-[var(--color-accent-muted)] rounded-2xl border border-[var(--color-border)] p-2.5 shadow-none">
               <div className="flex items-center justify-between mb-1.5">
                 <span className="text-xs font-bold text-neutral-900">{col.title} ({col.tasks.length})</span>
                 <IconButton type="button" size="sm" variant="ghost" className="p-0.5 text-neutral-400 hover:text-neutral-600 text-[10px]" label="Options" icon={<span>⋯</span>} />
@@ -155,7 +155,7 @@ function ScrumBoardContent() {
                     variant="ghost"
                     size="sm"
                     onClick={() => setSelected({ task, columnId: col.id, taskIndex: i })}
-                    className="w-full !justify-start text-left p-2 bg-[var(--color-surface)] rounded-md border border-white/10 shadow-none relative hover:border-primary/40 transition-colors"
+                    className="w-full !justify-start text-left p-2 bg-[var(--color-surface)] rounded-md border border-[var(--color-border)] shadow-none relative hover:border-primary/40 transition-colors"
                   >
                     {task.flagged && (
                       <span className="absolute top-1 right-1 text-neutral-400" aria-hidden>
@@ -198,7 +198,7 @@ function ScrumBoardContent() {
             assigneeDisplay={getAssigneeDisplay(selected.task.assignee)}
           />
         ) : (
-          <div className="flex flex-col bg-[var(--color-surface)] rounded-lg border border-white/10 p-3 h-full overflow-y-auto shadow-none">
+          <div className="flex flex-col bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] p-3 h-full overflow-y-auto shadow-none">
             <div className="flex items-center gap-1.5 mb-1">
               <span className="text-xs font-bold uppercase tracking-wide text-neutral-900">AI Task Insights</span>
               <svg className="w-3.5 h-3.5 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18" /><path d="M18 9l-5 5-4-4-3 3" /></svg>
@@ -308,7 +308,7 @@ function SprintBoardContent() {
             <Button variant="secondary" size="sm" className="py-1 px-2 text-xs h-7">New Task</Button>
           </div>
         </div>
-        <div className="flex gap-1 border-b border-white/10 pb-1.5 mb-2">
+        <div className="flex gap-1 border-b border-[var(--color-border)] pb-1.5 mb-2">
           <SegmentedControl
             value="task-board"
             onChange={() => {}}
@@ -317,7 +317,7 @@ function SprintBoardContent() {
         </div>
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 overflow-x-auto pb-1 min-h-0">
           {columns.map((col) => (
-            <div key={col.id} className="flex flex-col min-w-[220px] bg-[#141414] rounded-2xl border border-white/10 p-2.5 shadow-none">
+            <div key={col.id} className="flex flex-col min-w-[220px] bg-[var(--color-accent-muted)] rounded-2xl border border-[var(--color-border)] p-2.5 shadow-none">
               <div className="flex items-center justify-between mb-1.5">
                 <span className="text-xs font-bold text-neutral-900">{col.title}</span>
                 <IconButton type="button" size="sm" variant="ghost" className="p-0.5 text-neutral-400 hover:text-neutral-600 text-[10px]" label="Add" icon={<span>+</span>} />
@@ -330,7 +330,7 @@ function SprintBoardContent() {
                     variant="ghost"
                     size="sm"
                     onClick={() => setSelected({ task, columnId: col.id, taskIndex: i })}
-                    className="w-full !justify-start text-left p-2 bg-[var(--color-surface)] rounded-md border border-white/10 shadow-none hover:border-primary/40 transition-colors"
+                    className="w-full !justify-start text-left p-2 bg-[var(--color-surface)] rounded-md border border-[var(--color-border)] shadow-none hover:border-primary/40 transition-colors"
                   >
                     {task.tag && <Badge variant="outline" className="px-1.5 py-0.5 text-[10px] mb-1">{task.tag}</Badge>}
                     <p className="text-xs font-medium text-neutral-900 leading-tight">{task.title}</p>
@@ -367,7 +367,7 @@ function SprintBoardContent() {
             assigneeDisplay={getAssigneeDisplay(selected.task.assignee)}
           />
         ) : (
-          <div className="flex flex-col bg-[var(--color-surface)] rounded-lg border border-white/10 p-3 h-full overflow-y-auto space-y-3 shadow-none">
+          <div className="flex flex-col bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] p-3 h-full overflow-y-auto space-y-3 shadow-none">
             <p className="text-[10px] text-neutral-500">Click a task to edit.</p>
             <section>
               <div className="flex items-center justify-between mb-1">
@@ -396,7 +396,7 @@ function SprintBoardContent() {
                 ))}
               </ul>
             </section>
-            <section className="p-2 rounded-md bg-[var(--color-surface)] border border-white/10">
+            <section className="p-2 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)]">
               <h3 className="text-[10px] font-bold uppercase tracking-wide text-neutral-900 mb-1 flex items-center gap-0.5">
                 AI Assistant <span className="text-primary">◆</span>
               </h3>

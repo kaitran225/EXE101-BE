@@ -13,17 +13,17 @@ export function Modal({ open, onClose, title, size = 'max-w-md', children }: Mod
   if (!open) return null
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/55 backdrop-blur-[2px] animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 dark:bg-black/55 backdrop-blur-[2px] animate-fade-in"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
     >
       <div
-        className={`bg-[var(--color-surface)] rounded-[var(--radius-card)] border border-white/10 w-full shadow-none overflow-hidden animate-scale-in ${size}`}
+        className={`bg-[var(--color-surface)] rounded-[var(--radius-card)] border border-[var(--color-border)] w-full shadow-none overflow-hidden animate-scale-in ${size}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#141414]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--color-border)] bg-[var(--color-accent-muted)]">
           {title && (
             <h2 id="modal-title" className="text-xs font-bold text-neutral-500 uppercase tracking-[0.15em]">
               {title}
@@ -32,7 +32,7 @@ export function Modal({ open, onClose, title, size = 'max-w-md', children }: Mod
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-full text-neutral-500 hover:bg-white/10 hover:text-neutral-900 ml-auto transition-colors duration-150 active:scale-95"
+            className="p-2 rounded-full text-neutral-500 hover:bg-[var(--color-charcoal)] hover:text-neutral-900 ml-auto transition-colors duration-150 active:scale-95"
             aria-label="Close"
           >
             <CloseIcon className="w-5 h-5" />

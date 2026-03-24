@@ -62,7 +62,7 @@ export default function Dashboard() {
             {todayTasks.map((t, i) => (
               <li
                 key={i}
-                className="flex items-start gap-2 p-3 rounded-2xl border-0 bg-[#141414]"
+                className="flex items-start gap-2 p-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-accent-muted)]"
               >
                 <Badge variant="outline" className="mt-0.5 px-1.5 py-0 text-[10px]">Task</Badge>
                 <div className="min-w-0 flex-1">
@@ -80,7 +80,7 @@ export default function Dashboard() {
             {teamCards.map((team, i) => (
               <div
                 key={i}
-                className="p-3 rounded-2xl border-0 bg-[#141414] flex flex-col gap-2"
+                className="p-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-accent-muted)] flex flex-col gap-2"
               >
                 <p className="text-sm font-semibold text-neutral-900 truncate">{team.name}</p>
                 <Badge variant="focus" className="normal-case tracking-normal w-fit">{team.active}</Badge>
@@ -108,7 +108,7 @@ export default function Dashboard() {
               </div>
             ))}
           </div>
-          <div className="flex justify-between gap-0 pt-2 mt-1 border-t border-white/10">
+          <div className="flex justify-between gap-0 pt-2 mt-1 border-t border-[var(--color-border)]">
             {studyBars.map((b, i) => (
               <span key={i} className="flex-1 text-center text-[10px] font-bold text-neutral-500 uppercase tracking-wider">{b.day}</span>
             ))}
@@ -122,7 +122,7 @@ export default function Dashboard() {
             {upcomingItems.map((item, i) => (
               <li
                 key={i}
-                className="p-3 rounded-2xl border-0 bg-[#141414]"
+                className="p-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-accent-muted)]"
               >
                 <div className="flex justify-between items-start gap-2">
                   <Badge variant={item.tagClass.includes('error') ? 'error' : 'outline'} className="normal-case tracking-normal">{item.tag}</Badge>
@@ -135,7 +135,7 @@ export default function Dashboard() {
         </Card>
 
         <Card variant="interactive" className={`${cardCompact}`}>
-          <div className="flex items-center justify-between gap-2 pb-2 mb-3 border-b border-white/10">
+          <div className="flex items-center justify-between gap-2 pb-2 mb-3 border-b border-[var(--color-border)]">
             <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">Open study rooms</h3>
             <Button variant="ghost" size="sm" className="text-xs shrink-0">Join randomly</Button>
           </div>
@@ -143,7 +143,7 @@ export default function Dashboard() {
             {teamCards.map((room, i) => (
               <div
                 key={i}
-                className="p-3 rounded-2xl border-0 bg-[#141414] flex flex-col gap-2"
+                className="p-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-accent-muted)] flex flex-col gap-2"
               >
                 <p className="text-sm font-semibold text-neutral-900 truncate">{room.name}</p>
                 <Badge variant="focus" className="normal-case tracking-normal w-fit">{room.active}</Badge>
@@ -157,7 +157,7 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Card variant="interactive" className={`${cardCompact}`}>
-            <div className="flex items-center justify-between gap-2 pb-2 mb-3 border-b border-white/10">
+            <div className="flex items-center justify-between gap-2 pb-2 mb-3 border-b border-[var(--color-border)]">
               <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">Upcoming tasks</h3>
               <Link to="/meetings">
                 <Button variant="tonal" size="sm" className="shrink-0">Start / Join</Button>
@@ -167,7 +167,7 @@ export default function Dashboard() {
               {upcomingItems.slice(0, 2).map((item, i) => (
                 <li
                   key={i}
-                  className="p-3 rounded-2xl border-0 bg-[#141414]"
+                  className="p-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-accent-muted)]"
                 >
                   <div className="flex justify-between items-start gap-2">
                     <Badge variant={item.tagClass.includes('error') ? 'error' : 'outline'} className="normal-case tracking-normal">{item.tag}</Badge>

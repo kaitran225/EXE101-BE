@@ -1,0 +1,39 @@
+---
+description: Frontend guide for FE React app, with theme switch safeguards
+globs: FE/**
+alwaysApply: false
+---
+
+# FE Cursor Guide
+
+## Scope
+- Apply these rules for any work under `FE/**`.
+
+## Core Stack
+- Keep frontend code in TypeScript + React patterns already used in `FE/src`.
+- Reuse existing UI primitives from `FE/src/components/ui` before adding new components.
+- Prefer domain-based placement under `FE/src/domains/*` and keep feature logic colocated.
+
+## Styling and Tokens
+- Use design tokens from `FE/src/index.css`; avoid hardcoded colors when a token exists.
+- Keep existing flat-solid visual style (no new gradients unless explicitly requested).
+- Preserve accessibility states (`focus-visible`, reduced-motion behavior, contrast-safe text).
+
+## Color Switch (Must Preserve)
+- Theme state source of truth is `FE/src/contexts/ThemeContext.tsx`.
+- Keep `localStorage` key as `app-theme` unless migration is implemented.
+- Keep both theme hooks in sync:
+  - `document.documentElement.setAttribute('data-theme', theme)`
+  - `document.documentElement.classList.toggle('dark', theme === 'dark')`
+- `ThemeSwitch` should call `toggleTheme` from context (no duplicate local theme state).
+- If changing switch UI, preserve `aria-label`, `title`, and clear dark/light affordance.
+- Any theme-token change in `index.css` must be checked for both default and `.dark` scopes.
+
+## Routing and Auth Guardrails
+- Respect existing route protection flow in `FE/src/App.tsx` (`RequireAuth`, `RequireRole`).
+- Avoid introducing route-level behavior that bypasses auth/role guards.
+
+## Quality Bar
+- Keep edits minimal and targeted; avoid broad refactors unless requested.
+- Prefer small reusable extraction over copy-paste in large pages.
+- When changing theme/auth/routing behavior, include a short verification checklist in PR notes.
