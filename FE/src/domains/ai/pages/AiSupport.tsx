@@ -45,13 +45,13 @@ export default function AiSupport() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)] min-h-[520px]">
-      <div className="flex-1 grid grid-cols-[20fr_50fr_30fr] min-h-0 rounded-2xl border-2 border-neutral-200 bg-white shadow-sm overflow-hidden">
+      <div className="flex-1 grid grid-cols-[20fr_50fr_30fr] min-h-0 rounded-2xl border-2 border-neutral-200 bg-[var(--color-surface)] shadow-sm overflow-hidden">
         {/* Left: 20% */}
         <aside className="min-w-0 flex flex-col border-r-2 border-neutral-200 bg-neutral-50/80">
           <div className="p-3 border-b border-neutral-200">
             <Link
               to="/ai-support"
-              className="inline-flex w-full items-center justify-center gap-2 font-medium rounded-xl px-4 py-2 text-sm min-h-[44px] bg-white text-neutral-900 border border-neutral-900 hover:bg-neutral-100"
+              className="inline-flex w-full items-center justify-center gap-2 font-medium rounded-xl px-4 py-2 text-sm min-h-[44px] bg-[var(--color-surface)] text-neutral-900 border border-neutral-900 hover:bg-[var(--color-cream-200)]"
             >
               + New chat
             </Link>
@@ -94,7 +94,7 @@ export default function AiSupport() {
         </aside>
 
         {/* Center: 50% — Focus Room layout */}
-        <main className="min-w-0 flex flex-col p-6 gap-4 overflow-y-auto bg-white border-r-2 border-neutral-200">
+        <main className="min-w-0 flex flex-col p-6 gap-4 overflow-y-auto bg-[var(--color-surface)] border-r-2 border-neutral-200">
           <section>
             <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-600 mb-2">Summary</h2>
             <Card className="p-4 min-h-[120px] border-2 border-neutral-200 text-neutral-500 text-sm">
@@ -157,7 +157,7 @@ export default function AiSupport() {
         </main>
 
         {/* Right: 30% — Conversation chat */}
-        <aside className="min-w-0 flex flex-col border-l-2 border-neutral-200 bg-white">
+        <aside className="min-w-0 flex flex-col border-l-2 border-neutral-200 bg-[var(--color-surface)]">
           <div className="flex items-center gap-2 px-4 py-3 border-b-2 border-neutral-200">
             <AiBotIcon className="w-7 h-7" />
             <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-700 dark:text-accent">
@@ -213,7 +213,7 @@ export default function AiSupport() {
 
       {/* Chat dialog popup */}
       <Modal open={dialogOpen} onClose={() => setDialogOpen(false)} title="Together AI - Chat" size="max-w-2xl">
-          <div className="bg-white rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden">
+          <div className="bg-[var(--color-surface)] rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200 bg-neutral-50">
               <div className="flex items-center gap-2">
                 <AiBotIcon className="w-8 h-8" />
@@ -245,7 +245,7 @@ export default function AiSupport() {
                 </div>
               ))}
             </div>
-            <div className="p-3 border-t-2 border-neutral-200 bg-white">
+            <div className="p-3 border-t-2 border-neutral-200 bg-[var(--color-surface)]">
               <ChatInputBar
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -275,7 +275,7 @@ export default function AiSupport() {
 
       {/* Summarize popup — same as outer (Meet AI / AI Support): drop file, history, executive summary */}
       <Modal open={summarizeOpen} onClose={() => setSummarizeOpen(false)} title="Summarize" size="max-w-4xl">
-          <div className="bg-white rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
+          <div className="bg-[var(--color-surface)] rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200">
               <div className="flex items-center gap-2">
                 <Link to="/focus-room">
@@ -325,7 +325,7 @@ export default function AiSupport() {
                 <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide mb-2 flex items-center gap-1">
                 <MenuIcon className="w-3.5 h-3.5 text-neutral-500" />
                 Executive summary</p>
-                <div className="flex-1 min-h-[200px] rounded-xl border-2 border-neutral-200 bg-white p-4 overflow-y-auto">
+                <div className="flex-1 min-h-[200px] rounded-xl border-2 border-neutral-200 bg-[var(--color-surface)] p-4 overflow-y-auto">
                   {summaryText ? (
                     <p className="text-sm text-neutral-700 whitespace-pre-wrap">{summaryText}</p>
                   ) : (

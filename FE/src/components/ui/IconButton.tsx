@@ -5,10 +5,10 @@ type Size = 'sm' | 'md' | 'lg'
 
 const variantClasses: Record<Variant, string> = {
   default:
-    'bg-[var(--color-charcoal)] border border-white/10 text-neutral-900 hover:bg-neutral-300',
-  ghost: 'bg-transparent border border-transparent text-neutral-500 hover:bg-white/5 hover:text-neutral-900',
+    'bg-[var(--color-charcoal)] border border-[var(--color-border)] text-neutral-900 hover:bg-[var(--color-cream-200)]',
+  ghost: 'bg-transparent border border-transparent text-neutral-500 hover:bg-[var(--color-cream-100)] hover:text-neutral-900',
   primary: 'bg-primary border-0 text-primary-foreground hover:brightness-95',
-  tonal: 'bg-white/10 border border-white/10 text-primary hover:bg-white/15',
+  tonal: 'bg-[var(--color-cream-100)] border border-[var(--color-border)] text-[var(--color-cream-300)] hover:bg-[var(--color-cream-200)]',
 }
 
 const sizeClasses: Record<Size, string> = {

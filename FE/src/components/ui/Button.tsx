@@ -7,7 +7,7 @@ const variantClasses: Record<Variant, string> = {
   primary:
     'bg-primary text-primary-foreground border-0 shadow-none hover:brightness-95 focus-visible:outline-primary',
   secondary:
-    'bg-[var(--color-charcoal)] text-neutral-900 border border-[var(--color-border)] shadow-none hover:bg-neutral-200 dark:hover:bg-neutral-300 focus-visible:outline-primary',
+    'bg-[var(--color-charcoal)] text-neutral-900 border border-[var(--color-border)] shadow-none hover:bg-[var(--color-cream-200)] dark:hover:bg-neutral-300 focus-visible:outline-primary',
   ghost:
     'bg-transparent text-neutral-900 border border-transparent hover:bg-[var(--color-charcoal)] focus-visible:outline-primary',
   cta:

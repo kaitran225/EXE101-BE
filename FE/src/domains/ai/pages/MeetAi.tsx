@@ -162,7 +162,7 @@ export default function MeetAi() {
 
       {/* Summarize popup — opened by attachment icon; user drops/selects file here */}
       <Modal open={summarizeOpen} onClose={() => setSummarizeOpen(false)} title="Summarize" size="max-w-4xl">
-          <div className="bg-white rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
+          <div className="bg-[var(--color-surface)] rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200">
               <div className="flex items-center gap-2">
                 <Link to="/focus-room">
@@ -212,7 +212,7 @@ export default function MeetAi() {
                 <p className="text-xs font-bold text-neutral-900 uppercase tracking-wide mb-2 flex items-center gap-1">
                 <MenuIcon className="w-3.5 h-3.5 text-neutral-500" />
                 Executive summary</p>
-                <div className="flex-1 min-h-[200px] rounded-xl border-2 border-neutral-200 bg-white p-4 overflow-y-auto">
+                <div className="flex-1 min-h-[200px] rounded-xl border-2 border-neutral-200 bg-[var(--color-surface)] p-4 overflow-y-auto">
                   {summaryText ? (
                     <p className="text-sm text-neutral-700 whitespace-pre-wrap">{summaryText}</p>
                   ) : (
@@ -232,7 +232,7 @@ export default function MeetAi() {
 
       {/* Chat dialog popup */}
       <Modal open={chatDialogOpen} onClose={() => setChatDialogOpen(false)} title="Together AI - Chat" size="max-w-2xl">
-          <div className="bg-white rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden">
+          <div className="bg-[var(--color-surface)] rounded-2xl border-2 border-neutral-200 shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-neutral-200 bg-neutral-50">
               <div className="flex items-center gap-2">
                 <AiBotIcon className="w-8 h-8" />

@@ -99,7 +99,7 @@ export default function ProfileWithSidebar() {
           <Card className="p-5 border-2 border-neutral-200" heading="Achievements">
             <div className="flex flex-wrap gap-3">
               {[1, 2, 3].map((i) => (
-                <span key={i} className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white" aria-hidden>
+                <span key={i} className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-[var(--color-cream-300)]" aria-hidden>
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </span>
               ))}

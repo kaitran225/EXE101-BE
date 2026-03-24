@@ -5,7 +5,7 @@ import { todayTasks, studyBars, upcomingItems, teamCards, cardCompact } from '..
 export default function Dashboard() {
   return (
     <div className="flex flex-col gap-6 w-full">
-      <Card variant="featured" className="p-6 md:p-7 border border-white/5">
+      <Card variant="featured" className="p-6 md:p-7 border border-[var(--color-border)]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
             <Badge variant="milestone" className="normal-case tracking-[0.12em] mb-3">Daily momentum</Badge>

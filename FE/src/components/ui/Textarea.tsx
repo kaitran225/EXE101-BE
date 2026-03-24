@@ -17,7 +17,7 @@ export function Textarea({ label, error, id, className = '', ...props }: Textare
       <textarea
         id={textareaId}
         className={`
-          w-full px-4 py-3 bg-[var(--color-charcoal)] border border-white/10 rounded-[var(--radius-card)]
+          w-full px-4 py-3 bg-[var(--color-charcoal)] border border-[var(--color-border)] rounded-[var(--radius-card)]
           text-neutral-900 placeholder:text-neutral-500
           transition-colors duration-150 ease-out
           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent

@@ -34,24 +34,27 @@
   --pal-pear: #8FC766;
   --pal-sky: #5CB5F2;
   --pal-lilac: #A896F2;
+  --color-cream-100: #fffdf4;
+  --color-cream-200: #fff8df;
+  --color-cream-300: #f3ecd2;
 
   /* Semantic — bento / Gen Z solids */
   --color-primary: #b9e600;
   --color-primary-hover: #a8cf00;
   --color-primary-foreground: #000000;
   --color-accent: var(--pal-sky);
-  --color-accent-muted: #d1dbe8;
-  --color-surface: #f1f5f9;
-  --color-background: #e7edf5;
+  --color-accent-muted: var(--color-cream-300);
+  --color-surface: var(--color-cream-100);
+  --color-background: var(--color-cream-200);
   --color-highlight: var(--pal-sunshine);
   --color-highlight-hover: #f2b20f;
   --color-focus-area: var(--pal-lilac);
   --color-success: var(--pal-pear);
   --color-warning: var(--pal-orange);
   --color-error: var(--pal-flame);
-  --color-border: rgba(15, 23, 42, 0.18);
+  --color-border: rgba(15, 23, 42, 0.22);
   --color-border-strong: rgba(15, 23, 42, 0.24);
-  --color-charcoal: #d4dde8;
+  --color-charcoal: var(--color-cream-300);
 
   /* Flat “gradient” tokens = solid (legacy class names only) */
   --gradient-brand: var(--color-primary);
@@ -164,6 +167,20 @@
 
 /* Legacy “gradient” utility names = flat solids (no CSS gradients in UI) */
 @layer components {
+  html:not(.dark) .bg-white { background-color: var(--color-cream-100) !important; }
+  html:not(.dark) .text-white { color: var(--color-cream-300) !important; }
+  html:not(.dark) .border-white { border-color: var(--color-cream-300) !important; }
+  html:not(.dark) .bg-white\/5 { background-color: color-mix(in srgb, var(--color-cream-300) 5%, transparent) !important; }
+  html:not(.dark) .bg-white\/10 { background-color: color-mix(in srgb, var(--color-cream-300) 10%, transparent) !important; }
+  html:not(.dark) .bg-white\/15 { background-color: color-mix(in srgb, var(--color-cream-300) 15%, transparent) !important; }
+  html:not(.dark) .bg-white\/20 { background-color: color-mix(in srgb, var(--color-cream-300) 20%, transparent) !important; }
+  html:not(.dark) .bg-white\/80 { background-color: color-mix(in srgb, var(--color-cream-100) 80%, transparent) !important; }
+  html:not(.dark) .bg-white\/90 { background-color: color-mix(in srgb, var(--color-cream-100) 90%, transparent) !important; }
+  html:not(.dark) .text-white\/90 { color: color-mix(in srgb, var(--color-cream-300) 90%, transparent) !important; }
+  html:not(.dark) .text-white\/95 { color: color-mix(in srgb, var(--color-cream-300) 95%, transparent) !important; }
+  html:not(.dark) .border-white\/10 { border-color: color-mix(in srgb, var(--color-cream-300) 35%, transparent) !important; }
+  html:not(.dark) .border-white\/15 { border-color: color-mix(in srgb, var(--color-cream-300) 45%, transparent) !important; }
+  html:not(.dark) .border-white\/20 { border-color: color-mix(in srgb, var(--color-cream-300) 55%, transparent) !important; }
   .bg-gradient-brand { background-color: var(--gradient-brand); }
   .bg-gradient-atlitude-1 { background-color: var(--gradient-atlitude-1); }
   .bg-gradient-atlitude-2 { background-color: var(--gradient-atlitude-2); }
