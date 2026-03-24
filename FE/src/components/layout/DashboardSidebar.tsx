@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { AiBotIcon, Button, IconButton } from '../common'
+import { AiBotIcon, Button } from '../common'
 import { useAuth } from '../../contexts/AuthContext'
 import type { UserRole } from '../../mocks/auth'
 
@@ -175,26 +175,28 @@ export function DashboardSidebar() {
             )
           })}
         </nav>
-      <div className="pt-4 border-t border-neutral-700 space-y-2">
+      <div className="pt-4 border-t border-[var(--color-border)] space-y-2">
           {collapsed ? (
             <Link
               to="/profile"
-              className="flex justify-center p-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
+              className="flex justify-center p-2 rounded-xl hover:bg-[var(--color-charcoal)] transition-colors duration-150"
               aria-label="Go to profile"
             >
-              <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
+              <div className="w-7 h-7 rounded-full bg-[var(--color-charcoal)] border border-[var(--color-border)] flex-shrink-0" />
             </Link>
           ) : (
             <>
               <Link
                 to="/profile"
-                className="flex items-center gap-2 py-1.5 px-2 rounded-xl hover:bg-neutral-700 transition-colors duration-150"
+                className="flex items-center gap-2 py-1.5 px-2 rounded-xl hover:bg-[var(--color-charcoal)] transition-colors duration-150"
                 aria-label="Go to profile"
               >
-                <div className="w-7 h-7 rounded-full bg-neutral-600 flex-shrink-0" />
+                <div className="w-7 h-7 rounded-full bg-[var(--color-charcoal)] border border-[var(--color-border)] flex-shrink-0" />
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs font-medium text-white truncate">{user?.fullName ?? 'You'}</p>
-                  <p className="text-[10px] text-neutral-400">Level 24 · #777</p>
+                  <p className="text-xs font-semibold text-neutral-900 truncate">{user?.fullName ?? 'Admin User'}</p>
+                  <p className="text-[10px] text-neutral-500 truncate">
+                    {(user?.role ?? role).toString()} · @{user?.username ?? 'admin'}
+                  </p>
                 </div>
               </Link>
               <Button
@@ -202,22 +204,35 @@ export function DashboardSidebar() {
                 onClick={logout}
                 variant="ghost"
                 size="sm"
-                className="w-full !justify-start text-left text-xs font-semibold px-2 py-1.5 rounded-lg text-neutral-300 hover:text-white hover:bg-neutral-700 transition-colors"
+                className="w-full !justify-start text-left text-xs font-semibold px-2 py-1.5 rounded-lg text-neutral-700 hover:text-neutral-900 hover:bg-[var(--color-charcoal)] transition-colors"
               >
                 Logout
               </Button>
             </>
           )}
+          <button
+            type="button"
+            onClick={() => setCollapsed((c: boolean) => !c)}
+            className={`w-full inline-flex items-center rounded-lg border border-[var(--color-border)] bg-[var(--color-charcoal)] text-neutral-700 hover:text-neutral-900 hover:brightness-[0.98] transition-colors ${
+              collapsed ? 'justify-center px-2 py-2' : 'justify-between px-2.5 py-2'
+            }`}
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            {!collapsed && <span className="text-[10px] font-semibold uppercase tracking-[0.08em]">Collapse</span>}
+            <svg
+              className={`w-4 h-4 transition-transform duration-200 ease-out ${collapsed ? 'rotate-180' : ''}`}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden
+            >
+              <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         </div>
       </div>
-      {/* Peel tab: outside overflow-hidden so both right corners stay rounded */}
-      <IconButton
-        type="button"
-        onClick={() => setCollapsed((c: boolean) => !c)}
-        className="absolute right-0 bottom-6 w-8 h-11 rounded-l-none rounded-tr-2xl rounded-br-2xl bg-neutral-800 text-neutral-300 transition-all duration-200 active:scale-95 -translate-y-1/2 translate-x-full z-10 hover:bg-neutral-700 hover:text-white"
-        label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        icon={<svg className={`w-4 h-4 transition-transform duration-200 ease-out ${collapsed ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" /></svg>}
-      />
     </aside>
   )
 }
