@@ -32,9 +32,19 @@ export function LineChart({ data, series, height = 240 }: LineChartProps) {
         return (
           <g key={s.key}>
             <path d={d} fill="none" stroke={s.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            {data.map((item, i) => (
-              <circle key={`${s.key}-${item.label}`} cx={x(i)} cy={y(item.series[s.key] ?? 0)} r="2.8" fill={s.color} />
-            ))}
+            {data.map((item, i) => {
+              const pointValue = item.series[s.key] ?? 0
+              const px = x(i)
+              const py = y(pointValue)
+              return (
+                <g key={`${s.key}-${item.label}`}>
+                  <circle cx={px} cy={py} r="2.8" fill={s.color} />
+                  <text x={px} y={py - 8} textAnchor="middle" className="fill-neutral-600 text-[9px] font-semibold">
+                    {pointValue}
+                  </text>
+                </g>
+              )
+            })}
           </g>
         )
       })}

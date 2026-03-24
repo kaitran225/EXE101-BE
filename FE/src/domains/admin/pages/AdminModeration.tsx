@@ -53,7 +53,18 @@ export default function AdminModeration() {
                           onClick={() =>
                             setSelectedCase({
                               title: `${row.username} report`,
-                              details: [`Report count: ${row.reportCount}`, `Reason: ${row.reason}`],
+                              details: [
+                                `Username: ${row.username}`,
+                                `Email: ${row.email}`,
+                                `Plan: ${row.plan}`,
+                                `Status: ${row.status}`,
+                                `Report count: ${row.reportCount}`,
+                                `Main reason: ${row.reason}`,
+                                `Latest room: ${row.latestRoom}`,
+                                `Latest report: ${row.latestReportAt}`,
+                                `Prior warnings: ${row.priorWarnings}`,
+                                `Account created: ${row.accountCreatedAt}`,
+                              ],
                             })
                           }
                         >
@@ -90,9 +101,13 @@ export default function AdminModeration() {
           )}
         </div>
       </AdminPageSection>
-      <Modal open={!!selectedCase} onClose={() => setSelectedCase(null)} title={selectedCase?.title ?? 'Case'}>
+      <Modal open={!!selectedCase} onClose={() => setSelectedCase(null)} title={selectedCase?.title ?? 'Case detail'}>
         <div className="space-y-2 text-sm text-neutral-700">
-          {selectedCase?.details.map((line) => <p key={line}>{line}</p>)}
+          {selectedCase?.details.map((line) => (
+            <p key={line} className="rounded-lg border border-[var(--color-border)] bg-[var(--color-charcoal)] px-3 py-2">
+              {line}
+            </p>
+          ))}
         </div>
       </Modal>
       <AdminConfirmDialog
