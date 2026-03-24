@@ -11,14 +11,14 @@ export function AuthHeaderBar() {
       role="banner"
     >
       <Link to="/welcome" className="flex items-center gap-2 shrink-0">
-        <span className="text-lg font-bold text-primary" aria-hidden>
+        <span className="text-lg font-bold text-lime-600 dark:text-primary" aria-hidden>
           ∞
         </span>
-        <span className="text-sm font-semibold text-accent">together</span>
+        <span className="text-sm font-semibold text-violet-600 dark:text-accent">together</span>
       </Link>
       <div className="flex items-center gap-2.5">
         <ThemeSwitch />
-        <Link to="/sign-up" className="text-sm font-medium text-neutral-500 hover:text-neutral-900">
+        <Link to="/sign-up" className="text-sm font-medium text-neutral-700 hover:text-neutral-900">
           Sign up
         </Link>
         <Link

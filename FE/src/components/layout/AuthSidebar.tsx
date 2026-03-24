@@ -17,8 +17,8 @@ export function AuthSidebar() {
           className="flex items-center gap-2 self-start mb-10"
           aria-label="together home"
         >
-          <span className="text-2xl font-bold text-primary">∞</span>
-          <span className="text-lg font-semibold text-[var(--color-focus-area)]">together</span>
+          <span className="text-2xl font-bold text-lime-600 dark:text-primary">∞</span>
+          <span className="text-lg font-semibold text-violet-600 dark:text-[var(--color-focus-area)]">together</span>
         </Link>
         <h1 className="text-neutral-900 text-2xl md:text-3xl font-extrabold leading-tight mb-4">
           Learn together. Progress together.
@@ -30,7 +30,7 @@ export function AuthSidebar() {
           <Link
             to="/welcome"
             className={`text-sm font-medium transition-colors ${
-              location.pathname === '/welcome' ? 'text-primary' : 'text-neutral-500 hover:text-neutral-900'
+              location.pathname === '/welcome' ? 'text-neutral-900 font-semibold' : 'text-neutral-600 hover:text-neutral-900'
             }`}
           >
             Log in
@@ -38,7 +38,7 @@ export function AuthSidebar() {
           <Link
             to="/sign-up"
             className={`text-sm font-medium transition-colors ${
-              location.pathname === '/sign-up' ? 'text-primary' : 'text-neutral-500 hover:text-neutral-900'
+              location.pathname === '/sign-up' ? 'text-neutral-900 font-semibold' : 'text-neutral-600 hover:text-neutral-900'
             }`}
           >
             Sign up

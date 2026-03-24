@@ -31,7 +31,7 @@ export default function Welcome() {
     <div className="flex flex-col items-center justify-center min-h-full w-full max-w-[440px] mx-auto">
       <Card className="w-full max-w-[420px] p-7 md:p-8 flex flex-col gap-6 bg-[var(--color-surface)] border border-[var(--color-border)]">
         <div className="space-y-2">
-          <span className="inline-flex px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide bg-[var(--color-charcoal)] text-primary border border-[var(--color-border)]">
+          <span className="inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.12em] bg-primary/20 text-neutral-900 border border-primary/35">
             Study workspace
           </span>
           <h2 className="text-neutral-900 text-3xl font-bold tracking-tight">Welcome back</h2>
@@ -60,7 +60,7 @@ export default function Welcome() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <span className="label-study">PASSWORD</span>
-              <Link to="/confirm-mail" className="text-xs text-neutral-500 hover:text-neutral-900">Forgot password?</Link>
+              <Link to="/confirm-mail" className="text-xs text-neutral-700 hover:text-neutral-900">Forgot password?</Link>
             </div>
             <Input
               placeholder="Enter password"
@@ -75,7 +75,7 @@ export default function Welcome() {
           </Button>
         </form>
         <p className="text-center text-sm text-neutral-500 pt-2 border-t border-[var(--color-border)]">
-          Don&apos;t have an account? <Link to="/sign-up" className="font-semibold text-accent hover:opacity-90">Sign up</Link>
+          Don&apos;t have an account? <Link to="/sign-up" className="font-semibold text-neutral-800 hover:text-neutral-900 underline-offset-2 hover:underline">Sign up</Link>
         </p>
       </Card>
     </div>
