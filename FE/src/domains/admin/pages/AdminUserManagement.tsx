@@ -1,28 +1,38 @@
-import { useMemo, useState } from 'react'
-import { Button, Input, Select, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '../../../components/common'
-import { AdminFiltersRow, AdminPageSection, AdminPagination, AdminStatusBadge } from '../components'
-import { adminUsersData } from '../data/usersData'
+import { useEffect, useMemo, useState } from 'react'
+import { Button, Input, Modal, Select, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '../../../components/common'
+import { AdminActionToast, AdminConfirmDialog, AdminFiltersRow, AdminPageSection, AdminPagination, AdminStatusBadge } from '../components'
+import { adminUsersData, type AdminUserRow } from '../data/usersData'
+import { useAdminActions } from '../hooks/useAdminActions'
 
 const PAGE_SIZE = 6
 
 export default function AdminUserManagement() {
+  const [users, setUsers] = useState(adminUsersData)
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState('all')
   const [plan, setPlan] = useState('all')
   const [page, setPage] = useState(1)
+  const [selectedUser, setSelectedUser] = useState<AdminUserRow | null>(null)
+  const [pendingBanId, setPendingBanId] = useState<string | null>(null)
+  const { toast, showToast, closeToast, toggleUserBan } = useAdminActions()
 
   const filtered = useMemo(() => {
-    return adminUsersData.filter((row) => {
+    return users.filter((row) => {
       const q = query.trim().toLowerCase()
       const matchesQ = !q || row.username.toLowerCase().includes(q) || row.email.toLowerCase().includes(q) || row.id.toLowerCase().includes(q)
       const matchesStatus = status === 'all' || row.status === status
       const matchesPlan = plan === 'all' || row.plan === plan
       return matchesQ && matchesStatus && matchesPlan
     })
-  }, [query, status, plan])
+  }, [users, query, status, plan])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
   const pageRows = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+  const pendingUser = users.find((u) => u.id === pendingBanId) ?? null
+
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages)
+  }, [page, totalPages])
 
   return (
     <div className="flex flex-col gap-4">
@@ -81,8 +91,10 @@ export default function AdminUserManagement() {
                 <TableCell className="px-2 py-3 text-sm text-neutral-700">{row.expiryDate}</TableCell>
                 <TableCell className="px-2 py-3">
                   <div className="flex gap-2">
-                    <Button variant="secondary" size="sm">View</Button>
-                    <Button variant="ghost" size="sm">Ban</Button>
+                    <Button variant="secondary" size="sm" onClick={() => setSelectedUser(row)}>View</Button>
+                    <Button variant="ghost" size="sm" onClick={() => setPendingBanId(row.id)}>
+                      {row.status === 'Banned' ? 'Unban' : 'Ban'}
+                    </Button>
                   </div>
                 </TableCell>
               </TableRow>
@@ -91,6 +103,41 @@ export default function AdminUserManagement() {
         </Table>
         <AdminPagination page={page} totalPages={totalPages} onChange={setPage} />
       </div>
+      <Modal open={!!selectedUser} onClose={() => setSelectedUser(null)} title="User Detail">
+        {selectedUser && (
+          <div className="space-y-2 text-sm text-neutral-700">
+            <p><span className="font-semibold text-neutral-900">ID:</span> {selectedUser.id}</p>
+            <p><span className="font-semibold text-neutral-900">Username:</span> {selectedUser.username}</p>
+            <p><span className="font-semibold text-neutral-900">Email:</span> {selectedUser.email}</p>
+            <p><span className="font-semibold text-neutral-900">Plan:</span> {selectedUser.plan}</p>
+            <p><span className="font-semibold text-neutral-900">Status:</span> {selectedUser.status}</p>
+            <p><span className="font-semibold text-neutral-900">Registered:</span> {selectedUser.registerDate}</p>
+            <p><span className="font-semibold text-neutral-900">Expiry:</span> {selectedUser.expiryDate}</p>
+          </div>
+        )}
+      </Modal>
+      <AdminConfirmDialog
+        open={!!pendingUser}
+        title={pendingUser?.status === 'Banned' ? 'Unban User' : 'Ban User'}
+        message={
+          pendingUser
+            ? `Do you want to ${pendingUser.status === 'Banned' ? 'unban' : 'ban'} ${pendingUser.username}?`
+            : ''
+        }
+        confirmLabel={pendingUser?.status === 'Banned' ? 'Unban' : 'Ban'}
+        onCancel={() => setPendingBanId(null)}
+        onConfirm={() => {
+          if (!pendingBanId) return
+          setUsers((prev) => toggleUserBan(prev, pendingBanId))
+          const user = users.find((u) => u.id === pendingBanId)
+          showToast(
+            user?.status === 'Banned' ? `${user.username} was unbanned` : `${user?.username ?? 'User'} was banned`,
+            user?.status === 'Banned' ? 'success' : 'warning',
+          )
+          setPendingBanId(null)
+        }}
+      />
+      {toast && <AdminActionToast message={toast.message} variant={toast.variant} onClose={closeToast} />}
     </div>
   )
 }

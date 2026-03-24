@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { ChartContainer, BarChart, LineChart, useChartExport } from '../charts'
+import { Button } from '../../../components/common'
+import { ChartContainer, BarChart, LineChart, useChartExport, usePdfExport } from '../charts'
 import { AdminKpiCard, AdminPageSection } from '../components'
 import { newUsersByMonth, reportsKpis, subscriptionsVsCancellation } from '../data/reportsData'
 
@@ -8,6 +9,7 @@ export default function AdminReports() {
   const [toDate, setToDate] = useState('2026-06-30')
   const usersExport = useChartExport()
   const subExport = useChartExport()
+  const { exportSingleChartPdf, exportPageChartsPdf } = usePdfExport()
 
   return (
     <div className="flex flex-col gap-4">
@@ -15,9 +17,21 @@ export default function AdminReports() {
         title="Reports"
         subtitle="Date range based reporting snapshot"
         action={
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 justify-end">
             <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-neutral-800" />
             <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-neutral-800" />
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={() =>
+                exportPageChartsPdf([usersExport.chartRef.current, subExport.chartRef.current], {
+                  title: 'Admin Reports Charts',
+                  subtitle: `${fromDate} to ${toDate}`,
+                })
+              }
+            >
+              Export Page PDF
+            </Button>
           </div>
         }
       >
@@ -30,7 +44,19 @@ export default function AdminReports() {
 
       <div className="grid gap-4 xl:grid-cols-2">
         <div ref={usersExport.chartRef}>
-          <ChartContainer title="New users per month" legend={[{ label: 'Users', color: '#5CB5F2' }]}>
+          <ChartContainer
+            title="New users per month"
+            legend={[{ label: 'Users', color: '#5CB5F2' }]}
+            action={
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => exportSingleChartPdf(usersExport.chartRef.current, { title: 'New Users Per Month', subtitle: `${fromDate} to ${toDate}` })}
+              >
+                Export PDF
+              </Button>
+            }
+          >
             <BarChart data={newUsersByMonth} />
           </ChartContainer>
         </div>
@@ -38,6 +64,15 @@ export default function AdminReports() {
           <ChartContainer
             title="Subscriptions vs cancellation"
             legend={[{ label: 'Subscriptions', color: '#8FC766' }, { label: 'Cancellations', color: '#DE6B38' }]}
+            action={
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => exportSingleChartPdf(subExport.chartRef.current, { title: 'Subscriptions Vs Cancellation', subtitle: `${fromDate} to ${toDate}` })}
+              >
+                Export PDF
+              </Button>
+            }
           >
             <LineChart
               data={subscriptionsVsCancellation}

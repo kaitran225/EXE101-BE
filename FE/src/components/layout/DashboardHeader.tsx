@@ -115,6 +115,7 @@ export function DashboardHeader() {
   const pathname = location.pathname
   const isAdminView = pathname.startsWith('/admin')
   const [openUserMenu, setOpenUserMenu] = useState(false)
+  const [adminSearch, setAdminSearch] = useState('')
   const breadcrumbs = getBreadcrumbs(pathname)
   const titleOnly = getPageTitle(pathname)
   const subtitle = getPageSubtitle(pathname)
@@ -177,6 +178,8 @@ export function DashboardHeader() {
               <input
                 type="text"
                 placeholder="Search..."
+                value={adminSearch}
+                onChange={(e) => setAdminSearch(e.target.value)}
                 className="w-40 bg-transparent text-sm text-neutral-800 placeholder:text-neutral-500 focus:outline-none"
               />
             </div>

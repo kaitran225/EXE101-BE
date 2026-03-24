@@ -12,9 +12,10 @@ export type SupportMessage = {
 interface SupportChatWindowProps {
   user: { name: string; plan: string; status: string }
   messages: SupportMessage[]
+  onSend: (text: string) => void
 }
 
-export function SupportChatWindow({ user, messages }: SupportChatWindowProps) {
+export function SupportChatWindow({ user, messages, onSend }: SupportChatWindowProps) {
   const [draft, setDraft] = useState('')
   const rendered = useMemo(() => messages, [messages])
 
@@ -50,6 +51,7 @@ export function SupportChatWindow({ user, messages }: SupportChatWindowProps) {
           className="flex items-end gap-2"
           onSubmit={(e) => {
             e.preventDefault()
+            onSend(draft)
             setDraft('')
           }}
         >
