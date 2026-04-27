@@ -43,4 +43,5 @@ public class UserDto {
     Boolean emailVerified;
     Instant createdAt;
     Instant updatedAt;
+    Boolean isAdmin;
 }

@@ -3,19 +3,8 @@ spring:
     name: exe101-auth
   profiles:
     active: local
-  datasource:
-    url: jdbc:postgresql://localhost:5432/auth
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    show-sql: false
-    properties:
-      hibernate:
-        default_schema: public
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  config:
+    import: "optional:classpath:application-common.yaml"
 
 server:
   port: 8081
@@ -45,12 +34,12 @@ spring.security.oauth2.authorizationserver:
           - read
           - write
 
----
-spring:
-  config:
-    activate-on-profile: local
-  jpa:
-    hibernate:
-      ddl-auto: update
-  datasource:
-    url: jdbc:postgresql://localhost:5432/auth
+#---
+#spring:
+#  config:
+#    activate-on-profile: local
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/auth

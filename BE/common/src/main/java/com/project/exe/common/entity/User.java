@@ -3,6 +3,8 @@ package com.project.exe.common.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -60,6 +62,7 @@ public class User extends BaseAuditEntity {
     @Column(name = "last_active_date")
     LocalDate lastActiveDate;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "metadata", columnDefinition = "jsonb")
     String metadata;
 
@@ -68,4 +71,6 @@ public class User extends BaseAuditEntity {
 
     @Column(name = "email_verified", nullable = false)
     Boolean emailVerified = false;
+
+    Boolean isAdmin = false;
 }
