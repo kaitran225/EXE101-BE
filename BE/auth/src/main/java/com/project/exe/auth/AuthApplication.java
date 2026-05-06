@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.project.exe.common.exception.GlobalExceptionHandler;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
+@EnableAsync
 @ComponentScan(
         basePackages = { "com.project.exe.auth", "com.project.exe.common" },
         excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE)

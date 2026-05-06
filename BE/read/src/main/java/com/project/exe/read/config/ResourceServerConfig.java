@@ -34,12 +34,11 @@ public class ResourceServerConfig {
                 "/swagger-ui/**",
                 "/swagger-ui.html",
                 "/v3/api-docs/**",
-                "/v3/api-docs",
-                "/api/v1/**"
+                "/v3/api-docs"
         };
 
         String[] BLACKLIST = {
-
+                "/api/users**"
         };
         http
                 .csrf(Customizer.withDefaults())

@@ -37,7 +37,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
         // admin thì sẽ set isAdmin thành true khi kiểm tra ở login
         return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
+                .username(user.getUserSso())
                 .password(user.getPasswordHash())
                 .authorities(authorities)
                 .build();

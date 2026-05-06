@@ -86,11 +86,12 @@ public class AuthSecurityConfig {
                 "/webjars/**"
         };
         String[] PUBLIC_AUTH = {
-                "/api/v1/auth/login",
-                "/api/v1/auth/register",
-                "/api/v1/auth/refresh",
-                "/api/v1/auth/reset-password",
-                "/api/v1/auth/reset-password/confirm"
+                "/api/auth/login",
+                "/api/auth/register",
+                "/api/auth/refresh",
+                "/api/auth/google-login",
+                "/api/auth/reset-password",
+                "/api/auth/reset-password/confirm"
         };
         http
                 .cors(Customizer.withDefaults())
@@ -193,18 +194,17 @@ public class AuthSecurityConfig {
             if(OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType())){
                 Authentication principal = context.getPrincipal();
 
-                String email = principal.getName();
+                String userSso = principal.getName();
 
-                User user = userService.getUserByEmail(email);
+                User user = userService.getUserBySso(userSso);
 
                 if(user != null){
                     context.getClaims().claims(claims -> {
+                        claims.put("sub", user.getUserSso());
                         claims.put("user_id", user.getUserId());
                         claims.put("user_sso", user.getUserSso());
                         claims.put("plan_type", user.getPlanType());
                         claims.put("is_admin", user.getIsAdmin());
-
-                        claims.put("sub", user.getEmail());
                     });
                 }
             }

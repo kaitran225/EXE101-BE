@@ -54,12 +54,12 @@ public class TokenService {
                 .issuer("http://localhost:8081")
                 .issuedAt(now)
                 .expiresAt(expiry)
-                .subject(user.getEmail())
+                .subject(user.getUserSso())
                 .id(user.getUserId().toString())
                 .claim("user_id", user.getUserId())
-                .claim("user_sso", user.getUserSso())
                 .claim("plan_type", user.getPlanType())
                 .claim("user_email", user.getEmail())
+                .claim("is_admin", user.getIsAdmin())
                 .build();
 
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
