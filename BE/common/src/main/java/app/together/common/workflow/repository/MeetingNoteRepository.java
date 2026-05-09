@@ -1,0 +1,11 @@
+package app.together.common.workflow.repository;
+
+import app.together.common.workflow.entity.MeetingNote;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface MeetingNoteRepository extends JpaRepository<MeetingNote, Long> {
+
+    List<MeetingNote> findByMeetingId(Long meetingId);
+}

@@ -1,0 +1,7 @@
+spring:
+  config:
+    activate-on-profile: dev
+
+logging:
+  level:
+    app.together.cronjob: INFO

@@ -3,11 +3,18 @@ spring:
     name: exe101-auth
   profiles:
     active: local
-  config:
-    import: "optional:classpath:application-common.yaml"
 
 server:
   port: 8081
+  shutdown: graceful
+  undertow:
+    accesslog:
+      enabled: ${UNDERTOW_ACCESSLOG_ENABLED:false}
+      pattern: ${UNDERTOW_ACCESSLOG_PATTERN:%h %l %u %t \"%r\" %s %b}
+    threads:
+      io: ${UNDERTOW_IO_THREADS:4}
+      worker: ${UNDERTOW_WORKER_THREADS:32}
+    max-http-post-size: ${UNDERTOW_MAX_HTTP_POST_SIZE:10485760}
 
 # OAuth2 Authorization Server
 spring.security.oauth2.authorizationserver:
@@ -33,13 +40,3 @@ spring.security.oauth2.authorizationserver:
           - openid
           - read
           - write
-
-#---
-#spring:
-#  config:
-#    activate-on-profile: local
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/auth

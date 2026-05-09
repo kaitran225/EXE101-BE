@@ -23,6 +23,7 @@
         <module>auth</module>
         <module>read</module>
         <module>workflow</module>
+        <module>cronjob</module>
     </modules>
 
     <properties>
@@ -51,6 +52,11 @@
             <dependency>
                 <groupId>com.project.exe</groupId>
                 <artifactId>workflow</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.project.exe</groupId>
+                <artifactId>cronjob</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: exe101-cronjob
+  profiles:
+    active: local
+
+server:
+  port: 8084
+
+cronjob:
+  heartbeat:
+    cron: ${CRONJOB_HEARTBEAT_CRON:0 */5 * * * *}

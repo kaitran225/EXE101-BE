@@ -1,0 +1,24 @@
+package app.together.common.workflow.mapper;
+
+import app.together.common.workflow.dto.UserMasterDataDto;
+import app.together.common.workflow.entity.UserMasterData;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+public interface UserMasterDataMapper {
+
+    UserMasterDataDto toDto(UserMasterData entity);
+
+    @Mapping(target = "masterDataId", ignore = true)
+    UserMasterData toEntity(UserMasterDataDto dto);
+
+    @Mapping(target = "masterDataId", ignore = true)
+    void updateEntity(@MappingTarget UserMasterData entity, UserMasterDataDto dto);
+
+    UserMasterData copy(UserMasterData entity);
+
+    UserMasterData deepCopy(UserMasterData entity);
+}
