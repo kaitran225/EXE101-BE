@@ -1,4 +1,4 @@
-package app.together.common.auth.service;
+package app.together.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +16,7 @@ public class EmailService {
     private String mailSend;
 
     @Async
-    public void sendResetPasswordEmail(String toEmail, String rawToken){
+    public void sendResetPasswordEmail(String toEmail, String rawToken) {
         String resetLink = "http://localhost:5173/reset-password?token=" + rawToken;
 
         SimpleMailMessage message = new SimpleMailMessage();
@@ -34,8 +34,7 @@ public class EmailService {
     }
 
     @Async
-    public void sendVerifycationEmail(String toEmail, String rawToken){
-        // react link
+    public void sendVerifycationEmail(String toEmail, String rawToken) {
         String verifycationLink = "http://localhost:5173/verify-email?token=" + rawToken;
 
         SimpleMailMessage message = new SimpleMailMessage();

@@ -2,6 +2,7 @@ package app.together.common.shared.util;
 
 import app.together.common.auth.enums.BusinessRole;
 import app.together.common.auth.enums.SystemRole;
+import app.together.common.shared.constant.MessageConstants;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -41,7 +42,7 @@ public final class SecurityUtils {
     /** User SSO or throw. */
     public static String requireCurrentUserSso() {
         return getCurrentUserSso()
-            .orElseThrow(() -> new IllegalStateException("No authenticated user (user_sso not available)"));
+            .orElseThrow(() -> new IllegalStateException(MessageConstants.MESSAGE_USER_SSO_NOT_IN_CONTEXT));
     }
 
     /** JWT subject. */

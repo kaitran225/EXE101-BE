@@ -3,7 +3,7 @@ package app.together.auth.config;
 import app.together.common.auth.entity.User;
 import app.together.common.auth.enums.SystemRole;
 import app.together.common.shared.exception.ResourceNotFoundException;
-import app.together.common.auth.service.UserService;
+import app.together.auth.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,10 +22,6 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws ResourceNotFoundException {
 
         User user = userService.getUserByEmail(username);
-
-        if (user == null){
-            throw new ResourceNotFoundException("User not found with email: " + username, "USER_NOT_FOUND");
-        }
 
         SystemRole systemRole = user.getSystemRole() != null ? user.getSystemRole() : SystemRole.USER;
 

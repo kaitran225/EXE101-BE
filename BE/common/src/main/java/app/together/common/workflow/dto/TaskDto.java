@@ -1,8 +1,17 @@
 package app.together.common.workflow.dto;
 
+import app.together.common.shared.dto.BaseAuditDTO;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -11,13 +20,16 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 
-@Data
-@Builder
+@Getter
+@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TaskDto {
+public class TaskDto extends BaseAuditDTO {
     Long taskId;
     Long projectId;
     Long teamId;
@@ -35,6 +47,5 @@ public class TaskDto {
     LocalDate startDate;
     LocalDate dueDate;
     Instant completedAt;
-    String createdBy;
 
 }

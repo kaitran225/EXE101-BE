@@ -1,4 +1,4 @@
-package app.together.common.auth.service;
+package app.together.auth.service;
 
 import app.together.common.auth.entity.RefreshToken;
 import app.together.common.auth.entity.User;
@@ -6,8 +6,8 @@ import app.together.common.auth.enums.BusinessRole;
 import app.together.common.auth.enums.SystemRole;
 import app.together.common.auth.repository.RefreshTokenRepository;
 import app.together.common.auth.repository.UserRepository;
+import app.together.common.shared.constant.MessageConstants;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class TokenService {
 
     private final JwtEncoder jwtEncoder;
@@ -36,24 +36,15 @@ public class TokenService {
     @Value("${spring.jwt.refresh-token-expiration:604800}")
     private long refreshTokenExpirySeconds;
 
-    @Autowired
-    public TokenService(
-            RefreshTokenRepository refreshTokenRepository,
-            UserRepository userRepository,
-            @Autowired(required = false) JwtEncoder jwtEncoder // required = false là mấu chốt
-    ) {
-        this.refreshTokenRepository = refreshTokenRepository;
-        this.userRepository = userRepository;
-        this.jwtEncoder = jwtEncoder;
-    }
+    @Value("${auth.issuer-uri:http://localhost:8081}")
+    private String issuerUri;
 
     public String generateAccessToken(User user) {
-        System.out.println("sso: " + user.getUserSso());
         Instant now = Instant.now();
         Instant expiry = now.plusSeconds(accessTokenExpirySeconds);
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .issuer("http://localhost:8081")
+                .issuer(issuerUri)
                 .issuedAt(now)
                 .expiresAt(expiry)
                 .subject(user.getUserSso())
@@ -122,7 +113,7 @@ public class TokenService {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             return Base64.getEncoder().encodeToString(digest.digest(token.getBytes(StandardCharsets.UTF_8)));
         } catch (Exception e) {
-            throw new IllegalStateException("Failed to hash token", e);
+            throw new IllegalStateException(MessageConstants.MESSAGE_TOKEN_HASH_FAILED, e);
         }
     }
 }

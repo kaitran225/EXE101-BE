@@ -1,5 +1,6 @@
 package app.together.auth.controller;
 
+import app.together.common.shared.constant.MessageConstants;
 import app.together.common.shared.dto.ApiResponse;
 import app.together.common.auth.dto.UserDto;
 import app.together.common.auth.dto.ChangePasswordRequest;
@@ -9,7 +10,7 @@ import app.together.common.auth.dto.LoginResponse;
 import app.together.common.auth.dto.RefreshTokenRequest;
 import app.together.common.auth.dto.RegisterRequest;
 import app.together.common.auth.dto.ResetPasswordRequest;
-import app.together.common.auth.service.AuthService;
+import app.together.auth.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -53,20 +54,6 @@ public class AuthController {
         return ResponseEntity.ok(ok(null));
     }
 
-//    @GetMapping("/me")
-//    public ResponseEntity<ApiResponse<UserDto>> me(JwtAuthenticationToken authentication) {
-//        if (authentication == null) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-//                    .body(ApiResponse.fail("Not authenticated", ErrorCodes.UNAUTHORIZED));
-//        }
-//        String userEmail = authentication.getToken().getSubject();
-//        System.out.println("userEmail: " + userEmail);
-//        System.out.println("Claims: " + authentication.getToken().getClaims().toString());
-//
-//        UserDto user = authService.getCurrentUser(userEmail);
-//        return ResponseEntity.ok(ok(user));
-//    }
-
     @PostMapping("/refresh")
     public ResponseEntity<ApiResponse<LoginResponse>> refresh(@Valid @RequestBody RefreshTokenRequest request) {
         return ResponseEntity.ok(ok(authService.refreshToken(request.getRefreshToken())));
@@ -81,19 +68,19 @@ public class AuthController {
     @PostMapping("/reset-password/confirm")
     public ResponseEntity<ApiResponse<String>> confirmPasswordReset(@Valid @RequestBody ConfirmPasswordResetRequest request) {
         authService.confirmPasswordReset(request);
-        return ResponseEntity.ok(ApiResponse.ok("Xác thực password thành công!"));
+        return ResponseEntity.ok(ApiResponse.ok(MessageConstants.MESSAGE_PASSWORD_RESET_CONFIRM_SUCCESS));
     }
 
     @GetMapping("/verify-email")
     public ResponseEntity<ApiResponse<String>> verifyEmail(@RequestParam String tokenEmail) {
         authService.verifyEmail(tokenEmail);
-        return ResponseEntity.ok(ApiResponse.ok("Xác thực Email thành công!"));
+        return ResponseEntity.ok(ApiResponse.ok(MessageConstants.MESSAGE_EMAIL_VERIFY_SUCCESS));
     }
 
     @PostMapping("/change-password")
     public ResponseEntity<ApiResponse<String>> changePassword(@Valid @RequestBody ChangePasswordRequest request) {
         authService.changePasswordRequest(request.getOldPassword(), request.getNewPassword());
-        return ResponseEntity.ok(ApiResponse.ok("Đổi password thành công!"));
+        return ResponseEntity.ok(ApiResponse.ok(MessageConstants.MESSAGE_PASSWORD_CHANGE_SUCCESS));
     }
 
 }

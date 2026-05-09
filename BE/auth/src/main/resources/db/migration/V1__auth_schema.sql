@@ -15,8 +15,8 @@ CREATE TABLE "users" (
   "metadata" JSONB,
   "status" VARCHAR,
   "email_verified" BOOLEAN NOT NULL,
-  "system_role" VARCHAR(32) NOT NULL,
-  "business_role" VARCHAR(32) NOT NULL,
+  "system_role" VARCHAR NOT NULL,
+  "business_role" VARCHAR NOT NULL,
   "is_admin" BOOLEAN,
   "created_at" TIMESTAMP,
   "created_by" VARCHAR,
@@ -75,7 +75,7 @@ CREATE TABLE "user_wallets" (
   "lifetime_earned" INT,
   "lifetime_spent" INT,
   "last_transaction_at" TIMESTAMP,
-  "status" VARCHAR(32),
+  "status" VARCHAR,
   "version" BIGINT,
   "metadata" JSONB,
   "created_at" TIMESTAMP,
@@ -90,9 +90,9 @@ CREATE TABLE "user_transactions" (
   "wallet_id" BIGINT NOT NULL,
   "amount" INT NOT NULL,
   "balance_after" INT NOT NULL,
-  "type" VARCHAR(32) NOT NULL,
-  "reference_type" VARCHAR(64),
-  "reference_id" VARCHAR(128),
+  "type" VARCHAR NOT NULL,
+  "reference_type" VARCHAR,
+  "reference_id" VARCHAR,
   "description" TEXT,
   "metadata" JSONB,
   "created_at" TIMESTAMP,
@@ -146,6 +146,7 @@ ALTER TABLE "refresh_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("us
 ALTER TABLE "user_wallets" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id") ON DELETE CASCADE;
 
 ALTER TABLE "user_transactions" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id") ON DELETE CASCADE;
+
 ALTER TABLE "user_transactions" ADD FOREIGN KEY ("wallet_id") REFERENCES "user_wallets" ("wallet_id") ON DELETE CASCADE;
 
 ALTER TABLE "user_preferences" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id") ON DELETE CASCADE;

@@ -8,7 +8,8 @@ import com.nimbusds.jose.proc.SecurityContext;
 import app.together.common.auth.entity.User;
 import app.together.common.auth.enums.BusinessRole;
 import app.together.common.auth.enums.SystemRole;
-import app.together.common.auth.service.UserService;
+import app.together.auth.service.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -149,7 +150,6 @@ public class AuthSecurityConfig {
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
-        KeyPair keyPair = generateRsaKey();
         RSAPublicKey publicKey = (RSAPublicKey) commonKeyPair.getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) commonKeyPair.getPrivate();
         RSAKey rsaKey = new RSAKey.Builder(publicKey)
@@ -176,8 +176,9 @@ public class AuthSecurityConfig {
     }
 
     @Bean
-    public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().issuer("http://localhost:8081").build();
+    public AuthorizationServerSettings authorizationServerSettings(
+            @Value("${auth.issuer-uri:http://localhost:8081}") String issuerUri) {
+        return AuthorizationServerSettings.builder().issuer(issuerUri).build();
     }
 
     @Bean

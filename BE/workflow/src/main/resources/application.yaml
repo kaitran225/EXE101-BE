@@ -3,17 +3,6 @@ spring:
     name: exe101-workflow
   profiles:
     active: local
-  mail:
-    username: ${MAIL_USERNAME:}
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${GOOGLE_CLIENT_ID:}
-  jwt:
-    expiration: ${JWT_EXPIRATION:3600}
-    refresh-token-expiration: ${JWT_REFRESH_EXPIRATION:604800}
 
 server:
   port: 8082
@@ -26,7 +15,3 @@ server:
       io: ${UNDERTOW_IO_THREADS:4}
       worker: ${UNDERTOW_WORKER_THREADS:32}
     max-http-post-size: ${UNDERTOW_MAX_HTTP_POST_SIZE:10485760}
-
-spring.security.oauth2.resourceserver.jwt:
-  issuer-uri: http://localhost:8081
-  jwk-set-uri: http://localhost:8081/oauth2/jwks

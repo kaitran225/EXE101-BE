@@ -4,6 +4,10 @@ spring:
   profiles:
     active: local
 
+# Must match JWT `iss` and resource servers’ AUTH_ISSUER_URI (no trailing slash).
+auth:
+  issuer-uri: ${AUTH_ISSUER_URI:http://localhost:8081}
+
 server:
   port: 8081
   shutdown: graceful
@@ -16,9 +20,9 @@ server:
       worker: ${UNDERTOW_WORKER_THREADS:32}
     max-http-post-size: ${UNDERTOW_MAX_HTTP_POST_SIZE:10485760}
 
-# OAuth2 Authorization Server
+# OAuth2 Authorization Server (reference; issuer is wired from auth.issuer-uri in Java config)
 spring.security.oauth2.authorizationserver:
-  issuer: http://localhost:8081
+  issuer: ${AUTH_ISSUER_URI:http://localhost:8081}
   endpoint:
     authorization-uri: http://localhost:8081/oauth2/authorize
     token-uri: http://localhost:8081/oauth2/token

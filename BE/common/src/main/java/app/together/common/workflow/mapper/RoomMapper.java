@@ -1,5 +1,7 @@
 package app.together.common.workflow.mapper;
 
+import app.together.common.shared.mapper.BaseAuditMapper;
+
 import app.together.common.workflow.dto.RoomDto;
 import app.together.common.workflow.entity.Room;
 import org.mapstruct.Mapper;
@@ -7,7 +9,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = BaseAuditMapper.class)
 public interface RoomMapper {
 
     RoomDto toDto(Room entity);

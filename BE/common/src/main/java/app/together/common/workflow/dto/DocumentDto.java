@@ -1,21 +1,33 @@
 package app.together.common.workflow.dto;
 
+import app.together.common.shared.dto.BaseAuditDTO;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import app.together.common.shared.constant.MessageConstants;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import lombok.*;
 
 
-@Data
-@Builder
+@Getter
+@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DocumentDto {
+public class DocumentDto extends BaseAuditDTO {
     public Long documentId;
     @NotBlank(message = MessageConstants.MESSAGE_USER_SSO_REQUIRED)
     @Size(max = 255)

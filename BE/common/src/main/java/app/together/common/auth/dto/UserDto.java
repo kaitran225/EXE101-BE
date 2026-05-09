@@ -1,9 +1,17 @@
 package app.together.common.auth.dto;
 
+import app.together.common.shared.dto.BaseAuditDTO;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,14 +23,16 @@ import app.together.common.auth.enums.SystemRole;
 import java.time.Instant;
 import java.time.LocalDate;
 
-@Data
-@Builder
+@Getter
+@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserDto {
+public class UserDto extends BaseAuditDTO {
     Long userId;
     @NotBlank(message = "userSso required")
     @Size(max = 255)
@@ -44,8 +54,6 @@ public class UserDto {
     LocalDate lastActiveDate;
     String status;
     Boolean emailVerified;
-    Instant createdAt;
-    Instant updatedAt;
     SystemRole systemRole;
     BusinessRole businessRole;
     Boolean isAdmin;

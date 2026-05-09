@@ -6,7 +6,13 @@ spring:
 
 server:
   port: 8084
+  shutdown: graceful
 
-cronjob:
-  heartbeat:
-    cron: ${CRONJOB_HEARTBEAT_CRON:0 */5 * * * *}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: when_authorized

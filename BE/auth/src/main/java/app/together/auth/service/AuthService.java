@@ -1,33 +1,33 @@
-package app.together.common.auth.service;
+package app.together.auth.service;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
-import app.together.common.shared.constant.ErrorCodes;
-import app.together.common.shared.constant.MessageConstants;
-import app.together.common.auth.dto.UserDto;
 import app.together.common.auth.dto.ChangePasswordRequest;
 import app.together.common.auth.dto.ConfirmPasswordResetRequest;
 import app.together.common.auth.dto.LoginRequest;
 import app.together.common.auth.dto.LoginResponse;
 import app.together.common.auth.dto.RegisterRequest;
+import app.together.common.auth.dto.UserDto;
 import app.together.common.auth.entity.EmailVerification;
 import app.together.common.auth.entity.PasswordReset;
 import app.together.common.auth.entity.User;
 import app.together.common.auth.enums.BusinessRole;
-import app.together.common.workflow.enums.SubcriptionType;
 import app.together.common.auth.enums.SystemRole;
-import app.together.common.workflow.enums.UserStatus;
-import app.together.common.shared.exception.BadRequestException;
-import app.together.common.shared.exception.ConflictException;
-import app.together.common.shared.exception.ResourceNotFoundException;
-import app.together.common.shared.exception.UnauthorizedException;
 import app.together.common.auth.mapper.UserMapper;
 import app.together.common.auth.repository.EmailVerificationRepository;
 import app.together.common.auth.repository.PasswordResetRepository;
 import app.together.common.auth.repository.UserRepository;
+import app.together.common.shared.constant.ErrorCodes;
+import app.together.common.shared.constant.MessageConstants;
+import app.together.common.shared.exception.BadRequestException;
+import app.together.common.shared.exception.ConflictException;
+import app.together.common.shared.exception.ResourceNotFoundException;
+import app.together.common.shared.exception.UnauthorizedException;
 import app.together.common.shared.util.SecurityUtils;
+import app.together.common.workflow.enums.SubcriptionType;
+import app.together.common.workflow.enums.UserStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -60,15 +60,14 @@ public class AuthService {
     @Value("${spring.jwt.refresh-token-expiration}")
     private long refreshTokenExpirationTime;
 
-
-
     @Transactional
     public LoginResponse login(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new UnauthorizedException("Thông tin đăng nhập không hợp lệ", ErrorCodes.UNAUTHORIZED));
+                .orElseThrow(() -> new UnauthorizedException(
+                        MessageConstants.MESSAGE_LOGIN_INVALID_CREDENTIALS, ErrorCodes.UNAUTHORIZED));
 
         if (user.getPasswordHash() == null || !passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
-            throw new UnauthorizedException("Thông tin đăng nhập không hợp lệ", ErrorCodes.UNAUTHORIZED);
+            throw new UnauthorizedException(MessageConstants.MESSAGE_LOGIN_INVALID_CREDENTIALS, ErrorCodes.UNAUTHORIZED);
         }
 
         return buildLoginResponse(user);
@@ -77,7 +76,8 @@ public class AuthService {
     @Transactional
     public UserDto register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new ConflictException("Email đã tồn tại", MessageConstants.MESSAGE_USER_EMAIL_ALREADY_EXISTS);
+            throw new ConflictException(
+                    MessageConstants.MESSAGE_USER_EMAIL_ALREADY_EXISTS, MessageConstants.MESSAGE_USER_EMAIL_ALREADY_EXISTS);
         }
 
         User user = User.builder()
@@ -102,7 +102,7 @@ public class AuthService {
                 .userId(user.getUserId())
                 .email(user.getEmail())
                 .verificationCode(hashedToken)
-                .expiresAt(Instant.now().plus(Duration.ofHours(24))) // Hết hạn sau 24h
+                .expiresAt(Instant.now().plus(Duration.ofHours(24)))
                 .attempts(0)
                 .isEduEmail(user.getEmail().endsWith(".edu.vn") || user.getEmail().endsWith(".edu"))
                 .build();
@@ -126,7 +126,7 @@ public class AuthService {
     public LoginResponse refreshToken(String refreshToken) {
         User user = tokenService.validateRefreshToken(refreshToken)
                 .orElseThrow(() -> new UnauthorizedException(
-                        "Token làm mới không hợp lệ hoặc đã hết hạn",
+                        MessageConstants.MESSAGE_REFRESH_TOKEN_INVALID,
                         MessageConstants.MESSAGE_REFRESH_TOKEN_INVALID));
 
         tokenService.revokeRefreshToken(refreshToken);
@@ -135,7 +135,6 @@ public class AuthService {
 
     @Transactional
     public void requestPasswordReset(String email) {
-        // Always return success to prevent user enumeration
         userRepository.findByEmail(email).ifPresent(user -> {
             String rawToken = UUID.randomUUID().toString();
             String tokenHash = tokenService.hashToken(rawToken);
@@ -156,36 +155,36 @@ public class AuthService {
     public void confirmPasswordReset(ConfirmPasswordResetRequest request) {
         if (request == null || request.getToken() == null || request.getToken().isBlank()) {
             throw new BadRequestException(
-                    "Token đặt lại mật khẩu là bắt buộc",
+                    MessageConstants.MESSAGE_PASSWORD_RESET_TOKEN_REQUIRED,
                     MessageConstants.MESSAGE_PASSWORD_RESET_INVALID);
         }
         if (request.getNewPassword() == null || request.getNewPassword().isBlank()) {
             throw new BadRequestException(
-                    "Mật khẩu mới là bắt buộc",
+                    MessageConstants.MESSAGE_USER_NEW_PASSWORD_REQUIRED,
                     MessageConstants.MESSAGE_PASSWORD_RESET_INVALID);
         }
 
         String tokenHash = tokenService.hashToken(request.getToken());
         PasswordReset reset = passwordResetRepository.findByResetTokenHash(tokenHash)
                 .orElseThrow(() -> new BadRequestException(
-                        "Token đặt lại không hợp lệ",
+                        MessageConstants.MESSAGE_PASSWORD_RESET_INVALID,
                         MessageConstants.MESSAGE_PASSWORD_RESET_INVALID));
 
         if (reset.getUsedAt() != null) {
             throw new BadRequestException(
-                    "Token đặt lại đã được sử dụng",
+                    MessageConstants.MESSAGE_PASSWORD_RESET_TOKEN_USED,
                     MessageConstants.MESSAGE_PASSWORD_RESET_INVALID);
         }
 
         if (reset.getExpiresAt().isBefore(Instant.now())) {
             throw new BadRequestException(
-                    "Token đặt lại đã hết hạn",
+                    MessageConstants.MESSAGE_PASSWORD_RESET_EXPIRED,
                     MessageConstants.MESSAGE_PASSWORD_RESET_EXPIRED);
         }
 
         User user = userRepository.findById(reset.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Không tìm thấy người dùng",
+                        MessageConstants.MESSAGE_USER_NOT_FOUND,
                         MessageConstants.MESSAGE_USER_NOT_FOUND));
 
         user.setPasswordHash(passwordEncoder.encode(request.getNewPassword()));
@@ -201,7 +200,7 @@ public class AuthService {
     public UserDto getCurrentUser(String userSso) {
         User user = userRepository.findByUserSso(userSso)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Không tìm thấy người dùng với userSso: " + userSso,
+                        MessageConstants.MESSAGE_USER_NOT_FOUND,
                         MessageConstants.MESSAGE_USER_NOT_FOUND));
         return userMapper.toDto(user);
     }
@@ -224,36 +223,39 @@ public class AuthService {
         return response;
     }
 
-    private String generateUserSso(){
-        return "USER_" + UUID.randomUUID().toString().substring(0 ,8).toUpperCase();
+    private String generateUserSso() {
+        return "USER_" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 
-    private String generateGoogleUserSso(){
-        return "GOOGLE_" + UUID.randomUUID().toString().substring(0 ,8).toUpperCase();
+    private String generateGoogleUserSso() {
+        return "GOOGLE_" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 
-    public String verifyAndGetMailFromGoogle(String idTokenString){
-        try{
+    public String verifyAndGetMailFromGoogle(String idTokenString) {
+        try {
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(),
                     new GsonFactory())
                     .setAudience(Collections.singleton(googleClientId))
                     .build();
             GoogleIdToken idToken = verifier.verify(idTokenString);
 
-            if(idToken != null){
+            if (idToken != null) {
                 GoogleIdToken.Payload payload = idToken.getPayload();
                 return payload.getEmail();
             } else {
-                throw new UnauthorizedException("Token Google không hợp lệ", ErrorCodes.UNAUTHORIZED);
+                throw new UnauthorizedException(MessageConstants.MESSAGE_GOOGLE_TOKEN_INVALID, ErrorCodes.UNAUTHORIZED);
             }
 
-        } catch (Exception e){
-            throw new UnauthorizedException("Xác minh token Google thất bại: " + e.getMessage(), ErrorCodes.UNAUTHORIZED);
+        } catch (UnauthorizedException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new UnauthorizedException(
+                    MessageConstants.MESSAGE_GOOGLE_TOKEN_VERIFICATION_FAILED, ErrorCodes.UNAUTHORIZED);
         }
     }
 
     @Transactional
-    public LoginResponse loginWithGoogle(String googleToken){
+    public LoginResponse loginWithGoogle(String googleToken) {
         String email = verifyAndGetMailFromGoogle(googleToken);
 
         User user = userRepository.findByEmail(email).orElseGet(() -> {
@@ -275,31 +277,37 @@ public class AuthService {
     }
 
     @Transactional
-    public void verifyEmail(String rawToken){
+    public void verifyEmail(String rawToken) {
         String hashedToken = tokenService.hashToken(rawToken);
 
         EmailVerification verification = emailVerificationRepository.findByVerificationCode(hashedToken)
                 .orElseThrow(() -> new BadRequestException(
-                        "Mã xác thức không hợp lệ",
+                        MessageConstants.MESSAGE_EMAIL_VERIFICATION_INVALID,
                         MessageConstants.MESSAGE_EMAIL_VERIFICATION_INVALID
                 ));
 
         if (verification.getAttempts() != null && verification.getAttempts() >= 5) {
-            throw new BadRequestException("Bạn đã thử quá nhiều lần. Vui lòng yêu cầu mã mới.");
+            throw new BadRequestException(
+                    MessageConstants.MESSAGE_EMAIL_VERIFICATION_TOO_MANY_ATTEMPTS,
+                    MessageConstants.MESSAGE_EMAIL_VERIFICATION_INVALID);
         }
 
         if (verification.getVerifiedAt() != null) {
-            throw new BadRequestException("Email này đã được xác thực trước đó",
+            throw new BadRequestException(
+                    MessageConstants.MESSAGE_EMAIL_VERIFICATION_ALREADY_USED,
                     MessageConstants.MESSAGE_EMAIL_VERIFICATION_ALREADY_USED);
         }
 
-        if(verification.getExpiresAt().isBefore(Instant.now())){
-            throw new BadRequestException("Mã xác thực đã hết hạn",
+        if (verification.getExpiresAt().isBefore(Instant.now())) {
+            throw new BadRequestException(
+                    MessageConstants.MESSAGE_EMAIL_VERIFICATION_EXPIRED,
                     MessageConstants.MESSAGE_EMAIL_VERIFICATION_EXPIRED);
         }
 
         User user = userRepository.findById(verification.getUserId())
-                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy người dùng", "USER_NOT_FOUND"));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        MessageConstants.MESSAGE_USER_NOT_FOUND,
+                        MessageConstants.MESSAGE_USER_NOT_FOUND));
 
         user.setEmailVerified(true);
         userRepository.save(user);
@@ -311,18 +319,18 @@ public class AuthService {
     }
 
     @Transactional
-    public ChangePasswordRequest changePasswordRequest(String oldPassword, String newPassword){
+    public ChangePasswordRequest changePasswordRequest(String oldPassword, String newPassword) {
         String userSsoOrNull = SecurityUtils.getCurrentUserSsoOrNull();
 
         User user = userRepository.findByUserSso(userSsoOrNull)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Không tìm thấy người dùng với userSso: " + userSsoOrNull,
+                        MessageConstants.MESSAGE_USER_NOT_FOUND,
                         MessageConstants.MESSAGE_USER_NOT_FOUND));
 
         if (user.getPasswordHash() == null || !passwordEncoder.matches(oldPassword, user.getPasswordHash())) {
             throw new BadRequestException(
-                    "Mật khẩu cũ không chính xác",
-                    MessageConstants.MESSAGE_PASSWORD_RESET_NOT_FOUND);
+                    MessageConstants.MESSAGE_USER_OLD_PASSWORD_INCORRECT,
+                    MessageConstants.MESSAGE_USER_OLD_PASSWORD_INCORRECT);
         }
 
         user.setPasswordHash(passwordEncoder.encode(newPassword));
@@ -331,7 +339,7 @@ public class AuthService {
         tokenService.revokeAllUserRefreshTokens(user.getUserId());
 
         ChangePasswordRequest response = new ChangePasswordRequest();
-        response.setNewPassword("Mật khẩu đã được thay đổi thành công");
+        response.setNewPassword(MessageConstants.MESSAGE_PASSWORD_CHANGE_SUCCESS);
         return response;
     }
 }
