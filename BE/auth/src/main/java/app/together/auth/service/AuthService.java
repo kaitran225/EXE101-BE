@@ -49,7 +49,7 @@ public class AuthService {
     private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
-    private final EmailService emailService;
+    private final EmailDispatchClient emailDispatchClient;
 
     @Value("${spring.security.oauth2.client.registration.google.client-id}")
     private String googleClientId;
@@ -107,10 +107,7 @@ public class AuthService {
                 .isEduEmail(user.getEmail().endsWith(".edu.vn") || user.getEmail().endsWith(".edu"))
                 .build();
         emailVerificationRepository.save(emailVerification);
-
-        System.out.println("DEBUG: Link xác thực cho user: http://localhost:5173/verify-email?token=" + rawToken);
-
-        emailService.sendVerifycationEmail(user.getEmail(), rawToken);
+        emailDispatchClient.sendVerificationEmail(user.getEmail(), rawToken);
 
         return userMapper.toDto(user);
     }
@@ -147,7 +144,7 @@ public class AuthService {
 
             passwordResetRepository.save(reset);
 
-            emailService.sendResetPasswordEmail(user.getEmail(), rawToken);
+            emailDispatchClient.sendResetPasswordEmail(user.getEmail(), rawToken);
         });
     }
 

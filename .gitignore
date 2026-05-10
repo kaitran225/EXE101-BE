@@ -153,6 +153,7 @@ $RECYCLE.BIN/
 .env.local
 .env.*.local
 *.env
+!.env.example
 
 # Temporary files
 *.tmp

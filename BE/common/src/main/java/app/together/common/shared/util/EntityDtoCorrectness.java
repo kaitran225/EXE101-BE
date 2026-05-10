@@ -1,5 +1,13 @@
 package app.together.common.shared.util;
 
+import app.together.common.auth.mapper.EmailVerificationMapper;
+import app.together.common.auth.mapper.OAuthAccountMapper;
+import app.together.common.auth.mapper.PasswordResetMapper;
+import app.together.common.auth.mapper.RefreshTokenMapper;
+import app.together.common.auth.mapper.UserMapper;
+import app.together.common.auth.mapper.UserPreferencesMapper;
+import app.together.common.auth.mapper.UserTransactionMapper;
+import app.together.common.auth.mapper.UserWalletMapper;
 import app.together.common.workflow.dto.AchievementDto;
 import app.together.common.workflow.dto.AppConfigDto;
 import app.together.common.workflow.dto.AuditLogDto;
@@ -104,6 +112,50 @@ import app.together.common.workflow.entity.Transaction;
 import app.together.common.workflow.entity.UserAchievement;
 import app.together.common.workflow.entity.UserMasterData;
 import app.together.common.workflow.entity.UserRoomSlot;
+import app.together.common.workflow.mapper.AchievementMapper;
+import app.together.common.workflow.mapper.AppConfigMapper;
+import app.together.common.workflow.mapper.AuditLogMapper;
+import app.together.common.workflow.mapper.ChatConversationMapper;
+import app.together.common.workflow.mapper.ChatMessageMapper;
+import app.together.common.workflow.mapper.CoinPackageMapper;
+import app.together.common.workflow.mapper.DocumentMapper;
+import app.together.common.workflow.mapper.FlashcardMapper;
+import app.together.common.workflow.mapper.FlashcardReviewMapper;
+import app.together.common.workflow.mapper.MeetingMapper;
+import app.together.common.workflow.mapper.MeetingNoteMapper;
+import app.together.common.workflow.mapper.MeetingParticipantMapper;
+import app.together.common.workflow.mapper.MeetingSummaryMapper;
+import app.together.common.workflow.mapper.MindmapMapper;
+import app.together.common.workflow.mapper.NotificationMapper;
+import app.together.common.workflow.mapper.PaymentTransactionMapper;
+import app.together.common.workflow.mapper.ProjectMapper;
+import app.together.common.workflow.mapper.QuickNoteMapper;
+import app.together.common.workflow.mapper.QuizAnalyticsMapper;
+import app.together.common.workflow.mapper.QuizAttemptMapper;
+import app.together.common.workflow.mapper.QuizMapper;
+import app.together.common.workflow.mapper.QuizQuestionMapper;
+import app.together.common.workflow.mapper.RoomActivityMapper;
+import app.together.common.workflow.mapper.RoomMapper;
+import app.together.common.workflow.mapper.RoomMemberMapper;
+import app.together.common.workflow.mapper.RoomPostMapper;
+import app.together.common.workflow.mapper.RoomRequestMapper;
+import app.together.common.workflow.mapper.ScheduleCategoryMapper;
+import app.together.common.workflow.mapper.ScheduleExceptionMapper;
+import app.together.common.workflow.mapper.ScheduleMapper;
+import app.together.common.workflow.mapper.StudySessionMapper;
+import app.together.common.workflow.mapper.SummaryMapper;
+import app.together.common.workflow.mapper.TaskActivityMapper;
+import app.together.common.workflow.mapper.TaskAssignmentMapper;
+import app.together.common.workflow.mapper.TaskAttachmentMapper;
+import app.together.common.workflow.mapper.TaskCommentMapper;
+import app.together.common.workflow.mapper.TaskDependencyMapper;
+import app.together.common.workflow.mapper.TaskMapper;
+import app.together.common.workflow.mapper.TeamMapper;
+import app.together.common.workflow.mapper.TeamMemberMapper;
+import app.together.common.workflow.mapper.TransactionMapper;
+import app.together.common.workflow.mapper.UserAchievementMapper;
+import app.together.common.workflow.mapper.UserMasterDataMapper;
+import app.together.common.workflow.mapper.UserRoomSlotMapper;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -132,7 +184,6 @@ public final class EntityDtoCorrectness {
         "notifications", "audit_logs", "app_config"
     );
 
-    @SuppressWarnings("rawtypes")
     private static final List<Class<?>> ENTITY_CLASSES = List.of(
         User.class, ScheduleCategory.class, CoinPackage.class, EmailVerification.class,
         UserMasterData.class, Achievement.class, UserAchievement.class, UserRoomSlot.class, OAuthAccount.class, RefreshToken.class, UserWallet.class, UserTransaction.class, Transaction.class,
@@ -146,7 +197,6 @@ public final class EntityDtoCorrectness {
         Notification.class, AuditLog.class, AppConfig.class
     );
 
-    @SuppressWarnings("rawtypes")
     private static final List<Class<?>> DTO_CLASSES = List.of(
         UserDto.class, ScheduleCategoryDto.class, CoinPackageDto.class, EmailVerificationDto.class,
         UserMasterDataDto.class, AchievementDto.class, UserAchievementDto.class, UserRoomSlotDto.class, OAuthAccountDto.class, RefreshTokenDto.class, UserWalletDto.class, UserTransactionDto.class, TransactionDto.class,
@@ -161,60 +211,59 @@ public final class EntityDtoCorrectness {
     );
 
     /** Mapper -> entity for toDto check. */
-    @SuppressWarnings("rawtypes")
     private static final Map<Class<?>, Class<?>> MAPPER_TO_ENTITY = Map.ofEntries(
-        map(app.together.common.auth.mapper.UserMapper.class, User.class),
-        map(app.together.common.workflow.mapper.AchievementMapper.class, Achievement.class),
-        map(app.together.common.workflow.mapper.ScheduleCategoryMapper.class, ScheduleCategory.class),
-        map(app.together.common.workflow.mapper.CoinPackageMapper.class, CoinPackage.class),
-        map(app.together.common.auth.mapper.EmailVerificationMapper.class, EmailVerification.class),
-        map(app.together.common.workflow.mapper.UserMasterDataMapper.class, UserMasterData.class),
-        map(app.together.common.auth.mapper.OAuthAccountMapper.class, OAuthAccount.class),
-        map(app.together.common.auth.mapper.RefreshTokenMapper.class, RefreshToken.class),
-        map(app.together.common.auth.mapper.UserWalletMapper.class, UserWallet.class),
-        map(app.together.common.auth.mapper.UserTransactionMapper.class, UserTransaction.class),
-        map(app.together.common.workflow.mapper.TransactionMapper.class, Transaction.class),
-        map(app.together.common.workflow.mapper.UserAchievementMapper.class, UserAchievement.class),
-        map(app.together.common.auth.mapper.PasswordResetMapper.class, PasswordReset.class),
-        map(app.together.common.auth.mapper.UserPreferencesMapper.class, UserPreferences.class),
-        map(app.together.common.workflow.mapper.PaymentTransactionMapper.class, PaymentTransaction.class),
-        map(app.together.common.workflow.mapper.ChatConversationMapper.class, ChatConversation.class),
-        map(app.together.common.workflow.mapper.ChatMessageMapper.class, ChatMessage.class),
-        map(app.together.common.workflow.mapper.UserRoomSlotMapper.class, UserRoomSlot.class),
-        map(app.together.common.workflow.mapper.RoomMapper.class, Room.class),
-        map(app.together.common.workflow.mapper.RoomRequestMapper.class, RoomRequest.class),
-        map(app.together.common.workflow.mapper.RoomMemberMapper.class, RoomMember.class),
-        map(app.together.common.workflow.mapper.RoomPostMapper.class, RoomPost.class),
-        map(app.together.common.workflow.mapper.StudySessionMapper.class, StudySession.class),
-        map(app.together.common.workflow.mapper.RoomActivityMapper.class, RoomActivity.class),
-        map(app.together.common.workflow.mapper.DocumentMapper.class, Document.class),
-        map(app.together.common.workflow.mapper.SummaryMapper.class, Summary.class),
-        map(app.together.common.workflow.mapper.FlashcardReviewMapper.class, FlashcardReview.class),
-        map(app.together.common.workflow.mapper.MindmapMapper.class, Mindmap.class),
-        map(app.together.common.workflow.mapper.QuizMapper.class, Quiz.class),
-        map(app.together.common.workflow.mapper.QuizQuestionMapper.class, QuizQuestion.class),
-        map(app.together.common.workflow.mapper.FlashcardMapper.class, Flashcard.class),
-        map(app.together.common.workflow.mapper.QuizAttemptMapper.class, QuizAttempt.class),
-        map(app.together.common.workflow.mapper.QuizAnalyticsMapper.class, QuizAnalytics.class),
-        map(app.together.common.workflow.mapper.ScheduleMapper.class, Schedule.class),
-        map(app.together.common.workflow.mapper.ScheduleExceptionMapper.class, ScheduleException.class),
-        map(app.together.common.workflow.mapper.QuickNoteMapper.class, QuickNote.class),
-        map(app.together.common.workflow.mapper.TeamMapper.class, Team.class),
-        map(app.together.common.workflow.mapper.TeamMemberMapper.class, TeamMember.class),
-        map(app.together.common.workflow.mapper.ProjectMapper.class, Project.class),
-        map(app.together.common.workflow.mapper.TaskMapper.class, Task.class),
-        map(app.together.common.workflow.mapper.TaskAssignmentMapper.class, TaskAssignment.class),
-        map(app.together.common.workflow.mapper.TaskDependencyMapper.class, TaskDependency.class),
-        map(app.together.common.workflow.mapper.TaskCommentMapper.class, TaskComment.class),
-        map(app.together.common.workflow.mapper.TaskActivityMapper.class, TaskActivity.class),
-        map(app.together.common.workflow.mapper.TaskAttachmentMapper.class, TaskAttachment.class),
-        map(app.together.common.workflow.mapper.MeetingMapper.class, Meeting.class),
-        map(app.together.common.workflow.mapper.MeetingParticipantMapper.class, MeetingParticipant.class),
-        map(app.together.common.workflow.mapper.MeetingSummaryMapper.class, MeetingSummary.class),
-        map(app.together.common.workflow.mapper.MeetingNoteMapper.class, MeetingNote.class),
-        map(app.together.common.workflow.mapper.NotificationMapper.class, Notification.class),
-        map(app.together.common.workflow.mapper.AuditLogMapper.class, AuditLog.class),
-        map(app.together.common.workflow.mapper.AppConfigMapper.class, AppConfig.class)
+        map(UserMapper.class, User.class),
+        map(AchievementMapper.class, Achievement.class),
+        map(ScheduleCategoryMapper.class, ScheduleCategory.class),
+        map(CoinPackageMapper.class, CoinPackage.class),
+        map(EmailVerificationMapper.class, EmailVerification.class),
+        map(UserMasterDataMapper.class, UserMasterData.class),
+        map(OAuthAccountMapper.class, OAuthAccount.class),
+        map(RefreshTokenMapper.class, RefreshToken.class),
+        map(UserWalletMapper.class, UserWallet.class),
+        map(UserTransactionMapper.class, UserTransaction.class),
+        map(TransactionMapper.class, Transaction.class),
+        map(UserAchievementMapper.class, UserAchievement.class),
+        map(PasswordResetMapper.class, PasswordReset.class),
+        map(UserPreferencesMapper.class, UserPreferences.class),
+        map(PaymentTransactionMapper.class, PaymentTransaction.class),
+        map(ChatConversationMapper.class, ChatConversation.class),
+        map(ChatMessageMapper.class, ChatMessage.class),
+        map(UserRoomSlotMapper.class, UserRoomSlot.class),
+        map(RoomMapper.class, Room.class),
+        map(RoomRequestMapper.class, RoomRequest.class),
+        map(RoomMemberMapper.class, RoomMember.class),
+        map(RoomPostMapper.class, RoomPost.class),
+        map(StudySessionMapper.class, StudySession.class),
+        map(RoomActivityMapper.class, RoomActivity.class),
+        map(DocumentMapper.class, Document.class),
+        map(SummaryMapper.class, Summary.class),
+        map(FlashcardReviewMapper.class, FlashcardReview.class),
+        map(MindmapMapper.class, Mindmap.class),
+        map(QuizMapper.class, Quiz.class),
+        map(QuizQuestionMapper.class, QuizQuestion.class),
+        map(FlashcardMapper.class, Flashcard.class),
+        map(QuizAttemptMapper.class, QuizAttempt.class),
+        map(QuizAnalyticsMapper.class, QuizAnalytics.class),
+        map(ScheduleMapper.class, Schedule.class),
+        map(ScheduleExceptionMapper.class, ScheduleException.class),
+        map(QuickNoteMapper.class, QuickNote.class),
+        map(TeamMapper.class, Team.class),
+        map(TeamMemberMapper.class, TeamMember.class),
+        map(ProjectMapper.class, Project.class),
+        map(TaskMapper.class, Task.class),
+        map(TaskAssignmentMapper.class, TaskAssignment.class),
+        map(TaskDependencyMapper.class, TaskDependency.class),
+        map(TaskCommentMapper.class, TaskComment.class),
+        map(TaskActivityMapper.class, TaskActivity.class),
+        map(TaskAttachmentMapper.class, TaskAttachment.class),
+        map(MeetingMapper.class, Meeting.class),
+        map(MeetingParticipantMapper.class, MeetingParticipant.class),
+        map(MeetingSummaryMapper.class, MeetingSummary.class),
+        map(MeetingNoteMapper.class, MeetingNote.class),
+        map(NotificationMapper.class, Notification.class),
+        map(AuditLogMapper.class, AuditLog.class),
+        map(AppConfigMapper.class, AppConfig.class)
     );
 
     private static Map.Entry<Class<?>, Class<?>> map(Class<?> mapper, Class<?> entity) {

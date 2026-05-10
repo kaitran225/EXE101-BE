@@ -8,6 +8,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import app.together.common.auth.entity.User;
 import app.together.common.auth.enums.BusinessRole;
 import app.together.common.auth.enums.SystemRole;
+import app.together.common.auth.enums.UserTier;
 import app.together.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -177,7 +178,7 @@ public class AuthSecurityConfig {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings(
-            @Value("${auth.issuer-uri:http://localhost:8081}") String issuerUri) {
+            @Value("${auth.issuer-uri}") String issuerUri) {
         return AuthorizationServerSettings.builder().issuer(issuerUri).build();
     }
 
@@ -207,6 +208,7 @@ public class AuthSecurityConfig {
                         claims.put("user_id", user.getUserId());
                         claims.put("user_sso", user.getUserSso());
                         claims.put("plan_type", user.getPlanType());
+                        claims.put("user_tier", UserTier.parse(user.getPlanType()).name());
                         claims.put("system_role",
                                 user.getSystemRole() != null ? user.getSystemRole().name() : SystemRole.USER.name());
                         claims.put("business_role",

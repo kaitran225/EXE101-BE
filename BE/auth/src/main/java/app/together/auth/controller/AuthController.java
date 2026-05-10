@@ -2,6 +2,7 @@ package app.together.auth.controller;
 
 import app.together.common.shared.constant.MessageConstants;
 import app.together.common.shared.dto.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import app.together.common.auth.dto.UserDto;
 import app.together.common.auth.dto.ChangePasswordRequest;
 import app.together.common.auth.dto.ConfirmPasswordResetRequest;
@@ -25,6 +26,7 @@ import java.util.Map;
 
 import static app.together.common.shared.dto.ApiResponse.ok;
 
+@Tag(name = "Auth", description = "Auth API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")

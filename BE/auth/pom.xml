@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.project.exe</groupId>
-        <artifactId>exe101-be</artifactId>
+        <artifactId>exe101-be-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>auth</artifactId>
@@ -23,6 +23,10 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -4,6 +4,7 @@ import app.together.common.auth.entity.RefreshToken;
 import app.together.common.auth.entity.User;
 import app.together.common.auth.enums.BusinessRole;
 import app.together.common.auth.enums.SystemRole;
+import app.together.common.auth.enums.UserTier;
 import app.together.common.auth.repository.RefreshTokenRepository;
 import app.together.common.auth.repository.UserRepository;
 import app.together.common.shared.constant.MessageConstants;
@@ -30,13 +31,13 @@ public class TokenService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final UserRepository userRepository;
 
-    @Value("${spring.jwt.expiration:3600}")
+    @Value("${spring.jwt.expiration}")
     private long accessTokenExpirySeconds;
 
-    @Value("${spring.jwt.refresh-token-expiration:604800}")
+    @Value("${spring.jwt.refresh-token-expiration}")
     private long refreshTokenExpirySeconds;
 
-    @Value("${auth.issuer-uri:http://localhost:8081}")
+    @Value("${auth.issuer-uri}")
     private String issuerUri;
 
     public String generateAccessToken(User user) {
@@ -51,6 +52,7 @@ public class TokenService {
                 .id(user.getUserId().toString())
                 .claim("user_id", user.getUserId())
                 .claim("plan_type", user.getPlanType())
+                .claim("user_tier", UserTier.parse(user.getPlanType()).name())
                 .claim("user_email", user.getEmail())
                 .claim("system_role", user.getSystemRole() != null ? user.getSystemRole().name() : SystemRole.USER.name())
                 .claim("business_role", user.getBusinessRole() != null

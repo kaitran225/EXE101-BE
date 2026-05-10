@@ -1,0 +1,30 @@
+Render.com: one Web Service per module (Docker, Free tier)
+============================================================
+
+  Root Directory:  BE
+  Dockerfile Path:  render/Dockerfile.<module>
+
+Docker builds no longer copy stub sibling modules. The Maven reactor was split:
+
+  BE/parent/pom.xml     → artifact exe101-be-parent (dependencyManagement only, no <modules>)
+  BE/pom.xml            → thin reactor only (modules list), inherits parent
+
+Each image runs:
+  mvnw -f parent/pom.xml install
+  then mvnw -f common/pom.xml install (if the service depends on common)
+  then mvnw -f <service>/pom.xml package
+
+Suggested names: together-auth, together-email, together-workflow, together-read, together-cronjob
+
+  Dockerfile Path: render/Dockerfile.email  (set MAIL_*, EMAIL_SERVICE_INTERNAL_API_KEY on the email service)
+
+Default Spring profile in images: dev (SPRING_PROFILES_ACTIVE=dev). Override in Render Environment if needed.
+
+Health paths:
+  auth:      /swagger-ui/index.html
+  email:     /health
+  workflow:  /api/v1/workflow/health
+  read:      /api/v1/read/health
+  cronjob:   /actuator/health
+
+If your Git repo root is only the backend (no BE/ wrapper), leave Root Directory empty and adjust Dockerfile paths accordingly.

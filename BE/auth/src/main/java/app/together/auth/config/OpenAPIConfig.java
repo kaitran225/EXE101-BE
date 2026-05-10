@@ -51,9 +51,7 @@ public class OpenAPIConfig {
                 .servers(List.of(
                         createServer("http://localhost:8081",
                                 "Server URL in Development environment"),
-                        createServer("https://envexe.example.com",
-                                "Server URL in Testing environment"),
-                        createServer("https://exe.example.com",
+                        createServer("https://together-app-auth.onrender.com",
                                 "Server URL in Production environment")))
                 .addSecurityItem(
                         new SecurityRequirement().addList("Bearer Authentication"))

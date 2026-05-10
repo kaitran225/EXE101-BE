@@ -25,6 +25,7 @@ public final class MessageConstants {
     public static final String MESSAGE_USER_EMAIL_REQUIRED = "USER_EMAIL_REQUIRED";
     public static final String MESSAGE_USER_EMAIL_ALREADY_EXISTS = "USER_EMAIL_ALREADY_EXISTS";
     public static final String MESSAGE_USER_SSO_REQUIRED = "USER_SSO_REQUIRED";
+    public static final String MESSAGE_PERMISSION_DENIED = "PERMISSION_DENIED";
     public static final String MESSAGE_ACHIEVEMENT_NOT_FOUND = "ACHIEVEMENT_NOT_FOUND";
     public static final String MESSAGE_ACHIEVEMENT_INVALID = "ACHIEVEMENT_INVALID";
     public static final String MESSAGE_ACHIEVEMENT_NAME_REQUIRED = "ACHIEVEMENT_NAME_REQUIRED";

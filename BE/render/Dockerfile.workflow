@@ -1,0 +1,34 @@
+# Render Web Service — Workflow (build context = BE/)
+# Root Directory: BE | Dockerfile Path: render/Dockerfile.workflow
+# Health: /api/v1/workflow/health
+
+FROM eclipse-temurin:21-jdk-alpine AS builder
+WORKDIR /src
+RUN apk add --no-cache bash
+
+COPY mvnw mvnw
+COPY .mvn .mvn
+COPY parent/pom.xml parent/
+COPY common/pom.xml common/
+COPY common/src common/src
+COPY workflow/pom.xml workflow/
+COPY workflow/src workflow/src
+RUN chmod +x mvnw
+
+RUN ./mvnw -B -q -f parent/pom.xml install -DskipTests \
+    && ./mvnw -B -q -f common/pom.xml install -DskipTests \
+    && ./mvnw -B -q -f workflow/pom.xml package -DskipTests
+
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+
+COPY --from=builder /src/workflow/target/*.jar /app/app.jar
+
+ENV SPRING_PROFILES_ACTIVE=dev
+ENV JAVA_OPTS="-XX:MaxRAMPercentage=75.0 -XX:+UseContainerSupport"
+
+EXPOSE 10000
+
+CMD ["/bin/sh", "-c", "exec java $JAVA_OPTS -jar /app/app.jar --server.port=${PORT}"]

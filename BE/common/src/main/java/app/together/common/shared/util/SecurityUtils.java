@@ -2,6 +2,7 @@ package app.together.common.shared.util;
 
 import app.together.common.auth.enums.BusinessRole;
 import app.together.common.auth.enums.SystemRole;
+import app.together.common.auth.enums.UserTier;
 import app.together.common.shared.constant.MessageConstants;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -64,6 +65,17 @@ public final class SecurityUtils {
     /** Domain role from JWT claim {@code business_role}. */
     public static Optional<BusinessRole> getCurrentBusinessRole() {
         return getClaimAsString("business_role").flatMap(SecurityUtils::parseBusinessRole);
+    }
+
+    /**
+     * Billing / product tier: claim {@code user_tier}, else {@code plan_type}, parsed with {@link UserTier#parse}.
+     */
+    public static Optional<UserTier> getCurrentUserTier() {
+        Optional<String> explicit = getClaimAsString("user_tier");
+        if (explicit.isPresent()) {
+            return Optional.of(UserTier.parse(explicit.get()));
+        }
+        return getClaimAsString("plan_type").map(UserTier::parse);
     }
 
     /** User ID from JWT. */

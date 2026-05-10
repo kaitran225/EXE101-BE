@@ -13,7 +13,7 @@ Spring Boot microservices backend + Vite React frontend (from [SRS](.guide/SRS.m
 
 ## Backend – Getting started
 
-1. **PostgreSQL**: Create databases `auth`, `read`, `workflow` on `localhost:5432` (user/pass `postgres` or set in each service’s `application.yaml`).
+1. **PostgreSQL**: Create databases `auth`, `read`, `workflow` on `localhost:5432`. Copy `.env.example` to `.env` at the repo root and set `DB_USERNAME` / `DB_PASSWORD` (and other keys; no `${VAR:default}` fallbacks).
 
 2. **Build:**
    ```bash
@@ -29,7 +29,7 @@ Spring Boot microservices backend + Vite React frontend (from [SRS](.guide/SRS.m
    cd BE/workflow && ../mvnw.cmd spring-boot:run   # 8082
    ```
 
-   With `local` profile, JPA uses `ddl-auto: update` for schema.
+   With `local` profile, the **read** service uses `ddl-auto: update`; auth/workflow use `validate` with Flyway where enabled.
 
 ## Frontend – Getting started
 

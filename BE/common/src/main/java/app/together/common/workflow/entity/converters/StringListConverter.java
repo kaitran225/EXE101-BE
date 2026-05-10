@@ -1,4 +1,4 @@
-package app.together.common.workflow.entity;
+package app.together.common.workflow.entity.converters;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
