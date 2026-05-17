@@ -20,6 +20,7 @@ public final class MessageConstants {
 
     // User / Auth
     public static final String MESSAGE_USER_NOT_FOUND = "USER_NOT_FOUND";
+    public static final String MESSAGE_USER_NOT_ACTIVATED = "USER_NOT_ACTIVATED";
     public static final String MESSAGE_USER_INVALID = "USER_INVALID";
     public static final String MESSAGE_USER_EMAIL_INVALID = "USER_EMAIL_INVALID";
     public static final String MESSAGE_USER_EMAIL_REQUIRED = "USER_EMAIL_REQUIRED";
@@ -63,6 +64,7 @@ public final class MessageConstants {
     public static final String MESSAGE_USER_NEW_PASSWORD_REQUIRED = "USER_NEW_PASSWORD_REQUIRED";
     public static final String MESSAGE_USER_OLD_PASSWORD_INCORRECT = "USER_OLD_PASSWORD_INCORRECT";
     public static final String MESSAGE_LOGIN_INVALID_CREDENTIALS = "LOGIN_INVALID_CREDENTIALS";
+    public static final String MESSAGE_GOOGLE_ID_TOKEN_REQUIRED = "GOOGLE_ID_TOKEN_REQUIRED";
     public static final String MESSAGE_GOOGLE_TOKEN_INVALID = "GOOGLE_TOKEN_INVALID";
     public static final String MESSAGE_GOOGLE_TOKEN_VERIFICATION_FAILED = "GOOGLE_TOKEN_VERIFICATION_FAILED";
     public static final String MESSAGE_EMAIL_VERIFICATION_TOO_MANY_ATTEMPTS = "EMAIL_VERIFICATION_TOO_MANY_ATTEMPTS";

@@ -36,4 +36,5 @@ public final class ErrorCodes {
     public static final String USER_SSO_REQUIRED = "USER_SSO_REQUIRED";
     public static final String USER_SSO_INVALID = "USER_SSO_INVALID";
     public static final String USER_SSO_ALREADY_EXISTS = "USER_SSO_ALREADY_EXISTS";
+    public static final String USER_NOT_ACTIVATED = "USER_NOT_ACTIVATED";
 }

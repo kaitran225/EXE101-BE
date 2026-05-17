@@ -2,7 +2,6 @@ package app.together.common.auth.entity;
 
 import app.together.common.shared.persistence.BaseAuditEntity;
 
-import app.together.common.auth.enums.BusinessRole;
 import app.together.common.auth.enums.SystemRole;
 import jakarta.persistence.*;
 import lombok.*;
@@ -80,10 +79,6 @@ public class User extends BaseAuditEntity {
     @Column(name = "system_role", nullable = false, length = 32)
     SystemRole systemRole;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "business_role", nullable = false, length = 32)
-    BusinessRole businessRole;
-
     /** Kept for backward compatibility with DB column and legacy JWT claim {@code is_admin}. */
     @Column(name = "is_admin")
     Boolean isAdmin;
@@ -96,9 +91,6 @@ public class User extends BaseAuditEntity {
         }
         if (systemRole == null) {
             systemRole = SystemRole.USER;
-        }
-        if (businessRole == null) {
-            businessRole = BusinessRole.MEMBER;
         }
         isAdmin = systemRole == SystemRole.ADMIN;
     }

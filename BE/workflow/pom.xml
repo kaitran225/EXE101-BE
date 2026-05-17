@@ -13,7 +13,7 @@
     <artifactId>workflow</artifactId>
     <packaging>jar</packaging>
     <name>Workflow Service</name>
-    <description>Workflow API (health-only baseline)</description>
+    <description>Workflow API with room management and WebSocket signaling</description>
 
     <dependencies>
         <dependency>
@@ -27,6 +27,14 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>

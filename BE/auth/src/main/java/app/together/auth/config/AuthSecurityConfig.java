@@ -5,10 +5,6 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import app.together.common.auth.entity.User;
-import app.together.common.auth.enums.BusinessRole;
-import app.together.common.auth.enums.SystemRole;
-import app.together.common.auth.enums.UserTier;
 import app.together.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,17 +15,13 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
@@ -37,8 +29,6 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
-import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
-import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
@@ -87,7 +77,10 @@ public class AuthSecurityConfig {
                 "/swagger-ui.html",
                 "/v3/api-docs/**",
                 "/v3/api-docs",
-                "/webjars/**"
+                "/webjars/**",
+                "/api/auth/logout",
+                "/api/auth/verify-email",
+                "/api/auth/health/check"
         };
         String[] PUBLIC_AUTH = {
                 "/api/auth/login",
@@ -191,33 +184,5 @@ public class AuthSecurityConfig {
     UserDetailsService userDetailsService(UserService userService){
         return new CustomUserDetailService(userService);
     }
-
-    @Bean
-    OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer(UserService userService){
-        return context -> {
-            if(OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType())){
-                Authentication principal = context.getPrincipal();
-
-                String userSso = principal.getName();
-
-                User user = userService.getUserBySso(userSso);
-
-                if(user != null){
-                    context.getClaims().claims(claims -> {
-                        claims.put("sub", user.getUserSso());
-                        claims.put("user_id", user.getUserId());
-                        claims.put("user_sso", user.getUserSso());
-                        claims.put("plan_type", user.getPlanType());
-                        claims.put("user_tier", UserTier.parse(user.getPlanType()).name());
-                        claims.put("system_role",
-                                user.getSystemRole() != null ? user.getSystemRole().name() : SystemRole.USER.name());
-                        claims.put("business_role",
-                                user.getBusinessRole() != null ? user.getBusinessRole().name() : BusinessRole.MEMBER.name());
-                        claims.put("is_admin", user.getSystemRole() == SystemRole.ADMIN
-                                || Boolean.TRUE.equals(user.getIsAdmin()));
-                    });
-                }
-            }
-        };
-    }
+   
 }
